@@ -1,0 +1,671 @@
+/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
+
+/* INICIO BLOQUE CSS: * */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+/* FIN BLOQUE CSS: * */
+
+
+/* INICIO BLOQUE CSS: body */
+body{
+    font-family:"Outfit", sans-serif;
+    background:#F0EFF4;
+    color:#191516;
+}
+/* FIN BLOQUE CSS: body */
+
+
+/* INICIO BLOQUE CSS: header */
+header{
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#F0EFF4;
+
+    padding:10px 80px;
+
+    box-shadow:0 2px 15px rgba(0,0,0,0.05);
+
+    z-index:1000;
+
+    transition:0.3s;
+}
+/* FIN BLOQUE CSS: header */
+
+
+/* INICIO BLOQUE CSS: header.scrolled */
+header.scrolled{
+
+    padding:12px 80px;
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+/* FIN BLOQUE CSS: header.scrolled */
+
+
+/* INICIO BLOQUE CSS: .logo */
+.logo{
+    font-size:1.8rem;
+    font-weight:700;
+}
+/* FIN BLOQUE CSS: .logo */
+
+
+/* INICIO BLOQUE CSS: .logo img */
+.logo img{
+    height:75px;
+
+    filter:drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+}
+/* FIN BLOQUE CSS: .logo img */
+
+
+/* INICIO BLOQUE CSS: header.scrolled .logo img */
+header.scrolled .logo img{
+    height:55px;
+}
+/* FIN BLOQUE CSS: header.scrolled .logo img */
+
+
+/* INICIO BLOQUE CSS: nav */
+nav{
+    display:flex;
+    gap:50px;
+}
+/* FIN BLOQUE CSS: nav */
+
+
+/* INICIO BLOQUE CSS: nav a */
+nav a{
+    text-decoration:none;
+
+    color:#191516;
+
+    font-weight:600;
+
+    position:relative;
+
+    transition:color 0.8s ease;
+}
+/* FIN BLOQUE CSS: nav a */
+
+
+/* INICIO BLOQUE CSS: header.scrolled nav a */
+header.scrolled nav a{
+    font-size:.95rem;
+    
+    color:#111;
+}
+/* FIN BLOQUE CSS: header.scrolled nav a */
+
+
+/* INICIO BLOQUE CSS: nav a:hover */
+nav a:hover{
+    color:#DC136C;
+}
+/* FIN BLOQUE CSS: nav a:hover */
+
+
+/* INICIO BLOQUE CSS: nav a::before */
+nav a::before{
+    content:"";
+
+    position:absolute;
+
+    bottom:-8px;
+    left:0;
+
+    width:0;
+    height:2px;
+
+    background:#DC136C;
+
+    transition:width 1.3s cubic-bezier(.22,.61,.36,1);
+}
+/* FIN BLOQUE CSS: nav a::before */
+
+
+/* INICIO BLOQUE CSS: nav a:hover::before */
+nav a:hover::before{
+    width:100%;
+}
+/* FIN BLOQUE CSS: nav a:hover::before */
+
+
+/* INICIO BLOQUE CSS: .news-hero */
+.news-hero{
+    height:350px;
+}
+/* FIN BLOQUE CSS: .news-hero */
+
+
+/* INICIO BLOQUE CSS: .news-layout */
+.news-layout{
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:30px;
+}
+/* FIN BLOQUE CSS: .news-layout */
+
+
+/* INICIO BLOQUE CSS: .news-layout */
+.news-layout{
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:30px;
+}
+/* FIN BLOQUE CSS: .news-layout */
+
+
+/* INICIO BLOQUE CSS: .news-hero */
+.news-hero{
+    height:500px;
+
+    background-image:url("../img/hero/news-banner.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    position:relative;
+}
+/* FIN BLOQUE CSS: .news-hero */
+
+
+/* INICIO BLOQUE CSS: .news-hero::before */
+.news-hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.55);
+}
+/* FIN BLOQUE CSS: .news-hero::before */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay */
+.hero-overlay{
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    color:white;
+    z-index:2;
+    padding:0 30px;
+    transform:translateY(40px);
+}
+/* FIN BLOQUE CSS: .hero-overlay */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay h1 */
+.hero-overlay h1{
+    font-size:5rem;
+    font-weight:900;
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .hero-overlay h1 */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay p */
+.hero-overlay p{
+    font-size:1.2rem;
+    opacity:.9;
+}
+/* FIN BLOQUE CSS: .hero-overlay p */
+
+
+/* INICIO BLOQUE CSS: .araxys-chismes */
+.araxys-chismes{
+    padding:120px 80px;
+
+    text-align:center;
+
+    background-image:url("../img/hero/instalock1.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    position:relative;
+}
+/* FIN BLOQUE CSS: .araxys-chismes */
+
+
+/* INICIO BLOQUE CSS: .araxys-chismes::before */
+.araxys-chismes::before{
+    background:rgba(0,0,0,0.25);
+}
+/* FIN BLOQUE CSS: .araxys-chismes::before */
+
+
+/* INICIO BLOQUE CSS: .araxys-chismes h2 */
+.araxys-chismes h2{
+
+    font-family:"Outfit", sans-serif;
+
+    font-size:3rem;
+
+    margin-bottom:30px;
+
+    display:inline-block;
+
+    background:white;
+
+    color:#111;
+
+    padding:20px 50px;
+
+    border-radius:20px;
+
+    position:relative;
+
+    transform:rotate(-2deg);
+}
+/* FIN BLOQUE CSS: .araxys-chismes h2 */
+
+
+/* INICIO BLOQUE CSS: .araxys-chismes h2::after */
+.araxys-chismes h2::after{
+    content:"";
+
+    position:absolute;
+
+    bottom:-15px;
+    left:60px;
+
+    width:25px;
+    height:25px;
+
+    background:white;
+
+    transform:rotate(45deg);
+}
+/* FIN BLOQUE CSS: .araxys-chismes h2::after */
+
+
+/* INICIO BLOQUE CSS: .araxys-chismes span */
+.araxys-chismes span{
+    color:#DC136C;
+}
+/* FIN BLOQUE CSS: .araxys-chismes span */
+
+
+/* INICIO BLOQUE CSS: .araxys-chismes p */
+.araxys-chismes p{
+    font-family:"Outfit", sans-serif;
+    color:#191516;
+    font-size:1.25rem;
+
+    margin-bottom:40px;
+}
+/* FIN BLOQUE CSS: .araxys-chismes p */
+
+
+/* INICIO BLOQUE CSS: .chismes-btn */
+.chismes-btn{
+    display:inline-block;
+
+    padding:18px 40px;
+
+    background:#DC136C;
+
+    box-shadow:0 10px 30px rgba(220,19,108,0.4);
+
+    color:#F0EFF4;
+
+    text-decoration:none;
+
+    border-radius:20px;
+
+    font-weight:700;
+
+    transition:0.3s ease;
+}
+/* FIN BLOQUE CSS: .chismes-btn */
+
+
+/* INICIO BLOQUE CSS: .chismes-btn:hover */
+.chismes-btn:hover{
+    transform:translateY(-5px);
+}
+/* FIN BLOQUE CSS: .chismes-btn:hover */
+
+
+/* INICIO BLOQUE CSS: .news-title */
+.news-title{
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    padding:0 80px;
+
+    margin:30px 0 -90px;
+}
+/* FIN BLOQUE CSS: .news-title */
+
+
+/* INICIO BLOQUE CSS: .news-title h2 */
+.news-title h2{
+    font-family:"Outfit", sans-serif;
+
+    font-size:2rem;
+
+    font-weight:800;
+
+    color:#DC136C;
+
+    line-height:1;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+/* FIN BLOQUE CSS: .news-title h2 */
+
+
+/* INICIO BLOQUE CSS: .news-title h2::before */
+.news-title h2::before{
+    content:"";
+
+    width:12px;
+    height:12px;
+
+    border-top:3px solid #DC136C;
+    border-right:3px solid #DC136C;
+
+    transform:rotate(45deg);
+
+    display:inline-block;
+}
+/* FIN BLOQUE CSS: .news-title h2::before */
+
+
+/* INICIO BLOQUE CSS: .news-feed */
+.news-feed{
+    padding:120px 80px;
+}
+/* FIN BLOQUE CSS: .news-feed */
+
+
+/* INICIO BLOQUE CSS: .news-block */
+.news-block{
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:30px;
+
+    margin-bottom:30px;
+}
+/* FIN BLOQUE CSS: .news-block */
+
+
+/* INICIO BLOQUE CSS: .news-side */
+.news-side{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:30px;
+}
+/* FIN BLOQUE CSS: .news-side */
+
+
+/* INICIO BLOQUE CSS: .news-big */
+.news-big{
+    height:500px;
+
+    background:#242423;
+
+    border-radius:25px;
+}
+/* FIN BLOQUE CSS: .news-big */
+
+
+/* INICIO BLOQUE CSS: .news-small */
+.news-small{
+    height:235px;
+
+    background:#242423;
+
+    border-radius:25px;
+}
+/* FIN BLOQUE CSS: .news-small */
+
+
+/* INICIO BLOQUE CSS: .news-block.reverse */
+.news-block.reverse{
+    grid-template-columns:1fr 2fr;
+}
+/* FIN BLOQUE CSS: .news-block.reverse */
+
+
+.news-big,
+/* INICIO BLOQUE CSS: .news-small */
+.news-small{
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    text-decoration:none;
+
+    color:white;
+
+    cursor:pointer;
+
+    display:block;
+    
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+    transition:0.35s ease;
+}
+/* FIN BLOQUE CSS: .news-small */
+
+
+.news-big img,
+/* INICIO BLOQUE CSS: .news-small img */
+.news-small img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+}
+/* FIN BLOQUE CSS: .news-small img */
+
+
+.news-big:hover,
+/* INICIO BLOQUE CSS: .news-small:hover */
+.news-small:hover{
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+/* FIN BLOQUE CSS: .news-small:hover */
+
+
+/* INICIO BLOQUE CSS: .news-more */
+.news-more{
+    text-align:center;
+
+    margin:50px 0 -200px;
+}
+/* FIN BLOQUE CSS: .news-more */
+
+
+/* INICIO BLOQUE CSS: .news-more a */
+.news-more a{
+    text-decoration:none;
+
+    color:#DC136C;
+
+    font-weight:700;
+
+    font-size:1.1rem;
+
+    transition:0.3s ease;
+}
+/* FIN BLOQUE CSS: .news-more a */
+
+
+/* INICIO BLOQUE CSS: .news-more a:hover */
+.news-more a:hover{
+    opacity:0.7;
+}
+/* FIN BLOQUE CSS: .news-more a:hover */
+
+
+/* INICIO BLOQUE CSS: .news-overlay */
+.news-overlay{
+    position:absolute;
+
+    inset:0;
+
+    z-index:2;
+
+    display:flex;
+    
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    padding:30px;
+
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.4),
+        rgba(0,0,0,0)
+    );
+}
+/* FIN BLOQUE CSS: .news-overlay */
+
+
+/* INICIO BLOQUE CSS: .news-overlay h3 */
+.news-overlay h3{
+    color:white;
+
+    text-shadow:0 3px 10px rgba(0,0,0,0.8);
+}
+/* FIN BLOQUE CSS: .news-overlay h3 */
+
+
+/* INICIO BLOQUE CSS: .news-category */
+.news-category{
+    display:inline-block;
+
+    width:fit-content;
+
+    padding:6px 12px;
+
+    border-radius:10px;
+
+    background:#DC136C;
+
+    color:white;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+}
+/* FIN BLOQUE CSS: .news-category */
+
+
+/* INICIO BLOQUE CSS: footer */
+footer{
+
+    border-top:3px solid #DC136C;
+    
+    margin-top:120px;
+
+    padding:80px;
+
+    background:#111;
+
+    color:#F0EFF4;
+
+    text-align:center;
+}
+/* FIN BLOQUE CSS: footer */
+
+
+/* INICIO BLOQUE CSS: footer img */
+footer img{
+    width:100px;
+
+    margin-bottom:30px;
+}
+/* FIN BLOQUE CSS: footer img */
+
+
+.footer-links,
+/* INICIO BLOQUE CSS: .footer-social */
+.footer-social{
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    margin-bottom:25px;
+}
+/* FIN BLOQUE CSS: .footer-social */
+
+
+/* INICIO BLOQUE CSS: footer a */
+footer a{
+    text-decoration:none;
+
+    color:#F0EFF4;
+
+    transition:0.3s;
+}
+/* FIN BLOQUE CSS: footer a */
+
+
+/* INICIO BLOQUE CSS: footer a:hover */
+footer a:hover{
+    color:#DC136C;
+}
+/* FIN BLOQUE CSS: footer a:hover */
+
+
+/* INICIO BLOQUE CSS: footer p */
+footer p{
+    color:#888;
+}
+/* FIN BLOQUE CSS: footer p */
+

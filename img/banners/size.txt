@@ -1,0 +1,7 @@
+BANNER UNETE A ARAXYS
+Tamano: 1920 x 700 px
+Formato: 21:9
+Usos:
+- Banner de invitacion
+- CTA de Discord
+- Banner final

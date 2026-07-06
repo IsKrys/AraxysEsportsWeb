@@ -1,0 +1,8 @@
+LOGO TRANSPARENTE PNG PRINCIPAL
+Tamano: 2000 x 2000 px
+Formato: 1:1
+Usos:
+- Header
+  CSS: height:75px;
+- Footer
+  CSS: width:100px;

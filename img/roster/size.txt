@@ -1,0 +1,6 @@
+JUGADORES DEL ROSTER
+Tamano: 800 x 1000 px
+Formato: 4:5
+Usos:
+- Fotos de jugadores
+- Cards de roster

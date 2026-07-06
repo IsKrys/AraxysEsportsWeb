@@ -1,0 +1,537 @@
+/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
+
+/* HERO */
+
+/* INICIO BLOQUE CSS: .team-hero */
+.team-hero{
+    height:70vh;
+
+    background-image:url("../img/teams/titular.png");
+
+    background-size:cover;
+    background-position:center;
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+/* FIN BLOQUE CSS: .team-hero */
+
+
+/* INICIO BLOQUE CSS: .team-hero::before */
+.team-hero::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:rgba(0,0,0,0.55);
+}
+/* FIN BLOQUE CSS: .team-hero::before */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay */
+.hero-overlay{
+    position:relative;
+    z-index:2;
+
+    color:#F0EFF4;
+}
+/* FIN BLOQUE CSS: .hero-overlay */
+
+
+/* INICIO BLOQUE CSS: .team-tag */
+.team-tag{
+    display:inline-block;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    background:#DC136C;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .team-tag */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay h1 */
+.hero-overlay h1{
+    font-size:5rem;
+
+    font-weight:900;
+
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .hero-overlay h1 */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay p */
+.hero-overlay p{
+    font-size:1.2rem;
+
+    opacity:0.9;
+}
+/* FIN BLOQUE CSS: .hero-overlay p */
+
+
+/* INICIO BLOQUE CSS: .section-header h2 */
+.section-header h2{
+
+    font-size:2rem;
+
+    color:#DC136C;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-top:30px;
+
+    margin-bottom:10px;
+    
+}
+/* FIN BLOQUE CSS: .section-header h2 */
+
+
+/* INICIO BLOQUE CSS: .section-header h2::before */
+.section-header h2::before{
+    content:"";
+
+    width:12px;
+    height:12px;
+
+    border-top:3px solid #DC136C;
+    border-right:3px solid #DC136C;
+
+    transform:rotate(45deg);
+
+    display:inline-block;
+}
+/* FIN BLOQUE CSS: .section-header h2::before */
+
+
+/* INICIO BLOQUE CSS: .hero-scroll */
+.hero-scroll{
+    margin-top:50px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:12px;
+}
+/* FIN BLOQUE CSS: .hero-scroll */
+
+
+/* INICIO BLOQUE CSS: .hero-scroll span */
+.hero-scroll span{
+    color:rgba(255,255,255,.8);
+
+    font-size:.85rem;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+}
+/* FIN BLOQUE CSS: .hero-scroll span */
+
+
+/* INICIO BLOQUE CSS: .hero-scroll-line */
+.hero-scroll-line{
+    width:2px;
+
+    height:50px;
+
+    background:#F0EFF4;
+
+    animation:scrollPulse 2s infinite;
+}
+/* FIN BLOQUE CSS: .hero-scroll-line */
+
+
+/* INICIO BLOQUE CSS: @keyframes scrollPulse */
+@keyframes scrollPulse{
+
+    0%{
+        opacity:.3;
+        transform:scaleY(.5);
+    }
+
+    50%{
+        opacity:1;
+        transform:scaleY(1);
+    }
+
+    100%{
+        opacity:.3;
+        transform:scaleY(.5);
+    }
+
+}
+/* FIN BLOQUE CSS: @keyframes scrollPulse */
+
+
+/* INFO */
+
+/* INICIO BLOQUE CSS: .team-info */
+.team-info{
+    padding:90px;
+
+    background-image:url("../img/hero/news-bg.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+}
+/* FIN BLOQUE CSS: .team-info */
+
+
+/* INICIO BLOQUE CSS: .info-grid */
+.info-grid{
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+}
+/* FIN BLOQUE CSS: .info-grid */
+
+
+/* INICIO BLOQUE CSS: .info-card */
+.info-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+/* FIN BLOQUE CSS: .info-card */
+
+
+/* INICIO BLOQUE CSS: .info-card::before */
+.info-card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:4px;
+
+    background:#DC136C;
+}
+/* FIN BLOQUE CSS: .info-card::before */
+
+
+/* INICIO BLOQUE CSS: .info-card span */
+.info-card span{
+    color:#888;
+
+    display:block;
+
+    margin-bottom:10px;
+}
+/* FIN BLOQUE CSS: .info-card span */
+
+
+/* INICIO BLOQUE CSS: .info-card h2 */
+.info-card h2{
+    color:#111;
+}
+/* FIN BLOQUE CSS: .info-card h2 */
+
+
+/* DESCRIPCIÓN */
+
+/* INICIO BLOQUE CSS: .team-description */
+.team-description{
+    padding:0 80px 80px;
+}
+/* FIN BLOQUE CSS: .team-description */
+
+
+/* INICIO BLOQUE CSS: .team-description p */
+.team-description p{
+    color:#555;
+
+    line-height:1.8;
+
+    max-width:900px;
+}
+/* FIN BLOQUE CSS: .team-description p */
+
+
+/* INICIO BLOQUE CSS: .description-card */
+.description-card{
+    background:white;
+
+    border-radius:25px;
+
+    padding:40px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    border-top:4px solid #DC136C;
+}
+/* FIN BLOQUE CSS: .description-card */
+
+
+/* INICIO BLOQUE CSS: .description-card p */
+.description-card p{
+    color:#555;
+
+    line-height:1.8;
+
+    font-size:1.05rem;
+}
+/* FIN BLOQUE CSS: .description-card p */
+
+
+/* INICIO BLOQUE CSS: .team-roster */
+.team-roster{
+    padding:0 80px 100px;
+}
+/* FIN BLOQUE CSS: .team-roster */
+
+
+/* INICIO BLOQUE CSS: .roster-grid */
+.roster-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:25px;
+}
+/* FIN BLOQUE CSS: .roster-grid */
+
+
+/* INICIO BLOQUE CSS: .player-card */
+.player-card{
+    background:white;
+    border-radius:25px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+    position:relative;
+    overflow:hidden;
+}
+/* FIN BLOQUE CSS: .player-card */
+
+
+/* INICIO BLOQUE CSS: .player-card::before */
+.player-card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:4px;
+
+    background:#DC136C;
+}
+/* FIN BLOQUE CSS: .player-card::before */
+
+
+/* INICIO BLOQUE CSS: .player-card:hover */
+.player-card:hover{
+    transform:translateY(-10px);
+}
+/* FIN BLOQUE CSS: .player-card:hover */
+
+
+/* INICIO BLOQUE CSS: .player-card img */
+.player-card img{
+    width:100px;
+    height:100px;
+    object-fit:cover;
+    border-radius:50%;
+    margin-bottom:15px;
+}
+/* FIN BLOQUE CSS: .player-card img */
+
+
+/* INICIO BLOQUE CSS: .player-card h3 */
+.player-card h3{
+    color:#111;
+    margin-bottom:5px;
+}
+/* FIN BLOQUE CSS: .player-card h3 */
+
+
+/* INICIO BLOQUE CSS: .player-card span */
+.player-card span{
+    color:#777;
+}
+/* FIN BLOQUE CSS: .player-card span */
+
+
+/* INICIO BLOQUE CSS: .team-achievements */
+.team-achievements{
+    padding:0 80px 100px;
+}
+/* FIN BLOQUE CSS: .team-achievements */
+
+
+/* INICIO BLOQUE CSS: .achievement-card */
+.achievement-card{
+
+    background:white;
+
+    padding:25px 30px;
+
+    margin-bottom:20px;
+
+    border-radius:20px;
+
+    font-weight:600;
+
+    color:#111;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+
+    border-left:5px solid #DC136C;
+
+    transition:.3s ease;
+}
+/* FIN BLOQUE CSS: .achievement-card */
+
+
+/* INICIO BLOQUE CSS: .achievement-card:hover */
+.achievement-card:hover{
+
+    transform:translateX(10px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.1);
+}
+/* FIN BLOQUE CSS: .achievement-card:hover */
+
+
+/* INICIO BLOQUE CSS: .join-banner */
+.join-banner{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:30px;
+
+    height:260px;
+
+    text-decoration:none;
+
+    cursor:pointer;
+
+    transition:.35s ease;
+
+}
+/* FIN BLOQUE CSS: .join-banner */
+
+
+/* INICIO BLOQUE CSS: .join-banner:hover */
+.join-banner:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+/* FIN BLOQUE CSS: .join-banner:hover */
+
+
+/* INICIO BLOQUE CSS: .join-banner img */
+.join-banner img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+}
+/* FIN BLOQUE CSS: .join-banner img */
+
+
+/* INICIO BLOQUE CSS: .join-overlay */
+.join-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    background:rgba(0,0,0,.55);
+
+    color:white;
+
+    padding:30px;
+}
+/* FIN BLOQUE CSS: .join-overlay */
+
+
+/* INICIO BLOQUE CSS: .join-overlay h2 */
+.join-overlay h2{
+
+    font-size:2.4rem;
+
+    margin-bottom:15px;
+}
+/* FIN BLOQUE CSS: .join-overlay h2 */
+
+
+/* INICIO BLOQUE CSS: .join-overlay p */
+.join-overlay p{
+
+    font-size:1.1rem;
+
+    margin-bottom:20px;
+
+    opacity:.9;
+}
+/* FIN BLOQUE CSS: .join-overlay p */
+
+
+/* INICIO BLOQUE CSS: .join-overlay span */
+.join-overlay span{
+
+    color:#DC136C;
+
+    font-weight:800;
+
+    font-size:1.1rem;
+}
+/* FIN BLOQUE CSS: .join-overlay span */
+

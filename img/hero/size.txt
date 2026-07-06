@@ -1,0 +1,12 @@
+BANNERS / HERO
+Tamano: 1920 x 1080 px
+Formato: 16:9
+Usos:
+- Inicio
+- News
+- Teams
+- About
+- Torneos
+- Torneo individual
+- Apply
+- Banner final

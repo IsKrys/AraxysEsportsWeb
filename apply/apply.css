@@ -1,0 +1,540 @@
+/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
+
+/* INICIO BLOQUE CSS: body */
+body{
+    color:#191516;
+}
+/* FIN BLOQUE CSS: body */
+
+
+/* INICIO BLOQUE CSS: .apply-hero */
+.apply-hero{
+    height:70vh;
+
+    background-image:url("../img/hero/restante.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+/* FIN BLOQUE CSS: .apply-hero */
+
+
+/* INICIO BLOQUE CSS: .apply-hero::before */
+.apply-hero::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:rgba(0,0,0,.55);
+}
+/* FIN BLOQUE CSS: .apply-hero::before */
+
+
+/* INICIO BLOQUE CSS: .apply-hero .hero-overlay */
+.apply-hero .hero-overlay{
+    position:relative;
+    z-index:2;
+
+    color:white;
+
+    max-width:850px;
+
+    padding:0 30px;
+}
+/* FIN BLOQUE CSS: .apply-hero .hero-overlay */
+
+
+/* INICIO BLOQUE CSS: .apply-hero h1 */
+.apply-hero h1{
+    font-size:5rem;
+
+    font-weight:900;
+
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .apply-hero h1 */
+
+
+/* INICIO BLOQUE CSS: .apply-hero p */
+.apply-hero p{
+    font-size:1.2rem;
+
+    opacity:.9;
+}
+/* FIN BLOQUE CSS: .apply-hero p */
+
+
+/* INICIO BLOQUE CSS: .apply-content */
+.apply-content{
+    padding:100px 80px;
+
+    background-image:url("../img/hero/news-bg.jpg");
+    background-size:cover;
+    background-position:center;
+}
+/* FIN BLOQUE CSS: .apply-content */
+
+
+/* INICIO BLOQUE CSS: .roles-grid */
+.roles-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
+}
+/* FIN BLOQUE CSS: .roles-grid */
+
+
+/* INICIO BLOQUE CSS: .requirements-title */
+.requirements-title{
+    margin-top:90px;
+}
+/* FIN BLOQUE CSS: .requirements-title */
+
+
+/* INICIO BLOQUE CSS: .requirements-grid */
+.requirements-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+/* FIN BLOQUE CSS: .requirements-grid */
+
+
+.role-card,
+/* INICIO BLOQUE CSS: .requirement-card */
+.requirement-card{
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.35s ease;
+}
+/* FIN BLOQUE CSS: .requirement-card */
+
+
+/* INICIO BLOQUE CSS: .role-card */
+.role-card{
+    cursor:pointer;
+}
+/* FIN BLOQUE CSS: .role-card */
+
+
+/* INICIO BLOQUE CSS: .requirement-card */
+.requirement-card{
+    cursor:default;
+}
+/* FIN BLOQUE CSS: .requirement-card */
+
+
+.role-card::before,
+/* INICIO BLOQUE CSS: .requirement-card::before */
+.requirement-card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:4px;
+
+    background:#DC136C;
+}
+/* FIN BLOQUE CSS: .requirement-card::before */
+
+
+/* INICIO BLOQUE CSS: .role-card:hover */
+.role-card:hover{
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+/* FIN BLOQUE CSS: .role-card:hover */
+
+
+/* INICIO BLOQUE CSS: .requirement-card:hover */
+.requirement-card:hover{
+    transform:translateY(-5px);
+
+    box-shadow:0 15px 30px rgba(0,0,0,.12);
+}
+/* FIN BLOQUE CSS: .requirement-card:hover */
+
+
+.role-card h3,
+/* INICIO BLOQUE CSS: .requirement-card h3 */
+.requirement-card h3{
+    color:#111;
+
+    font-size:2rem;
+
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .requirement-card h3 */
+
+
+.role-card p,
+/* INICIO BLOQUE CSS: .requirement-card p */
+.requirement-card p{
+    color:#555;
+
+    line-height:1.8;
+}
+/* FIN BLOQUE CSS: .requirement-card p */
+
+
+/* INICIO BLOQUE CSS: .apply-modal */
+.apply-modal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    opacity:0;
+    pointer-events:none;
+
+    z-index:99999;
+
+    transition:.3s ease;
+}
+/* FIN BLOQUE CSS: .apply-modal */
+
+
+/* INICIO BLOQUE CSS: .apply-modal.active */
+.apply-modal.active{
+    opacity:1;
+    pointer-events:auto;
+}
+/* FIN BLOQUE CSS: .apply-modal.active */
+
+
+/* INICIO BLOQUE CSS: .modal-content */
+.modal-content{
+    background:white;
+
+    width:min(900px,90vw);
+    max-height:90vh;
+    overflow-y:auto;
+
+    padding:45px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    position:relative;
+
+    transform:scale(.9);
+
+    transition:.3s ease;
+
+    border-top:5px solid #DC136C;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.25);
+}
+/* FIN BLOQUE CSS: .modal-content */
+
+
+/* INICIO BLOQUE CSS: .apply-modal.active .modal-content */
+.apply-modal.active .modal-content{
+    transform:scale(1);
+}
+/* FIN BLOQUE CSS: .apply-modal.active .modal-content */
+
+
+/* INICIO BLOQUE CSS: .modal-close */
+.modal-close{
+    position:absolute;
+
+    top:15px;
+    right:20px;
+
+    border:none;
+    background:none;
+
+    font-size:2rem;
+
+    cursor:pointer;
+
+    color:#111;
+}
+/* FIN BLOQUE CSS: .modal-close */
+
+
+/* INICIO BLOQUE CSS: .modal-content h2 */
+.modal-content h2{
+    color:#111;
+
+    font-size:2rem;
+
+    margin-bottom:15px;
+}
+/* FIN BLOQUE CSS: .modal-content h2 */
+
+
+/* INICIO BLOQUE CSS: .modal-content p */
+.modal-content p{
+    color:#555;
+
+    line-height:1.6;
+
+    margin-bottom:30px;
+}
+/* FIN BLOQUE CSS: .modal-content p */
+
+
+/* INICIO BLOQUE CSS: .modal-buttons */
+.modal-buttons{
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+}
+/* FIN BLOQUE CSS: .modal-buttons */
+
+
+/* INICIO BLOQUE CSS: .modal-buttons a, .modal-buttons button */
+.modal-buttons a,
+.modal-buttons button{
+    border:none;
+
+    display:inline-block;
+
+    text-decoration:none;
+
+    padding:15px 30px;
+
+    border-radius:15px;
+
+    background:#DC136C;
+
+    color:white;
+
+    font-family:"Outfit", sans-serif;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+}
+/* FIN BLOQUE CSS: .modal-buttons a, .modal-buttons button */
+
+
+/* INICIO BLOQUE CSS: .modal-buttons a:hover, .modal-buttons button:hover */
+.modal-buttons a:hover,
+.modal-buttons button:hover{
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 30px rgba(220,19,108,.35);
+}
+/* FIN BLOQUE CSS: .modal-buttons a:hover, .modal-buttons button:hover */
+
+.apply-form{
+    display:none;
+    margin-top:30px;
+}
+
+.apply-form.active{
+    display:block;
+}
+
+#dynamicFields{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.apply-form input,
+.apply-form textarea{
+    width:100%;
+
+    padding:15px 18px;
+
+    border:2px solid #ddd;
+
+    border-radius:15px;
+
+    font-family:"Outfit", sans-serif;
+
+    font-size:1rem;
+
+    outline:none;
+}
+
+.apply-form textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.apply-form input:focus,
+.apply-form textarea:focus{
+    border-color:#DC136C;
+}
+
+.apply-form button{
+    width:100%;
+
+    margin-top:20px;
+
+    border:none;
+
+    background:#DC136C;
+
+    color:white;
+
+    padding:16px;
+
+    border-radius:15px;
+
+    font-family:"Outfit", sans-serif;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+}
+
+.apply-form button:hover{
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 30px rgba(220,19,108,.35);
+}
+
+.form-status{
+    display:none;
+
+    margin-top:20px;
+
+    padding:16px;
+
+    border-radius:15px;
+
+    font-weight:700;
+
+    text-align:center;
+}
+
+.form-status.success{
+    display:block;
+
+    background:rgba(46,204,113,.15);
+
+    color:#2ecc71;
+
+    border:2px solid #2ecc71;
+}
+
+.form-status.error{
+    display:block;
+
+    background:rgba(220,19,108,.15);
+
+    color:#DC136C;
+
+    border:2px solid #DC136C;
+}
+
+.apply-form button:disabled{
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+}
+
+.success-screen{
+    display:none;
+
+    margin-top:30px;
+
+    text-align:center;
+}
+
+.success-screen.active{
+    display:block;
+}
+
+.success-icon{
+    width:70px;
+    height:70px;
+
+    margin:0 auto 20px;
+
+    border-radius:50%;
+
+    background:#DC136C;
+
+    color:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:2.5rem;
+
+    font-weight:900;
+}
+
+.success-screen h3{
+    color:#111;
+
+    font-size:2rem;
+
+    margin-bottom:10px;
+}
+
+.success-screen p{
+    color:#555;
+
+    line-height:1.6;
+
+    margin-bottom:25px;
+}
+
+body.dark-mode .success-screen h3,
+body.dark-mode .success-screen p{
+    color:#F0EFF4;
+}
+
+.success-screen button{
+    border:none;
+
+    background:#DC136C;
+
+    color:white;
+
+    padding:15px 35px;
+
+    border-radius:15px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}

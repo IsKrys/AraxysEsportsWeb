@@ -1,0 +1,760 @@
+/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
+
+/* RESET */
+
+/* INICIO BLOQUE CSS: * */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+/* FIN BLOQUE CSS: * */
+
+
+/* GENERAL */
+
+/* INICIO BLOQUE CSS: body */
+body{
+    font-family:"Outfit", sans-serif;
+    background:#F0EFF4;
+}
+/* FIN BLOQUE CSS: body */
+
+
+/* INICIO BLOQUE CSS: body.page-enter */
+body.page-enter{
+    animation:pageEnter .45s ease forwards;
+}
+/* FIN BLOQUE CSS: body.page-enter */
+
+
+/* INICIO BLOQUE CSS: @keyframes pageEnter */
+@keyframes pageEnter{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+/* FIN BLOQUE CSS: @keyframes pageEnter */
+
+
+/* INICIO BLOQUE CSS: body.page-leave */
+body.page-leave{
+
+    opacity:0;
+
+    transform:translateY(-20px);
+
+    transition:.3s ease;
+}
+/* FIN BLOQUE CSS: body.page-leave */
+
+
+/* INICIO BLOQUE CSS: .scroll-indicator */
+.scroll-indicator{
+    margin-top:28px;
+    font-size:2rem;
+    color:white;
+    animation:bounce 2s infinite;
+}
+/* FIN BLOQUE CSS: .scroll-indicator */
+
+
+/* INICIO BLOQUE CSS: @keyframes bounce */
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(10px);
+    }
+}
+/* FIN BLOQUE CSS: @keyframes bounce */
+
+
+
+
+/* HEADER */
+
+/* INICIO BLOQUE CSS: header */
+header{
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:25px 80px;
+
+    z-index:1000;
+
+    background:rgba(17,17,17,0);
+    backdrop-filter:blur(0px);
+
+    transition:.3s;
+}
+/* FIN BLOQUE CSS: header */
+
+
+/* INICIO BLOQUE CSS: header.scrolled */
+header.scrolled{
+
+    padding:12px 80px;
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+/* FIN BLOQUE CSS: header.scrolled */
+
+
+
+
+/* LOGO */
+
+/* INICIO BLOQUE CSS: .logo img */
+.logo img{
+    height:75px;
+
+    filter:drop-shadow(0 4px 8px rgba(0,0,0,.25));
+
+    transition:.3s;
+}
+/* FIN BLOQUE CSS: .logo img */
+
+
+/* INICIO BLOQUE CSS: header.scrolled .logo img */
+header.scrolled .logo img{
+    height:55px;
+}
+/* FIN BLOQUE CSS: header.scrolled .logo img */
+
+
+
+
+/* NAV */
+
+/* INICIO BLOQUE CSS: nav */
+nav{
+    display:flex;
+    gap:50px;
+}
+/* FIN BLOQUE CSS: nav */
+
+
+/* INICIO BLOQUE CSS: nav a */
+nav a{
+    text-decoration:none;
+
+    color:white;
+
+    font-weight:600;
+
+    position:relative;
+
+    transition:color .8s ease;
+}
+/* FIN BLOQUE CSS: nav a */
+
+
+/* INICIO BLOQUE CSS: header.scrolled nav a */
+header.scrolled nav a{
+    color:#111;
+    font-size:.95rem;
+}
+/* FIN BLOQUE CSS: header.scrolled nav a */
+
+
+/* INICIO BLOQUE CSS: nav a:hover */
+nav a:hover{
+    color:#DC136C;
+}
+/* FIN BLOQUE CSS: nav a:hover */
+
+
+/* INICIO BLOQUE CSS: header.scrolled nav a:hover */
+header.scrolled nav a:hover{
+    color:#DC136C;
+}
+/* FIN BLOQUE CSS: header.scrolled nav a:hover */
+
+
+/* INICIO BLOQUE CSS: nav a::before */
+nav a::before{
+    content:"";
+
+    position:absolute;
+
+    bottom:-8px;
+    left:0;
+
+    width:0;
+    height:2px;
+
+    background:#DC136C;
+
+    transition:width 1.3s cubic-bezier(.22,.61,.36,1);
+}
+/* FIN BLOQUE CSS: nav a::before */
+
+
+/* INICIO BLOQUE CSS: nav a:hover::before */
+nav a:hover::before{
+    width:100%;
+}
+/* FIN BLOQUE CSS: nav a:hover::before */
+
+
+/* MODO OSCURO */
+
+/* INICIO BLOQUE CSS: .theme-toggle */
+.theme-toggle{
+    width:44px;
+    height:44px;
+    border:none;
+    border-radius:50%;
+    background:#DC136C;
+    color:#FEE440;
+    font-size:1.35rem;
+    font-weight:800;
+    cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 8px 20px rgba(220,19,108,.28);
+    transition:.3s ease;
+}
+/* FIN BLOQUE CSS: .theme-toggle */
+
+
+/* INICIO BLOQUE CSS: .theme-toggle:hover */
+.theme-toggle:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 28px rgba(220,19,108,.38);
+}
+/* FIN BLOQUE CSS: .theme-toggle:hover */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode */
+body.dark-mode{
+    background:#191516;
+    color:#F0EFF4;
+}
+/* FIN BLOQUE CSS: body.dark-mode */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode header */
+body.dark-mode header{
+    background:rgba(25,21,22,.94);
+    box-shadow:0 5px 20px rgba(0,0,0,.28);
+}
+
+body.dark-mode.home-page header{
+    background:rgba(17,17,17,0);
+    box-shadow:none;
+}
+
+body.dark-mode header.scrolled{
+    background:rgba(25,21,22,.94);
+    box-shadow:0 5px 20px rgba(0,0,0,.28);
+}
+/* FIN BLOQUE CSS: body.dark-mode header */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode nav a */
+body.dark-mode nav a,
+body.dark-mode header.scrolled nav a{
+    color:#F0EFF4;
+}
+/* FIN BLOQUE CSS: body.dark-mode nav a */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode page backgrounds */
+body.dark-mode .featured-news,
+body.dark-mode .teams-section,
+body.dark-mode .teams-showcase,
+body.dark-mode .team-info,
+body.dark-mode .apply-content,
+body.dark-mode .article-workspace,
+body.dark-mode .circuit-workspace,
+body.dark-mode .tournament-info{
+    background-color:#191516;
+}
+/* FIN BLOQUE CSS: body.dark-mode page backgrounds */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode cards */
+body.dark-mode .news-card,
+body.dark-mode .video-card,
+body.dark-mode .info-card,
+body.dark-mode .description-card,
+body.dark-mode .focus-card,
+body.dark-mode .achievement-card,
+body.dark-mode .achievements-dropdown,
+body.dark-mode .about-card,
+body.dark-mode .pillar-card,
+body.dark-mode .role-card,
+body.dark-mode .requirement-card,
+body.dark-mode .modal-content,
+body.dark-mode .article-placeholder,
+body.dark-mode .circuit-placeholder,
+body.dark-mode .event-card,
+body.dark-mode .registered-card,
+body.dark-mode .player-card{
+    background:#242423;
+    color:#F0EFF4;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+/* FIN BLOQUE CSS: body.dark-mode cards */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode text */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode .news-card p,
+body.dark-mode .video-card p,
+body.dark-mode .event-bottom p,
+body.dark-mode .description-card p,
+body.dark-mode .focus-card p,
+body.dark-mode .article-placeholder p,
+body.dark-mode .circuit-placeholder p,
+body.dark-mode .about-card p,
+body.dark-mode .pillar-card p,
+body.dark-mode .role-card p,
+body.dark-mode .requirement-card p,
+body.dark-mode .modal-content p{
+    color:#F0EFF4;
+}
+/* FIN BLOQUE CSS: body.dark-mode text */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode pink accents */
+body.dark-mode .section-header h2,
+body.dark-mode .section-title h2,
+body.dark-mode .news-title h2,
+body.dark-mode .news-date,
+body.dark-mode .event-top span:last-child,
+body.dark-mode .join-overlay span{
+    color:#DC136C;
+}
+/* FIN BLOQUE CSS: body.dark-mode pink accents */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode .event-top span:first-child */
+body.dark-mode .event-top span:first-child{
+    color:#F0EFF4;
+}
+/* FIN BLOQUE CSS: body.dark-mode .event-top span:first-child */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode yellow accents */
+body.dark-mode .article-tag{
+    color:#F0EFF4;
+    background:#DC136C;
+}
+/* FIN BLOQUE CSS: body.dark-mode yellow accents */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode team and game tags */
+body.dark-mode .team-tag,
+body.dark-mode .game-tag,
+body.dark-mode .circuit-tag{
+    color:#F0EFF4;
+    background:#DC136C;
+}
+/* FIN BLOQUE CSS: body.dark-mode team and game tags */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode .news-category */
+body.dark-mode .news-category{
+    color:#F0EFF4;
+    background:#DC136C;
+}
+/* FIN BLOQUE CSS: body.dark-mode .news-category */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode buttons */
+body.dark-mode .hero-btn,
+body.dark-mode .chismes-btn,
+body.dark-mode .discord-btn,
+body.dark-mode .form-btn,
+body.dark-mode .register-btn,
+body.dark-mode .modal-buttons a,
+body.dark-mode .modal-buttons button{
+    background:#DC136C;
+    color:#F0EFF4;
+}
+/* FIN BLOQUE CSS: body.dark-mode buttons */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode secondary buttons */
+body.dark-mode .rules-btn{
+    background:#242423;
+    color:#F0EFF4;
+    border-color:#DC136C;
+}
+/* FIN BLOQUE CSS: body.dark-mode secondary buttons */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode light speech card */
+body.dark-mode .araxys-chismes h2,
+body.dark-mode .araxys-chismes h2::after{
+    background:white;
+    color:#111;
+}
+
+body.dark-mode .araxys-chismes span{
+    color:#DC136C;
+}
+
+body.dark-mode .araxys-chismes p{
+    color:#191516;
+}
+/* FIN BLOQUE CSS: body.dark-mode light speech card */
+
+
+/* INICIO BLOQUE CSS: body.dark-mode page transition */
+body.dark-mode .page-transition{
+    background:#191516;
+}
+/* FIN BLOQUE CSS: body.dark-mode page transition */
+
+
+
+
+/* TITULOS */
+
+/* INICIO BLOQUE CSS: .section-header */
+.section-header{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:40px;
+}
+/* FIN BLOQUE CSS: .section-header */
+
+
+/* INICIO BLOQUE CSS: .section-header h2 */
+.section-header h2{
+    font-size:2rem;
+
+    color:#DC136C;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+/* FIN BLOQUE CSS: .section-header h2 */
+
+
+/* INICIO BLOQUE CSS: .section-header h2::before */
+.section-header h2::before{
+    content:"";
+
+    width:12px;
+    height:12px;
+
+    border-top:3px solid #DC136C;
+    border-right:3px solid #DC136C;
+
+    transform:rotate(45deg);
+}
+/* FIN BLOQUE CSS: .section-header h2::before */
+
+
+/* INICIO BLOQUE CSS: .section-header a */
+.section-header a{
+    text-decoration:none;
+
+    color:#DC136C;
+
+    font-weight:700;
+
+    transition:.3s;
+}
+/* FIN BLOQUE CSS: .section-header a */
+
+
+/* INICIO BLOQUE CSS: .section-header a:hover */
+.section-header a:hover{
+    opacity:.7;
+}
+/* FIN BLOQUE CSS: .section-header a:hover */
+
+
+/* RESPONSIVE*/
+
+/* INICIO BLOQUE CSS: @media(max-width:768px) */
+@media(max-width:768px){
+
+    header{
+        padding:15px 25px;
+
+        flex-direction:column;
+
+        gap:15px;
+    }
+
+    header.scrolled{
+        padding:10px 25px;
+    }
+
+    .logo img{
+        height:55px;
+    }
+
+    header.scrolled .logo img{
+        height:45px;
+    }
+
+    nav{
+        gap:18px;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+    }
+
+    .theme-toggle{
+        width:40px;
+        height:40px;
+        font-size:1.1rem;
+    }
+
+    nav a{
+        font-size:.85rem;
+    }
+
+    header.scrolled nav a{
+        font-size:.8rem;
+    }
+
+    .section-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+}
+
+.section-header h2{
+    font-size:1.8rem;
+}
+
+.news-grid,
+.content-grid,
+.teams-grid,
+.pillars-grid,
+.info-grid,
+.registered-grid,
+.roster-grid{
+    grid-template-columns:1fr;
+}
+
+.hero,
+.featured-news,
+.content-section,
+.teams-section,
+.teams-showcase,
+.about-intro,
+.pillars-section,
+.tournament-info,
+.tournament-description,
+.registered-teams{
+    padding-left:25px;
+    padding-right:25px;
+}
+
+.hero h1,
+.teams-hero h1,
+.about-hero h1,
+.torneos-hero h1,
+.tournament-hero h1{
+    font-size:3rem;
+}
+
+.hero p,
+.teams-hero p,
+.about-hero p,
+.tournament-hero p{
+    font-size:1rem;
+}
+
+.video-card img,
+.video-thumbnail img,
+.team-card img{
+    height:320px;
+}
+
+.team-card{
+    height:420px;
+}
+
+.news-card,
+.info-card,
+.pillar-card,
+.registered-card,
+.about-card{
+    padding:25px;
+}
+
+.hero,
+.teams-hero,
+.about-hero,
+.torneos-hero,
+.tournament-hero{
+
+    min-height:60vh;
+
+    height:auto;
+
+    padding:140px 25px 80px;
+
+}
+
+.hero-content,
+.hero-overlay{
+
+    max-width:100%;
+
+}
+
+.scroll-indicator{
+
+    font-size:1.5rem;
+
+    margin-top:20px;
+
+}
+
+.footer-links,
+.footer-social{
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+}
+/* FIN BLOQUE CSS: @media(max-width:768px) */
+
+
+
+
+/* FOOTER */
+
+/* INICIO BLOQUE CSS: footer */
+footer{
+
+    border-top:3px solid #DC136C;
+
+    padding:80px;
+
+    background:#111;
+
+    color:white;
+
+    text-align:center;
+}
+/* FIN BLOQUE CSS: footer */
+
+
+/* INICIO BLOQUE CSS: footer img */
+footer img{
+    width:100px;
+
+    margin-bottom:30px;
+}
+/* FIN BLOQUE CSS: footer img */
+
+
+.footer-links,
+/* INICIO BLOQUE CSS: .footer-social */
+.footer-social{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    margin-bottom:25px;
+}
+/* FIN BLOQUE CSS: .footer-social */
+
+
+/* INICIO BLOQUE CSS: footer a */
+footer a{
+    text-decoration:none;
+
+    color:white;
+
+    transition:.3s;
+}
+/* FIN BLOQUE CSS: footer a */
+
+
+/* INICIO BLOQUE CSS: footer a:hover */
+footer a:hover{
+    color:#DC136C;
+}
+/* FIN BLOQUE CSS: footer a:hover */
+
+
+/* INICIO BLOQUE CSS: footer p */
+footer p{
+    color:#888;
+}
+/* FIN BLOQUE CSS: footer p */
+
+
+/* INICIO BLOQUE CSS: .page-transition */
+.page-transition{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#111;
+
+    z-index:99999;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.3s ease;
+
+    border-top:5px solid #DC136C;
+    border-bottom:5px solid #DC136C
+}
+/* FIN BLOQUE CSS: .page-transition */
+
+
+/* INICIO BLOQUE CSS: .page-transition.active */
+.page-transition.active{
+    opacity:1;
+}
+/* FIN BLOQUE CSS: .page-transition.active */

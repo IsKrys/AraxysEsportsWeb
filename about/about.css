@@ -1,0 +1,569 @@
+/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
+
+/* INICIO BLOQUE CSS: * */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+/* FIN BLOQUE CSS: * */
+
+
+/* INICIO BLOQUE CSS: body */
+body{
+    font-family:"Outfit", sans-serif;
+    background:#F0EFF4;
+    color:#191516;
+}
+/* FIN BLOQUE CSS: body */
+
+
+/* INICIO BLOQUE CSS: header */
+header{
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#F0EFF4;
+
+    padding:10px 80px;
+
+    box-shadow:0 2px 15px rgba(0,0,0,0.05);
+
+    z-index:1000;
+
+    transition:0.3s;
+}
+/* FIN BLOQUE CSS: header */
+
+
+/* INICIO BLOQUE CSS: header.scrolled */
+header.scrolled{
+
+    padding:12px 80px;
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+/* FIN BLOQUE CSS: header.scrolled */
+
+
+/* INICIO BLOQUE CSS: .logo */
+.logo{
+    font-size:1.8rem;
+    font-weight:700;
+}
+/* FIN BLOQUE CSS: .logo */
+
+
+/* INICIO BLOQUE CSS: .logo img */
+.logo img{
+    height:75px;
+
+    filter:drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+}
+/* FIN BLOQUE CSS: .logo img */
+
+
+/* INICIO BLOQUE CSS: header.scrolled .logo img */
+header.scrolled .logo img{
+    height:55px;
+}
+/* FIN BLOQUE CSS: header.scrolled .logo img */
+
+
+/* INICIO BLOQUE CSS: nav */
+nav{
+    display:flex;
+    gap:50px;
+}
+/* FIN BLOQUE CSS: nav */
+
+
+/* INICIO BLOQUE CSS: nav a */
+nav a{
+    text-decoration:none;
+
+    color:#191516;
+
+    font-weight:600;
+
+    position:relative;
+
+    transition:color 0.8s ease;
+}
+/* FIN BLOQUE CSS: nav a */
+
+
+/* INICIO BLOQUE CSS: header.scrolled nav a */
+header.scrolled nav a{
+    font-size:.95rem;
+    
+    color:#111;
+}
+/* FIN BLOQUE CSS: header.scrolled nav a */
+
+
+/* INICIO BLOQUE CSS: nav a:hover */
+nav a:hover{
+    color:#DC136C;
+}
+/* FIN BLOQUE CSS: nav a:hover */
+
+
+/* INICIO BLOQUE CSS: nav a::before */
+nav a::before{
+    content:"";
+
+    position:absolute;
+
+    bottom:-8px;
+    left:0;
+
+    width:0;
+    height:2px;
+
+    background:#DC136C;
+
+    transition:width 1.3s cubic-bezier(.22,.61,.36,1);
+}
+/* FIN BLOQUE CSS: nav a::before */
+
+
+/* INICIO BLOQUE CSS: nav a:hover::before */
+nav a:hover::before{
+    width:100%;
+}
+/* FIN BLOQUE CSS: nav a:hover::before */
+
+
+/* INICIO BLOQUE CSS: body */
+body{
+    color:#191516;
+}
+/* FIN BLOQUE CSS: body */
+
+
+/* INICIO BLOQUE CSS: .about-hero */
+.about-hero{
+    height:60vh;
+
+    background-image:url("../img/hero/restante.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+/* FIN BLOQUE CSS: .about-hero */
+
+
+/* INICIO BLOQUE CSS: .about-hero::before */
+.about-hero::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:rgba(0,0,0,.55);
+}
+/* FIN BLOQUE CSS: .about-hero::before */
+
+
+/* INICIO BLOQUE CSS: .about-hero .hero-overlay */
+.about-hero .hero-overlay{
+    position:relative;
+
+    z-index:2;
+
+    color:white;
+
+    max-width:850px;
+
+    padding:0 30px;
+
+    transform:translateY(40px);
+}
+/* FIN BLOQUE CSS: .about-hero .hero-overlay */
+
+
+/* INICIO BLOQUE CSS: .about-hero h1 */
+.about-hero h1{
+    font-size:5rem;
+
+    font-weight:900;
+
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .about-hero h1 */
+
+
+/* INICIO BLOQUE CSS: .about-hero p */
+.about-hero p{
+    font-size:1.2rem;
+
+    opacity:.9;
+}
+/* FIN BLOQUE CSS: .about-hero p */
+
+
+/* INICIO BLOQUE CSS: .about-intro */
+.about-intro{
+    padding:100px 80px 60px;
+}
+/* FIN BLOQUE CSS: .about-intro */
+
+
+/* INICIO BLOQUE CSS: .about-card */
+.about-card{
+    background:white;
+
+    padding:45px;
+
+    border-radius:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    border-top:4px solid #DC136C;
+}
+/* FIN BLOQUE CSS: .about-card */
+
+
+/* INICIO BLOQUE CSS: .about-card p */
+.about-card p{
+    color:#555;
+
+    font-size:1.1rem;
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .about-card p */
+
+
+/* INICIO BLOQUE CSS: .about-card p:last-child */
+.about-card p:last-child{
+    margin-bottom:0;
+}
+/* FIN BLOQUE CSS: .about-card p:last-child */
+
+
+/* INICIO BLOQUE CSS: .pillars-section */
+.pillars-section{
+
+    padding:0 80px 100px;
+
+}
+/* FIN BLOQUE CSS: .pillars-section */
+
+
+/* INICIO BLOQUE CSS: .pillars-grid */
+.pillars-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+}
+/* FIN BLOQUE CSS: .pillars-grid */
+
+
+/* INICIO BLOQUE CSS: .pillar-card */
+.pillar-card{
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.35s ease;
+
+}
+/* FIN BLOQUE CSS: .pillar-card */
+
+
+/* INICIO BLOQUE CSS: .pillar-card::before */
+.pillar-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:4px;
+
+    background:#DC136C;
+
+}
+/* FIN BLOQUE CSS: .pillar-card::before */
+
+
+/* INICIO BLOQUE CSS: .pillar-card:hover */
+.pillar-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+/* FIN BLOQUE CSS: .pillar-card:hover */
+
+
+/* INICIO BLOQUE CSS: .pillar-card h3 */
+.pillar-card h3{
+
+    color:#111;
+
+    font-size:2rem;
+
+    margin-bottom:20px;
+
+}
+/* FIN BLOQUE CSS: .pillar-card h3 */
+
+
+/* INICIO BLOQUE CSS: .pillar-card p */
+.pillar-card p{
+
+    color:#555;
+
+    line-height:1.8;
+
+}
+/* FIN BLOQUE CSS: .pillar-card p */
+
+
+/* INICIO BLOQUE CSS: .about-ending */
+.about-ending{
+
+    height:450px;
+
+    background-image:url("../img/hero/restante.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    position:relative;
+
+    margin:0 80px 100px;
+
+    border-radius:30px;
+
+    overflow:hidden;
+}
+/* FIN BLOQUE CSS: .about-ending */
+
+
+/* INICIO BLOQUE CSS: .about-ending::before */
+.about-ending::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+}
+/* FIN BLOQUE CSS: .about-ending::before */
+
+
+/* INICIO BLOQUE CSS: .ending-overlay */
+.ending-overlay{
+
+    position:relative;
+
+    z-index:2;
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    color:white;
+
+    padding:40px;
+}
+/* FIN BLOQUE CSS: .ending-overlay */
+
+
+/* INICIO BLOQUE CSS: .ending-overlay h2 */
+.ending-overlay h2{
+
+    font-size:3rem;
+
+    margin-bottom:25px;
+}
+/* FIN BLOQUE CSS: .ending-overlay h2 */
+
+
+/* INICIO BLOQUE CSS: .ending-overlay p */
+.ending-overlay p{
+
+    max-width:800px;
+
+    line-height:1.8;
+
+    margin-bottom:30px;
+
+    opacity:.9;
+}
+/* FIN BLOQUE CSS: .ending-overlay p */
+
+
+/* INICIO BLOQUE CSS: .ending-overlay span */
+.ending-overlay span{
+
+    color:#DC136C;
+
+    font-size:1.2rem;
+
+    font-weight:800;
+
+    margin-bottom:40px;
+}
+/* FIN BLOQUE CSS: .ending-overlay span */
+
+
+/* INICIO BLOQUE CSS: .discord-btn */
+.discord-btn{
+
+    background:#DC136C;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:18px 40px;
+
+    border-radius:18px;
+
+    font-weight:700;
+
+    transition:.3s ease;
+}
+/* FIN BLOQUE CSS: .discord-btn */
+
+
+/* INICIO BLOQUE CSS: .discord-btn:hover */
+.discord-btn:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 15px 30px rgba(220,19,108,.4);
+}
+/* FIN BLOQUE CSS: .discord-btn:hover */
+
+
+
+
+
+
+
+
+
+
+/* INICIO BLOQUE CSS: footer */
+footer{
+
+    border-top:3px solid #DC136C;
+    
+    margin-top:120px;
+
+    padding:80px;
+
+    background:#111;
+
+    color:#F0EFF4;
+
+    text-align:center;
+}
+/* FIN BLOQUE CSS: footer */
+
+
+/* INICIO BLOQUE CSS: footer img */
+footer img{
+    width:100px;
+
+    margin-bottom:30px;
+}
+/* FIN BLOQUE CSS: footer img */
+
+
+.footer-links,
+/* INICIO BLOQUE CSS: .footer-social */
+.footer-social{
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    margin-bottom:25px;
+}
+/* FIN BLOQUE CSS: .footer-social */
+
+
+/* INICIO BLOQUE CSS: footer a */
+footer a{
+    text-decoration:none;
+
+    color:#F0EFF4;
+
+    transition:0.3s;
+}
+/* FIN BLOQUE CSS: footer a */
+
+
+/* INICIO BLOQUE CSS: footer a:hover */
+footer a:hover{
+    color:#DC136C;
+}
+/* FIN BLOQUE CSS: footer a:hover */
+
+
+/* INICIO BLOQUE CSS: footer p */
+footer p{
+    color:#888;
+}
+/* FIN BLOQUE CSS: footer p */
+

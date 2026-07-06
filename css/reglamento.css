@@ -1,0 +1,119 @@
+/* INICIO BLOQUE CSS: .rules-hero */
+.rules-hero{
+    min-height:52vh;
+    background-image:url("../img/hero/news-bg.jpg");
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:120px 30px 80px;
+}
+
+.rules-hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.62);
+}
+
+.rules-hero .hero-overlay{
+    position:relative;
+    z-index:2;
+    color:white;
+    max-width:900px;
+}
+
+.rules-hero span{
+    display:inline-block;
+    padding:10px 18px;
+    border-radius:999px;
+    background:#DC136C;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.rules-hero h1{
+    font-size:4rem;
+    font-weight:900;
+    margin-bottom:18px;
+}
+
+.rules-hero p{
+    font-size:1.15rem;
+    line-height:1.7;
+}
+/* FIN BLOQUE CSS: .rules-hero */
+
+
+/* INICIO BLOQUE CSS: .rules-workspace */
+.rules-workspace{
+    padding:90px 80px;
+    background-image:url("../img/hero/news-bg.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.rules-card{
+    max-width:980px;
+    margin:0 auto;
+    background:white;
+    border-radius:24px;
+    padding:55px;
+    box-shadow:0 20px 50px rgba(0,0,0,.12);
+    border-top:5px solid #DC136C;
+}
+
+.rules-card h2{
+    color:#DC136C;
+    font-size:1.8rem;
+    margin:35px 0 15px;
+}
+
+.rules-card h2:first-child{
+    margin-top:0;
+}
+
+.rules-card p,
+.rules-card li{
+    color:#555;
+    line-height:1.8;
+    font-size:1.05rem;
+}
+
+.rules-card ul{
+    margin:15px 0 20px 22px;
+}
+
+body.dark-mode .rules-workspace{
+    background-color:#191516;
+}
+
+body.dark-mode .rules-card{
+    background:#242423;
+    color:#F0EFF4;
+    box-shadow:0 20px 50px rgba(0,0,0,.28);
+}
+
+body.dark-mode .rules-card p,
+body.dark-mode .rules-card li{
+    color:#F0EFF4;
+}
+/* FIN BLOQUE CSS: .rules-workspace */
+
+
+@media(max-width:760px){
+    .rules-hero h1{
+        font-size:2.7rem;
+    }
+
+    .rules-workspace{
+        padding:60px 20px;
+    }
+
+    .rules-card{
+        padding:32px;
+    }
+}

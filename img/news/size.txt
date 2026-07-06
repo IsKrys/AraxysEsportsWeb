@@ -1,0 +1,6 @@
+NOTICIAS
+Tamano: 1280 x 720 px
+Formato: 16:9
+Usos:
+- Tarjetas de noticias
+- Hero de articulos

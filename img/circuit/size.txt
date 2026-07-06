@@ -1,0 +1,6 @@
+CIRCUITO ARAXYS
+Tamano: 900 x 1600 px
+Formato: vertical
+Usos:
+- Banner lateral del circuito
+- Hero o portada del circuito Araxys

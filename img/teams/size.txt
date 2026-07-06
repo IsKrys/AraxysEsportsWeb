@@ -1,0 +1,8 @@
+TEAMS
+Tamano: 1000 x 1400 px
+Formato: 5:7
+Usos:
+- Titular
+- Wolf
+- Academy
+- Streamers

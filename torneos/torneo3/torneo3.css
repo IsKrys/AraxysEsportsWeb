@@ -1,0 +1,10 @@
+/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
+
+@import url("../Torneo1/torneo1.css");
+
+/* INICIO BLOQUE CSS: .tournament-hero */
+.tournament-hero{
+    background-image:url("../../img/torneos/wolf-championship.jpg");
+}
+/* FIN BLOQUE CSS: .tournament-hero */
+

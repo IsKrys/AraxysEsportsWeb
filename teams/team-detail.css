@@ -1,0 +1,512 @@
+/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
+
+/* TEAM DETAIL PAGES */
+
+/* INICIO BLOQUE CSS: .team-hero */
+.team-hero{
+    min-height:70vh;
+    background-image:var(--team-hero-image);
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+/* FIN BLOQUE CSS: .team-hero */
+
+
+/* INICIO BLOQUE CSS: .team-hero::before */
+.team-hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.58);
+}
+/* FIN BLOQUE CSS: .team-hero::before */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay */
+.hero-overlay{
+    position:relative;
+    z-index:2;
+    color:#F0EFF4;
+    padding:0 24px;
+}
+/* FIN BLOQUE CSS: .hero-overlay */
+
+
+/* INICIO BLOQUE CSS: .team-tag */
+.team-tag{
+    display:inline-block;
+    padding:10px 18px;
+    border-radius:999px;
+    background:#DC136C;
+    font-weight:700;
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .team-tag */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay h1 */
+.hero-overlay h1{
+    font-size:5rem;
+    font-weight:900;
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .hero-overlay h1 */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay p */
+.hero-overlay p{
+    font-size:1.2rem;
+    opacity:.9;
+}
+/* FIN BLOQUE CSS: .hero-overlay p */
+
+
+/* INICIO BLOQUE CSS: .scroll-indicator */
+.scroll-indicator{
+    margin-top:18px;
+    font-size:2rem;
+    animation:bounce 2s infinite;
+}
+/* FIN BLOQUE CSS: .scroll-indicator */
+
+
+/* INICIO BLOQUE CSS: @keyframes bounce */
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(10px);
+    }
+}
+/* FIN BLOQUE CSS: @keyframes bounce */
+
+
+/* INICIO BLOQUE CSS: .section-header h2 */
+.section-header h2{
+    font-size:2rem;
+    color:#DC136C;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:30px;
+    margin-bottom:10px;
+}
+/* FIN BLOQUE CSS: .section-header h2 */
+
+
+/* INICIO BLOQUE CSS: .section-header h2::before */
+.section-header h2::before{
+    content:"";
+    width:12px;
+    height:12px;
+    border-top:3px solid #DC136C;
+    border-right:3px solid #DC136C;
+    transform:rotate(45deg);
+    display:inline-block;
+}
+/* FIN BLOQUE CSS: .section-header h2::before */
+
+
+/* INICIO BLOQUE CSS: .team-info */
+.team-info{
+    padding:90px 80px;
+    background-image:url("../img/hero/news-bg.jpg");
+    background-size:cover;
+    background-position:center;
+}
+/* FIN BLOQUE CSS: .team-info */
+
+
+/* INICIO BLOQUE CSS: .info-grid */
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+/* FIN BLOQUE CSS: .info-grid */
+
+
+/* INICIO BLOQUE CSS: .info-card */
+.info-card{
+    position:relative;
+    overflow:hidden;
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+/* FIN BLOQUE CSS: .info-card */
+
+
+.info-card::before,
+/* INICIO BLOQUE CSS: .focus-card::before */
+.focus-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:#DC136C;
+}
+/* FIN BLOQUE CSS: .focus-card::before */
+
+
+/* INICIO BLOQUE CSS: .info-card span */
+.info-card span{
+    color:#888;
+    display:block;
+    margin-bottom:10px;
+}
+/* FIN BLOQUE CSS: .info-card span */
+
+
+/* INICIO BLOQUE CSS: .info-card h2 */
+.info-card h2{
+    color:#111;
+}
+/* FIN BLOQUE CSS: .info-card h2 */
+
+
+.team-description,
+.team-focus,
+.team-roster-showcase,
+/* INICIO BLOQUE CSS: .team-achievements */
+.team-achievements{
+    padding:0 80px 90px;
+}
+/* FIN BLOQUE CSS: .team-achievements */
+
+
+/* INICIO BLOQUE CSS: .member-card-grid */
+.member-card-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:22px;
+}
+/* FIN BLOQUE CSS: .member-card-grid */
+
+
+/* INICIO BLOQUE CSS: .member-card */
+.member-card{
+    position:relative;
+    overflow:hidden;
+    min-height:460px;
+    border-radius:25px;
+    background:#111;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.35s ease;
+}
+/* FIN BLOQUE CSS: .member-card */
+
+
+/* INICIO BLOQUE CSS: .member-card:hover */
+.member-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+/* FIN BLOQUE CSS: .member-card:hover */
+
+
+/* INICIO BLOQUE CSS: .member-card img */
+.member-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:.4s ease;
+}
+/* FIN BLOQUE CSS: .member-card img */
+
+
+/* INICIO BLOQUE CSS: .member-card:hover img */
+.member-card:hover img{
+    transform:scale(1.05);
+}
+/* FIN BLOQUE CSS: .member-card:hover img */
+
+
+/* INICIO BLOQUE CSS: .member-overlay */
+.member-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    text-align:center;
+    padding:28px;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.9),
+        rgba(0,0,0,.08)
+    );
+}
+/* FIN BLOQUE CSS: .member-overlay */
+
+
+/* INICIO BLOQUE CSS: .member-overlay h3 */
+.member-overlay h3{
+    color:white;
+    font-size:1.6rem;
+    text-shadow:0 3px 10px rgba(0,0,0,.8);
+}
+/* FIN BLOQUE CSS: .member-overlay h3 */
+
+
+/* INICIO BLOQUE CSS: .achievements-dropdown */
+.achievements-dropdown{
+    background:white;
+    border-radius:25px;
+    padding:10px 30px 30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    border-top:4px solid #DC136C;
+}
+/* FIN BLOQUE CSS: .achievements-dropdown */
+
+
+/* INICIO BLOQUE CSS: .achievements-dropdown summary */
+.achievements-dropdown summary{
+    cursor:pointer;
+    list-style:none;
+}
+/* FIN BLOQUE CSS: .achievements-dropdown summary */
+
+
+/* INICIO BLOQUE CSS: .achievements-dropdown summary::-webkit-details-marker */
+.achievements-dropdown summary::-webkit-details-marker{
+    display:none;
+}
+/* FIN BLOQUE CSS: .achievements-dropdown summary::-webkit-details-marker */
+
+
+/* INICIO BLOQUE CSS: .achievements-dropdown .section-header */
+.achievements-dropdown .section-header{
+    margin-bottom:0;
+}
+/* FIN BLOQUE CSS: .achievements-dropdown .section-header */
+
+
+/* INICIO BLOQUE CSS: .achievements-dropdown[open] .section-header */
+.achievements-dropdown[open] .section-header{
+    margin-bottom:25px;
+}
+/* FIN BLOQUE CSS: .achievements-dropdown[open] .section-header */
+
+
+/* INICIO BLOQUE CSS: .achievements-dropdown[open] .section-header h2::before */
+.achievements-dropdown[open] .section-header h2::before{
+    transform:rotate(135deg);
+}
+/* FIN BLOQUE CSS: .achievements-dropdown[open] .section-header h2::before */
+
+
+/* INICIO BLOQUE CSS: .description-card */
+.description-card{
+    background:white;
+    border-radius:25px;
+    padding:40px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    border-top:4px solid #DC136C;
+}
+/* FIN BLOQUE CSS: .description-card */
+
+
+/* INICIO BLOQUE CSS: .description-card p */
+.description-card p{
+    color:#555;
+    line-height:1.8;
+    font-size:1.05rem;
+    max-width:900px;
+}
+/* FIN BLOQUE CSS: .description-card p */
+
+
+/* INICIO BLOQUE CSS: .focus-grid */
+.focus-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+/* FIN BLOQUE CSS: .focus-grid */
+
+
+/* INICIO BLOQUE CSS: .focus-card */
+.focus-card{
+    position:relative;
+    overflow:hidden;
+    background:white;
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+/* FIN BLOQUE CSS: .focus-card */
+
+
+/* INICIO BLOQUE CSS: .focus-card h3 */
+.focus-card h3{
+    color:#111;
+    margin-bottom:10px;
+}
+/* FIN BLOQUE CSS: .focus-card h3 */
+
+
+/* INICIO BLOQUE CSS: .focus-card p */
+.focus-card p{
+    color:#666;
+    line-height:1.7;
+}
+/* FIN BLOQUE CSS: .focus-card p */
+
+
+/* INICIO BLOQUE CSS: .achievement-card */
+.achievement-card{
+    background:white;
+    padding:25px 30px;
+    margin-bottom:20px;
+    border-radius:20px;
+    font-weight:600;
+    color:#111;
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+    border-left:5px solid #DC136C;
+    transition:.3s ease;
+}
+/* FIN BLOQUE CSS: .achievement-card */
+
+
+/* INICIO BLOQUE CSS: .achievement-card:hover */
+.achievement-card:hover{
+    transform:translateX(10px);
+    box-shadow:0 12px 25px rgba(0,0,0,.1);
+}
+/* FIN BLOQUE CSS: .achievement-card:hover */
+
+
+/* INICIO BLOQUE CSS: .join-banner */
+.join-banner{
+    position:relative;
+    overflow:hidden;
+    border-radius:30px;
+    height:260px;
+    text-decoration:none;
+    cursor:pointer;
+    transition:.35s ease;
+    display:block;
+    margin-top:45px;
+}
+/* FIN BLOQUE CSS: .join-banner */
+
+
+/* INICIO BLOQUE CSS: .join-banner:hover */
+.join-banner:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+/* FIN BLOQUE CSS: .join-banner:hover */
+
+
+/* INICIO BLOQUE CSS: .join-banner img */
+.join-banner img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+/* FIN BLOQUE CSS: .join-banner img */
+
+
+/* INICIO BLOQUE CSS: .join-overlay */
+.join-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:rgba(0,0,0,.55);
+    color:white;
+    padding:30px;
+}
+/* FIN BLOQUE CSS: .join-overlay */
+
+
+/* INICIO BLOQUE CSS: .join-overlay h2 */
+.join-overlay h2{
+    font-size:2.4rem;
+    margin-bottom:15px;
+}
+/* FIN BLOQUE CSS: .join-overlay h2 */
+
+
+/* INICIO BLOQUE CSS: .join-overlay p */
+.join-overlay p{
+    font-size:1.1rem;
+    margin-bottom:20px;
+    opacity:.9;
+}
+/* FIN BLOQUE CSS: .join-overlay p */
+
+
+/* INICIO BLOQUE CSS: .join-overlay span */
+.join-overlay span{
+    color:#DC136C;
+    font-weight:800;
+    font-size:1.1rem;
+}
+/* FIN BLOQUE CSS: .join-overlay span */
+
+
+/* INICIO BLOQUE CSS: @media (max-width:1000px) */
+@media (max-width:1000px){
+    .info-grid,
+    .focus-grid,
+    .member-card-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero-overlay h1{
+        font-size:3.6rem;
+    }
+}
+/* FIN BLOQUE CSS: @media (max-width:1000px) */
+
+
+/* INICIO BLOQUE CSS: @media (max-width:680px) */
+@media (max-width:680px){
+    .team-info,
+    .team-description,
+    .team-focus,
+    .team-roster-showcase,
+    .team-achievements{
+        padding-left:24px;
+        padding-right:24px;
+    }
+
+    .info-grid,
+    .focus-grid,
+    .member-card-grid{
+        grid-template-columns:1fr;
+    }
+
+    .member-card{
+        min-height:420px;
+    }
+
+    .hero-overlay h1{
+        font-size:2.7rem;
+    }
+
+    .join-overlay h2{
+        font-size:1.8rem;
+    }
+}
+/* FIN BLOQUE CSS: @media (max-width:680px) */
+

@@ -1,0 +1,5 @@
+EQUIPOS INSCRITOS LOGOS
+Tamano: 512 x 512 px
+Formato: 1:1
+Usos:
+- Logos de equipos inscritos en torneos

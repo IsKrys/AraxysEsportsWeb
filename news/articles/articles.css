@@ -1,0 +1,165 @@
+/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
+
+/* INICIO BLOQUE CSS: body */
+body{
+    color:#191516;
+}
+/* FIN BLOQUE CSS: body */
+
+
+/* INICIO BLOQUE CSS: .article-hero */
+.article-hero{
+    min-height:60vh;
+    background-image:var(--article-hero-image);
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+/* FIN BLOQUE CSS: .article-hero */
+
+
+/* INICIO BLOQUE CSS: .article-hero::before */
+.article-hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.58);
+}
+/* FIN BLOQUE CSS: .article-hero::before */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay */
+.hero-overlay{
+    position:relative;
+    z-index:2;
+    color:white;
+    max-width:900px;
+    padding:0 30px;
+}
+/* FIN BLOQUE CSS: .hero-overlay */
+
+
+/* INICIO BLOQUE CSS: .article-tag */
+.article-tag{
+    display:inline-block;
+    padding:10px 18px;
+    border-radius:999px;
+    background:#DC136C;
+    font-weight:700;
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .article-tag */
+
+
+/* INICIO BLOQUE CSS: .article-hero h1 */
+.article-hero h1{
+    font-size:4.5rem;
+    font-weight:900;
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .article-hero h1 */
+
+
+/* INICIO BLOQUE CSS: .article-hero p */
+.article-hero p{
+    font-size:1.2rem;
+    opacity:.9;
+}
+/* FIN BLOQUE CSS: .article-hero p */
+
+
+/* INICIO BLOQUE CSS: .article-workspace */
+.article-workspace{
+    padding:100px 80px;
+    background-image:url("../../img/hero/news-bg.jpg");
+    background-size:cover;
+    background-position:center;
+}
+/* FIN BLOQUE CSS: .article-workspace */
+
+
+/* INICIO BLOQUE CSS: .article-placeholder */
+.article-placeholder{
+    background:white;
+    border-radius:25px;
+    padding:45px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    border-top:4px solid #DC136C;
+}
+/* FIN BLOQUE CSS: .article-placeholder */
+
+
+/* INICIO BLOQUE CSS: .article-image-card */
+.article-image-card{
+    position:relative;
+    max-width:720px;
+    margin:0 auto 45px;
+    padding:14px;
+    border-radius:28px;
+    background:linear-gradient(135deg, rgba(220,19,108,.95), rgba(254,228,64,.9));
+    box-shadow:0 25px 60px rgba(0,0,0,.18);
+    overflow:hidden;
+}
+
+.article-image-card::before{
+    content:"";
+    position:absolute;
+    inset:14px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.35);
+    pointer-events:none;
+    z-index:2;
+}
+
+.article-image-card img{
+    display:block;
+    width:100%;
+    aspect-ratio:3 / 4;
+    object-fit:contain;
+    background:#191516;
+    border-radius:18px;
+}
+/* FIN BLOQUE CSS: .article-image-card */
+
+
+/* INICIO BLOQUE CSS: .article-placeholder p */
+.article-placeholder p{
+    color:#555;
+    line-height:1.8;
+    font-size:1.05rem;
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .article-placeholder p */
+
+
+/* INICIO BLOQUE CSS: article text helpers */
+.article-placeholder p:last-child{
+    margin-bottom:0;
+}
+
+.article-placeholder h2{
+    color:#DC136C;
+    font-size:1.8rem;
+    margin:35px 0 15px;
+}
+
+.article-placeholder ul{
+    margin:15px 0 25px 22px;
+}
+
+.article-placeholder li{
+    color:#555;
+    line-height:1.8;
+    font-size:1.05rem;
+    margin-bottom:8px;
+}
+
+body.dark-mode .article-placeholder li{
+    color:#F0EFF4;
+}
+/* FIN BLOQUE CSS: article text helpers */
+

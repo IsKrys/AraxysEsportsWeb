@@ -1,0 +1,712 @@
+/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
+
+/* INICIO BLOQUE CSS: * */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+/* FIN BLOQUE CSS: * */
+
+
+/* INICIO BLOQUE CSS: body */
+body{
+    font-family:"Outfit", sans-serif;
+    background:#F0EFF4;
+    color:#F0EFF4;
+}
+/* FIN BLOQUE CSS: body */
+
+
+/* INICIO BLOQUE CSS: header */
+header{
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:25px 80px;
+
+    z-index:1000;
+
+    background:rgba(17,17,17,0);
+    backdrop-filter:blur(0px);
+
+    transition:0.3s;
+}
+/* FIN BLOQUE CSS: header */
+
+
+/* INICIO BLOQUE CSS: header.scrolled */
+header.scrolled{
+
+    padding:12px 80px;
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+/* FIN BLOQUE CSS: header.scrolled */
+
+
+/* INICIO BLOQUE CSS: .logo */
+.logo{
+    font-size:1.8rem;
+    font-weight:700;
+}
+/* FIN BLOQUE CSS: .logo */
+
+
+/* INICIO BLOQUE CSS: .logo img */
+.logo img{
+    height:75px;
+    
+    filter:drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+}
+/* FIN BLOQUE CSS: .logo img */
+
+
+/* INICIO BLOQUE CSS: header.scrolled .logo img */
+header.scrolled .logo img{
+    height:55px;
+}
+/* FIN BLOQUE CSS: header.scrolled .logo img */
+
+
+/* INICIO BLOQUE CSS: nav */
+nav{
+    display:flex;
+    gap:50px;
+}
+/* FIN BLOQUE CSS: nav */
+
+
+/* INICIO BLOQUE CSS: nav a */
+nav a{
+    text-decoration:none;
+
+    color:white;
+
+    font-weight:600;
+
+    position:relative;
+
+    transition:color 0.8s ease;
+}
+/* FIN BLOQUE CSS: nav a */
+
+
+/* INICIO BLOQUE CSS: header.scrolled nav a */
+header.scrolled nav a{
+    font-size:.95rem;
+    color:#111;
+}
+/* FIN BLOQUE CSS: header.scrolled nav a */
+
+
+/* INICIO BLOQUE CSS: nav a:hover */
+nav a:hover{
+    color:#DC136C;
+}
+/* FIN BLOQUE CSS: nav a:hover */
+
+
+/* INICIO BLOQUE CSS: nav a::before */
+nav a::before{
+    content:"";
+
+    position:absolute;
+
+    bottom:-8px;
+    left:0;
+
+    width:0;
+    height:2px;
+
+    background:#DC136C;
+
+    transition:width 1.3s cubic-bezier(.22,.61,.36,1);
+}
+/* FIN BLOQUE CSS: nav a::before */
+
+
+/* INICIO BLOQUE CSS: nav a:hover::before */
+nav a:hover::before{
+    width:100%;
+}
+/* FIN BLOQUE CSS: nav a:hover::before */
+
+
+/* HERO */
+
+/* INICIO BLOQUE CSS: .tournament-hero */
+.tournament-hero{
+    height:70vh;
+
+    background-image:url("../../img/torneos/araxys-torneo-inauguracion.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+/* FIN BLOQUE CSS: .tournament-hero */
+
+
+/* INICIO BLOQUE CSS: .tournament-hero::before */
+.tournament-hero::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:rgba(0,0,0,0.55);
+}
+/* FIN BLOQUE CSS: .tournament-hero::before */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay */
+.hero-overlay{
+    position:relative;
+    z-index:2;
+
+    color:white;
+}
+/* FIN BLOQUE CSS: .hero-overlay */
+
+
+/* INICIO BLOQUE CSS: .game-tag */
+.game-tag{
+    display:inline-block;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    background:#DC136C;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .game-tag */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay h1 */
+.hero-overlay h1{
+    font-size:5rem;
+
+    font-weight:900;
+
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .hero-overlay h1 */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay p */
+.hero-overlay p{
+    font-size:1.2rem;
+
+    opacity:0.9;
+}
+/* FIN BLOQUE CSS: .hero-overlay p */
+
+
+/* INICIO BLOQUE CSS: .section-header h2 */
+.section-header h2{
+
+    font-size:2rem;
+
+    color:#DC136C;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-top:30px;
+
+    margin-bottom:10px;
+    
+}
+/* FIN BLOQUE CSS: .section-header h2 */
+
+
+/* INICIO BLOQUE CSS: .section-header h2::before */
+.section-header h2::before{
+    content:"";
+
+    width:12px;
+    height:12px;
+
+    border-top:3px solid #DC136C;
+    border-right:3px solid #DC136C;
+
+    transform:rotate(45deg);
+
+    display:inline-block;
+}
+/* FIN BLOQUE CSS: .section-header h2::before */
+
+
+/* INICIO BLOQUE CSS: .hero-scroll */
+.hero-scroll{
+    margin-top:50px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:12px;
+}
+/* FIN BLOQUE CSS: .hero-scroll */
+
+
+/* INICIO BLOQUE CSS: .hero-scroll span */
+.hero-scroll span{
+    color:rgba(255,255,255,.8);
+
+    font-size:.85rem;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+}
+/* FIN BLOQUE CSS: .hero-scroll span */
+
+
+/* INICIO BLOQUE CSS: .hero-scroll-line */
+.hero-scroll-line{
+    width:2px;
+
+    height:50px;
+
+    background:white;
+
+    animation:scrollPulse 2s infinite;
+}
+/* FIN BLOQUE CSS: .hero-scroll-line */
+
+
+/* INICIO BLOQUE CSS: @keyframes scrollPulse */
+@keyframes scrollPulse{
+
+    0%{
+        opacity:.3;
+        transform:scaleY(.5);
+    }
+
+    50%{
+        opacity:1;
+        transform:scaleY(1);
+    }
+
+    100%{
+        opacity:.3;
+        transform:scaleY(.5);
+    }
+
+}
+/* FIN BLOQUE CSS: @keyframes scrollPulse */
+
+
+/* INFO */
+
+/* INICIO BLOQUE CSS: .tournament-info */
+.tournament-info{
+    padding:90px;
+
+    background-image:url("../../img/hero/news-bg.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+}
+/* FIN BLOQUE CSS: .tournament-info */
+
+
+/* INICIO BLOQUE CSS: .info-grid */
+.info-grid{
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+}
+/* FIN BLOQUE CSS: .info-grid */
+
+
+/* INICIO BLOQUE CSS: .info-card */
+.info-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+/* FIN BLOQUE CSS: .info-card */
+
+
+/* INICIO BLOQUE CSS: .info-card::before */
+.info-card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:4px;
+
+    background:#DC136C;
+}
+/* FIN BLOQUE CSS: .info-card::before */
+
+
+/* INICIO BLOQUE CSS: .info-card span */
+.info-card span{
+    color:#888;
+
+    display:block;
+
+    margin-bottom:10px;
+}
+/* FIN BLOQUE CSS: .info-card span */
+
+
+/* INICIO BLOQUE CSS: .info-card h2 */
+.info-card h2{
+    color:#111;
+}
+/* FIN BLOQUE CSS: .info-card h2 */
+
+
+/* DESCRIPCIÓN */
+
+/* INICIO BLOQUE CSS: .tournament-description */
+.tournament-description{
+    padding:0 80px 80px;
+}
+/* FIN BLOQUE CSS: .tournament-description */
+
+
+/* INICIO BLOQUE CSS: .tournament-description p */
+.tournament-description p{
+    color:#555;
+
+    line-height:1.8;
+
+    max-width:900px;
+}
+/* FIN BLOQUE CSS: .tournament-description p */
+
+
+/* BOTONES */
+
+/* INICIO BLOQUE CSS: .tournament-actions */
+.tournament-actions{
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    padding-bottom:100px;
+}
+/* FIN BLOQUE CSS: .tournament-actions */
+
+
+/* INICIO BLOQUE CSS: .register-btn */
+.register-btn{
+    background:#DC136C;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:18px 40px;
+
+    border-radius:18px;
+
+    font-weight:700;
+
+    transition:0.3s;
+}
+/* FIN BLOQUE CSS: .register-btn */
+
+
+/* INICIO BLOQUE CSS: .register-btn:hover */
+.register-btn:hover{
+    transform:translateY(-4px);
+}
+/* FIN BLOQUE CSS: .register-btn:hover */
+
+
+/* INICIO BLOQUE CSS: .rules-btn */
+.rules-btn{
+    background:white;
+
+    color:#111;
+
+    text-decoration:none;
+
+    padding:18px 40px;
+
+    border-radius:18px;
+
+    font-weight:700;
+
+    border:2px solid #ddd;
+
+    transition:0.3s;
+}
+/* FIN BLOQUE CSS: .rules-btn */
+
+
+/* INICIO BLOQUE CSS: .rules-btn:hover */
+.rules-btn:hover{
+    transform:translateY(-4px);
+}
+/* FIN BLOQUE CSS: .rules-btn:hover */
+
+
+/* INICIO BLOQUE CSS: .registered-teams */
+.registered-teams{
+    padding:40px 80px 100px;
+
+    margin-top:-100px;
+    
+    margin-bottom:40px;
+}
+/* FIN BLOQUE CSS: .registered-teams */
+
+
+/* INICIO BLOQUE CSS: .registered-grid */
+.registered-grid{
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+}
+/* FIN BLOQUE CSS: .registered-grid */
+
+
+/* INICIO BLOQUE CSS: .registered-empty */
+.registered-empty{
+    background:white;
+    border-radius:25px;
+    padding:45px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    border-top:4px solid #DC136C;
+}
+
+.registered-empty p{
+    color:#555;
+    line-height:1.8;
+    font-size:1.05rem;
+}
+
+body.dark-mode .registered-empty{
+    background:#242423;
+    color:#F0EFF4;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+body.dark-mode .registered-empty p{
+    color:#F0EFF4;
+}
+/* FIN BLOQUE CSS: .registered-empty */
+
+
+/* INICIO BLOQUE CSS: .registered-card */
+.registered-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+    transition:.3s ease;
+
+    position:relative;
+
+    overflow:hidden;
+}
+/* FIN BLOQUE CSS: .registered-card */
+
+
+/* INICIO BLOQUE CSS: .registered-card::before */
+.registered-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:4px;
+
+    background:#DC136C;
+}
+/* FIN BLOQUE CSS: .registered-card::before */
+
+
+/* INICIO BLOQUE CSS: .registered-card:hover */
+.registered-card:hover{
+
+    transform:translateY(-10px);
+}
+/* FIN BLOQUE CSS: .registered-card:hover */
+
+
+/* INICIO BLOQUE CSS: .registered-card img */
+.registered-card img{
+
+    width:90px;
+
+    height:90px;
+
+    object-fit:contain;
+
+    margin-bottom:15px;
+}
+/* FIN BLOQUE CSS: .registered-card img */
+
+
+/* INICIO BLOQUE CSS: .registered-card h3 */
+.registered-card h3{
+
+    color:#111;
+}
+/* FIN BLOQUE CSS: .registered-card h3 */
+
+
+/* INICIO BLOQUE CSS: .description-card */
+.description-card{
+    background:white;
+
+    border-radius:25px;
+
+    padding:40px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    border-top:4px solid #DC136C;
+}
+/* FIN BLOQUE CSS: .description-card */
+
+
+/* INICIO BLOQUE CSS: .description-card p */
+.description-card p{
+    color:#555;
+
+    line-height:1.8;
+
+    font-size:1.05rem;
+}
+/* FIN BLOQUE CSS: .description-card p */
+
+
+/* INICIO BLOQUE CSS: footer */
+footer{
+
+    border-top:3px solid #DC136C;
+    
+    margin-top:0px;
+
+    padding:80px;
+
+    background:#111;
+
+    color:white;
+
+    text-align:center;
+}
+/* FIN BLOQUE CSS: footer */
+
+
+/* INICIO BLOQUE CSS: footer img */
+footer img{
+    width:100px;
+
+    margin-bottom:30px;
+}
+/* FIN BLOQUE CSS: footer img */
+
+
+.footer-links,
+/* INICIO BLOQUE CSS: .footer-social */
+.footer-social{
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    margin-bottom:25px;
+}
+/* FIN BLOQUE CSS: .footer-social */
+
+
+/* INICIO BLOQUE CSS: footer a */
+footer a{
+    text-decoration:none;
+
+    color:white;
+
+    transition:0.3s;
+}
+/* FIN BLOQUE CSS: footer a */
+
+
+/* INICIO BLOQUE CSS: footer a:hover */
+footer a:hover{
+    color:#DC136C;
+}
+/* FIN BLOQUE CSS: footer a:hover */
+
+
+/* INICIO BLOQUE CSS: footer p */
+footer p{
+    color:#888;
+}
+/* FIN BLOQUE CSS: footer p */
+

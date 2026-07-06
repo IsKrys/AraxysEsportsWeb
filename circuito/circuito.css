@@ -1,0 +1,122 @@
+/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
+
+/* INICIO BLOQUE CSS: body */
+body{
+    color:#191516;
+}
+/* FIN BLOQUE CSS: body */
+
+
+/* INICIO BLOQUE CSS: .circuit-hero */
+.circuit-hero{
+    min-height:60vh;
+    background-image:url("../img/araxys-circuit/hero-circuit.jpg");
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+/* FIN BLOQUE CSS: .circuit-hero */
+
+
+/* INICIO BLOQUE CSS: .circuit-hero::before */
+.circuit-hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.58);
+}
+/* FIN BLOQUE CSS: .circuit-hero::before */
+
+
+/* INICIO BLOQUE CSS: .hero-overlay */
+.hero-overlay{
+    position:relative;
+    z-index:2;
+    color:white;
+    max-width:900px;
+    padding:0 30px;
+}
+/* FIN BLOQUE CSS: .hero-overlay */
+
+
+/* INICIO BLOQUE CSS: .circuit-tag */
+.circuit-tag{
+    display:inline-block;
+    padding:10px 18px;
+    border-radius:999px;
+    background:#DC136C;
+    font-weight:700;
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .circuit-tag */
+
+
+/* INICIO BLOQUE CSS: .circuit-hero h1 */
+.circuit-hero h1{
+    font-size:5rem;
+    font-weight:900;
+    margin-bottom:20px;
+}
+/* FIN BLOQUE CSS: .circuit-hero h1 */
+
+
+/* INICIO BLOQUE CSS: .circuit-hero p */
+.circuit-hero p{
+    font-size:1.2rem;
+    opacity:.9;
+}
+/* FIN BLOQUE CSS: .circuit-hero p */
+
+
+/* INICIO BLOQUE CSS: .circuit-workspace */
+.circuit-workspace{
+    padding:100px 80px;
+    background-image:url("../img/hero/news-bg.jpg");
+    background-size:cover;
+    background-position:center;
+}
+/* FIN BLOQUE CSS: .circuit-workspace */
+
+
+/* INICIO BLOQUE CSS: .circuit-placeholder */
+.circuit-placeholder{
+    background:white;
+    border-radius:25px;
+    padding:45px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    border-top:4px solid #DC136C;
+}
+/* FIN BLOQUE CSS: .circuit-placeholder */
+
+
+/* INICIO BLOQUE CSS: .circuit-placeholder p */
+.circuit-placeholder p{
+    color:#555;
+    line-height:1.8;
+    font-size:1.05rem;
+}
+/* FIN BLOQUE CSS: .circuit-placeholder p */
+
+
+/* INICIO BLOQUE CSS: .circuit-rules-btn */
+.circuit-rules-btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:15px 28px;
+    border-radius:15px;
+    background:#DC136C;
+    color:white;
+    text-decoration:none;
+    font-weight:800;
+    transition:.3s ease;
+}
+
+.circuit-rules-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 30px rgba(220,19,108,.35);
+}
+/* FIN BLOQUE CSS: .circuit-rules-btn */

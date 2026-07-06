@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- INICIO HEAD: aqui van titulo, fuentes, meta datos y CSS de la pagina. -->
+<head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Únete a Araxys</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon/araxys-favicon.ico">
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="apply.css">
+
+</head>
+<!-- FIN HEAD -->
+<!-- TIP HTML: manten header, secciones principales y footer separados; asi sera mas facil encontrar y editar cada parte despues. -->
+<!-- INICIO BODY: aqui empieza todo lo visible de la pagina. -->
+<body>
+
+    <div class="page-transition"></div>
+
+    <!-- INICIO HEADER: barra superior con logo y navegacion. -->
+    <header>
+
+        <a href="../index/index.html" class="logo">
+            <img src="../img/logos/logo.png" alt="Araxys">
+        </a>
+
+        <!-- INICIO NAV: enlaces principales del sitio. -->
+        <nav>
+            <a href="../news/news.html">Noticias</a>
+            <a href="../torneos/torneos.html">Torneos</a>
+            <a href="../teams/teams.html">Araxys Teams</a>
+            <a href="../about/about.html">Sobre Nosotros</a>
+            <a href="../apply/apply.html">Inscribirse</a>
+        </nav>
+        <!-- FIN NAV -->
+
+    </header>
+    <!-- FIN HEADER -->
+
+    <!-- INICIO SECCION: section .apply-hero -->
+    <section class="apply-hero">
+
+        <div class="hero-overlay">
+
+            <h1>Únete a Araxys</h1>
+
+            <p>
+                Elige tu camino dentro de la comunidad.
+            </p>
+
+        </div>
+
+    </section>
+    <!-- FIN SECCION: section .apply-hero -->
+
+    <!-- INICIO SECCION: section .apply-content -->
+    <section class="apply-content">
+
+    <div class="section-header">
+        <h2>¿En que te convertiras?</h2>
+    </div>
+
+    <div class="roles-grid">
+
+        <div class="role-card" data-role="Jugador">
+            <h3>Jugador</h3>
+            <p>Representa a Araxys en partidas, entrenamientos y torneos.</p>
+        </div>
+
+        <div class="role-card" data-role="Streamer">
+            <h3>Streamer</h3>
+            <p>Crea contenido, comparte tu personalidad y conecta con la comunidad.</p>
+        </div>
+
+        <div class="role-card" data-role="Caster">
+            <h3>Caster</h3>
+            <p>Narra partidas, acompaña eventos y ayuda a que cada torneo se sienta profesional y emocionante.</p>
+        </div>
+
+        <div class="role-card" data-role="Coach">
+            <h3>Coach</h3>
+            <p>Guía a los equipos con análisis, estrategia y seguimiento para mejorar su rendimiento.</p>
+        </div>
+
+    </div>
+
+    <div class="section-header requirements-title">
+        <h2>¿Qué buscamos?</h2>
+    </div>
+
+    <div class="requirements-grid">
+
+        <div class="requirement-card">
+            <h3>Compromiso</h3>
+            <p>Buscamos personas con ganas de crecer y aportar a la comunidad.</p>
+        </div>
+
+        <div class="requirement-card">
+            <h3>Respeto</h3>
+            <p>Mantener una actitud sana y positiva con otros miembros.</p>
+        </div>
+
+        <div class="requirement-card">
+            <h3>Trabajo en Equipo</h3>
+            <p>Aprender, enseñar y avanzar juntos como comunidad.</p>
+        </div>
+
+    </div>
+
+</section>
+<!-- FIN SECCION: section .apply-content -->
+
+<div class="apply-modal" id="applyModal">
+
+    <div class="modal-content">
+
+        <button class="modal-close" id="modalClose">
+            ×
+        </button>
+
+        <h2 id="modalTitle">
+            Aplicar a Araxys
+        </h2>
+
+        <p id="modalDescription">
+            Elige cómo quieres aplicar.
+        </p>
+
+        <div class="modal-buttons">
+
+            <a href="#" class="discord-btn" id="discordLink" target="_blank" rel="noopener noreferrer">
+                Discord
+            </a>
+
+            <button id="showFormBtn" class="form-btn">
+                Formulario
+            </button>
+
+        </div>
+
+        <form class="apply-form" id="applyForm">
+
+            <div id="dynamicFields"></div>
+
+            <button type="submit">
+                Enviar aplicación
+            </button>
+
+        </form>
+
+        <div class="form-status" id="formStatus"></div>
+
+        <div class="success-screen" id="successScreen">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h3>Solicitud enviada</h3>
+
+            <p>
+                Gracias por aplicar a Araxys Esports. El staff revisará tu solicitud pronto.
+            </p>
+
+            <button id="closeSuccessBtn">
+                Cerrar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- SCRIPT: carga JavaScript para animaciones o interacciones. -->
+    <script src="../js/global.js"></script>
+    <!-- SCRIPT: carga JavaScript para animaciones o interacciones. -->
+    <script src="apply.js"></script>
+
+</body>
+<!-- FIN BODY -->
+</html>
