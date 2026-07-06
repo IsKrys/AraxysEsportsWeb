@@ -1,5 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const pageTransition = document.querySelector(".page-transition");
+
+    const resetPageTransition = () => {
+
+        if(pageTransition){
+            pageTransition.classList.remove("active");
+        }
+
+    };
+
+    resetPageTransition();
+
     const path = window.location.pathname.toLowerCase();
 
     if(path.endsWith("/") || path.endsWith("/index.html")){
@@ -95,8 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 e.preventDefault();
 
-                document.querySelector(".page-transition")
-.classList.add("active");
+                if(pageTransition){
+                    pageTransition.classList.add("active");
+                }
 
                 setTimeout(() => {
 
@@ -109,5 +122,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     });
+
+});
+
+window.addEventListener("pageshow", () => {
+
+    const pageTransition = document.querySelector(".page-transition");
+
+    if(pageTransition){
+        pageTransition.classList.remove("active");
+    }
 
 });
