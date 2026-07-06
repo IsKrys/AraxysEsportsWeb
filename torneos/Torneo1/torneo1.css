@@ -151,7 +151,7 @@ nav a:hover::before{
 .tournament-hero{
     height:70vh;
 
-    background-image:url("../../img/torneos/araxys-torneo-inauguracion.jpg");
+    background-image:url("../../img/torneos/araxys-torneo-inauguracion.webp");
 
     background-size:cover;
     background-position:center;

@@ -10,7 +10,7 @@ body{
 /* INICIO BLOQUE CSS: .circuit-hero */
 .circuit-hero{
     min-height:60vh;
-    background-image:url("../img/araxys-circuit/hero-circuit.jpg");
+    background-image:url("../img/araxys-circuit/hero-circuit.webp");
     background-size:cover;
     background-position:center;
     position:relative;

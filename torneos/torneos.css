@@ -157,7 +157,7 @@ nav a:hover::before{
     justify-content:center;
     align-items:center;
 
-    background-image:url("../img/torneos/torneos-banner.jpg");
+    background-image:url("../img/torneos/torneos-banner.webp");
 
     background-size:cover;
     background-position:center;

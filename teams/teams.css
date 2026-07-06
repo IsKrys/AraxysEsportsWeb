@@ -154,7 +154,7 @@ nav a:hover::before{
 
     height:70vh;
 
-    background-image:url("../img/banners/join-banner.jpg");
+    background-image:url("../img/banners/join-banner.webp");
 
     background-size:cover;
     background-position:center;
@@ -251,7 +251,7 @@ nav a:hover::before{
 
     height:55vh;
 
-    background-image:url("../img/banners/join-banner.jpg");
+    background-image:url("../img/banners/join-banner.webp");
 
     background-size:cover;
     background-position:center;

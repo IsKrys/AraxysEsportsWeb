@@ -182,7 +182,7 @@ nav a:hover::before{
 .news-hero{
     height:500px;
 
-    background-image:url("../img/hero/news-banner.jpg");
+    background-image:url("../img/hero/news-banner.webp");
 
     background-size:cover;
 
