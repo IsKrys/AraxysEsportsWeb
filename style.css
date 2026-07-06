@@ -300,7 +300,7 @@ nav a:hover::before{
 .featured-news{
     padding:120px 80px;
 
-    background-image:url("../img/hero/news-bg.jpg");
+    background-image:url("img/hero/news-bg.jpg");
 
     background-size:cover;
 
@@ -597,7 +597,7 @@ nav a:hover::before{
 .teams-section{
     padding:50px 80px;
 
-    background-image:url("../img/hero/news-bg.jpg");
+    background-image:url("img/hero/news-bg.jpg");
 
     background-size:cover;
 

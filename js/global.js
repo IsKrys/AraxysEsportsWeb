@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    if(window.location.pathname.toLowerCase().includes("/index/")){
+    const path = window.location.pathname.toLowerCase();
+
+    if(path.endsWith("/") || path.endsWith("/index.html")){
         document.body.classList.add("home-page");
     }
 
