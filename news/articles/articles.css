@@ -125,12 +125,22 @@ body{
 }
 
 .article-image-card.article-image-card-wide{
-    max-width:920px;
+    width:min(100%, 980px);
+    max-width:980px;
+    padding:10px;
+    border-radius:18px;
 }
 
 .article-image-card.article-image-card-wide img{
     aspect-ratio:16 / 9;
     object-fit:cover;
+    background:transparent;
+    border-radius:12px;
+}
+
+.article-image-card.article-image-card-wide::before{
+    inset:10px;
+    border-radius:12px;
 }
 /* FIN BLOQUE CSS: .article-image-card */
 
