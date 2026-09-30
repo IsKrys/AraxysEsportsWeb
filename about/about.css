@@ -1,24 +1,23 @@
-/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
 
-/* INICIO BLOQUE CSS: * */
+
+/* INICIO ESTILOS: * */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
-/* FIN BLOQUE CSS: * */
 
+/* INICIO ESTILOS: body */
 
-/* INICIO BLOQUE CSS: body */
 body{
     font-family:"Outfit", sans-serif;
     background:#F0EFF4;
     color:#191516;
 }
-/* FIN BLOQUE CSS: body */
 
+/* INICIO ESTILOS: header */
 
-/* INICIO BLOQUE CSS: header */
 header{
     position:fixed;
 
@@ -43,10 +42,9 @@ header{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: header */
 
+/* INICIO ESTILOS: header.scrolled */
 
-/* INICIO BLOQUE CSS: header.scrolled */
 header.scrolled{
 
     padding:12px 80px;
@@ -57,42 +55,37 @@ header.scrolled{
 
     box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
-/* FIN BLOQUE CSS: header.scrolled */
 
+/* INICIO ESTILOS: .logo */
 
-/* INICIO BLOQUE CSS: .logo */
 .logo{
     font-size:1.8rem;
     font-weight:700;
 }
-/* FIN BLOQUE CSS: .logo */
 
+/* INICIO ESTILOS: .logo img */
 
-/* INICIO BLOQUE CSS: .logo img */
 .logo img{
     height:75px;
 
     filter:drop-shadow(0 4px 8px rgba(0,0,0,0.25));
 }
-/* FIN BLOQUE CSS: .logo img */
 
+/* INICIO ESTILOS: header.scrolled .logo img */
 
-/* INICIO BLOQUE CSS: header.scrolled .logo img */
 header.scrolled .logo img{
     height:55px;
 }
-/* FIN BLOQUE CSS: header.scrolled .logo img */
 
+/* INICIO ESTILOS: nav */
 
-/* INICIO BLOQUE CSS: nav */
 nav{
     display:flex;
     gap:50px;
 }
-/* FIN BLOQUE CSS: nav */
 
+/* INICIO ESTILOS: nav a */
 
-/* INICIO BLOQUE CSS: nav a */
 nav a{
     text-decoration:none;
 
@@ -104,26 +97,23 @@ nav a{
 
     transition:color 0.8s ease;
 }
-/* FIN BLOQUE CSS: nav a */
 
+/* INICIO ESTILOS: header.scrolled nav a */
 
-/* INICIO BLOQUE CSS: header.scrolled nav a */
 header.scrolled nav a{
     font-size:.95rem;
-    
+
     color:#111;
 }
-/* FIN BLOQUE CSS: header.scrolled nav a */
 
+/* INICIO ESTILOS: nav a:hover */
 
-/* INICIO BLOQUE CSS: nav a:hover */
 nav a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: nav a:hover */
 
+/* INICIO ESTILOS: nav a::before */
 
-/* INICIO BLOQUE CSS: nav a::before */
 nav a::before{
     content:"";
 
@@ -139,24 +129,21 @@ nav a::before{
 
     transition:width 1.3s cubic-bezier(.22,.61,.36,1);
 }
-/* FIN BLOQUE CSS: nav a::before */
 
+/* INICIO ESTILOS: nav a:hover::before */
 
-/* INICIO BLOQUE CSS: nav a:hover::before */
 nav a:hover::before{
     width:100%;
 }
-/* FIN BLOQUE CSS: nav a:hover::before */
 
+/* INICIO ESTILOS: body */
 
-/* INICIO BLOQUE CSS: body */
 body{
     color:#191516;
 }
-/* FIN BLOQUE CSS: body */
 
+/* INICIO ESTILOS: .about-hero */
 
-/* INICIO BLOQUE CSS: .about-hero */
 .about-hero{
     height:60vh;
 
@@ -173,10 +160,9 @@ body{
 
     text-align:center;
 }
-/* FIN BLOQUE CSS: .about-hero */
 
+/* INICIO ESTILOS: .about-hero::before */
 
-/* INICIO BLOQUE CSS: .about-hero::before */
 .about-hero::before{
     content:"";
 
@@ -185,10 +171,9 @@ body{
 
     background:rgba(0,0,0,.55);
 }
-/* FIN BLOQUE CSS: .about-hero::before */
 
+/* INICIO ESTILOS: .about-hero .hero-overlay */
 
-/* INICIO BLOQUE CSS: .about-hero .hero-overlay */
 .about-hero .hero-overlay{
     position:relative;
 
@@ -202,10 +187,9 @@ body{
 
     transform:translateY(40px);
 }
-/* FIN BLOQUE CSS: .about-hero .hero-overlay */
 
+/* INICIO ESTILOS: .about-hero h1 */
 
-/* INICIO BLOQUE CSS: .about-hero h1 */
 .about-hero h1{
     font-size:5rem;
 
@@ -213,26 +197,23 @@ body{
 
     margin-bottom:20px;
 }
-/* FIN BLOQUE CSS: .about-hero h1 */
 
+/* INICIO ESTILOS: .about-hero p */
 
-/* INICIO BLOQUE CSS: .about-hero p */
 .about-hero p{
     font-size:1.2rem;
 
     opacity:.9;
 }
-/* FIN BLOQUE CSS: .about-hero p */
 
+/* INICIO ESTILOS: .about-intro */
 
-/* INICIO BLOQUE CSS: .about-intro */
 .about-intro{
     padding:100px 80px 60px;
 }
-/* FIN BLOQUE CSS: .about-intro */
 
+/* INICIO ESTILOS: .about-card */
 
-/* INICIO BLOQUE CSS: .about-card */
 .about-card{
     background:white;
 
@@ -244,10 +225,9 @@ body{
 
     border-top:4px solid #DC136C;
 }
-/* FIN BLOQUE CSS: .about-card */
 
+/* INICIO ESTILOS: .about-card p */
 
-/* INICIO BLOQUE CSS: .about-card p */
 .about-card p{
     color:#555;
 
@@ -257,26 +237,23 @@ body{
 
     margin-bottom:20px;
 }
-/* FIN BLOQUE CSS: .about-card p */
 
+/* INICIO ESTILOS: .about-card p:last-child */
 
-/* INICIO BLOQUE CSS: .about-card p:last-child */
 .about-card p:last-child{
     margin-bottom:0;
 }
-/* FIN BLOQUE CSS: .about-card p:last-child */
 
+/* INICIO ESTILOS: .pillars-section */
 
-/* INICIO BLOQUE CSS: .pillars-section */
 .pillars-section{
 
     padding:0 80px 100px;
 
 }
-/* FIN BLOQUE CSS: .pillars-section */
 
+/* INICIO ESTILOS: .pillars-grid */
 
-/* INICIO BLOQUE CSS: .pillars-grid */
 .pillars-grid{
 
     display:grid;
@@ -286,10 +263,9 @@ body{
     gap:30px;
 
 }
-/* FIN BLOQUE CSS: .pillars-grid */
 
+/* INICIO ESTILOS: .pillar-card */
 
-/* INICIO BLOQUE CSS: .pillar-card */
 .pillar-card{
 
     background:white;
@@ -307,10 +283,9 @@ body{
     transition:.35s ease;
 
 }
-/* FIN BLOQUE CSS: .pillar-card */
 
+/* INICIO ESTILOS: .pillar-card::before */
 
-/* INICIO BLOQUE CSS: .pillar-card::before */
 .pillar-card::before{
 
     content:"";
@@ -326,10 +301,9 @@ body{
     background:#DC136C;
 
 }
-/* FIN BLOQUE CSS: .pillar-card::before */
 
+/* INICIO ESTILOS: .pillar-card:hover */
 
-/* INICIO BLOQUE CSS: .pillar-card:hover */
 .pillar-card:hover{
 
     transform:translateY(-10px);
@@ -337,10 +311,9 @@ body{
     box-shadow:0 20px 40px rgba(0,0,0,.15);
 
 }
-/* FIN BLOQUE CSS: .pillar-card:hover */
 
+/* INICIO ESTILOS: .pillar-card h3 */
 
-/* INICIO BLOQUE CSS: .pillar-card h3 */
 .pillar-card h3{
 
     color:#111;
@@ -350,10 +323,9 @@ body{
     margin-bottom:20px;
 
 }
-/* FIN BLOQUE CSS: .pillar-card h3 */
 
+/* INICIO ESTILOS: .pillar-card p */
 
-/* INICIO BLOQUE CSS: .pillar-card p */
 .pillar-card p{
 
     color:#555;
@@ -361,10 +333,9 @@ body{
     line-height:1.8;
 
 }
-/* FIN BLOQUE CSS: .pillar-card p */
 
+/* INICIO ESTILOS: .about-ending */
 
-/* INICIO BLOQUE CSS: .about-ending */
 .about-ending{
 
     height:450px;
@@ -383,10 +354,9 @@ body{
 
     overflow:hidden;
 }
-/* FIN BLOQUE CSS: .about-ending */
 
+/* INICIO ESTILOS: .about-ending::before */
 
-/* INICIO BLOQUE CSS: .about-ending::before */
 .about-ending::before{
 
     content:"";
@@ -397,10 +367,9 @@ body{
 
     background:rgba(0,0,0,.65);
 }
-/* FIN BLOQUE CSS: .about-ending::before */
 
+/* INICIO ESTILOS: .ending-overlay */
 
-/* INICIO BLOQUE CSS: .ending-overlay */
 .ending-overlay{
 
     position:relative;
@@ -423,20 +392,18 @@ body{
 
     padding:40px;
 }
-/* FIN BLOQUE CSS: .ending-overlay */
 
+/* INICIO ESTILOS: .ending-overlay h2 */
 
-/* INICIO BLOQUE CSS: .ending-overlay h2 */
 .ending-overlay h2{
 
     font-size:3rem;
 
     margin-bottom:25px;
 }
-/* FIN BLOQUE CSS: .ending-overlay h2 */
 
+/* INICIO ESTILOS: .ending-overlay p */
 
-/* INICIO BLOQUE CSS: .ending-overlay p */
 .ending-overlay p{
 
     max-width:800px;
@@ -447,10 +414,9 @@ body{
 
     opacity:.9;
 }
-/* FIN BLOQUE CSS: .ending-overlay p */
 
+/* INICIO ESTILOS: .ending-overlay span */
 
-/* INICIO BLOQUE CSS: .ending-overlay span */
 .ending-overlay span{
 
     color:#DC136C;
@@ -461,10 +427,9 @@ body{
 
     margin-bottom:40px;
 }
-/* FIN BLOQUE CSS: .ending-overlay span */
 
+/* INICIO ESTILOS: .discord-btn */
 
-/* INICIO BLOQUE CSS: .discord-btn */
 .discord-btn{
 
     background:#DC136C;
@@ -481,32 +446,22 @@ body{
 
     transition:.3s ease;
 }
-/* FIN BLOQUE CSS: .discord-btn */
 
+/* INICIO ESTILOS: .discord-btn:hover */
 
-/* INICIO BLOQUE CSS: .discord-btn:hover */
 .discord-btn:hover{
 
     transform:translateY(-5px);
 
     box-shadow:0 15px 30px rgba(220,19,108,.4);
 }
-/* FIN BLOQUE CSS: .discord-btn:hover */
 
+/* INICIO ESTILOS: footer */
 
-
-
-
-
-
-
-
-
-/* INICIO BLOQUE CSS: footer */
 footer{
 
     border-top:3px solid #DC136C;
-    
+
     margin-top:120px;
 
     padding:80px;
@@ -517,20 +472,19 @@ footer{
 
     text-align:center;
 }
-/* FIN BLOQUE CSS: footer */
 
+/* INICIO ESTILOS: footer img */
 
-/* INICIO BLOQUE CSS: footer img */
 footer img{
     width:100px;
 
     margin-bottom:30px;
 }
-/* FIN BLOQUE CSS: footer img */
-
 
 .footer-links,
-/* INICIO BLOQUE CSS: .footer-social */
+
+/* INICIO ESTILOS: .footer-social */
+
 .footer-social{
     display:flex;
 
@@ -540,10 +494,9 @@ footer img{
 
     margin-bottom:25px;
 }
-/* FIN BLOQUE CSS: .footer-social */
 
+/* INICIO ESTILOS: footer a */
 
-/* INICIO BLOQUE CSS: footer a */
 footer a{
     text-decoration:none;
 
@@ -551,19 +504,15 @@ footer a{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: footer a */
 
+/* INICIO ESTILOS: footer a:hover */
 
-/* INICIO BLOQUE CSS: footer a:hover */
 footer a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: footer a:hover */
 
+/* INICIO ESTILOS: footer p */
 
-/* INICIO BLOQUE CSS: footer p */
 footer p{
     color:#888;
 }
-/* FIN BLOQUE CSS: footer p */
-

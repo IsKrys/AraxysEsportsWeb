@@ -1,24 +1,23 @@
-/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
 
-/* INICIO BLOQUE CSS: * */
+
+/* INICIO ESTILOS: * */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
-/* FIN BLOQUE CSS: * */
 
+/* INICIO ESTILOS: body */
 
-/* INICIO BLOQUE CSS: body */
 body{
     font-family:"Outfit", sans-serif;
     background:#F0EFF4;
     color:#191516;
 }
-/* FIN BLOQUE CSS: body */
 
+/* INICIO ESTILOS: header */
 
-/* INICIO BLOQUE CSS: header */
 header{
     position:fixed;
 
@@ -43,10 +42,9 @@ header{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: header */
 
+/* INICIO ESTILOS: header.scrolled */
 
-/* INICIO BLOQUE CSS: header.scrolled */
 header.scrolled{
 
     padding:12px 80px;
@@ -57,42 +55,37 @@ header.scrolled{
 
     box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
-/* FIN BLOQUE CSS: header.scrolled */
 
+/* INICIO ESTILOS: .logo */
 
-/* INICIO BLOQUE CSS: .logo */
 .logo{
     font-size:1.8rem;
     font-weight:700;
 }
-/* FIN BLOQUE CSS: .logo */
 
+/* INICIO ESTILOS: .logo img */
 
-/* INICIO BLOQUE CSS: .logo img */
 .logo img{
     height:75px;
 
     filter:drop-shadow(0 4px 8px rgba(0,0,0,0.25));
 }
-/* FIN BLOQUE CSS: .logo img */
 
+/* INICIO ESTILOS: header.scrolled .logo img */
 
-/* INICIO BLOQUE CSS: header.scrolled .logo img */
 header.scrolled .logo img{
     height:55px;
 }
-/* FIN BLOQUE CSS: header.scrolled .logo img */
 
+/* INICIO ESTILOS: nav */
 
-/* INICIO BLOQUE CSS: nav */
 nav{
     display:flex;
     gap:50px;
 }
-/* FIN BLOQUE CSS: nav */
 
+/* INICIO ESTILOS: nav a */
 
-/* INICIO BLOQUE CSS: nav a */
 nav a{
     text-decoration:none;
 
@@ -104,26 +97,23 @@ nav a{
 
     transition:color 0.8s ease;
 }
-/* FIN BLOQUE CSS: nav a */
 
+/* INICIO ESTILOS: header.scrolled nav a */
 
-/* INICIO BLOQUE CSS: header.scrolled nav a */
 header.scrolled nav a{
     font-size:.95rem;
-    
+
     color:#111;
 }
-/* FIN BLOQUE CSS: header.scrolled nav a */
 
+/* INICIO ESTILOS: nav a:hover */
 
-/* INICIO BLOQUE CSS: nav a:hover */
 nav a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: nav a:hover */
 
+/* INICIO ESTILOS: nav a::before */
 
-/* INICIO BLOQUE CSS: nav a::before */
 nav a::before{
     content:"";
 
@@ -139,29 +129,19 @@ nav a::before{
 
     transition:width 1.3s cubic-bezier(.22,.61,.36,1);
 }
-/* FIN BLOQUE CSS: nav a::before */
 
+/* INICIO ESTILOS: nav a:hover::before */
 
-/* INICIO BLOQUE CSS: nav a:hover::before */
 nav a:hover::before{
     width:100%;
 }
-/* FIN BLOQUE CSS: nav a:hover::before */
 
+/* INICIO ESTILOS: footer */
 
-
-
-
-
-
-
-
-
-/* INICIO BLOQUE CSS: footer */
 footer{
 
     border-top:3px solid #DC136C;
-    
+
     margin-top:120px;
 
     padding:80px;
@@ -172,20 +152,19 @@ footer{
 
     text-align:center;
 }
-/* FIN BLOQUE CSS: footer */
 
+/* INICIO ESTILOS: footer img */
 
-/* INICIO BLOQUE CSS: footer img */
 footer img{
     width:100px;
 
     margin-bottom:30px;
 }
-/* FIN BLOQUE CSS: footer img */
-
 
 .footer-links,
-/* INICIO BLOQUE CSS: .footer-social */
+
+/* INICIO ESTILOS: .footer-social */
+
 .footer-social{
     display:flex;
 
@@ -195,10 +174,9 @@ footer img{
 
     margin-bottom:25px;
 }
-/* FIN BLOQUE CSS: .footer-social */
 
+/* INICIO ESTILOS: footer a */
 
-/* INICIO BLOQUE CSS: footer a */
 footer a{
     text-decoration:none;
 
@@ -206,18 +184,15 @@ footer a{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: footer a */
 
+/* INICIO ESTILOS: footer a:hover */
 
-/* INICIO BLOQUE CSS: footer a:hover */
 footer a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: footer a:hover */
 
+/* INICIO ESTILOS: footer p */
 
-/* INICIO BLOQUE CSS: footer p */
 footer p{
     color:#888;
 }
-/* FIN BLOQUE CSS: footer p */

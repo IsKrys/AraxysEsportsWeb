@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- INICIO HEAD: aqui van titulo, fuentes, meta datos y CSS de la pagina. -->
+
+<!-- INICIO HEAD: metadatos, titulo, fuentes y estilos. -->
+
 <head>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -10,7 +12,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO: inicio -->
+    <!-- INICIO SEO: metadatos para buscadores y redes sociales. -->
+
     <meta name="description" content="Araxys Esports reune jugadores, creadores de contenido, torneos y noticias para construir una comunidad dentro del mundo esports.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://araxys.xyz/">
@@ -28,43 +31,47 @@
     <meta name="twitter:title" content="Araxys Esports | Equipo Competitivo y Comunidad">
     <meta name="twitter:description" content="Araxys Esports reune jugadores, creadores de contenido, torneos y noticias para construir una comunidad dentro del mundo esports.">
     <meta name="twitter:image" content="https://araxys.xyz/img/seo/og-image.jpg">
-    <!-- SEO: fin -->
+
+    <!-- FIN SEO -->
 
     <title>Araxys Esports | Equipo Competitivo y Comunidad</title>
     <link rel="icon" type="image/x-icon" href="img/favicon/araxys-favicon.ico">
-    
+
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <!-- FIN HEAD -->
-<!-- TIP HTML: manten header, secciones principales y footer separados; asi sera mas facil encontrar y editar cada parte despues. -->
-<!-- INICIO BODY: aqui empieza todo lo visible de la pagina. -->
+
 <body>
 
     <div class="page-transition"></div>
 
-    <!-- INICIO HEADER: barra superior con logo y navegacion. -->
-    <header>
+<!-- INICIO HEADER: barra superior con logo y navegacion. -->
+
+<header>
 
         <a href="index.html" class="logo">
             <img src="img/logos/logo.png" alt="Araxys">
         </a>
 
-        <!-- INICIO NAV: enlaces principales del sitio. -->
-        <nav>
+<!-- INICIO NAVEGACION: enlaces principales del sitio. -->
+
+<nav>
             <a href="news/news.html">Noticias</a>
             <a href="torneos/torneos.html">Torneos</a>
             <a href="teams/teams.html">Araxys Teams</a>
             <a href="about/about.html">Sobre Nosotros</a>
             <a href="apply/apply.html">Inscribirse</a>
         </nav>
-        <!-- FIN NAV -->
+        <!-- FIN NAVEGACION -->
 
     </header>
+
     <!-- FIN HEADER -->
 
-    <!-- INICIO SECCION: section .hero -->
-    <section id="inicio" class="hero">
+<!-- INICIO SECCION: hero -->
+
+<section id="inicio" class="hero">
 
         <video autoplay muted loop playsinline class="hero-bg" aria-hidden="true">
             <source src="img/hero/hero.webm" type="video/webm">
@@ -89,10 +96,12 @@
         </div>
 
     </section>
-    <!-- FIN SECCION: section .hero -->
 
-    <!-- INICIO SECCION: section .featured-news -->
-    <section class="featured-news">
+    <!-- FIN SECCION -->
+
+<!-- INICIO SECCION: featured-news -->
+
+<section class="featured-news">
 
     <div class="section-header">
 
@@ -106,7 +115,9 @@
 
     <div class="news-grid">
 
-        <article class="news-card">
+<!-- INICIO ARTICULO: news-card -->
+
+<article class="news-card">
 
             <span class="news-date">
                 28 de Septiembre 2026
@@ -120,7 +131,11 @@
 
         </article>
 
-        <article class="news-card">
+        <!-- FIN ARTICULO -->
+
+<!-- INICIO ARTICULO: news-card -->
+
+<article class="news-card">
 
             <span class="news-date">
                 23 de Agosto de 2026
@@ -134,7 +149,11 @@
 
         </article>
 
-        <article class="news-card">
+        <!-- FIN ARTICULO -->
+
+<!-- INICIO ARTICULO: news-card -->
+
+<article class="news-card">
 
             <span class="news-date">
                 10 de Agosto de 2026
@@ -148,12 +167,16 @@
 
         </article>
 
+        <!-- FIN ARTICULO -->
+
     </div>
 
 </section>
-<!-- FIN SECCION: section .featured-news -->
 
-<!-- INICIO SECCION: section .content-section -->
+<!-- FIN SECCION -->
+
+<!-- INICIO SECCION: content-section -->
+
 <section class="content-section">
 
     <div class="section-header">
@@ -172,7 +195,7 @@
 
     <div class="video-thumbnail">
 
-        <img src="https://img.youtube.com/vi/x8jAY2CoOBg/maxresdefault.jpg">
+        <img src="https://img.youtube.com/vi/x8jAY2CoOBg/maxresdefault.jpg" alt="Miniatura del video If The Sun Burns Out Tonight de VALORANT Champions 2026">
 
         <div class="play-button">
             <span>▶</span>
@@ -211,9 +234,11 @@
     </div>
 
 </section>
-<!-- FIN SECCION: section .content-section -->
 
-<!-- INICIO SECCION: section .teams-section -->
+<!-- FIN SECCION -->
+
+<!-- INICIO SECCION: teams-section -->
+
 <section class="teams-section">
 
     <div class="section-header">
@@ -275,13 +300,14 @@
     </div>
 
 </section>
-<!-- FIN SECCION: section .teams-section -->
 
-    <!-- SCRIPT: carga JavaScript para animaciones o interacciones. -->
+<!-- FIN SECCION -->
+
     <script src="js/global.js?v=20260706-transition-fix"></script>
 
-    <!-- INICIO FOOTER: pie de pagina con logo, enlaces y redes. -->
-    <footer>
+<!-- INICIO FOOTER: enlaces y datos de cierre. -->
+
+<footer>
 
     <img src="img/logos/logo.png" alt="Araxys">
 
@@ -307,8 +333,9 @@
     </p>
 
 </footer>
+
 <!-- FIN FOOTER -->
 
 </body>
-<!-- FIN BODY -->
+
 </html>

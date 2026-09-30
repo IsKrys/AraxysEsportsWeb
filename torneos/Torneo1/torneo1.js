@@ -1,3 +1,4 @@
+// INICIO HEADER: cambia su estilo al desplazar la pagina.
 window.addEventListener("scroll", () => {
 
     const header = document.querySelector("header");

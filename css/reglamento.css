@@ -1,4 +1,7 @@
-/* INICIO BLOQUE CSS: .rules-hero */
+
+
+/* INICIO ESTILOS: .rules-hero */
+
 .rules-hero{
     min-height:52vh;
     background-image:url("../img/hero/news-bg.jpg");
@@ -12,6 +15,8 @@
     padding:120px 30px 80px;
 }
 
+/* INICIO ESTILOS: .rules-hero::before */
+
 .rules-hero::before{
     content:"";
     position:absolute;
@@ -19,12 +24,16 @@
     background:rgba(0,0,0,.62);
 }
 
+/* INICIO ESTILOS: .rules-hero .hero-overlay */
+
 .rules-hero .hero-overlay{
     position:relative;
     z-index:2;
     color:white;
     max-width:900px;
 }
+
+/* INICIO ESTILOS: .rules-hero span */
 
 .rules-hero span{
     display:inline-block;
@@ -35,26 +44,31 @@
     margin-bottom:18px;
 }
 
+/* INICIO ESTILOS: .rules-hero h1 */
+
 .rules-hero h1{
     font-size:4rem;
     font-weight:900;
     margin-bottom:18px;
 }
 
+/* INICIO ESTILOS: .rules-hero p */
+
 .rules-hero p{
     font-size:1.15rem;
     line-height:1.7;
 }
-/* FIN BLOQUE CSS: .rules-hero */
 
+/* INICIO ESTILOS: .rules-workspace */
 
-/* INICIO BLOQUE CSS: .rules-workspace */
 .rules-workspace{
     padding:90px 80px;
     background-image:url("../img/hero/news-bg.jpg");
     background-size:cover;
     background-position:center;
 }
+
+/* INICIO ESTILOS: .rules-card */
 
 .rules-card{
     max-width:980px;
@@ -66,30 +80,43 @@
     border-top:5px solid #DC136C;
 }
 
+/* INICIO ESTILOS: .rules-card h2 */
+
 .rules-card h2{
     color:#DC136C;
     font-size:1.8rem;
     margin:35px 0 15px;
 }
 
+/* INICIO ESTILOS: .rules-card h2:first-child */
+
 .rules-card h2:first-child{
     margin-top:0;
 }
 
 .rules-card p,
+
+/* INICIO ESTILOS: .rules-card li */
+
 .rules-card li{
     color:#555;
     line-height:1.8;
     font-size:1.05rem;
 }
 
+/* INICIO ESTILOS: .rules-card ul */
+
 .rules-card ul{
     margin:15px 0 20px 22px;
 }
 
+/* INICIO ESTILOS: body.dark-mode .rules-workspace */
+
 body.dark-mode .rules-workspace{
     background-color:#191516;
 }
+
+/* INICIO ESTILOS: body.dark-mode .rules-card */
 
 body.dark-mode .rules-card{
     background:#242423;
@@ -98,20 +125,30 @@ body.dark-mode .rules-card{
 }
 
 body.dark-mode .rules-card p,
+
+/* INICIO ESTILOS: body.dark-mode .rules-card li */
+
 body.dark-mode .rules-card li{
     color:#F0EFF4;
 }
-/* FIN BLOQUE CSS: .rules-workspace */
 
+/* INICIO VISTA MOVIL */
 
 @media(max-width:760px){
+
+    /* INICIO ESTILOS: .rules-hero h1 */
+
     .rules-hero h1{
         font-size:2.7rem;
     }
 
+    /* INICIO ESTILOS: .rules-workspace */
+
     .rules-workspace{
         padding:60px 20px;
     }
+
+    /* INICIO ESTILOS: .rules-card */
 
     .rules-card{
         padding:32px;

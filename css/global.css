@@ -1,40 +1,38 @@
-/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
 
-/* RESET */
 
-/* INICIO BLOQUE CSS: * */
+/* INICIO ESTILOS: * */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
-/* FIN BLOQUE CSS: * */
 
+/* INICIO ESTILOS: body */
 
-/* GENERAL */
-
-/* INICIO BLOQUE CSS: body */
 body{
     font-family:"Outfit", sans-serif;
     background:#F0EFF4;
 }
-/* FIN BLOQUE CSS: body */
 
+/* INICIO ESTILOS: body.page-enter */
 
-/* INICIO BLOQUE CSS: body.page-enter */
 body.page-enter{
     animation:pageEnter .45s ease forwards;
 }
-/* FIN BLOQUE CSS: body.page-enter */
 
+/* INICIO ANIMACION: @keyframes pageEnter */
 
-/* INICIO BLOQUE CSS: @keyframes pageEnter */
 @keyframes pageEnter{
+
+    /* INICIO ESTILOS: from */
 
     from{
         opacity:0;
         transform:translateY(20px);
     }
+
+    /* INICIO ESTILOS: to */
 
     to{
         opacity:1;
@@ -42,10 +40,9 @@ body.page-enter{
     }
 
 }
-/* FIN BLOQUE CSS: @keyframes pageEnter */
 
+/* INICIO ESTILOS: body.page-leave */
 
-/* INICIO BLOQUE CSS: body.page-leave */
 body.page-leave{
 
     opacity:0;
@@ -54,37 +51,35 @@ body.page-leave{
 
     transition:.3s ease;
 }
-/* FIN BLOQUE CSS: body.page-leave */
 
+/* INICIO ESTILOS: .scroll-indicator */
 
-/* INICIO BLOQUE CSS: .scroll-indicator */
 .scroll-indicator{
     margin-top:28px;
     font-size:2rem;
     color:white;
     animation:bounce 2s infinite;
 }
-/* FIN BLOQUE CSS: .scroll-indicator */
 
+/* INICIO ANIMACION: @keyframes bounce */
 
-/* INICIO BLOQUE CSS: @keyframes bounce */
 @keyframes bounce{
+
+    /* INICIO ESTILOS: 0%,100% */
+
     0%,100%{
         transform:translateY(0);
     }
+
+    /* INICIO ESTILOS: 50% */
 
     50%{
         transform:translateY(10px);
     }
 }
-/* FIN BLOQUE CSS: @keyframes bounce */
 
+/* INICIO ESTILOS: header */
 
-
-
-/* HEADER */
-
-/* INICIO BLOQUE CSS: header */
 header{
     position:fixed;
 
@@ -106,10 +101,9 @@ header{
 
     transition:.3s;
 }
-/* FIN BLOQUE CSS: header */
 
+/* INICIO ESTILOS: header.scrolled */
 
-/* INICIO BLOQUE CSS: header.scrolled */
 header.scrolled{
 
     padding:12px 80px;
@@ -120,14 +114,9 @@ header.scrolled{
 
     box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
-/* FIN BLOQUE CSS: header.scrolled */
 
+/* INICIO ESTILOS: .logo img */
 
-
-
-/* LOGO */
-
-/* INICIO BLOQUE CSS: .logo img */
 .logo img{
     height:75px;
 
@@ -135,29 +124,22 @@ header.scrolled{
 
     transition:.3s;
 }
-/* FIN BLOQUE CSS: .logo img */
 
+/* INICIO ESTILOS: header.scrolled .logo img */
 
-/* INICIO BLOQUE CSS: header.scrolled .logo img */
 header.scrolled .logo img{
     height:55px;
 }
-/* FIN BLOQUE CSS: header.scrolled .logo img */
 
+/* INICIO ESTILOS: nav */
 
-
-
-/* NAV */
-
-/* INICIO BLOQUE CSS: nav */
 nav{
     display:flex;
     gap:50px;
 }
-/* FIN BLOQUE CSS: nav */
 
+/* INICIO ESTILOS: nav a */
 
-/* INICIO BLOQUE CSS: nav a */
 nav a{
     text-decoration:none;
 
@@ -169,32 +151,28 @@ nav a{
 
     transition:color .8s ease;
 }
-/* FIN BLOQUE CSS: nav a */
 
+/* INICIO ESTILOS: header.scrolled nav a */
 
-/* INICIO BLOQUE CSS: header.scrolled nav a */
 header.scrolled nav a{
     color:#111;
     font-size:.95rem;
 }
-/* FIN BLOQUE CSS: header.scrolled nav a */
 
+/* INICIO ESTILOS: nav a:hover */
 
-/* INICIO BLOQUE CSS: nav a:hover */
 nav a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: nav a:hover */
 
+/* INICIO ESTILOS: header.scrolled nav a:hover */
 
-/* INICIO BLOQUE CSS: header.scrolled nav a:hover */
 header.scrolled nav a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: header.scrolled nav a:hover */
 
+/* INICIO ESTILOS: nav a::before */
 
-/* INICIO BLOQUE CSS: nav a::before */
 nav a::before{
     content:"";
 
@@ -210,19 +188,15 @@ nav a::before{
 
     transition:width 1.3s cubic-bezier(.22,.61,.36,1);
 }
-/* FIN BLOQUE CSS: nav a::before */
 
+/* INICIO ESTILOS: nav a:hover::before */
 
-/* INICIO BLOQUE CSS: nav a:hover::before */
 nav a:hover::before{
     width:100%;
 }
-/* FIN BLOQUE CSS: nav a:hover::before */
 
+/* INICIO ESTILOS: .theme-toggle */
 
-/* MODO OSCURO */
-
-/* INICIO BLOQUE CSS: .theme-toggle */
 .theme-toggle{
     width:44px;
     height:44px;
@@ -239,52 +213,50 @@ nav a:hover::before{
     box-shadow:0 8px 20px rgba(220,19,108,.28);
     transition:.3s ease;
 }
-/* FIN BLOQUE CSS: .theme-toggle */
 
+/* INICIO ESTILOS: .theme-toggle:hover */
 
-/* INICIO BLOQUE CSS: .theme-toggle:hover */
 .theme-toggle:hover{
     transform:translateY(-3px);
     box-shadow:0 14px 28px rgba(220,19,108,.38);
 }
-/* FIN BLOQUE CSS: .theme-toggle:hover */
 
+/* INICIO ESTILOS: body.dark-mode */
 
-/* INICIO BLOQUE CSS: body.dark-mode */
 body.dark-mode{
     background:#191516;
     color:#F0EFF4;
 }
-/* FIN BLOQUE CSS: body.dark-mode */
 
+/* INICIO ESTILOS: body.dark-mode header */
 
-/* INICIO BLOQUE CSS: body.dark-mode header */
 body.dark-mode header{
     background:rgba(25,21,22,.94);
     box-shadow:0 5px 20px rgba(0,0,0,.28);
 }
+
+/* INICIO ESTILOS: body.dark-mode.home-page header */
 
 body.dark-mode.home-page header{
     background:rgba(17,17,17,0);
     box-shadow:none;
 }
 
+/* INICIO ESTILOS: body.dark-mode header.scrolled */
+
 body.dark-mode header.scrolled{
     background:rgba(25,21,22,.94);
     box-shadow:0 5px 20px rgba(0,0,0,.28);
 }
-/* FIN BLOQUE CSS: body.dark-mode header */
 
-
-/* INICIO BLOQUE CSS: body.dark-mode nav a */
 body.dark-mode nav a,
+
+/* INICIO ESTILOS: body.dark-mode header.scrolled nav a */
+
 body.dark-mode header.scrolled nav a{
     color:#F0EFF4;
 }
-/* FIN BLOQUE CSS: body.dark-mode nav a */
 
-
-/* INICIO BLOQUE CSS: body.dark-mode page backgrounds */
 body.dark-mode .featured-news,
 body.dark-mode .teams-section,
 body.dark-mode .teams-showcase,
@@ -292,13 +264,13 @@ body.dark-mode .team-info,
 body.dark-mode .apply-content,
 body.dark-mode .article-workspace,
 body.dark-mode .circuit-workspace,
+
+/* INICIO ESTILOS: body.dark-mode .tournament-info */
+
 body.dark-mode .tournament-info{
     background-color:#191516;
 }
-/* FIN BLOQUE CSS: body.dark-mode page backgrounds */
 
-
-/* INICIO BLOQUE CSS: body.dark-mode cards */
 body.dark-mode .news-card,
 body.dark-mode .video-card,
 body.dark-mode .info-card,
@@ -315,15 +287,15 @@ body.dark-mode .article-placeholder,
 body.dark-mode .circuit-placeholder,
 body.dark-mode .event-card,
 body.dark-mode .registered-card,
+
+/* INICIO ESTILOS: body.dark-mode .player-card */
+
 body.dark-mode .player-card{
     background:#242423;
     color:#F0EFF4;
     box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
-/* FIN BLOQUE CSS: body.dark-mode cards */
 
-
-/* INICIO BLOQUE CSS: body.dark-mode text */
 body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode h3,
@@ -340,109 +312,106 @@ body.dark-mode .about-card p,
 body.dark-mode .pillar-card p,
 body.dark-mode .role-card p,
 body.dark-mode .requirement-card p,
+
+/* INICIO ESTILOS: body.dark-mode .modal-content p */
+
 body.dark-mode .modal-content p{
     color:#F0EFF4;
 }
-/* FIN BLOQUE CSS: body.dark-mode text */
 
-
-/* INICIO BLOQUE CSS: body.dark-mode pink accents */
 body.dark-mode .section-header h2,
 body.dark-mode .section-title h2,
 body.dark-mode .news-title h2,
 body.dark-mode .news-date,
 body.dark-mode .event-top span:last-child,
+
+/* INICIO ESTILOS: body.dark-mode .join-overlay span */
+
 body.dark-mode .join-overlay span{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: body.dark-mode pink accents */
 
+/* INICIO ESTILOS: body.dark-mode .event-top span:first-child */
 
-/* INICIO BLOQUE CSS: body.dark-mode .event-top span:first-child */
 body.dark-mode .event-top span:first-child{
     color:#F0EFF4;
 }
-/* FIN BLOQUE CSS: body.dark-mode .event-top span:first-child */
 
+/* INICIO ESTILOS: body.dark-mode .article-tag */
 
-/* INICIO BLOQUE CSS: body.dark-mode yellow accents */
 body.dark-mode .article-tag{
     color:#F0EFF4;
     background:#DC136C;
 }
-/* FIN BLOQUE CSS: body.dark-mode yellow accents */
 
-
-/* INICIO BLOQUE CSS: body.dark-mode team and game tags */
 body.dark-mode .team-tag,
 body.dark-mode .game-tag,
+
+/* INICIO ESTILOS: body.dark-mode .circuit-tag */
+
 body.dark-mode .circuit-tag{
     color:#F0EFF4;
     background:#DC136C;
 }
-/* FIN BLOQUE CSS: body.dark-mode team and game tags */
 
+/* INICIO ESTILOS: body.dark-mode .news-category */
 
-/* INICIO BLOQUE CSS: body.dark-mode .news-category */
 body.dark-mode .news-category{
     color:#F0EFF4;
     background:#DC136C;
 }
-/* FIN BLOQUE CSS: body.dark-mode .news-category */
 
-
-/* INICIO BLOQUE CSS: body.dark-mode buttons */
 body.dark-mode .hero-btn,
 body.dark-mode .chismes-btn,
 body.dark-mode .discord-btn,
 body.dark-mode .form-btn,
 body.dark-mode .register-btn,
 body.dark-mode .modal-buttons a,
+
+/* INICIO ESTILOS: body.dark-mode .modal-buttons button */
+
 body.dark-mode .modal-buttons button{
     background:#DC136C;
     color:#F0EFF4;
 }
-/* FIN BLOQUE CSS: body.dark-mode buttons */
 
+/* INICIO ESTILOS: body.dark-mode .rules-btn */
 
-/* INICIO BLOQUE CSS: body.dark-mode secondary buttons */
 body.dark-mode .rules-btn{
     background:#242423;
     color:#F0EFF4;
     border-color:#DC136C;
 }
-/* FIN BLOQUE CSS: body.dark-mode secondary buttons */
 
-
-/* INICIO BLOQUE CSS: body.dark-mode light speech card */
 body.dark-mode .araxys-chismes h2,
+
+/* INICIO ESTILOS: body.dark-mode .araxys-chismes h2::after */
+
 body.dark-mode .araxys-chismes h2::after{
     background:white;
     color:#111;
 }
 
+/* INICIO ESTILOS: body.dark-mode .araxys-chismes span */
+
 body.dark-mode .araxys-chismes span{
     color:#DC136C;
 }
 
+/* INICIO ESTILOS: body.dark-mode .araxys-chismes p */
+
 body.dark-mode .araxys-chismes p{
     color:#191516;
 }
-/* FIN BLOQUE CSS: body.dark-mode light speech card */
 
+/* INICIO ESTILOS: body.dark-mode .page-transition */
 
-/* INICIO BLOQUE CSS: body.dark-mode page transition */
 body.dark-mode .page-transition{
     background:#191516;
 }
-/* FIN BLOQUE CSS: body.dark-mode page transition */
 
+/* INICIO ESTILOS: .section-header */
 
-
-
-/* TITULOS */
-
-/* INICIO BLOQUE CSS: .section-header */
 .section-header{
     display:flex;
 
@@ -452,10 +421,9 @@ body.dark-mode .page-transition{
 
     margin-bottom:40px;
 }
-/* FIN BLOQUE CSS: .section-header */
 
+/* INICIO ESTILOS: .section-header h2 */
 
-/* INICIO BLOQUE CSS: .section-header h2 */
 .section-header h2{
     font-size:2rem;
 
@@ -467,10 +435,9 @@ body.dark-mode .page-transition{
 
     gap:12px;
 }
-/* FIN BLOQUE CSS: .section-header h2 */
 
+/* INICIO ESTILOS: .section-header h2::before */
 
-/* INICIO BLOQUE CSS: .section-header h2::before */
 .section-header h2::before{
     content:"";
 
@@ -482,10 +449,9 @@ body.dark-mode .page-transition{
 
     transform:rotate(45deg);
 }
-/* FIN BLOQUE CSS: .section-header h2::before */
 
+/* INICIO ESTILOS: .section-header a */
 
-/* INICIO BLOQUE CSS: .section-header a */
 .section-header a{
     text-decoration:none;
 
@@ -495,20 +461,18 @@ body.dark-mode .page-transition{
 
     transition:.3s;
 }
-/* FIN BLOQUE CSS: .section-header a */
 
+/* INICIO ESTILOS: .section-header a:hover */
 
-/* INICIO BLOQUE CSS: .section-header a:hover */
 .section-header a:hover{
     opacity:.7;
 }
-/* FIN BLOQUE CSS: .section-header a:hover */
 
+/* INICIO VISTA MOVIL */
 
-/* RESPONSIVE*/
-
-/* INICIO BLOQUE CSS: @media(max-width:768px) */
 @media(max-width:768px){
+
+    /* INICIO ESTILOS: header */
 
     header{
         padding:15px 25px;
@@ -518,17 +482,25 @@ body.dark-mode .page-transition{
         gap:15px;
     }
 
+    /* INICIO ESTILOS: header.scrolled */
+
     header.scrolled{
         padding:10px 25px;
     }
+
+    /* INICIO ESTILOS: .logo img */
 
     .logo img{
         height:55px;
     }
 
+    /* INICIO ESTILOS: header.scrolled .logo img */
+
     header.scrolled .logo img{
         height:45px;
     }
+
+    /* INICIO ESTILOS: nav */
 
     nav{
         gap:18px;
@@ -538,25 +510,35 @@ body.dark-mode .page-transition{
         justify-content:center;
     }
 
+    /* INICIO ESTILOS: .theme-toggle */
+
     .theme-toggle{
         width:40px;
         height:40px;
         font-size:1.1rem;
     }
 
+    /* INICIO ESTILOS: nav a */
+
     nav a{
         font-size:.85rem;
     }
 
+    /* INICIO ESTILOS: header.scrolled nav a */
+
     header.scrolled nav a{
         font-size:.8rem;
     }
+
+    /* INICIO ESTILOS: .section-header */
 
     .section-header{
     flex-direction:column;
     align-items:flex-start;
     gap:15px;
 }
+
+/* INICIO ESTILOS: .section-header h2 */
 
 .section-header h2{
     font-size:1.8rem;
@@ -568,6 +550,9 @@ body.dark-mode .page-transition{
 .pillars-grid,
 .info-grid,
 .registered-grid,
+
+/* INICIO ESTILOS: .roster-grid */
+
 .roster-grid{
     grid-template-columns:1fr;
 }
@@ -581,6 +566,9 @@ body.dark-mode .page-transition{
 .pillars-section,
 .tournament-info,
 .tournament-description,
+
+/* INICIO ESTILOS: .registered-teams */
+
 .registered-teams{
     padding-left:25px;
     padding-right:25px;
@@ -590,6 +578,9 @@ body.dark-mode .page-transition{
 .teams-hero h1,
 .about-hero h1,
 .torneos-hero h1,
+
+/* INICIO ESTILOS: .tournament-hero h1 */
+
 .tournament-hero h1{
     font-size:3rem;
 }
@@ -597,15 +588,23 @@ body.dark-mode .page-transition{
 .hero p,
 .teams-hero p,
 .about-hero p,
+
+/* INICIO ESTILOS: .tournament-hero p */
+
 .tournament-hero p{
     font-size:1rem;
 }
 
 .video-card img,
 .video-thumbnail img,
+
+/* INICIO ESTILOS: .team-card img */
+
 .team-card img{
     height:320px;
 }
+
+/* INICIO ESTILOS: .team-card */
 
 .team-card{
     height:420px;
@@ -615,6 +614,9 @@ body.dark-mode .page-transition{
 .info-card,
 .pillar-card,
 .registered-card,
+
+/* INICIO ESTILOS: .about-card */
+
 .about-card{
     padding:25px;
 }
@@ -623,6 +625,9 @@ body.dark-mode .page-transition{
 .teams-hero,
 .about-hero,
 .torneos-hero,
+
+/* INICIO ESTILOS: .tournament-hero */
+
 .tournament-hero{
 
     min-height:60vh;
@@ -634,11 +639,16 @@ body.dark-mode .page-transition{
 }
 
 .hero-content,
+
+/* INICIO ESTILOS: .hero-overlay */
+
 .hero-overlay{
 
     max-width:100%;
 
 }
+
+/* INICIO ESTILOS: .scroll-indicator */
 
 .scroll-indicator{
 
@@ -649,6 +659,9 @@ body.dark-mode .page-transition{
 }
 
 .footer-links,
+
+/* INICIO ESTILOS: .footer-social */
+
 .footer-social{
 
     flex-direction:column;
@@ -658,14 +671,9 @@ body.dark-mode .page-transition{
 }
 
 }
-/* FIN BLOQUE CSS: @media(max-width:768px) */
 
+/* INICIO ESTILOS: footer */
 
-
-
-/* FOOTER */
-
-/* INICIO BLOQUE CSS: footer */
 footer{
 
     border-top:3px solid #DC136C;
@@ -678,20 +686,19 @@ footer{
 
     text-align:center;
 }
-/* FIN BLOQUE CSS: footer */
 
+/* INICIO ESTILOS: footer img */
 
-/* INICIO BLOQUE CSS: footer img */
 footer img{
     width:100px;
 
     margin-bottom:30px;
 }
-/* FIN BLOQUE CSS: footer img */
-
 
 .footer-links,
-/* INICIO BLOQUE CSS: .footer-social */
+
+/* INICIO ESTILOS: .footer-social */
+
 .footer-social{
 
     display:flex;
@@ -702,10 +709,9 @@ footer img{
 
     margin-bottom:25px;
 }
-/* FIN BLOQUE CSS: .footer-social */
 
+/* INICIO ESTILOS: footer a */
 
-/* INICIO BLOQUE CSS: footer a */
 footer a{
     text-decoration:none;
 
@@ -713,24 +719,21 @@ footer a{
 
     transition:.3s;
 }
-/* FIN BLOQUE CSS: footer a */
 
+/* INICIO ESTILOS: footer a:hover */
 
-/* INICIO BLOQUE CSS: footer a:hover */
 footer a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: footer a:hover */
 
+/* INICIO ESTILOS: footer p */
 
-/* INICIO BLOQUE CSS: footer p */
 footer p{
     color:#888;
 }
-/* FIN BLOQUE CSS: footer p */
 
+/* INICIO ESTILOS: .page-transition */
 
-/* INICIO BLOQUE CSS: .page-transition */
 .page-transition{
 
     position:fixed;
@@ -750,11 +753,9 @@ footer p{
     border-top:5px solid #DC136C;
     border-bottom:5px solid #DC136C
 }
-/* FIN BLOQUE CSS: .page-transition */
 
+/* INICIO ESTILOS: .page-transition.active */
 
-/* INICIO BLOQUE CSS: .page-transition.active */
 .page-transition.active{
     opacity:1;
 }
-/* FIN BLOQUE CSS: .page-transition.active */

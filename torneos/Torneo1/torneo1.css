@@ -1,24 +1,23 @@
-/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
 
-/* INICIO BLOQUE CSS: * */
+
+/* INICIO ESTILOS: * */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
-/* FIN BLOQUE CSS: * */
 
+/* INICIO ESTILOS: body */
 
-/* INICIO BLOQUE CSS: body */
 body{
     font-family:"Outfit", sans-serif;
     background:#F0EFF4;
     color:#F0EFF4;
 }
-/* FIN BLOQUE CSS: body */
 
+/* INICIO ESTILOS: header */
 
-/* INICIO BLOQUE CSS: header */
 header{
     position:fixed;
 
@@ -40,10 +39,9 @@ header{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: header */
 
+/* INICIO ESTILOS: header.scrolled */
 
-/* INICIO BLOQUE CSS: header.scrolled */
 header.scrolled{
 
     padding:12px 80px;
@@ -54,42 +52,37 @@ header.scrolled{
 
     box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
-/* FIN BLOQUE CSS: header.scrolled */
 
+/* INICIO ESTILOS: .logo */
 
-/* INICIO BLOQUE CSS: .logo */
 .logo{
     font-size:1.8rem;
     font-weight:700;
 }
-/* FIN BLOQUE CSS: .logo */
 
+/* INICIO ESTILOS: .logo img */
 
-/* INICIO BLOQUE CSS: .logo img */
 .logo img{
     height:75px;
-    
+
     filter:drop-shadow(0 4px 8px rgba(0,0,0,0.25));
 }
-/* FIN BLOQUE CSS: .logo img */
 
+/* INICIO ESTILOS: header.scrolled .logo img */
 
-/* INICIO BLOQUE CSS: header.scrolled .logo img */
 header.scrolled .logo img{
     height:55px;
 }
-/* FIN BLOQUE CSS: header.scrolled .logo img */
 
+/* INICIO ESTILOS: nav */
 
-/* INICIO BLOQUE CSS: nav */
 nav{
     display:flex;
     gap:50px;
 }
-/* FIN BLOQUE CSS: nav */
 
+/* INICIO ESTILOS: nav a */
 
-/* INICIO BLOQUE CSS: nav a */
 nav a{
     text-decoration:none;
 
@@ -101,25 +94,22 @@ nav a{
 
     transition:color 0.8s ease;
 }
-/* FIN BLOQUE CSS: nav a */
 
+/* INICIO ESTILOS: header.scrolled nav a */
 
-/* INICIO BLOQUE CSS: header.scrolled nav a */
 header.scrolled nav a{
     font-size:.95rem;
     color:#111;
 }
-/* FIN BLOQUE CSS: header.scrolled nav a */
 
+/* INICIO ESTILOS: nav a:hover */
 
-/* INICIO BLOQUE CSS: nav a:hover */
 nav a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: nav a:hover */
 
+/* INICIO ESTILOS: nav a::before */
 
-/* INICIO BLOQUE CSS: nav a::before */
 nav a::before{
     content:"";
 
@@ -135,19 +125,15 @@ nav a::before{
 
     transition:width 1.3s cubic-bezier(.22,.61,.36,1);
 }
-/* FIN BLOQUE CSS: nav a::before */
 
+/* INICIO ESTILOS: nav a:hover::before */
 
-/* INICIO BLOQUE CSS: nav a:hover::before */
 nav a:hover::before{
     width:100%;
 }
-/* FIN BLOQUE CSS: nav a:hover::before */
 
+/* INICIO ESTILOS: .tournament-hero */
 
-/* HERO */
-
-/* INICIO BLOQUE CSS: .tournament-hero */
 .tournament-hero{
     height:70vh;
 
@@ -164,10 +150,9 @@ nav a:hover::before{
 
     text-align:center;
 }
-/* FIN BLOQUE CSS: .tournament-hero */
 
+/* INICIO ESTILOS: .tournament-hero::before */
 
-/* INICIO BLOQUE CSS: .tournament-hero::before */
 .tournament-hero::before{
     content:"";
 
@@ -176,20 +161,18 @@ nav a:hover::before{
 
     background:rgba(0,0,0,0.55);
 }
-/* FIN BLOQUE CSS: .tournament-hero::before */
 
+/* INICIO ESTILOS: .hero-overlay */
 
-/* INICIO BLOQUE CSS: .hero-overlay */
 .hero-overlay{
     position:relative;
     z-index:2;
 
     color:white;
 }
-/* FIN BLOQUE CSS: .hero-overlay */
 
+/* INICIO ESTILOS: .game-tag */
 
-/* INICIO BLOQUE CSS: .game-tag */
 .game-tag{
     display:inline-block;
 
@@ -203,10 +186,9 @@ nav a:hover::before{
 
     margin-bottom:20px;
 }
-/* FIN BLOQUE CSS: .game-tag */
 
+/* INICIO ESTILOS: .hero-overlay h1 */
 
-/* INICIO BLOQUE CSS: .hero-overlay h1 */
 .hero-overlay h1{
     font-size:5rem;
 
@@ -214,19 +196,17 @@ nav a:hover::before{
 
     margin-bottom:20px;
 }
-/* FIN BLOQUE CSS: .hero-overlay h1 */
 
+/* INICIO ESTILOS: .hero-overlay p */
 
-/* INICIO BLOQUE CSS: .hero-overlay p */
 .hero-overlay p{
     font-size:1.2rem;
 
     opacity:0.9;
 }
-/* FIN BLOQUE CSS: .hero-overlay p */
 
+/* INICIO ESTILOS: .section-header h2 */
 
-/* INICIO BLOQUE CSS: .section-header h2 */
 .section-header h2{
 
     font-size:2rem;
@@ -242,12 +222,11 @@ nav a:hover::before{
     margin-top:30px;
 
     margin-bottom:10px;
-    
+
 }
-/* FIN BLOQUE CSS: .section-header h2 */
 
+/* INICIO ESTILOS: .section-header h2::before */
 
-/* INICIO BLOQUE CSS: .section-header h2::before */
 .section-header h2::before{
     content:"";
 
@@ -261,10 +240,9 @@ nav a:hover::before{
 
     display:inline-block;
 }
-/* FIN BLOQUE CSS: .section-header h2::before */
 
+/* INICIO ESTILOS: .hero-scroll */
 
-/* INICIO BLOQUE CSS: .hero-scroll */
 .hero-scroll{
     margin-top:50px;
 
@@ -276,10 +254,9 @@ nav a:hover::before{
 
     gap:12px;
 }
-/* FIN BLOQUE CSS: .hero-scroll */
 
+/* INICIO ESTILOS: .hero-scroll span */
 
-/* INICIO BLOQUE CSS: .hero-scroll span */
 .hero-scroll span{
     color:rgba(255,255,255,.8);
 
@@ -291,10 +268,9 @@ nav a:hover::before{
 
     text-transform:uppercase;
 }
-/* FIN BLOQUE CSS: .hero-scroll span */
 
+/* INICIO ESTILOS: .hero-scroll-line */
 
-/* INICIO BLOQUE CSS: .hero-scroll-line */
 .hero-scroll-line{
     width:2px;
 
@@ -304,21 +280,26 @@ nav a:hover::before{
 
     animation:scrollPulse 2s infinite;
 }
-/* FIN BLOQUE CSS: .hero-scroll-line */
 
+/* INICIO ANIMACION: @keyframes scrollPulse */
 
-/* INICIO BLOQUE CSS: @keyframes scrollPulse */
 @keyframes scrollPulse{
+
+    /* INICIO ESTILOS: 0% */
 
     0%{
         opacity:.3;
         transform:scaleY(.5);
     }
 
+    /* INICIO ESTILOS: 50% */
+
     50%{
         opacity:1;
         transform:scaleY(1);
     }
+
+    /* INICIO ESTILOS: 100% */
 
     100%{
         opacity:.3;
@@ -326,12 +307,9 @@ nav a:hover::before{
     }
 
 }
-/* FIN BLOQUE CSS: @keyframes scrollPulse */
 
+/* INICIO ESTILOS: .tournament-info */
 
-/* INFO */
-
-/* INICIO BLOQUE CSS: .tournament-info */
 .tournament-info{
     padding:90px;
 
@@ -341,10 +319,9 @@ nav a:hover::before{
 
     background-position:center;
 }
-/* FIN BLOQUE CSS: .tournament-info */
 
+/* INICIO ESTILOS: .info-grid */
 
-/* INICIO BLOQUE CSS: .info-grid */
 .info-grid{
     display:grid;
 
@@ -352,10 +329,9 @@ nav a:hover::before{
 
     gap:25px;
 }
-/* FIN BLOQUE CSS: .info-grid */
 
+/* INICIO ESTILOS: .info-card */
 
-/* INICIO BLOQUE CSS: .info-card */
 .info-card{
 
     position:relative;
@@ -372,10 +348,9 @@ nav a:hover::before{
 
     box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
-/* FIN BLOQUE CSS: .info-card */
 
+/* INICIO ESTILOS: .info-card::before */
 
-/* INICIO BLOQUE CSS: .info-card::before */
 .info-card::before{
     content:"";
 
@@ -389,10 +364,9 @@ nav a:hover::before{
 
     background:#DC136C;
 }
-/* FIN BLOQUE CSS: .info-card::before */
 
+/* INICIO ESTILOS: .info-card span */
 
-/* INICIO BLOQUE CSS: .info-card span */
 .info-card span{
     color:#888;
 
@@ -400,26 +374,21 @@ nav a:hover::before{
 
     margin-bottom:10px;
 }
-/* FIN BLOQUE CSS: .info-card span */
 
+/* INICIO ESTILOS: .info-card h2 */
 
-/* INICIO BLOQUE CSS: .info-card h2 */
 .info-card h2{
     color:#111;
 }
-/* FIN BLOQUE CSS: .info-card h2 */
 
+/* INICIO ESTILOS: .tournament-description */
 
-/* DESCRIPCIÓN */
-
-/* INICIO BLOQUE CSS: .tournament-description */
 .tournament-description{
     padding:0 80px 80px;
 }
-/* FIN BLOQUE CSS: .tournament-description */
 
+/* INICIO ESTILOS: .tournament-description p */
 
-/* INICIO BLOQUE CSS: .tournament-description p */
 .tournament-description p{
     color:#555;
 
@@ -427,12 +396,9 @@ nav a:hover::before{
 
     max-width:900px;
 }
-/* FIN BLOQUE CSS: .tournament-description p */
 
+/* INICIO ESTILOS: .tournament-actions */
 
-/* BOTONES */
-
-/* INICIO BLOQUE CSS: .tournament-actions */
 .tournament-actions{
     display:flex;
 
@@ -442,10 +408,9 @@ nav a:hover::before{
 
     padding-bottom:100px;
 }
-/* FIN BLOQUE CSS: .tournament-actions */
 
+/* INICIO ESTILOS: .register-btn */
 
-/* INICIO BLOQUE CSS: .register-btn */
 .register-btn{
     background:#DC136C;
 
@@ -461,17 +426,15 @@ nav a:hover::before{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: .register-btn */
 
+/* INICIO ESTILOS: .register-btn:hover */
 
-/* INICIO BLOQUE CSS: .register-btn:hover */
 .register-btn:hover{
     transform:translateY(-4px);
 }
-/* FIN BLOQUE CSS: .register-btn:hover */
 
+/* INICIO ESTILOS: .rules-btn */
 
-/* INICIO BLOQUE CSS: .rules-btn */
 .rules-btn{
     background:white;
 
@@ -489,28 +452,25 @@ nav a:hover::before{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: .rules-btn */
 
+/* INICIO ESTILOS: .rules-btn:hover */
 
-/* INICIO BLOQUE CSS: .rules-btn:hover */
 .rules-btn:hover{
     transform:translateY(-4px);
 }
-/* FIN BLOQUE CSS: .rules-btn:hover */
 
+/* INICIO ESTILOS: .registered-teams */
 
-/* INICIO BLOQUE CSS: .registered-teams */
 .registered-teams{
     padding:40px 80px 100px;
 
     margin-top:-100px;
-    
+
     margin-bottom:40px;
 }
-/* FIN BLOQUE CSS: .registered-teams */
 
+/* INICIO ESTILOS: .registered-grid */
 
-/* INICIO BLOQUE CSS: .registered-grid */
 .registered-grid{
     display:grid;
 
@@ -518,10 +478,9 @@ nav a:hover::before{
 
     gap:25px;
 }
-/* FIN BLOQUE CSS: .registered-grid */
 
+/* INICIO ESTILOS: .registered-empty */
 
-/* INICIO BLOQUE CSS: .registered-empty */
 .registered-empty{
     background:white;
     border-radius:25px;
@@ -531,11 +490,15 @@ nav a:hover::before{
     border-top:4px solid #DC136C;
 }
 
+/* INICIO ESTILOS: .registered-empty p */
+
 .registered-empty p{
     color:#555;
     line-height:1.8;
     font-size:1.05rem;
 }
+
+/* INICIO ESTILOS: body.dark-mode .registered-empty */
 
 body.dark-mode .registered-empty{
     background:#242423;
@@ -543,13 +506,14 @@ body.dark-mode .registered-empty{
     box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
+/* INICIO ESTILOS: body.dark-mode .registered-empty p */
+
 body.dark-mode .registered-empty p{
     color:#F0EFF4;
 }
-/* FIN BLOQUE CSS: .registered-empty */
 
+/* INICIO ESTILOS: .registered-card */
 
-/* INICIO BLOQUE CSS: .registered-card */
 .registered-card{
 
     background:white;
@@ -568,10 +532,9 @@ body.dark-mode .registered-empty p{
 
     overflow:hidden;
 }
-/* FIN BLOQUE CSS: .registered-card */
 
+/* INICIO ESTILOS: .registered-card::before */
 
-/* INICIO BLOQUE CSS: .registered-card::before */
 .registered-card::before{
 
     content:"";
@@ -586,18 +549,16 @@ body.dark-mode .registered-empty p{
 
     background:#DC136C;
 }
-/* FIN BLOQUE CSS: .registered-card::before */
 
+/* INICIO ESTILOS: .registered-card:hover */
 
-/* INICIO BLOQUE CSS: .registered-card:hover */
 .registered-card:hover{
 
     transform:translateY(-10px);
 }
-/* FIN BLOQUE CSS: .registered-card:hover */
 
+/* INICIO ESTILOS: .registered-card img */
 
-/* INICIO BLOQUE CSS: .registered-card img */
 .registered-card img{
 
     width:90px;
@@ -608,18 +569,16 @@ body.dark-mode .registered-empty p{
 
     margin-bottom:15px;
 }
-/* FIN BLOQUE CSS: .registered-card img */
 
+/* INICIO ESTILOS: .registered-card h3 */
 
-/* INICIO BLOQUE CSS: .registered-card h3 */
 .registered-card h3{
 
     color:#111;
 }
-/* FIN BLOQUE CSS: .registered-card h3 */
 
+/* INICIO ESTILOS: .description-card */
 
-/* INICIO BLOQUE CSS: .description-card */
 .description-card{
     background:white;
 
@@ -631,10 +590,9 @@ body.dark-mode .registered-empty p{
 
     border-top:4px solid #DC136C;
 }
-/* FIN BLOQUE CSS: .description-card */
 
+/* INICIO ESTILOS: .description-card p */
 
-/* INICIO BLOQUE CSS: .description-card p */
 .description-card p{
     color:#555;
 
@@ -642,14 +600,13 @@ body.dark-mode .registered-empty p{
 
     font-size:1.05rem;
 }
-/* FIN BLOQUE CSS: .description-card p */
 
+/* INICIO ESTILOS: footer */
 
-/* INICIO BLOQUE CSS: footer */
 footer{
 
     border-top:3px solid #DC136C;
-    
+
     margin-top:0px;
 
     padding:80px;
@@ -660,20 +617,19 @@ footer{
 
     text-align:center;
 }
-/* FIN BLOQUE CSS: footer */
 
+/* INICIO ESTILOS: footer img */
 
-/* INICIO BLOQUE CSS: footer img */
 footer img{
     width:100px;
 
     margin-bottom:30px;
 }
-/* FIN BLOQUE CSS: footer img */
-
 
 .footer-links,
-/* INICIO BLOQUE CSS: .footer-social */
+
+/* INICIO ESTILOS: .footer-social */
+
 .footer-social{
     display:flex;
 
@@ -683,10 +639,9 @@ footer img{
 
     margin-bottom:25px;
 }
-/* FIN BLOQUE CSS: .footer-social */
 
+/* INICIO ESTILOS: footer a */
 
-/* INICIO BLOQUE CSS: footer a */
 footer a{
     text-decoration:none;
 
@@ -694,19 +649,15 @@ footer a{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: footer a */
 
+/* INICIO ESTILOS: footer a:hover */
 
-/* INICIO BLOQUE CSS: footer a:hover */
 footer a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: footer a:hover */
 
+/* INICIO ESTILOS: footer p */
 
-/* INICIO BLOQUE CSS: footer p */
 footer p{
     color:#888;
 }
-/* FIN BLOQUE CSS: footer p */
-

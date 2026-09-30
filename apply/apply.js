@@ -1,3 +1,5 @@
+// INICIO FORMULARIO: modal de inscripcion y envio de solicitudes.
+// INICIO REFERENCIAS: elementos del formulario en la pagina.
 const roleCards = document.querySelectorAll(".role-card");
 
 const modal = document.getElementById("applyModal");
@@ -14,8 +16,10 @@ const dynamicFields = document.getElementById("dynamicFields");
 const successScreen = document.getElementById("successScreen");
 const closeSuccessBtn = document.getElementById("closeSuccessBtn");
 
+// INICIO ROL SELECCIONADO: opcion activa dentro del modal.
 let selectedRole = "";
 
+// INICIO DATOS POR ROL: textos y preguntas de cada inscripcion.
 const roleData = {
     Jugador: {
         type: "jugadores",
@@ -89,6 +93,7 @@ const roleData = {
     }
 };
 
+// INICIO CREAR CAMPOS: genera las preguntas del rol seleccionado.
 function createFields(role){
 
     dynamicFields.innerHTML = "";
@@ -122,6 +127,7 @@ function createFields(role){
 
 }
 
+// INICIO ABRIR MODAL: prepara la solicitud del rol elegido.
 roleCards.forEach(card => {
 
     card.addEventListener("click", () => {
@@ -151,10 +157,12 @@ roleCards.forEach(card => {
 
 });
 
+// INICIO MOSTRAR FORMULARIO: abre o cierra los campos de inscripcion.
 showFormBtn.addEventListener("click", () => {
     applyForm.classList.toggle("active");
 });
 
+// INICIO ENVIAR SOLICITUD: recopila respuestas y las envia a la API.
 applyForm.addEventListener("submit", async e => {
 
     e.preventDefault();
@@ -192,38 +200,36 @@ applyForm.addEventListener("submit", async e => {
     submitBtn.disabled = true;
     submitBtn.textContent = "Enviando...";
 
-    const response = await fetch("https://araxys-api.araxysoficial.workers.dev/apply", {
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify(data)
-    });
+    try{
+        const response = await fetch("https://araxys-api.araxysoficial.workers.dev/apply", {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(data)
+        });
 
-    if(response.ok){
-
-        formStatus.className = "form-status";
-        formStatus.textContent = "";
-
-        applyForm.classList.remove("active");
-        applyForm.reset();
-
-        successScreen.classList.add("active");
-
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Enviar aplicación";
-
-    }else{
-
+        if(response.ok){
+            formStatus.className = "form-status";
+            formStatus.textContent = "";
+            applyForm.classList.remove("active");
+            applyForm.reset();
+            successScreen.classList.add("active");
+        }else{
+            formStatus.className = "form-status error";
+            formStatus.textContent = "Hubo un error al enviar la aplicación. Intenta de nuevo.";
+        }
+    }catch{
         formStatus.className = "form-status error";
-        formStatus.textContent = "Hubo un error al enviar la aplicación. Intenta de nuevo.";
-
+        formStatus.textContent = "No se pudo conectar con el servidor. Intenta de nuevo.";
+    }finally{
         submitBtn.disabled = false;
         submitBtn.textContent = "Enviar aplicación";
     }
 
 });
 
+// INICIO CERRAR MODAL: cierre manual, por fondo o despues del envio.
 modalClose.addEventListener("click", () => {
     modal.classList.remove("active");
 });

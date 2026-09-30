@@ -1,24 +1,23 @@
-/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
 
-/* INICIO BLOQUE CSS: * */
+
+/* INICIO ESTILOS: * */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
-/* FIN BLOQUE CSS: * */
 
+/* INICIO ESTILOS: body */
 
-/* INICIO BLOQUE CSS: body */
 body{
     font-family:"Outfit", sans-serif;
     background:#F0EFF4;
     color:#191516;
 }
-/* FIN BLOQUE CSS: body */
 
+/* INICIO ESTILOS: header */
 
-/* INICIO BLOQUE CSS: header */
 header{
     position:fixed;
 
@@ -43,10 +42,9 @@ header{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: header */
 
+/* INICIO ESTILOS: header.scrolled */
 
-/* INICIO BLOQUE CSS: header.scrolled */
 header.scrolled{
 
     padding:12px 80px;
@@ -57,42 +55,37 @@ header.scrolled{
 
     box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
-/* FIN BLOQUE CSS: header.scrolled */
 
+/* INICIO ESTILOS: .logo */
 
-/* INICIO BLOQUE CSS: .logo */
 .logo{
     font-size:1.8rem;
     font-weight:700;
 }
-/* FIN BLOQUE CSS: .logo */
 
+/* INICIO ESTILOS: .logo img */
 
-/* INICIO BLOQUE CSS: .logo img */
 .logo img{
     height:75px;
 
     filter:drop-shadow(0 4px 8px rgba(0,0,0,0.25));
 }
-/* FIN BLOQUE CSS: .logo img */
 
+/* INICIO ESTILOS: header.scrolled .logo img */
 
-/* INICIO BLOQUE CSS: header.scrolled .logo img */
 header.scrolled .logo img{
     height:55px;
 }
-/* FIN BLOQUE CSS: header.scrolled .logo img */
 
+/* INICIO ESTILOS: nav */
 
-/* INICIO BLOQUE CSS: nav */
 nav{
     display:flex;
     gap:50px;
 }
-/* FIN BLOQUE CSS: nav */
 
+/* INICIO ESTILOS: nav a */
 
-/* INICIO BLOQUE CSS: nav a */
 nav a{
     text-decoration:none;
 
@@ -104,26 +97,23 @@ nav a{
 
     transition:color 0.8s ease;
 }
-/* FIN BLOQUE CSS: nav a */
 
+/* INICIO ESTILOS: header.scrolled nav a */
 
-/* INICIO BLOQUE CSS: header.scrolled nav a */
 header.scrolled nav a{
     font-size:.95rem;
-    
+
     color:#111;
 }
-/* FIN BLOQUE CSS: header.scrolled nav a */
 
+/* INICIO ESTILOS: nav a:hover */
 
-/* INICIO BLOQUE CSS: nav a:hover */
 nav a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: nav a:hover */
 
+/* INICIO ESTILOS: nav a::before */
 
-/* INICIO BLOQUE CSS: nav a::before */
 nav a::before{
     content:"";
 
@@ -139,24 +129,21 @@ nav a::before{
 
     transition:width 1.3s cubic-bezier(.22,.61,.36,1);
 }
-/* FIN BLOQUE CSS: nav a::before */
 
+/* INICIO ESTILOS: nav a:hover::before */
 
-/* INICIO BLOQUE CSS: nav a:hover::before */
 nav a:hover::before{
     width:100%;
 }
-/* FIN BLOQUE CSS: nav a:hover::before */
 
+/* INICIO ESTILOS: .news-hero */
 
-/* INICIO BLOQUE CSS: .news-hero */
 .news-hero{
     height:350px;
 }
-/* FIN BLOQUE CSS: .news-hero */
 
+/* INICIO ESTILOS: .news-layout */
 
-/* INICIO BLOQUE CSS: .news-layout */
 .news-layout{
     display:grid;
 
@@ -164,10 +151,9 @@ nav a:hover::before{
 
     gap:30px;
 }
-/* FIN BLOQUE CSS: .news-layout */
 
+/* INICIO ESTILOS: .news-layout */
 
-/* INICIO BLOQUE CSS: .news-layout */
 .news-layout{
     display:grid;
 
@@ -175,10 +161,9 @@ nav a:hover::before{
 
     gap:30px;
 }
-/* FIN BLOQUE CSS: .news-layout */
 
+/* INICIO ESTILOS: .news-hero */
 
-/* INICIO BLOQUE CSS: .news-hero */
 .news-hero{
     height:500px;
 
@@ -190,20 +175,18 @@ nav a:hover::before{
 
     position:relative;
 }
-/* FIN BLOQUE CSS: .news-hero */
 
+/* INICIO ESTILOS: .news-hero::before */
 
-/* INICIO BLOQUE CSS: .news-hero::before */
 .news-hero::before{
     content:"";
     position:absolute;
     inset:0;
     background:rgba(0,0,0,.55);
 }
-/* FIN BLOQUE CSS: .news-hero::before */
 
+/* INICIO ESTILOS: .hero-overlay */
 
-/* INICIO BLOQUE CSS: .hero-overlay */
 .hero-overlay{
     position:absolute;
 
@@ -224,27 +207,24 @@ nav a:hover::before{
     padding:0 30px;
     transform:translateY(40px);
 }
-/* FIN BLOQUE CSS: .hero-overlay */
 
+/* INICIO ESTILOS: .hero-overlay h1 */
 
-/* INICIO BLOQUE CSS: .hero-overlay h1 */
 .hero-overlay h1{
     font-size:5rem;
     font-weight:900;
     margin-bottom:20px;
 }
-/* FIN BLOQUE CSS: .hero-overlay h1 */
 
+/* INICIO ESTILOS: .hero-overlay p */
 
-/* INICIO BLOQUE CSS: .hero-overlay p */
 .hero-overlay p{
     font-size:1.2rem;
     opacity:.9;
 }
-/* FIN BLOQUE CSS: .hero-overlay p */
 
+/* INICIO ESTILOS: .araxys-chismes */
 
-/* INICIO BLOQUE CSS: .araxys-chismes */
 .araxys-chismes{
     padding:120px 80px;
 
@@ -258,17 +238,15 @@ nav a:hover::before{
 
     position:relative;
 }
-/* FIN BLOQUE CSS: .araxys-chismes */
 
+/* INICIO ESTILOS: .araxys-chismes::before */
 
-/* INICIO BLOQUE CSS: .araxys-chismes::before */
 .araxys-chismes::before{
     background:rgba(0,0,0,0.25);
 }
-/* FIN BLOQUE CSS: .araxys-chismes::before */
 
+/* INICIO ESTILOS: .araxys-chismes h2 */
 
-/* INICIO BLOQUE CSS: .araxys-chismes h2 */
 .araxys-chismes h2{
 
     font-family:"Outfit", sans-serif;
@@ -291,10 +269,9 @@ nav a:hover::before{
 
     transform:rotate(-2deg);
 }
-/* FIN BLOQUE CSS: .araxys-chismes h2 */
 
+/* INICIO ESTILOS: .araxys-chismes h2::after */
 
-/* INICIO BLOQUE CSS: .araxys-chismes h2::after */
 .araxys-chismes h2::after{
     content:"";
 
@@ -310,17 +287,15 @@ nav a:hover::before{
 
     transform:rotate(45deg);
 }
-/* FIN BLOQUE CSS: .araxys-chismes h2::after */
 
+/* INICIO ESTILOS: .araxys-chismes span */
 
-/* INICIO BLOQUE CSS: .araxys-chismes span */
 .araxys-chismes span{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: .araxys-chismes span */
 
+/* INICIO ESTILOS: .araxys-chismes p */
 
-/* INICIO BLOQUE CSS: .araxys-chismes p */
 .araxys-chismes p{
     font-family:"Outfit", sans-serif;
     color:#191516;
@@ -328,10 +303,9 @@ nav a:hover::before{
 
     margin-bottom:40px;
 }
-/* FIN BLOQUE CSS: .araxys-chismes p */
 
+/* INICIO ESTILOS: .chismes-btn */
 
-/* INICIO BLOQUE CSS: .chismes-btn */
 .chismes-btn{
     display:inline-block;
 
@@ -351,17 +325,15 @@ nav a:hover::before{
 
     transition:0.3s ease;
 }
-/* FIN BLOQUE CSS: .chismes-btn */
 
+/* INICIO ESTILOS: .chismes-btn:hover */
 
-/* INICIO BLOQUE CSS: .chismes-btn:hover */
 .chismes-btn:hover{
     transform:translateY(-5px);
 }
-/* FIN BLOQUE CSS: .chismes-btn:hover */
 
+/* INICIO ESTILOS: .news-title */
 
-/* INICIO BLOQUE CSS: .news-title */
 .news-title{
     display:flex;
     align-items:center;
@@ -371,10 +343,9 @@ nav a:hover::before{
 
     margin:30px 0 -90px;
 }
-/* FIN BLOQUE CSS: .news-title */
 
+/* INICIO ESTILOS: .news-title h2 */
 
-/* INICIO BLOQUE CSS: .news-title h2 */
 .news-title h2{
     font-family:"Outfit", sans-serif;
 
@@ -390,10 +361,9 @@ nav a:hover::before{
     align-items:center;
     gap:12px;
 }
-/* FIN BLOQUE CSS: .news-title h2 */
 
+/* INICIO ESTILOS: .news-title h2::before */
 
-/* INICIO BLOQUE CSS: .news-title h2::before */
 .news-title h2::before{
     content:"";
 
@@ -407,17 +377,15 @@ nav a:hover::before{
 
     display:inline-block;
 }
-/* FIN BLOQUE CSS: .news-title h2::before */
 
+/* INICIO ESTILOS: .news-feed */
 
-/* INICIO BLOQUE CSS: .news-feed */
 .news-feed{
     padding:120px 80px;
 }
-/* FIN BLOQUE CSS: .news-feed */
 
+/* INICIO ESTILOS: .news-block */
 
-/* INICIO BLOQUE CSS: .news-block */
 .news-block{
     display:grid;
 
@@ -427,10 +395,9 @@ nav a:hover::before{
 
     margin-bottom:30px;
 }
-/* FIN BLOQUE CSS: .news-block */
 
+/* INICIO ESTILOS: .news-side */
 
-/* INICIO BLOQUE CSS: .news-side */
 .news-side{
     display:flex;
 
@@ -438,10 +405,9 @@ nav a:hover::before{
 
     gap:30px;
 }
-/* FIN BLOQUE CSS: .news-side */
 
+/* INICIO ESTILOS: .news-big */
 
-/* INICIO BLOQUE CSS: .news-big */
 .news-big{
     height:500px;
 
@@ -449,10 +415,9 @@ nav a:hover::before{
 
     border-radius:25px;
 }
-/* FIN BLOQUE CSS: .news-big */
 
+/* INICIO ESTILOS: .news-small */
 
-/* INICIO BLOQUE CSS: .news-small */
 .news-small{
     height:235px;
 
@@ -460,18 +425,17 @@ nav a:hover::before{
 
     border-radius:25px;
 }
-/* FIN BLOQUE CSS: .news-small */
 
+/* INICIO ESTILOS: .news-block.reverse */
 
-/* INICIO BLOQUE CSS: .news-block.reverse */
 .news-block.reverse{
     grid-template-columns:1fr 2fr;
 }
-/* FIN BLOQUE CSS: .news-block.reverse */
-
 
 .news-big,
-/* INICIO BLOQUE CSS: .news-small */
+
+/* INICIO ESTILOS: .news-small */
+
 .news-small{
     position:relative;
 
@@ -486,16 +450,16 @@ nav a:hover::before{
     cursor:pointer;
 
     display:block;
-    
+
     box-shadow:0 10px 25px rgba(0,0,0,0.08);
 
     transition:0.35s ease;
 }
-/* FIN BLOQUE CSS: .news-small */
-
 
 .news-big img,
-/* INICIO BLOQUE CSS: .news-small img */
+
+/* INICIO ESTILOS: .news-small img */
+
 .news-small img{
     width:100%;
     height:100%;
@@ -504,29 +468,27 @@ nav a:hover::before{
 
     display:block;
 }
-/* FIN BLOQUE CSS: .news-small img */
-
 
 .news-big:hover,
-/* INICIO BLOQUE CSS: .news-small:hover */
+
+/* INICIO ESTILOS: .news-small:hover */
+
 .news-small:hover{
     transform:translateY(-8px);
 
     box-shadow:0 20px 40px rgba(0,0,0,0.15);
 }
-/* FIN BLOQUE CSS: .news-small:hover */
 
+/* INICIO ESTILOS: .news-more */
 
-/* INICIO BLOQUE CSS: .news-more */
 .news-more{
     text-align:center;
 
     margin:50px 0 -200px;
 }
-/* FIN BLOQUE CSS: .news-more */
 
+/* INICIO ESTILOS: .news-more a */
 
-/* INICIO BLOQUE CSS: .news-more a */
 .news-more a{
     text-decoration:none;
 
@@ -538,17 +500,15 @@ nav a:hover::before{
 
     transition:0.3s ease;
 }
-/* FIN BLOQUE CSS: .news-more a */
 
+/* INICIO ESTILOS: .news-more a:hover */
 
-/* INICIO BLOQUE CSS: .news-more a:hover */
 .news-more a:hover{
     opacity:0.7;
 }
-/* FIN BLOQUE CSS: .news-more a:hover */
 
+/* INICIO ESTILOS: .news-overlay */
 
-/* INICIO BLOQUE CSS: .news-overlay */
 .news-overlay{
     position:absolute;
 
@@ -557,7 +517,7 @@ nav a:hover::before{
     z-index:2;
 
     display:flex;
-    
+
     flex-direction:column;
 
     justify-content:flex-end;
@@ -571,19 +531,17 @@ nav a:hover::before{
         rgba(0,0,0,0)
     );
 }
-/* FIN BLOQUE CSS: .news-overlay */
 
+/* INICIO ESTILOS: .news-overlay h3 */
 
-/* INICIO BLOQUE CSS: .news-overlay h3 */
 .news-overlay h3{
     color:white;
 
     text-shadow:0 3px 10px rgba(0,0,0,0.8);
 }
-/* FIN BLOQUE CSS: .news-overlay h3 */
 
+/* INICIO ESTILOS: .news-category */
 
-/* INICIO BLOQUE CSS: .news-category */
 .news-category{
     display:inline-block;
 
@@ -601,14 +559,13 @@ nav a:hover::before{
 
     margin-bottom:12px;
 }
-/* FIN BLOQUE CSS: .news-category */
 
+/* INICIO ESTILOS: footer */
 
-/* INICIO BLOQUE CSS: footer */
 footer{
 
     border-top:3px solid #DC136C;
-    
+
     margin-top:120px;
 
     padding:80px;
@@ -619,20 +576,19 @@ footer{
 
     text-align:center;
 }
-/* FIN BLOQUE CSS: footer */
 
+/* INICIO ESTILOS: footer img */
 
-/* INICIO BLOQUE CSS: footer img */
 footer img{
     width:100px;
 
     margin-bottom:30px;
 }
-/* FIN BLOQUE CSS: footer img */
-
 
 .footer-links,
-/* INICIO BLOQUE CSS: .footer-social */
+
+/* INICIO ESTILOS: .footer-social */
+
 .footer-social{
     display:flex;
 
@@ -642,10 +598,9 @@ footer img{
 
     margin-bottom:25px;
 }
-/* FIN BLOQUE CSS: .footer-social */
 
+/* INICIO ESTILOS: footer a */
 
-/* INICIO BLOQUE CSS: footer a */
 footer a{
     text-decoration:none;
 
@@ -653,19 +608,15 @@ footer a{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: footer a */
 
+/* INICIO ESTILOS: footer a:hover */
 
-/* INICIO BLOQUE CSS: footer a:hover */
 footer a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: footer a:hover */
 
+/* INICIO ESTILOS: footer p */
 
-/* INICIO BLOQUE CSS: footer p */
 footer p{
     color:#888;
 }
-/* FIN BLOQUE CSS: footer p */
-

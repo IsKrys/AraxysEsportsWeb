@@ -1,24 +1,23 @@
-/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
 
-/* INICIO BLOQUE CSS: * */
+
+/* INICIO ESTILOS: * */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
-/* FIN BLOQUE CSS: * */
 
+/* INICIO ESTILOS: body */
 
-/* INICIO BLOQUE CSS: body */
 body{
     font-family:"Outfit", sans-serif;
     background:#F0EFF4;
     color:#F0EFF4;
 }
-/* FIN BLOQUE CSS: body */
 
+/* INICIO ESTILOS: header */
 
-/* INICIO BLOQUE CSS: header */
 header{
     position:fixed;
 
@@ -40,10 +39,9 @@ header{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: header */
 
+/* INICIO ESTILOS: header.scrolled */
 
-/* INICIO BLOQUE CSS: header.scrolled */
 header.scrolled{
 
     padding:12px 80px;
@@ -54,42 +52,37 @@ header.scrolled{
 
     box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
-/* FIN BLOQUE CSS: header.scrolled */
 
+/* INICIO ESTILOS: .logo */
 
-/* INICIO BLOQUE CSS: .logo */
 .logo{
     font-size:1.8rem;
     font-weight:700;
 }
-/* FIN BLOQUE CSS: .logo */
 
+/* INICIO ESTILOS: .logo img */
 
-/* INICIO BLOQUE CSS: .logo img */
 .logo img{
     height:75px;
-    
+
     filter:drop-shadow(0 4px 8px rgba(0,0,0,0.25));
 }
-/* FIN BLOQUE CSS: .logo img */
 
+/* INICIO ESTILOS: header.scrolled .logo img */
 
-/* INICIO BLOQUE CSS: header.scrolled .logo img */
 header.scrolled .logo img{
     height:55px;
 }
-/* FIN BLOQUE CSS: header.scrolled .logo img */
 
+/* INICIO ESTILOS: nav */
 
-/* INICIO BLOQUE CSS: nav */
 nav{
     display:flex;
     gap:50px;
 }
-/* FIN BLOQUE CSS: nav */
 
+/* INICIO ESTILOS: nav a */
 
-/* INICIO BLOQUE CSS: nav a */
 nav a{
     text-decoration:none;
 
@@ -101,25 +94,22 @@ nav a{
 
     transition:color 0.8s ease;
 }
-/* FIN BLOQUE CSS: nav a */
 
+/* INICIO ESTILOS: header.scrolled nav a */
 
-/* INICIO BLOQUE CSS: header.scrolled nav a */
 header.scrolled nav a{
     font-size:.95rem;
     color:#111;
 }
-/* FIN BLOQUE CSS: header.scrolled nav a */
 
+/* INICIO ESTILOS: nav a:hover */
 
-/* INICIO BLOQUE CSS: nav a:hover */
 nav a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: nav a:hover */
 
+/* INICIO ESTILOS: nav a::before */
 
-/* INICIO BLOQUE CSS: nav a::before */
 nav a::before{
     content:"";
 
@@ -135,17 +125,15 @@ nav a::before{
 
     transition:width 1.3s cubic-bezier(.22,.61,.36,1);
 }
-/* FIN BLOQUE CSS: nav a::before */
 
+/* INICIO ESTILOS: nav a:hover::before */
 
-/* INICIO BLOQUE CSS: nav a:hover::before */
 nav a:hover::before{
     width:100%;
 }
-/* FIN BLOQUE CSS: nav a:hover::before */
 
+/* INICIO ESTILOS: .hero */
 
-/* INICIO BLOQUE CSS: .hero */
 .hero{
     min-height:80vh;
 
@@ -160,10 +148,9 @@ nav a:hover::before{
 
     overflow:hidden;
 }
-/* FIN BLOQUE CSS: .hero */
 
+/* INICIO ESTILOS: .hero-bg */
 
-/* INICIO BLOQUE CSS: .hero-bg */
 .hero-bg{
     position:absolute;
     inset:0;
@@ -176,10 +163,9 @@ nav a:hover::before{
 
     z-index:0;
 }
-/* FIN BLOQUE CSS: .hero-bg */
 
+/* INICIO ESTILOS: .hero-content */
 
-/* INICIO BLOQUE CSS: .hero-content */
 .hero-content{
     max-width:700px;
 
@@ -187,10 +173,9 @@ nav a:hover::before{
 
     z-index:2;
 }
-/* FIN BLOQUE CSS: .hero-content */
 
+/* INICIO ESTILOS: .scroll-indicator */
 
-/* INICIO BLOQUE CSS: .scroll-indicator */
 .scroll-indicator{
     position:absolute;
 
@@ -205,35 +190,36 @@ nav a:hover::before{
 
     animation:bounce 2s infinite;
 }
-/* FIN BLOQUE CSS: .scroll-indicator */
 
+/* INICIO ANIMACION: @keyframes bounce */
 
-/* INICIO BLOQUE CSS: @keyframes bounce */
 @keyframes bounce{
+
+    /* INICIO ESTILOS: 0%,100% */
 
     0%,100%{
         transform:translateX(-50%) translateY(0);
     }
+
+    /* INICIO ESTILOS: 50% */
 
     50%{
         transform:translateX(-50%) translateY(10px);
     }
 
 }
-/* FIN BLOQUE CSS: @keyframes bounce */
 
+/* INICIO ESTILOS: .hero h1 */
 
-/* INICIO BLOQUE CSS: .hero h1 */
 .hero h1{
     font-weight:800;
     font-size:4rem;
     margin-bottom:15px;
     text-shadow:0 4px 20px rgba(0,0,0,0.4);
 }
-/* FIN BLOQUE CSS: .hero h1 */
 
+/* INICIO ESTILOS: .hero p */
 
-/* INICIO BLOQUE CSS: .hero p */
 .hero p{
     font-size:1.3rem;
 
@@ -245,10 +231,9 @@ nav a:hover::before{
 
     max-width:600px;
 }
-/* FIN BLOQUE CSS: .hero p */
 
+/* INICIO ESTILOS: .hero-btn */
 
-/* INICIO BLOQUE CSS: .hero-btn */
 .hero-btn{
     display:inline-block;
 
@@ -272,17 +257,15 @@ nav a:hover::before{
 
     transition:0.3s ease;
 }
-/* FIN BLOQUE CSS: .hero-btn */
 
+/* INICIO ESTILOS: .hero-btn:hover */
 
-/* INICIO BLOQUE CSS: .hero-btn:hover */
 .hero-btn:hover{
     transform:translateY(-3px);
 }
-/* FIN BLOQUE CSS: .hero-btn:hover */
 
+/* INICIO ESTILOS: .hero::before */
 
-/* INICIO BLOQUE CSS: .hero::before */
 .hero::before{
     content:"";
 
@@ -293,10 +276,9 @@ nav a:hover::before{
 
     z-index:1;
 }
-/* FIN BLOQUE CSS: .hero::before */
 
+/* INICIO ESTILOS: .featured-news */
 
-/* INICIO BLOQUE CSS: .featured-news */
 .featured-news{
     padding:120px 80px;
 
@@ -305,13 +287,12 @@ nav a:hover::before{
     background-size:cover;
 
     background-position:center;
-    
+
     position:relative;
 }
-/* FIN BLOQUE CSS: .featured-news */
 
+/* INICIO ESTILOS: .section-header */
 
-/* INICIO BLOQUE CSS: .section-header */
 .section-header{
     display:flex;
 
@@ -321,10 +302,9 @@ nav a:hover::before{
 
     margin-bottom:40px;
 }
-/* FIN BLOQUE CSS: .section-header */
 
+/* INICIO ESTILOS: .section-header h2 */
 
-/* INICIO BLOQUE CSS: .section-header h2 */
 .section-header h2{
     font-size:2rem;
     color:#DC136C;
@@ -332,10 +312,9 @@ nav a:hover::before{
     align-items:center;
     gap:12px;
 }
-/* FIN BLOQUE CSS: .section-header h2 */
 
+/* INICIO ESTILOS: .section-header h2::before */
 
-/* INICIO BLOQUE CSS: .section-header h2::before */
 .section-header h2::before{
     content:"";
 
@@ -349,10 +328,9 @@ nav a:hover::before{
 
     display:inline-block;
 }
-/* FIN BLOQUE CSS: .section-header h2::before */
 
+/* INICIO ESTILOS: .section-header a */
 
-/* INICIO BLOQUE CSS: .section-header a */
 .section-header a{
     font-size:1.5rem;
     text-decoration:none;
@@ -363,17 +341,15 @@ nav a:hover::before{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: .section-header a */
 
+/* INICIO ESTILOS: .section-header a:hover */
 
-/* INICIO BLOQUE CSS: .section-header a:hover */
 .section-header a:hover{
     opacity:0.7;
 }
-/* FIN BLOQUE CSS: .section-header a:hover */
 
+/* INICIO ESTILOS: .news-grid */
 
-/* INICIO BLOQUE CSS: .news-grid */
 .news-grid{
     display:grid;
 
@@ -381,10 +357,9 @@ nav a:hover::before{
 
     gap:30px;
 }
-/* FIN BLOQUE CSS: .news-grid */
 
+/* INICIO ESTILOS: .news-card */
 
-/* INICIO BLOQUE CSS: .news-card */
 .news-card{
     background:white;
 
@@ -398,38 +373,34 @@ nav a:hover::before{
 
     transition:all 0.35s ease;
 }
-/* FIN BLOQUE CSS: .news-card */
 
+/* INICIO ESTILOS: .news-card:hover */
 
-/* INICIO BLOQUE CSS: .news-card:hover */
 .news-card:hover{
     transform:translateY(-10px);
 
     box-shadow:0 20px 40px rgba(0,0,0,0.15);
 }
-/* FIN BLOQUE CSS: .news-card:hover */
 
+/* INICIO ESTILOS: .news-card h3 */
 
-/* INICIO BLOQUE CSS: .news-card h3 */
 .news-card h3{
     margin-bottom:15px;
     color:#242423;
 
     font-size:1.4rem;
 }
-/* FIN BLOQUE CSS: .news-card h3 */
 
+/* INICIO ESTILOS: .news-card p */
 
-/* INICIO BLOQUE CSS: .news-card p */
 .news-card p{
     color:#191516;
 
     line-height:1.6;
 }
-/* FIN BLOQUE CSS: .news-card p */
 
+/* INICIO ESTILOS: .news-date */
 
-/* INICIO BLOQUE CSS: .news-date */
 .news-date{
     display:block;
 
@@ -441,17 +412,15 @@ nav a:hover::before{
 
     font-weight:600;
 }
-/* FIN BLOQUE CSS: .news-date */
 
+/* INICIO ESTILOS: .content-section */
 
-/* INICIO BLOQUE CSS: .content-section */
 .content-section{
     padding:50px 80px;
 }
-/* FIN BLOQUE CSS: .content-section */
 
+/* INICIO ESTILOS: .content-grid */
 
-/* INICIO BLOQUE CSS: .content-grid */
 .content-grid{
     display:grid;
 
@@ -459,10 +428,9 @@ nav a:hover::before{
 
     gap:30px;
 }
-/* FIN BLOQUE CSS: .content-grid */
 
+/* INICIO ESTILOS: .video-card */
 
-/* INICIO BLOQUE CSS: .video-card */
 .video-card{
     text-decoration:none;
 
@@ -478,10 +446,9 @@ nav a:hover::before{
 
     transition:0.3s ease;
 }
-/* FIN BLOQUE CSS: .video-card */
 
+/* INICIO ESTILOS: .video-card p */
 
-/* INICIO BLOQUE CSS: .video-card p */
 .video-card p{
     padding:0 25px 25px;
 
@@ -489,17 +456,15 @@ nav a:hover::before{
 
     line-height:1.6;
 }
-/* FIN BLOQUE CSS: .video-card p */
 
+/* INICIO ESTILOS: .video-card:hover */
 
-/* INICIO BLOQUE CSS: .video-card:hover */
 .video-card:hover{
     transform:translateY(-10px);
 }
-/* FIN BLOQUE CSS: .video-card:hover */
 
+/* INICIO ESTILOS: .video-card img */
 
-/* INICIO BLOQUE CSS: .video-card img */
 .video-card img{
     width:100%;
 
@@ -507,27 +472,24 @@ nav a:hover::before{
 
     object-fit:cover;
 }
-/* FIN BLOQUE CSS: .video-card img */
 
+/* INICIO ESTILOS: .video-card h3 */
 
-/* INICIO BLOQUE CSS: .video-card h3 */
 .video-card h3{
     padding:25px;
 
     font-size:1.3rem;
 }
-/* FIN BLOQUE CSS: .video-card h3 */
 
+/* INICIO ESTILOS: .video-thumbnail */
 
-/* INICIO BLOQUE CSS: .video-thumbnail */
 .video-thumbnail{
     position:relative;
     overflow:hidden;
 }
-/* FIN BLOQUE CSS: .video-thumbnail */
 
+/* INICIO ESTILOS: .play-button */
 
-/* INICIO BLOQUE CSS: .play-button */
 .play-button{
     position:absolute;
 
@@ -553,17 +515,15 @@ nav a:hover::before{
 
     transition:0.3s ease;
 }
-/* FIN BLOQUE CSS: .play-button */
 
+/* INICIO ESTILOS: .video-card:hover .play-button */
 
-/* INICIO BLOQUE CSS: .video-card:hover .play-button */
 .video-card:hover .play-button{
     transform:translate(-50%, -50%) scale(1.15);
 }
-/* FIN BLOQUE CSS: .video-card:hover .play-button */
 
+/* INICIO ESTILOS: .video-thumbnail img */
 
-/* INICIO BLOQUE CSS: .video-thumbnail img */
 .video-thumbnail img{
 
     transition:0.4s ease;
@@ -576,24 +536,21 @@ nav a:hover::before{
 
     filter:brightness(0.8);
 }
-/* FIN BLOQUE CSS: .video-thumbnail img */
 
+/* INICIO ESTILOS: .play-button span */
 
-/* INICIO BLOQUE CSS: .play-button span */
 .play-button span{
     margin-left:4px;
 }
-/* FIN BLOQUE CSS: .play-button span */
 
+/* INICIO ESTILOS: .video-card:hover .video-thumbnail img */
 
-/* INICIO BLOQUE CSS: .video-card:hover .video-thumbnail img */
 .video-card:hover .video-thumbnail img{
     transform:scale(1.05);
 }
-/* FIN BLOQUE CSS: .video-card:hover .video-thumbnail img */
 
+/* INICIO ESTILOS: .teams-section */
 
-/* INICIO BLOQUE CSS: .teams-section */
 .teams-section{
     padding:50px 80px;
 
@@ -602,13 +559,12 @@ nav a:hover::before{
     background-size:cover;
 
     background-position:center;
-    
+
     position:relative;
 }
-/* FIN BLOQUE CSS: .teams-section */
 
+/* INICIO ESTILOS: .teams-grid */
 
-/* INICIO BLOQUE CSS: .teams-grid */
 .teams-grid{
     display:grid;
 
@@ -616,10 +572,9 @@ nav a:hover::before{
 
     gap:30px;
 }
-/* FIN BLOQUE CSS: .teams-grid */
 
+/* INICIO ESTILOS: .team-card */
 
-/* INICIO BLOQUE CSS: .team-card */
 .team-card{
     position:relative;
 
@@ -632,22 +587,20 @@ nav a:hover::before{
     color:white;
 
     box-shadow:0 10px 25px rgba(0,0,0,0.08);
-    
+
     transition:0.35s ease;
 }
-/* FIN BLOQUE CSS: .team-card */
 
+/* INICIO ESTILOS: .team-card:hover */
 
-/* INICIO BLOQUE CSS: .team-card:hover */
 .team-card:hover{
     transform:translateY(-10px);
 
     box-shadow:0 20px 40px rgba(0,0,0,0.15);
 }
-/* FIN BLOQUE CSS: .team-card:hover */
 
+/* INICIO ESTILOS: .team-card::before */
 
-/* INICIO BLOQUE CSS: .team-card::before */
 .team-card::before{
     content:"";
 
@@ -667,18 +620,15 @@ nav a:hover::before{
 
     z-index:3;
 }
-/* FIN BLOQUE CSS: .team-card::before */
 
+/* INICIO ESTILOS: .team-card:hover::before */
 
-/* INICIO BLOQUE CSS: .team-card:hover::before */
 .team-card:hover::before{
     transform:scaleX(1);
 }
-/* FIN BLOQUE CSS: .team-card:hover::before */
 
+/* INICIO ESTILOS: .team-card img */
 
-
-/* INICIO BLOQUE CSS: .team-card img */
 .team-card img{
     width:100%;
 
@@ -690,17 +640,15 @@ nav a:hover::before{
 
     transition:0.4s ease;
 }
-/* FIN BLOQUE CSS: .team-card img */
 
+/* INICIO ESTILOS: .team-card:hover img */
 
-/* INICIO BLOQUE CSS: .team-card:hover img */
 .team-card:hover img{
     transform:scale(1.05);
 }
-/* FIN BLOQUE CSS: .team-card:hover img */
 
+/* INICIO ESTILOS: .team-overlay */
 
-/* INICIO BLOQUE CSS: .team-overlay */
 .team-overlay{
     position:absolute;
 
@@ -724,30 +672,27 @@ nav a:hover::before{
         rgba(0,0,0,0.05)
     );
 }
-/* FIN BLOQUE CSS: .team-overlay */
 
+/* INICIO ESTILOS: .team-overlay h3 */
 
-/* INICIO BLOQUE CSS: .team-overlay h3 */
 .team-overlay h3{
     font-size:2rem;
 
     margin-bottom:8px;
 }
-/* FIN BLOQUE CSS: .team-overlay h3 */
 
+/* INICIO ESTILOS: .team-overlay p */
 
-/* INICIO BLOQUE CSS: .team-overlay p */
 .team-overlay p{
     opacity:0.9;
 }
-/* FIN BLOQUE CSS: .team-overlay p */
 
+/* INICIO ESTILOS: footer */
 
-/* INICIO BLOQUE CSS: footer */
 footer{
 
     border-top:3px solid #DC136C;
-    
+
     margin-top:0px;
 
     padding:80px;
@@ -758,20 +703,19 @@ footer{
 
     text-align:center;
 }
-/* FIN BLOQUE CSS: footer */
 
+/* INICIO ESTILOS: footer img */
 
-/* INICIO BLOQUE CSS: footer img */
 footer img{
     width:100px;
 
     margin-bottom:30px;
 }
-/* FIN BLOQUE CSS: footer img */
-
 
 .footer-links,
-/* INICIO BLOQUE CSS: .footer-social */
+
+/* INICIO ESTILOS: .footer-social */
+
 .footer-social{
     display:flex;
 
@@ -781,10 +725,9 @@ footer img{
 
     margin-bottom:25px;
 }
-/* FIN BLOQUE CSS: .footer-social */
 
+/* INICIO ESTILOS: footer a */
 
-/* INICIO BLOQUE CSS: footer a */
 footer a{
     text-decoration:none;
 
@@ -792,20 +735,15 @@ footer a{
 
     transition:0.3s;
 }
-/* FIN BLOQUE CSS: footer a */
 
+/* INICIO ESTILOS: footer a:hover */
 
-/* INICIO BLOQUE CSS: footer a:hover */
 footer a:hover{
     color:#DC136C;
 }
-/* FIN BLOQUE CSS: footer a:hover */
 
+/* INICIO ESTILOS: footer p */
 
-/* INICIO BLOQUE CSS: footer p */
 footer p{
     color:#888;
 }
-/* FIN BLOQUE CSS: footer p */
-
-

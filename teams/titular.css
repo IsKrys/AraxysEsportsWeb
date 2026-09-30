@@ -1,8 +1,7 @@
-/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
 
-/* HERO */
 
-/* INICIO BLOQUE CSS: .team-hero */
+/* INICIO ESTILOS: .team-hero */
+
 .team-hero{
     height:70vh;
 
@@ -19,10 +18,9 @@
 
     text-align:center;
 }
-/* FIN BLOQUE CSS: .team-hero */
 
+/* INICIO ESTILOS: .team-hero::before */
 
-/* INICIO BLOQUE CSS: .team-hero::before */
 .team-hero::before{
     content:"";
 
@@ -31,20 +29,18 @@
 
     background:rgba(0,0,0,0.55);
 }
-/* FIN BLOQUE CSS: .team-hero::before */
 
+/* INICIO ESTILOS: .hero-overlay */
 
-/* INICIO BLOQUE CSS: .hero-overlay */
 .hero-overlay{
     position:relative;
     z-index:2;
 
     color:#F0EFF4;
 }
-/* FIN BLOQUE CSS: .hero-overlay */
 
+/* INICIO ESTILOS: .team-tag */
 
-/* INICIO BLOQUE CSS: .team-tag */
 .team-tag{
     display:inline-block;
 
@@ -58,10 +54,9 @@
 
     margin-bottom:20px;
 }
-/* FIN BLOQUE CSS: .team-tag */
 
+/* INICIO ESTILOS: .hero-overlay h1 */
 
-/* INICIO BLOQUE CSS: .hero-overlay h1 */
 .hero-overlay h1{
     font-size:5rem;
 
@@ -69,19 +64,17 @@
 
     margin-bottom:20px;
 }
-/* FIN BLOQUE CSS: .hero-overlay h1 */
 
+/* INICIO ESTILOS: .hero-overlay p */
 
-/* INICIO BLOQUE CSS: .hero-overlay p */
 .hero-overlay p{
     font-size:1.2rem;
 
     opacity:0.9;
 }
-/* FIN BLOQUE CSS: .hero-overlay p */
 
+/* INICIO ESTILOS: .section-header h2 */
 
-/* INICIO BLOQUE CSS: .section-header h2 */
 .section-header h2{
 
     font-size:2rem;
@@ -97,12 +90,11 @@
     margin-top:30px;
 
     margin-bottom:10px;
-    
+
 }
-/* FIN BLOQUE CSS: .section-header h2 */
 
+/* INICIO ESTILOS: .section-header h2::before */
 
-/* INICIO BLOQUE CSS: .section-header h2::before */
 .section-header h2::before{
     content:"";
 
@@ -116,10 +108,9 @@
 
     display:inline-block;
 }
-/* FIN BLOQUE CSS: .section-header h2::before */
 
+/* INICIO ESTILOS: .hero-scroll */
 
-/* INICIO BLOQUE CSS: .hero-scroll */
 .hero-scroll{
     margin-top:50px;
 
@@ -131,10 +122,9 @@
 
     gap:12px;
 }
-/* FIN BLOQUE CSS: .hero-scroll */
 
+/* INICIO ESTILOS: .hero-scroll span */
 
-/* INICIO BLOQUE CSS: .hero-scroll span */
 .hero-scroll span{
     color:rgba(255,255,255,.8);
 
@@ -146,10 +136,9 @@
 
     text-transform:uppercase;
 }
-/* FIN BLOQUE CSS: .hero-scroll span */
 
+/* INICIO ESTILOS: .hero-scroll-line */
 
-/* INICIO BLOQUE CSS: .hero-scroll-line */
 .hero-scroll-line{
     width:2px;
 
@@ -159,21 +148,26 @@
 
     animation:scrollPulse 2s infinite;
 }
-/* FIN BLOQUE CSS: .hero-scroll-line */
 
+/* INICIO ANIMACION: @keyframes scrollPulse */
 
-/* INICIO BLOQUE CSS: @keyframes scrollPulse */
 @keyframes scrollPulse{
+
+    /* INICIO ESTILOS: 0% */
 
     0%{
         opacity:.3;
         transform:scaleY(.5);
     }
 
+    /* INICIO ESTILOS: 50% */
+
     50%{
         opacity:1;
         transform:scaleY(1);
     }
+
+    /* INICIO ESTILOS: 100% */
 
     100%{
         opacity:.3;
@@ -181,12 +175,9 @@
     }
 
 }
-/* FIN BLOQUE CSS: @keyframes scrollPulse */
 
+/* INICIO ESTILOS: .team-info */
 
-/* INFO */
-
-/* INICIO BLOQUE CSS: .team-info */
 .team-info{
     padding:90px;
 
@@ -196,10 +187,9 @@
 
     background-position:center;
 }
-/* FIN BLOQUE CSS: .team-info */
 
+/* INICIO ESTILOS: .info-grid */
 
-/* INICIO BLOQUE CSS: .info-grid */
 .info-grid{
     display:grid;
 
@@ -207,10 +197,9 @@
 
     gap:25px;
 }
-/* FIN BLOQUE CSS: .info-grid */
 
+/* INICIO ESTILOS: .info-card */
 
-/* INICIO BLOQUE CSS: .info-card */
 .info-card{
 
     position:relative;
@@ -227,10 +216,9 @@
 
     box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
-/* FIN BLOQUE CSS: .info-card */
 
+/* INICIO ESTILOS: .info-card::before */
 
-/* INICIO BLOQUE CSS: .info-card::before */
 .info-card::before{
     content:"";
 
@@ -244,10 +232,9 @@
 
     background:#DC136C;
 }
-/* FIN BLOQUE CSS: .info-card::before */
 
+/* INICIO ESTILOS: .info-card span */
 
-/* INICIO BLOQUE CSS: .info-card span */
 .info-card span{
     color:#888;
 
@@ -255,26 +242,21 @@
 
     margin-bottom:10px;
 }
-/* FIN BLOQUE CSS: .info-card span */
 
+/* INICIO ESTILOS: .info-card h2 */
 
-/* INICIO BLOQUE CSS: .info-card h2 */
 .info-card h2{
     color:#111;
 }
-/* FIN BLOQUE CSS: .info-card h2 */
 
+/* INICIO ESTILOS: .team-description */
 
-/* DESCRIPCIÓN */
-
-/* INICIO BLOQUE CSS: .team-description */
 .team-description{
     padding:0 80px 80px;
 }
-/* FIN BLOQUE CSS: .team-description */
 
+/* INICIO ESTILOS: .team-description p */
 
-/* INICIO BLOQUE CSS: .team-description p */
 .team-description p{
     color:#555;
 
@@ -282,10 +264,9 @@
 
     max-width:900px;
 }
-/* FIN BLOQUE CSS: .team-description p */
 
+/* INICIO ESTILOS: .description-card */
 
-/* INICIO BLOQUE CSS: .description-card */
 .description-card{
     background:white;
 
@@ -297,10 +278,9 @@
 
     border-top:4px solid #DC136C;
 }
-/* FIN BLOQUE CSS: .description-card */
 
+/* INICIO ESTILOS: .description-card p */
 
-/* INICIO BLOQUE CSS: .description-card p */
 .description-card p{
     color:#555;
 
@@ -308,26 +288,23 @@
 
     font-size:1.05rem;
 }
-/* FIN BLOQUE CSS: .description-card p */
 
+/* INICIO ESTILOS: .team-roster */
 
-/* INICIO BLOQUE CSS: .team-roster */
 .team-roster{
     padding:0 80px 100px;
 }
-/* FIN BLOQUE CSS: .team-roster */
 
+/* INICIO ESTILOS: .roster-grid */
 
-/* INICIO BLOQUE CSS: .roster-grid */
 .roster-grid{
     display:grid;
     grid-template-columns:repeat(5,1fr);
     gap:25px;
 }
-/* FIN BLOQUE CSS: .roster-grid */
 
+/* INICIO ESTILOS: .player-card */
 
-/* INICIO BLOQUE CSS: .player-card */
 .player-card{
     background:white;
     border-radius:25px;
@@ -338,10 +315,9 @@
     position:relative;
     overflow:hidden;
 }
-/* FIN BLOQUE CSS: .player-card */
 
+/* INICIO ESTILOS: .player-card::before */
 
-/* INICIO BLOQUE CSS: .player-card::before */
 .player-card::before{
     content:"";
 
@@ -355,17 +331,15 @@
 
     background:#DC136C;
 }
-/* FIN BLOQUE CSS: .player-card::before */
 
+/* INICIO ESTILOS: .player-card:hover */
 
-/* INICIO BLOQUE CSS: .player-card:hover */
 .player-card:hover{
     transform:translateY(-10px);
 }
-/* FIN BLOQUE CSS: .player-card:hover */
 
+/* INICIO ESTILOS: .player-card img */
 
-/* INICIO BLOQUE CSS: .player-card img */
 .player-card img{
     width:100px;
     height:100px;
@@ -373,32 +347,28 @@
     border-radius:50%;
     margin-bottom:15px;
 }
-/* FIN BLOQUE CSS: .player-card img */
 
+/* INICIO ESTILOS: .player-card h3 */
 
-/* INICIO BLOQUE CSS: .player-card h3 */
 .player-card h3{
     color:#111;
     margin-bottom:5px;
 }
-/* FIN BLOQUE CSS: .player-card h3 */
 
+/* INICIO ESTILOS: .player-card span */
 
-/* INICIO BLOQUE CSS: .player-card span */
 .player-card span{
     color:#777;
 }
-/* FIN BLOQUE CSS: .player-card span */
 
+/* INICIO ESTILOS: .team-achievements */
 
-/* INICIO BLOQUE CSS: .team-achievements */
 .team-achievements{
     padding:0 80px 100px;
 }
-/* FIN BLOQUE CSS: .team-achievements */
 
+/* INICIO ESTILOS: .achievement-card */
 
-/* INICIO BLOQUE CSS: .achievement-card */
 .achievement-card{
 
     background:white;
@@ -419,20 +389,18 @@
 
     transition:.3s ease;
 }
-/* FIN BLOQUE CSS: .achievement-card */
 
+/* INICIO ESTILOS: .achievement-card:hover */
 
-/* INICIO BLOQUE CSS: .achievement-card:hover */
 .achievement-card:hover{
 
     transform:translateX(10px);
 
     box-shadow:0 12px 25px rgba(0,0,0,.1);
 }
-/* FIN BLOQUE CSS: .achievement-card:hover */
 
+/* INICIO ESTILOS: .join-banner */
 
-/* INICIO BLOQUE CSS: .join-banner */
 .join-banner{
 
     position:relative;
@@ -450,20 +418,18 @@
     transition:.35s ease;
 
 }
-/* FIN BLOQUE CSS: .join-banner */
 
+/* INICIO ESTILOS: .join-banner:hover */
 
-/* INICIO BLOQUE CSS: .join-banner:hover */
 .join-banner:hover{
 
     transform:translateY(-8px);
 
     box-shadow:0 20px 40px rgba(0,0,0,.15);
 }
-/* FIN BLOQUE CSS: .join-banner:hover */
 
+/* INICIO ESTILOS: .join-banner img */
 
-/* INICIO BLOQUE CSS: .join-banner img */
 .join-banner img{
 
     width:100%;
@@ -473,10 +439,9 @@
 
     display:block;
 }
-/* FIN BLOQUE CSS: .join-banner img */
 
+/* INICIO ESTILOS: .join-overlay */
 
-/* INICIO BLOQUE CSS: .join-overlay */
 .join-overlay{
 
     position:absolute;
@@ -499,20 +464,18 @@
 
     padding:30px;
 }
-/* FIN BLOQUE CSS: .join-overlay */
 
+/* INICIO ESTILOS: .join-overlay h2 */
 
-/* INICIO BLOQUE CSS: .join-overlay h2 */
 .join-overlay h2{
 
     font-size:2.4rem;
 
     margin-bottom:15px;
 }
-/* FIN BLOQUE CSS: .join-overlay h2 */
 
+/* INICIO ESTILOS: .join-overlay p */
 
-/* INICIO BLOQUE CSS: .join-overlay p */
 .join-overlay p{
 
     font-size:1.1rem;
@@ -521,10 +484,9 @@
 
     opacity:.9;
 }
-/* FIN BLOQUE CSS: .join-overlay p */
 
+/* INICIO ESTILOS: .join-overlay span */
 
-/* INICIO BLOQUE CSS: .join-overlay span */
 .join-overlay span{
 
     color:#DC136C;
@@ -533,5 +495,3 @@
 
     font-size:1.1rem;
 }
-/* FIN BLOQUE CSS: .join-overlay span */
-

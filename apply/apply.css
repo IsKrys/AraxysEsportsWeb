@@ -1,13 +1,13 @@
-/* TIP CSS: cada bloque controla una parte visual; cambia una cosa a la vez y prueba en el navegador para entender el efecto. */
 
-/* INICIO BLOQUE CSS: body */
+
+/* INICIO ESTILOS: body */
+
 body{
     color:#191516;
 }
-/* FIN BLOQUE CSS: body */
 
+/* INICIO ESTILOS: .apply-hero */
 
-/* INICIO BLOQUE CSS: .apply-hero */
 .apply-hero{
     height:70vh;
 
@@ -24,10 +24,9 @@ body{
 
     text-align:center;
 }
-/* FIN BLOQUE CSS: .apply-hero */
 
+/* INICIO ESTILOS: .apply-hero::before */
 
-/* INICIO BLOQUE CSS: .apply-hero::before */
 .apply-hero::before{
     content:"";
 
@@ -36,10 +35,9 @@ body{
 
     background:rgba(0,0,0,.55);
 }
-/* FIN BLOQUE CSS: .apply-hero::before */
 
+/* INICIO ESTILOS: .apply-hero .hero-overlay */
 
-/* INICIO BLOQUE CSS: .apply-hero .hero-overlay */
 .apply-hero .hero-overlay{
     position:relative;
     z-index:2;
@@ -50,10 +48,9 @@ body{
 
     padding:0 30px;
 }
-/* FIN BLOQUE CSS: .apply-hero .hero-overlay */
 
+/* INICIO ESTILOS: .apply-hero h1 */
 
-/* INICIO BLOQUE CSS: .apply-hero h1 */
 .apply-hero h1{
     font-size:5rem;
 
@@ -61,19 +58,17 @@ body{
 
     margin-bottom:20px;
 }
-/* FIN BLOQUE CSS: .apply-hero h1 */
 
+/* INICIO ESTILOS: .apply-hero p */
 
-/* INICIO BLOQUE CSS: .apply-hero p */
 .apply-hero p{
     font-size:1.2rem;
 
     opacity:.9;
 }
-/* FIN BLOQUE CSS: .apply-hero p */
 
+/* INICIO ESTILOS: .apply-content */
 
-/* INICIO BLOQUE CSS: .apply-content */
 .apply-content{
     padding:100px 80px;
 
@@ -81,36 +76,33 @@ body{
     background-size:cover;
     background-position:center;
 }
-/* FIN BLOQUE CSS: .apply-content */
 
+/* INICIO ESTILOS: .roles-grid */
 
-/* INICIO BLOQUE CSS: .roles-grid */
 .roles-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:30px;
 }
-/* FIN BLOQUE CSS: .roles-grid */
 
+/* INICIO ESTILOS: .requirements-title */
 
-/* INICIO BLOQUE CSS: .requirements-title */
 .requirements-title{
     margin-top:90px;
 }
-/* FIN BLOQUE CSS: .requirements-title */
 
+/* INICIO ESTILOS: .requirements-grid */
 
-/* INICIO BLOQUE CSS: .requirements-grid */
 .requirements-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:30px;
 }
-/* FIN BLOQUE CSS: .requirements-grid */
-
 
 .role-card,
-/* INICIO BLOQUE CSS: .requirement-card */
+
+/* INICIO ESTILOS: .requirement-card */
+
 .requirement-card{
     background:white;
 
@@ -126,25 +118,23 @@ body{
 
     transition:.35s ease;
 }
-/* FIN BLOQUE CSS: .requirement-card */
 
+/* INICIO ESTILOS: .role-card */
 
-/* INICIO BLOQUE CSS: .role-card */
 .role-card{
     cursor:pointer;
 }
-/* FIN BLOQUE CSS: .role-card */
 
+/* INICIO ESTILOS: .requirement-card */
 
-/* INICIO BLOQUE CSS: .requirement-card */
 .requirement-card{
     cursor:default;
 }
-/* FIN BLOQUE CSS: .requirement-card */
-
 
 .role-card::before,
-/* INICIO BLOQUE CSS: .requirement-card::before */
+
+/* INICIO ESTILOS: .requirement-card::before */
+
 .requirement-card::before{
     content:"";
 
@@ -158,29 +148,27 @@ body{
 
     background:#DC136C;
 }
-/* FIN BLOQUE CSS: .requirement-card::before */
 
+/* INICIO ESTILOS: .role-card:hover */
 
-/* INICIO BLOQUE CSS: .role-card:hover */
 .role-card:hover{
     transform:translateY(-10px);
 
     box-shadow:0 20px 40px rgba(0,0,0,.15);
 }
-/* FIN BLOQUE CSS: .role-card:hover */
 
+/* INICIO ESTILOS: .requirement-card:hover */
 
-/* INICIO BLOQUE CSS: .requirement-card:hover */
 .requirement-card:hover{
     transform:translateY(-5px);
 
     box-shadow:0 15px 30px rgba(0,0,0,.12);
 }
-/* FIN BLOQUE CSS: .requirement-card:hover */
-
 
 .role-card h3,
-/* INICIO BLOQUE CSS: .requirement-card h3 */
+
+/* INICIO ESTILOS: .requirement-card h3 */
+
 .requirement-card h3{
     color:#111;
 
@@ -188,20 +176,19 @@ body{
 
     margin-bottom:20px;
 }
-/* FIN BLOQUE CSS: .requirement-card h3 */
-
 
 .role-card p,
-/* INICIO BLOQUE CSS: .requirement-card p */
+
+/* INICIO ESTILOS: .requirement-card p */
+
 .requirement-card p{
     color:#555;
 
     line-height:1.8;
 }
-/* FIN BLOQUE CSS: .requirement-card p */
 
+/* INICIO ESTILOS: .apply-modal */
 
-/* INICIO BLOQUE CSS: .apply-modal */
 .apply-modal{
     position:fixed;
     inset:0;
@@ -219,18 +206,16 @@ body{
 
     transition:.3s ease;
 }
-/* FIN BLOQUE CSS: .apply-modal */
 
+/* INICIO ESTILOS: .apply-modal.active */
 
-/* INICIO BLOQUE CSS: .apply-modal.active */
 .apply-modal.active{
     opacity:1;
     pointer-events:auto;
 }
-/* FIN BLOQUE CSS: .apply-modal.active */
 
+/* INICIO ESTILOS: .modal-content */
 
-/* INICIO BLOQUE CSS: .modal-content */
 .modal-content{
     background:white;
 
@@ -254,17 +239,15 @@ body{
 
     box-shadow:0 25px 60px rgba(0,0,0,.25);
 }
-/* FIN BLOQUE CSS: .modal-content */
 
+/* INICIO ESTILOS: .apply-modal.active .modal-content */
 
-/* INICIO BLOQUE CSS: .apply-modal.active .modal-content */
 .apply-modal.active .modal-content{
     transform:scale(1);
 }
-/* FIN BLOQUE CSS: .apply-modal.active .modal-content */
 
+/* INICIO ESTILOS: .modal-close */
 
-/* INICIO BLOQUE CSS: .modal-close */
 .modal-close{
     position:absolute;
 
@@ -280,10 +263,9 @@ body{
 
     color:#111;
 }
-/* FIN BLOQUE CSS: .modal-close */
 
+/* INICIO ESTILOS: .modal-content h2 */
 
-/* INICIO BLOQUE CSS: .modal-content h2 */
 .modal-content h2{
     color:#111;
 
@@ -291,10 +273,9 @@ body{
 
     margin-bottom:15px;
 }
-/* FIN BLOQUE CSS: .modal-content h2 */
 
+/* INICIO ESTILOS: .modal-content p */
 
-/* INICIO BLOQUE CSS: .modal-content p */
 .modal-content p{
     color:#555;
 
@@ -302,10 +283,9 @@ body{
 
     margin-bottom:30px;
 }
-/* FIN BLOQUE CSS: .modal-content p */
 
+/* INICIO ESTILOS: .modal-buttons */
 
-/* INICIO BLOQUE CSS: .modal-buttons */
 .modal-buttons{
     display:flex;
 
@@ -313,11 +293,11 @@ body{
 
     gap:15px;
 }
-/* FIN BLOQUE CSS: .modal-buttons */
 
-
-/* INICIO BLOQUE CSS: .modal-buttons a, .modal-buttons button */
 .modal-buttons a,
+
+/* INICIO ESTILOS: .modal-buttons button */
+
 .modal-buttons button{
     border:none;
 
@@ -343,26 +323,31 @@ body{
 
     transition:.3s ease;
 }
-/* FIN BLOQUE CSS: .modal-buttons a, .modal-buttons button */
 
-
-/* INICIO BLOQUE CSS: .modal-buttons a:hover, .modal-buttons button:hover */
 .modal-buttons a:hover,
+
+/* INICIO ESTILOS: .modal-buttons button:hover */
+
 .modal-buttons button:hover{
     transform:translateY(-4px);
 
     box-shadow:0 15px 30px rgba(220,19,108,.35);
 }
-/* FIN BLOQUE CSS: .modal-buttons a:hover, .modal-buttons button:hover */
+
+/* INICIO ESTILOS: .apply-form */
 
 .apply-form{
     display:none;
     margin-top:30px;
 }
 
+/* INICIO ESTILOS: .apply-form.active */
+
 .apply-form.active{
     display:block;
 }
+
+/* INICIO ESTILOS: #dynamicFields */
 
 #dynamicFields{
     display:flex;
@@ -371,6 +356,9 @@ body{
 }
 
 .apply-form input,
+
+/* INICIO ESTILOS: .apply-form textarea */
+
 .apply-form textarea{
     width:100%;
 
@@ -387,15 +375,22 @@ body{
     outline:none;
 }
 
+/* INICIO ESTILOS: .apply-form textarea */
+
 .apply-form textarea{
     min-height:120px;
     resize:vertical;
 }
 
 .apply-form input:focus,
+
+/* INICIO ESTILOS: .apply-form textarea:focus */
+
 .apply-form textarea:focus{
     border-color:#DC136C;
 }
+
+/* INICIO ESTILOS: .apply-form button */
 
 .apply-form button{
     width:100%;
@@ -421,11 +416,15 @@ body{
     transition:.3s ease;
 }
 
+/* INICIO ESTILOS: .apply-form button:hover */
+
 .apply-form button:hover{
     transform:translateY(-4px);
 
     box-shadow:0 15px 30px rgba(220,19,108,.35);
 }
+
+/* INICIO ESTILOS: .form-status */
 
 .form-status{
     display:none;
@@ -441,6 +440,8 @@ body{
     text-align:center;
 }
 
+/* INICIO ESTILOS: .form-status.success */
+
 .form-status.success{
     display:block;
 
@@ -450,6 +451,8 @@ body{
 
     border:2px solid #2ecc71;
 }
+
+/* INICIO ESTILOS: .form-status.error */
 
 .form-status.error{
     display:block;
@@ -461,6 +464,8 @@ body{
     border:2px solid #DC136C;
 }
 
+/* INICIO ESTILOS: .apply-form button:disabled */
+
 .apply-form button:disabled{
     opacity:.6;
 
@@ -468,6 +473,8 @@ body{
 
     transform:none;
 }
+
+/* INICIO ESTILOS: .success-screen */
 
 .success-screen{
     display:none;
@@ -477,9 +484,13 @@ body{
     text-align:center;
 }
 
+/* INICIO ESTILOS: .success-screen.active */
+
 .success-screen.active{
     display:block;
 }
+
+/* INICIO ESTILOS: .success-icon */
 
 .success-icon{
     width:70px;
@@ -502,6 +513,8 @@ body{
     font-weight:900;
 }
 
+/* INICIO ESTILOS: .success-screen h3 */
+
 .success-screen h3{
     color:#111;
 
@@ -509,6 +522,8 @@ body{
 
     margin-bottom:10px;
 }
+
+/* INICIO ESTILOS: .success-screen p */
 
 .success-screen p{
     color:#555;
@@ -519,9 +534,14 @@ body{
 }
 
 body.dark-mode .success-screen h3,
+
+/* INICIO ESTILOS: body.dark-mode .success-screen p */
+
 body.dark-mode .success-screen p{
     color:#F0EFF4;
 }
+
+/* INICIO ESTILOS: .success-screen button */
 
 .success-screen button{
     border:none;

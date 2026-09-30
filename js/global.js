@@ -1,3 +1,4 @@
+// INICIO FUNCIONES GLOBALES: tema, encabezado y transiciones compartidas.
 document.addEventListener("DOMContentLoaded", () => {
 
     const pageTransition = document.querySelector(".page-transition");
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.add("home-page");
     }
 
-    // MODO OSCURO / MODO CLARO
+    // INICIO TEMA: modo oscuro y modo claro.
 
     const savedTheme = localStorage.getItem("araxys-theme");
 
@@ -70,9 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-
-
-    // HEADER AL HACER SCROLL
+    // INICIO HEADER: cambio de estilo al desplazar la pagina.
 
     window.addEventListener("scroll", () => {
 
@@ -88,9 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-
-
-    // TRANSICIÓN ENTRE PÁGINAS
+    // INICIO TRANSICIONES: animacion entre paginas internas.
 
     document.querySelectorAll("a").forEach(link => {
 
@@ -125,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+// INICIO RESTAURACION: limpia la transicion al volver a una pagina.
 window.addEventListener("pageshow", () => {
 
     const pageTransition = document.querySelector(".page-transition");
