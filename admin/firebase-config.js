@@ -5,14 +5,14 @@
 
 const ARAXYS_FIREBASE_STORAGE_KEY = "araxys_firebase_config_v1";
 
-// Configuración por defecto o plantilla para conectar con Firebase
+// Configuración oficial de Google Firebase para Araxys Esports
 const DEFAULT_FIREBASE_CONFIG = {
-    apiKey: "",
-    authDomain: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: ""
+    apiKey: "AIzaSyDosirX4w6VQ3eYRk0tbU9GAyUQ5LKWqQ4",
+    authDomain: "araxys-esports.firebaseapp.com",
+    projectId: "araxys-esports",
+    storageBucket: "araxys-esports.firebasestorage.app",
+    messagingSenderId: "752132311397",
+    appId: "1:752132311397:web:21a69d26e1ff2989f3f98c"
 };
 
 /**

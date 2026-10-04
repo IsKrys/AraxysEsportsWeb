@@ -136,28 +136,42 @@
         return `../${img}`;
     }
 
+    const DEFAULT_CONFIG = {
+        apiKey: "AIzaSyDosirX4w6VQ3eYRk0tbU9GAyUQ5LKWqQ4",
+        authDomain: "araxys-esports.firebaseapp.com",
+        projectId: "araxys-esports",
+        storageBucket: "araxys-esports.firebasestorage.app",
+        messagingSenderId: "752132311397",
+        appId: "1:752132311397:web:21a69d26e1ff2989f3f98c"
+    };
+
     // Inicialización al cargar la página
     document.addEventListener("DOMContentLoaded", async () => {
-        // 1. Probar carga desde Firebase si el SDK y credenciales están disponibles
+        // 1. Probar carga desde Firebase si el SDK está disponible
         try {
+            let config = DEFAULT_CONFIG;
             const rawConfig = localStorage.getItem(STORAGE_KEY_CONFIG);
-            if (rawConfig && typeof firebase !== "undefined") {
-                const config = JSON.parse(rawConfig);
-                if (config && config.projectId && config.apiKey) {
-                    const app = firebase.apps.length > 0 ? firebase.app() : firebase.initializeApp(config);
-                    const db = firebase.firestore();
+            if (rawConfig) {
+                try {
+                    const parsed = JSON.parse(rawConfig);
+                    if (parsed && parsed.projectId) config = parsed;
+                } catch (_) {}
+            }
 
-                    db.collection("araxys_news")
-                        .where("status", "==", "publicado")
-                        .onSnapshot((snapshot) => {
-                            if (!snapshot.empty) {
-                                const cloudNews = [];
-                                snapshot.forEach(doc => cloudNews.push(doc.data()));
-                                renderFeed(cloudNews);
-                            }
-                        }, (err) => console.warn("[NewsFeed] Firestore read error:", err));
-                    return;
-                }
+            if (typeof firebase !== "undefined" && config && config.projectId) {
+                const app = firebase.apps.length > 0 ? firebase.app() : firebase.initializeApp(config);
+                const db = firebase.firestore();
+
+                db.collection("araxys_news")
+                    .where("status", "==", "publicado")
+                    .onSnapshot((snapshot) => {
+                        if (!snapshot.empty) {
+                            const cloudNews = [];
+                            snapshot.forEach(doc => cloudNews.push(doc.data()));
+                            renderFeed(cloudNews);
+                        }
+                    }, (err) => console.warn("[NewsFeed] Firestore read error:", err));
+                return;
             }
         } catch (e) {
             console.warn("[NewsFeed] Modo fallback local:", e);
