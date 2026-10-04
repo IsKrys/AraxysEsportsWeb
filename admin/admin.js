@@ -233,6 +233,9 @@ class AdminStore {
         this.activityLog.unshift(entry);
         if (this.activityLog.length > 150) this.activityLog.pop();
         this.saveActivityLog();
+        if (window.araxysCloud && window.araxysCloud.isConnected) {
+            window.araxysCloud.saveLogDoc(entry);
+        }
         if (typeof renderAuditLog === "function") renderAuditLog();
         if (typeof updateTrashCounters === "function") updateTrashCounters();
     }
@@ -250,6 +253,11 @@ class AdminStore {
         };
         this.trash.unshift(trashItem);
         this.saveTrash();
+        if (window.araxysCloud && window.araxysCloud.isConnected) {
+            window.araxysCloud.saveTrashDoc(trashItem);
+            if (type === "news") window.araxysCloud.deleteNewsDoc(item.id);
+            else if (type === "player") window.araxysCloud.deletePlayerDoc(item.id);
+        }
         this.logAction("ELIMINACIÓN", `Se envió a la papelera: "${trashItem.title}" (${type === "news" ? "Noticia" : "Jugador"})`, item);
         if (typeof renderTrashList === "function") renderTrashList();
         if (typeof updateTrashCounters === "function") updateTrashCounters();
@@ -269,6 +277,9 @@ class AdminStore {
                 this.news.unshift(trashItem.data);
             }
             this.saveNews();
+            if (window.araxysCloud && window.araxysCloud.isConnected) {
+                window.araxysCloud.saveNewsDoc(trashItem.data);
+            }
             if (typeof renderNewsTable === "function") renderNewsTable();
             if (typeof renderOverview === "function") renderOverview();
         } else if (trashItem.type === "player") {
@@ -280,12 +291,18 @@ class AdminStore {
                 this.players.unshift(trashItem.data);
             }
             this.savePlayers();
+            if (window.araxysCloud && window.araxysCloud.isConnected) {
+                window.araxysCloud.savePlayerDoc(trashItem.data);
+            }
             if (typeof renderPlayersGrid === "function") renderPlayersGrid();
             if (typeof renderOverview === "function") renderOverview();
         }
 
         this.trash.splice(idx, 1);
         this.saveTrash();
+        if (window.araxysCloud && window.araxysCloud.isConnected) {
+            window.araxysCloud.deleteTrashDoc(trashId);
+        }
         this.logAction("RESTAURACIÓN", `El Administrador restauró "${trashItem.title}" a la página oficial.`, trashItem.data);
         if (typeof renderTrashList === "function") renderTrashList();
         if (typeof updateTrashCounters === "function") updateTrashCounters();
@@ -298,6 +315,9 @@ class AdminStore {
         const trashItem = this.trash[idx];
         this.trash.splice(idx, 1);
         this.saveTrash();
+        if (window.araxysCloud && window.araxysCloud.isConnected) {
+            window.araxysCloud.deleteTrashDoc(trashId);
+        }
         this.logAction("PURGA", `Se eliminó definitivamente de la papelera: "${trashItem.title}".`);
         if (typeof renderTrashList === "function") renderTrashList();
         if (typeof updateTrashCounters === "function") updateTrashCounters();
@@ -749,6 +769,10 @@ newsForm.addEventListener("submit", (e) => {
     }
 
     store.saveNews();
+    if (window.araxysCloud && window.araxysCloud.isConnected) {
+        const targetItem = id ? store.news.find(n => n.id === id) : store.news[0];
+        if (targetItem) window.araxysCloud.saveNewsDoc(targetItem);
+    }
     closeNewsModal();
     renderNewsTable();
     renderOverview();
@@ -974,6 +998,10 @@ playerForm.addEventListener("submit", (e) => {
     }
 
     store.savePlayers();
+    if (window.araxysCloud && window.araxysCloud.isConnected) {
+        const targetPlayer = id ? store.players.find(x => x.id === id) : store.players[store.players.length - 1];
+        if (targetPlayer) window.araxysCloud.savePlayerDoc(targetPlayer);
+    }
     closePlayerModal();
     renderPlayersGrid();
     renderOverview();
@@ -1123,6 +1151,10 @@ if (staffForm) {
         }
 
         store.saveStaff();
+        if (window.araxysCloud && window.araxysCloud.isConnected) {
+            const savedMember = id ? store.staff.find(x => x.id === id) : store.staff[store.staff.length - 1];
+            if (savedMember) window.araxysCloud.saveStaffDoc(savedMember);
+        }
         closeStaffModal();
         renderStaffTable();
     });
@@ -1140,6 +1172,9 @@ function deleteStaffMember(id) {
 
     store.staff = store.staff.filter(x => x.id !== id);
     store.saveStaff();
+    if (window.araxysCloud && window.araxysCloud.isConnected) {
+        window.araxysCloud.deleteStaffDoc(id);
+    }
     store.logAction("STAFF", `Acceso revocado para miembro de staff: ${s.nick}`);
     renderStaffTable();
     showToast(`Acceso revocado para ${s.nick}.`, "danger");
@@ -1619,4 +1654,138 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeSnapshotBtn = document.getElementById("closeSnapshotBtn");
     if (closeSnapshotModalBtn) closeSnapshotModalBtn.addEventListener("click", closeSnapshotModal);
     if (closeSnapshotBtn) closeSnapshotBtn.addEventListener("click", closeSnapshotModal);
+
+    // ==============================================================
+    // EVENTOS Y CONTROLADOR DEL MODAL DE FIREBASE CLOUD
+    // ==============================================================
+    const cloudModal = document.getElementById("cloudModal");
+    const openCloudModalBtn = document.getElementById("openCloudModalBtn");
+    const cloudStatusBadge = document.getElementById("cloudStatusBadge");
+    const closeCloudModalBtn = document.getElementById("closeCloudModalBtn");
+    const cancelCloudModalBtn = document.getElementById("cancelCloudModalBtn");
+
+    const subtabConfigBtn = document.getElementById("subtabConfigBtn");
+    const subtabGuideBtn = document.getElementById("subtabGuideBtn");
+    const cloudPanelConfig = document.getElementById("cloudPanelConfig");
+    const cloudPanelGuide = document.getElementById("cloudPanelGuide");
+
+    const cloudConfigForm = document.getElementById("cloudConfigForm");
+    const cloudSnippetInput = document.getElementById("cloudSnippetInput");
+    const btnSeedCloudDb = document.getElementById("btnSeedCloudDb");
+    const btnDisconnectCloud = document.getElementById("btnDisconnectCloud");
+
+    function openCloudModal() {
+        if (!cloudModal) return;
+        // Cargar configuración existente en los campos
+        const activeConfig = getActiveFirebaseConfig();
+        if (isFirebaseConfigValid(activeConfig)) {
+            document.getElementById("cloudApiKey").value = activeConfig.apiKey || "";
+            document.getElementById("cloudProjectId").value = activeConfig.projectId || "";
+            document.getElementById("cloudAuthDomain").value = activeConfig.authDomain || "";
+            document.getElementById("cloudStorageBucket").value = activeConfig.storageBucket || "";
+            document.getElementById("cloudSenderId").value = activeConfig.messagingSenderId || "";
+            document.getElementById("cloudAppId").value = activeConfig.appId || "";
+        }
+        cloudModal.classList.add("open");
+    }
+
+    function closeCloudModal() {
+        if (cloudModal) cloudModal.classList.remove("open");
+    }
+
+    if (openCloudModalBtn) openCloudModalBtn.addEventListener("click", openCloudModal);
+    if (cloudStatusBadge) cloudStatusBadge.addEventListener("click", openCloudModal);
+    if (closeCloudModalBtn) closeCloudModalBtn.addEventListener("click", closeCloudModal);
+    if (cancelCloudModalBtn) cancelCloudModalBtn.addEventListener("click", closeCloudModal);
+
+    if (subtabConfigBtn && subtabGuideBtn && cloudPanelConfig && cloudPanelGuide) {
+        subtabConfigBtn.addEventListener("click", () => {
+            subtabConfigBtn.classList.add("active");
+            subtabGuideBtn.classList.remove("active");
+            cloudPanelConfig.style.display = "block";
+            cloudPanelGuide.style.display = "none";
+        });
+
+        subtabGuideBtn.addEventListener("click", () => {
+            subtabGuideBtn.classList.add("active");
+            subtabConfigBtn.classList.remove("active");
+            cloudPanelConfig.style.display = "none";
+            cloudPanelGuide.style.display = "block";
+        });
+    }
+
+    if (cloudConfigForm) {
+        cloudConfigForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const snippet = cloudSnippetInput.value.trim();
+            let configToSave = null;
+
+            if (snippet) {
+                configToSave = parseFirebaseSnippet(snippet);
+            }
+
+            if (!configToSave) {
+                configToSave = {
+                    apiKey: document.getElementById("cloudApiKey").value.trim(),
+                    projectId: document.getElementById("cloudProjectId").value.trim(),
+                    authDomain: document.getElementById("cloudAuthDomain").value.trim(),
+                    storageBucket: document.getElementById("cloudStorageBucket").value.trim(),
+                    messagingSenderId: document.getElementById("cloudSenderId").value.trim(),
+                    appId: document.getElementById("cloudAppId").value.trim()
+                };
+            }
+
+            if (!isFirebaseConfigValid(configToSave)) {
+                showToast("Por favor ingresa una API Key y Project ID válidos de Firebase.", "danger");
+                return;
+            }
+
+            saveFirebaseConfig(configToSave);
+            showToast("Guardando credenciales e iniciando conexión con Firestore...");
+
+            const success = await window.araxysCloud.init();
+            if (success) {
+                showToast("¡Conectado exitosamente con Google Cloud Firestore!", "success");
+            } else {
+                showToast("No se pudo conectar a Firestore. Revisa las reglas o las claves.", "danger");
+            }
+        });
+    }
+
+    if (btnSeedCloudDb) {
+        btnSeedCloudDb.addEventListener("click", async () => {
+            if (!window.araxysCloud.isConnected) {
+                showToast("Primero debes conectar con Firebase antes de subir los datos.", "danger");
+                return;
+            }
+
+            if (confirm("¿Deseas subir todos los datos oficiales (6 noticias, 21 jugadores y staff) a Google Cloud Firestore?")) {
+                try {
+                    showToast("Subiendo base de datos a Google Cloud Firestore...");
+                    const count = await window.araxysCloud.seedInitialDatabase();
+                    showToast(`¡Éxito! Se sincronizaron ${count} elementos oficiales en Firestore.`);
+                } catch (err) {
+                    showToast(`Error al subir datos: ${err.message}`, "danger");
+                }
+            }
+        });
+    }
+
+    if (btnDisconnectCloud) {
+        btnDisconnectCloud.addEventListener("click", () => {
+            if (confirm("¿Desconectar de Firebase y regresar al Modo Local en este navegador?")) {
+                clearFirebaseConfig();
+                window.araxysCloud.disconnect();
+                if (cloudSnippetInput) cloudSnippetInput.value = "";
+                document.getElementById("cloudApiKey").value = "";
+                document.getElementById("cloudProjectId").value = "";
+                showToast("Desconectado de Firebase. Modo local activo.");
+            }
+        });
+    }
+
+    // Inicializar conexión con Firebase si ya existen credenciales guardadas
+    if (window.araxysCloud && typeof window.araxysCloud.init === "function") {
+        window.araxysCloud.init();
+    }
 });

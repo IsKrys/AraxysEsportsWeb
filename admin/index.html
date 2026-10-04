@@ -112,6 +112,13 @@
                     <h1 class="page-title" id="pageTitle">Resumen General</h1>
                 </div>
                 <div class="topbar-right">
+                    <button id="cloudStatusBadge" class="cloud-status-pill offline" title="Estado de sincronización en tiempo real con Google Firebase">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Nube: Modo Local</span>
+                    </button>
+                    <button id="openCloudModalBtn" class="btn btn-outline btn-sm" title="Configurar conexión con Google Firebase">
+                        <span>☁️ Sincronización Nube</span>
+                    </button>
                     <a href="../index.html" target="_blank" class="btn btn-outline btn-sm">
                         <span>Ver Web en Vivo</span> ↗
                     </a>
@@ -855,9 +862,156 @@
         </div>
     </div>
 
+    <!-- MODAL: SINCRONIZACIÓN Y CONFIGURACIÓN FIREBASE (CLOUD) -->
+    <div id="cloudModal" class="modal-backdrop">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 24px;">☁️</span>
+                    <div>
+                        <h3 style="margin: 0;">Sincronización en la Nube (Google Firebase)</h3>
+                        <small style="color: var(--brand-gray-text);">Sincroniza noticias, rosters y auditoría en tiempo real con todo el staff</small>
+                    </div>
+                </div>
+                <button class="modal-close" id="closeCloudModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Banner de estado dinámico -->
+                <div id="cloudStatusBanner" class="cloud-banner offline">
+                    <div class="cloud-banner-icon">☁️</div>
+                    <div class="cloud-banner-info">
+                        <strong class="cloud-banner-title">Modo Local (Offline)</strong>
+                        <span class="cloud-banner-sub">Los cambios se guardan localmente en este navegador. Para sincronizar entre varios equipos, conecta tu proyecto de Firebase.</span>
+                    </div>
+                </div>
+
+                <!-- Tabs del Modal: Configuración Directa vs Guía de Creación -->
+                <div class="cloud-subtabs">
+                    <button type="button" class="cloud-subtab-btn active" id="subtabConfigBtn">⚡ Conectar / Configurar</button>
+                    <button type="button" class="cloud-subtab-btn" id="subtabGuideBtn">📖 Guía Rápida (Cómo obtener las claves gratis)</button>
+                </div>
+
+                <!-- Panel 1: Configurar -->
+                <div id="cloudPanelConfig" class="cloud-panel active">
+                    <form id="cloudConfigForm">
+                        <div class="form-group">
+                            <label for="cloudSnippetInput">
+                                Pegar Bloque de Firebase Console (Recomendado):
+                                <small style="color: var(--brand-gray-text); font-weight: normal; margin-left: 6px;">
+                                    (Copia y pega directamente el fragmento <code>const firebaseConfig = { ... }</code>)
+                                </small>
+                            </label>
+                            <textarea id="cloudSnippetInput" rows="5" class="code-textarea" placeholder="const firebaseConfig = {
+  apiKey: &quot;AIzaSy...&quot;,
+  authDomain: &quot;araxys-esports.firebaseapp.com&quot;,
+  projectId: &quot;araxys-esports&quot;,
+  storageBucket: &quot;araxys-esports.appspot.com&quot;,
+  messagingSenderId: &quot;123456789&quot;,
+  appId: &quot;1:123456789:web:abcdef&quot;
+};"></textarea>
+                        </div>
+
+                        <details class="cloud-manual-details">
+                            <summary style="cursor: pointer; color: var(--brand-gold); font-size: 13px; font-weight: 600; margin-bottom: 12px;">
+                                O configurar campos individuales manualmente ▼
+                            </summary>
+                            <div class="form-row">
+                                <div class="form-group flex-1">
+                                    <label for="cloudApiKey">API Key *</label>
+                                    <input type="text" id="cloudApiKey" placeholder="AIzaSy...">
+                                </div>
+                                <div class="form-group flex-1">
+                                    <label for="cloudProjectId">Project ID *</label>
+                                    <input type="text" id="cloudProjectId" placeholder="araxys-esports">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group flex-1">
+                                    <label for="cloudAuthDomain">Auth Domain</label>
+                                    <input type="text" id="cloudAuthDomain" placeholder="araxys-esports.firebaseapp.com">
+                                </div>
+                                <div class="form-group flex-1">
+                                    <label for="cloudStorageBucket">Storage Bucket</label>
+                                    <input type="text" id="cloudStorageBucket" placeholder="araxys-esports.appspot.com">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group flex-1">
+                                    <label for="cloudSenderId">Messaging Sender ID</label>
+                                    <input type="text" id="cloudSenderId" placeholder="123456789">
+                                </div>
+                                <div class="form-group flex-1">
+                                    <label for="cloudAppId">App ID</label>
+                                    <input type="text" id="cloudAppId" placeholder="1:123456789:web:abcdef">
+                                </div>
+                            </div>
+                        </details>
+
+                        <div class="cloud-action-row">
+                            <button type="submit" class="btn btn-primary" id="btnSaveCloudConfig">
+                                ⚡ Conectar & Probar Firestore
+                            </button>
+                            <button type="button" class="btn btn-outline" id="btnSeedCloudDb" title="Sube las 6 noticias, 21 jugadores y staff actual a Firestore">
+                                🚀 Subir Datos Oficiales a la Nube (Seed Inicial)
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" id="btnDisconnectCloud" style="margin-left: auto;">
+                                Desconectar (Modo Local)
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Panel 2: Guía Rápida paso a paso -->
+                <div id="cloudPanelGuide" class="cloud-panel" style="display: none;">
+                    <div class="guide-steps-list">
+                        <div class="guide-step-item">
+                            <div class="guide-step-num">1</div>
+                            <div class="guide-step-body">
+                                <strong>Abrir la consola de Google Firebase</strong>
+                                <p>Entra a <a href="https://console.firebase.google.com/" target="_blank" style="color: var(--brand-magenta); font-weight: 700;">console.firebase.google.com ↗</a> con la cuenta oficial de Google de Araxys Esports.</p>
+                            </div>
+                        </div>
+                        <div class="guide-step-item">
+                            <div class="guide-step-num">2</div>
+                            <div class="guide-step-body">
+                                <strong>Crear el Proyecto</strong>
+                                <p>Haz clic en <em>"Agregar proyecto"</em>, nómbralo <code>araxys-esports</code>, puedes desactivar Google Analytics si lo deseas y haz clic en <em>Crear proyecto</em>.</p>
+                            </div>
+                        </div>
+                        <div class="guide-step-item">
+                            <div class="guide-step-num">3</div>
+                            <div class="guide-step-body">
+                                <strong>Activar Cloud Firestore</strong>
+                                <p>En el menú lateral izquierdo ve a <strong>Compilación</strong> &rarr; <strong>Firestore Database</strong> &rarr; Haz clic en <strong>Crear base de datos</strong> &rarr; Selecciona <em>"Comenzar en modo de prueba"</em> (para permitir lectura/escritura) y elige la ubicación más cercana (ej: <code>us-central1</code>).</p>
+                            </div>
+                        </div>
+                        <div class="guide-step-item">
+                            <div class="guide-step-num">4</div>
+                            <div class="guide-step-body">
+                                <strong>Registrar la Aplicación Web y Copiar Claves</strong>
+                                <p>Ve al icono de engranaje ⚙️ (Configuración del proyecto) &rarr; pestaña <strong>General</strong> &rarr; en <em>Tus apps</em> haz clic en el icono Web <strong>&lt;/&gt;</strong> &rarr; Nombra la app <code>Araxys CMS</code> &rarr; Copia el bloque <code>const firebaseConfig = { ... };</code> y pégalo aquí en la pestaña <em>"Conectar / Configurar"</em>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelCloudModalBtn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- NOTIFICACIONES TOAST -->
     <div id="toastContainer" class="toast-container"></div>
 
+    <!-- SDK DE GOOGLE FIREBASE (CDN COMPAT OFICIAL v10.12.0) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+    <!-- MOTOR DE CONFIGURACIÓN Y SINCRONIZACIÓN CLOUD -->
+    <script src="firebase-config.js"></script>
+    <script src="firebase-sync.js"></script>
     <script src="admin.js"></script>
 </body>
 </html>
