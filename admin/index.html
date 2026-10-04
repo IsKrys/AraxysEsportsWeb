@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Araxys Esports — Centro de Mando & CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../img/favicon/araxys-favicon.ico">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="araxys-admin-body">
+
+    <!-- PANTALLA DE LOGIN (Si no ha iniciado sesión) -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-card">
+            <div class="login-badge">SISTEMA INTERNO</div>
+            <div class="login-logo">
+                <img src="../img/logos/logo.png" alt="Araxys Esports">
+            </div>
+            <h2>CENTRO DE MANDO</h2>
+            <p class="login-sub">Acceso administrativo para Staff, Redactores y Coaches de Araxys Esports.</p>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="loginEmail">Correo o Usuario</label>
+                    <input type="text" id="loginEmail" placeholder="staff@araxys.xyz" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••••••" required autocomplete="current-password">
+                </div>
+                <div class="login-actions">
+                    <button type="submit" class="btn btn-primary btn-block">ENTRAR AL PANEL</button>
+                </div>
+            </form>
+            <div class="login-footer">
+                <span>¿No tienes credenciales? Consulta con el CEO o Administrador en Discord.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ESTRUCTURA PRINCIPAL DEL DASHBOARD -->
+    <div class="admin-layout" id="adminApp">
+        <!-- BARRA LATERAL (SIDEBAR) -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="../img/logos/logo.png" alt="Araxys Logo">
+                    <div class="sidebar-brand">
+                        <span class="brand-name">ARAXYS</span>
+                        <span class="brand-tag">CMS v1.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-tab="tab-overview" id="navItemOverview">
+                    <span class="nav-icon">📊</span>
+                    <span>Resumen General</span>
+                </button>
+                <button class="nav-item" data-tab="tab-news" id="navItemNews">
+                    <span class="nav-icon">📰</span>
+                    <span>Noticias & Prensa</span>
+                    <span class="badge badge-news" id="navNewsCount">6</span>
+                </button>
+                <button class="nav-item" data-tab="tab-teams" id="navItemTeams">
+                    <span class="nav-icon">👥</span>
+                    <span>Rosters & Jugadores</span>
+                    <span class="badge badge-teams">5 Equipos</span>
+                </button>
+                <button class="nav-item" data-tab="tab-tournaments" id="navItemTournaments">
+                    <span class="nav-icon">🏆</span>
+                    <span>Torneos & Circuito</span>
+                </button>
+                <button class="nav-item" data-tab="tab-branding" id="navItemBranding">
+                    <span class="nav-icon">🎨</span>
+                    <span>Kit de Marca & Recursos</span>
+                </button>
+                <button class="nav-item" data-tab="tab-staff" id="navItemStaff">
+                    <span class="nav-icon">🛡️</span>
+                    <span>Gestión de Staff</span>
+                    <span class="badge badge-staff">CEO</span>
+                </button>
+                <button class="nav-item" data-tab="tab-audit" id="navItemAudit">
+                    <span class="nav-icon">📜</span>
+                    <span>Auditoría & Papelera</span>
+                    <span class="badge badge-magenta" id="trashCountBadge">0</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-pill">
+                    <div class="user-avatar">AX</div>
+                    <div class="user-meta">
+                        <span class="user-name" id="sidebarUserName">Staff Araxys</span>
+                        <span class="user-role" id="sidebarUserRole">Administrador</span>
+                    </div>
+                </div>
+                <button class="btn-logout" id="logoutBtn" title="Cerrar sesión">🚪</button>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="admin-main">
+            <!-- TOPBAR -->
+            <header class="admin-topbar">
+                <div class="topbar-left">
+                    <span class="breadcrumb-root">Araxys Esports</span>
+                    <span class="breadcrumb-separator">/</span>
+                    <h1 class="page-title" id="pageTitle">Resumen General</h1>
+                </div>
+                <div class="topbar-right">
+                    <a href="../index.html" target="_blank" class="btn btn-outline btn-sm">
+                        <span>Ver Web en Vivo</span> ↗
+                    </a>
+                    <button id="quickNewNewsBtn" class="btn btn-primary btn-sm">
+                        <span>+ Nueva Noticia</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="admin-content">
+
+                <!-- PESTAÑA 1: RESUMEN GENERAL -->
+                <section id="tab-overview" class="tab-pane active">
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-icon icon-magenta">📰</div>
+                            <div class="kpi-data">
+                                <span class="kpi-num" id="kpiNewsTotal">6</span>
+                                <span class="kpi-label">Noticias Activas</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon icon-gold">👥</div>
+                            <div class="kpi-data">
+                                <span class="kpi-num" id="kpiPlayersTotal">21</span>
+                                <span class="kpi-label">Jugadores Registrados</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon icon-cyan">🛡️</div>
+                            <div class="kpi-data">
+                                <span class="kpi-num" id="kpiTeamsTotal">5</span>
+                                <span class="kpi-label">Equipos Competitivos</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon icon-purple">⚡</div>
+                            <div class="kpi-data">
+                                <span class="kpi-num">Activo</span>
+                                <span class="kpi-label">Sistema Online</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-panels-grid">
+                        <!-- Panel de Noticias Recientes -->
+                        <div class="panel-card" id="overviewNewsCard">
+                            <div class="panel-header">
+                                <h3>Últimas Noticias Publicadas</h3>
+                                <button class="btn btn-outline btn-xs switch-to-tab" data-target="tab-news">Ver Todas</button>
+                            </div>
+                            <div class="panel-body" id="overviewRecentNewsList">
+                                <!-- Llenado por JS -->
+                            </div>
+                        </div>
+
+                        <!-- Panel de Rosters -->
+                        <div class="panel-card" id="overviewTeamsCard">
+                            <div class="panel-header">
+                                <h3>Rosters de Araxys Esports</h3>
+                                <button class="btn btn-outline btn-xs switch-to-tab" data-target="tab-teams">Gestionar</button>
+                            </div>
+                            <div class="panel-body">
+                                <div class="rosters-quick-list">
+                                    <div class="roster-pill">
+                                        <div class="roster-dot dot-magenta"></div>
+                                        <div>
+                                            <strong>Araxys Titular</strong>
+                                            <small>ROSTER PRINCIPAL • 5 Jugadores</small>
+                                        </div>
+                                    </div>
+                                    <div class="roster-pill">
+                                        <div class="roster-dot dot-gold"></div>
+                                        <div>
+                                            <strong>Araxys Prime</strong>
+                                            <small>DIVISIÓN COMPETITIVA EN ASCENSO • Cap. Chiflesinho</small>
+                                        </div>
+                                    </div>
+                                    <div class="roster-pill">
+                                        <div class="roster-dot dot-cyan"></div>
+                                        <div>
+                                            <strong>Araxys Vanguard</strong>
+                                            <small>DIVISIÓN DE DESARROLLO • 5 Jugadores</small>
+                                        </div>
+                                    </div>
+                                    <div class="roster-pill">
+                                        <div class="roster-dot dot-purple"></div>
+                                        <div>
+                                            <strong>Araxys Wolf</strong>
+                                            <small>DIVISIÓN COMPETITIVA • 5 Jugadores</small>
+                                        </div>
+                                    </div>
+                                    <div class="roster-pill">
+                                        <div class="roster-dot dot-nexus"></div>
+                                        <div>
+                                            <strong>Araxys Nexus</strong>
+                                            <small>DIVISIÓN SORPRESA • Próximamente</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PESTAÑA 2: GESTOR DE NOTICIAS -->
+                <section id="tab-news" class="tab-pane">
+                    <div class="action-bar">
+                        <div class="action-bar-search">
+                            <input type="text" id="searchNewsInput" placeholder="Buscar noticia por título o autor...">
+                            <select id="filterCategorySelect">
+                                <option value="all">Todas las categorías</option>
+                                <option value="COLABORACION">Colaboración</option>
+                                <option value="RECLUTAMIENTO">Reclutamiento</option>
+                                <option value="TORNEOS">Torneos</option>
+                                <option value="ROSTER">Roster</option>
+                                <option value="COMUNIDAD">Comunidad</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="openCreateNewsModalBtn">
+                            + Crear Nueva Noticia
+                        </button>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Portada</th>
+                                    <th>Título & Resumen</th>
+                                    <th>Categoría</th>
+                                    <th>Autor</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th class="text-right">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="newsTableBody">
+                                <!-- Generado por JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- PESTAÑA 3: GESTOR DE ROSTERS & JUGADORES -->
+                <section id="tab-teams" class="tab-pane">
+                    <div class="action-bar">
+                        <div class="team-tabs-bar" id="teamFilterTabs">
+                            <button class="team-tab-btn active" data-team="titular">Titular</button>
+                            <button class="team-tab-btn" data-team="prime">Prime</button>
+                            <button class="team-tab-btn" data-team="vanguard">Vanguard</button>
+                            <button class="team-tab-btn" data-team="wolf">Wolf</button>
+                            <button class="team-tab-btn" data-team="nexus">Nexus</button>
+                        </div>
+                        <button class="btn btn-primary" id="openAddPlayerModalBtn">
+                            + Añadir Jugador
+                        </button>
+                    </div>
+
+                    <div class="team-overview-banner">
+                        <div class="team-banner-meta">
+                            <span class="team-badge" id="currentTeamBadge">ROSTER PRINCIPAL</span>
+                            <h2 id="currentTeamName">ARAXYS TITULAR</h2>
+                            <p id="currentTeamDesc">El equipo estelar que representa la bandera de Araxys Esports en Valorant.</p>
+                        </div>
+                    </div>
+
+                    <div class="players-cards-grid" id="playersCardsGrid">
+                        <!-- Generado dinámicamente por JS -->
+                    </div>
+                </section>
+
+                <!-- PESTAÑA 4: TORNEOS & CIRCUITO -->
+                <section id="tab-tournaments" class="tab-pane">
+                    <div class="action-bar">
+                        <div>
+                            <h2 style="font-size: 18px; font-weight: 800; color: var(--brand-white); margin-bottom: 4px;">Circuito & Torneos Oficiales Araxys</h2>
+                            <p style="font-size: 13px; color: var(--brand-gray-text);">Consulta las competiciones activas, formatos y fechas oficiales para la redacción de noticias y cobertura.</p>
+                        </div>
+                        <button class="btn btn-primary" id="createTournamentNewsShortcutBtn">
+                            📰 + Redactar Noticia de Torneo
+                        </button>
+                    </div>
+
+                    <div class="tournaments-grid">
+                        <!-- ARAXYS CIRCUIT -->
+                        <div class="tournament-card">
+                            <div class="tournament-card-header">
+                                <span class="badge" style="background: rgba(220,19,108,0.2); color: var(--brand-magenta); border: 1px solid var(--brand-magenta);">OFICIAL</span>
+                                <span class="game-badge">ECOSISTEMA</span>
+                            </div>
+                            <div class="tournament-card-body">
+                                <h3>Araxys Circuit</h3>
+                                <p>El circuito competitivo continuo donde compiten todos los rosters y miembros de la comunidad con tabla de puntuación oficial.</p>
+                                <div class="tournament-meta-row">
+                                    <span>⚡ Estado: Permanente & Abierto</span>
+                                </div>
+                            </div>
+                            <div class="tournament-card-footer">
+                                <a href="../circuito/circuito.html" target="_blank" class="btn btn-outline btn-sm">Ver en Web ↗</a>
+                                <span style="font-size: 11px; color: var(--brand-gray-text);">Página Activa</span>
+                            </div>
+                        </div>
+
+                        <!-- TORNEO 1: INAUGURACION -->
+                        <div class="tournament-card">
+                            <div class="tournament-card-header">
+                                <span class="badge" style="background: rgba(142, 142, 147, 0.2); color: #8E8E93; border: 1px solid #8E8E93;">FINALIZADO</span>
+                                <span class="game-badge">VALORANT</span>
+                            </div>
+                            <div class="tournament-card-body">
+                                <h3>Torneo Inauguración</h3>
+                                <p>Primera competición histórica de la comunidad de Araxys Esports bajo formato rápido 1v1 Skirmish.</p>
+                                <div class="tournament-meta-row">
+                                    <span>🎯 Modalidad: 1v1 Skirmish</span>
+                                </div>
+                            </div>
+                            <div class="tournament-card-footer">
+                                <a href="../torneos/Torneo1/torneo1.html" target="_blank" class="btn btn-outline btn-sm">Ver Resultados ↗</a>
+                                <span style="font-size: 11px; color: var(--brand-gray-text);">Edición #1</span>
+                            </div>
+                        </div>
+
+                        <!-- TORNEO 2: ARAXYS CUP -->
+                        <div class="tournament-card">
+                            <div class="tournament-card-header">
+                                <span class="badge" style="background: rgba(254, 228, 64, 0.15); color: var(--brand-gold); border: 1px solid var(--brand-gold);">EN PLANEACIÓN</span>
+                                <span class="game-badge">VALORANT</span>
+                            </div>
+                            <div class="tournament-card-body">
+                                <h3>Araxys Cup</h3>
+                                <p>Gran copa competitiva 5v5 con participación de escuadras invitadas y clasificación directa para la comunidad.</p>
+                                <div class="tournament-meta-row">
+                                    <span>📅 Viernes 14 de Agosto</span>
+                                </div>
+                            </div>
+                            <div class="tournament-card-footer">
+                                <a href="../torneos/torneo2/torneo2.html" target="_blank" class="btn btn-outline btn-sm">Ver Ficha ↗</a>
+                                <span style="font-size: 11px; color: var(--brand-gold); font-weight: 700;">Próxima Fecha</span>
+                            </div>
+                        </div>
+
+                        <!-- TORNEO 3: ACADEMY CHAMPIONSHIP -->
+                        <div class="tournament-card">
+                            <div class="tournament-card-header">
+                                <span class="badge" style="background: rgba(0, 209, 255, 0.15); color: #00D1FF; border: 1px solid #00D1FF;">CLASIFICATORIAS</span>
+                                <span class="game-badge">VALORANT</span>
+                            </div>
+                            <div class="tournament-card-body">
+                                <h3>Academy Championship</h3>
+                                <p>Torneo enfocado al semillero y divisiones en ascenso para descubrir nuevos talentos de la escena de Valorant.</p>
+                                <div class="tournament-meta-row">
+                                    <span>📅 Fecha por Definir</span>
+                                </div>
+                            </div>
+                            <div class="tournament-card-footer">
+                                <a href="../torneos/torneo3/torneo3.html" target="_blank" class="btn btn-outline btn-sm">Ver Ficha ↗</a>
+                                <span style="font-size: 11px; color: var(--brand-gray-text);">Fase Previa</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PESTAÑA 5: RECURSOS & MARCA PARA EDITORES -->
+                <section id="tab-branding" class="tab-pane">
+                    <div class="branding-grid">
+                        <div class="brand-info-card">
+                            <h3>Kit de Marca Oficial</h3>
+                            <p>Valores cromáticos autorizados. Haz clic sobre cualquier color para copiar su código HEX al portapapeles.</p>
+                            
+                            <div class="color-swatches">
+                                <div class="color-swatch copyable-color" data-color="#DC136C" title="Clic para copiar código">
+                                    <div class="swatch-box" style="background: #DC136C;"></div>
+                                    <div class="swatch-info">
+                                        <strong>#DC136C</strong>
+                                        <small>Dominante / Magenta Araxys</small>
+                                    </div>
+                                    <span class="copy-hint">Copiar</span>
+                                </div>
+                                <div class="color-swatch copyable-color" data-color="#FEE440" title="Clic para copiar código">
+                                    <div class="swatch-box" style="background: #FEE440;"></div>
+                                    <div class="swatch-info">
+                                        <strong>#FEE440</strong>
+                                        <small>Dorado / Torneos & Resalte</small>
+                                    </div>
+                                    <span class="copy-hint">Copiar</span>
+                                </div>
+                                <div class="color-swatch copyable-color" data-color="#F0EFF4" title="Clic para copiar código">
+                                    <div class="swatch-box" style="background: #F0EFF4; border: 1px solid #444;"></div>
+                                    <div class="swatch-info">
+                                        <strong>#F0EFF4</strong>
+                                        <small>Blanco Suave / Textos</small>
+                                    </div>
+                                    <span class="copy-hint">Copiar</span>
+                                </div>
+                                <div class="color-swatch copyable-color" data-color="#191516" title="Clic para copiar código">
+                                    <div class="swatch-box" style="background: #191516;"></div>
+                                    <div class="swatch-info">
+                                        <strong>#191516</strong>
+                                        <small>Fondo Oscuro #1</small>
+                                    </div>
+                                    <span class="copy-hint">Copiar</span>
+                                </div>
+                                <div class="color-swatch copyable-color" data-color="#242423" title="Clic para copiar código">
+                                    <div class="swatch-box" style="background: #242423;"></div>
+                                    <div class="swatch-info">
+                                        <strong>#242423</strong>
+                                        <small>Fondo Gris Carbón #2</small>
+                                    </div>
+                                    <span class="copy-hint">Copiar</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="brand-info-card">
+                            <h3>Buzón y Recursos en la Nube</h3>
+                            <p>Carpeta oficial en Google Drive compartida para editores, diseñadores y redactores.</p>
+                            <div class="drive-shortcuts">
+                                <a href="https://drive.google.com/drive/folders/1rTB753xDmnNfeJy89ssHSCuNc6WRC8NP" target="_blank" class="btn btn-primary btn-block">
+                                    Abrir Zona de Editores en Google Drive ↗
+                                </a>
+                                <div class="drive-files-list">
+                                    <span>📁 <strong>Banners y Fotos para Articulos</strong> — Sube aquí las fotos en alta calidad.</span>
+                                    <span>📁 <strong>Borradores y Notas</strong> — Documentos y textos antes de publicar.</span>
+                                </div>
+                                <div class="editorial-rules-box">
+                                    <strong>Guía rápida para publicaciones:</strong>
+                                    <ul>
+                                        <li>Proporción recomendada para noticias: 16:9 (1920x1080 o 1280x720).</li>
+                                        <li>Formatos preferidos: WEBP o PNG comprimido.</li>
+                                        <li>Tono: Enérgico, competitivo, sin modismos informales en comunicados oficiales.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CONVERSOR Y OPTIMIZADOR A WEBP (HERRAMIENTA INTEGRADA) -->
+                        <div class="brand-info-card webp-studio-card">
+                            <div class="card-badge-header">
+                                <h3>Conversor & Optimizador Oficial a .WebP</h3>
+                                <span class="badge badge-gold">HERRAMIENTA INTEGRADA</span>
+                            </div>
+                            <p>Convierte automáticamente fotos PNG o JPG al formato oficial WebP de alto rendimiento sin depender de programas externos ni páginas lentas.</p>
+                            
+                            <div class="webp-dropzone" id="mainWebpDropzone">
+                                <div class="dropzone-icon">⚡</div>
+                                <h4>Arrastra una imagen aquí o haz clic para subirla</h4>
+                                <p>Soporta PNG, JPG, JPEG. La convertirá a .webp de forma instantánea y privada en tu navegador.</p>
+                                <input type="file" id="mainWebpFileInput" accept="image/png, image/jpeg, image/jpg" style="display:none;">
+                                <button type="button" class="btn btn-secondary btn-sm" id="btnSelectMainWebpFile">Examinar Archivo</button>
+                            </div>
+
+                            <div class="webp-controls-bar" style="margin-top: 16px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+                                <div style="flex: 1; min-width: 180px;">
+                                    <label style="font-size: 12px; color: var(--brand-white); display: block; margin-bottom: 4px;">
+                                        Calidad de Compresión: <strong id="qualityDisplay" style="color: var(--brand-gold);">85%</strong>
+                                    </label>
+                                    <input type="range" id="webpQualitySlider" min="50" max="100" value="85" style="width: 100%; cursor: pointer;">
+                                </div>
+                                <div style="flex: 1; min-width: 180px;">
+                                    <label style="font-size: 12px; color: var(--brand-white); display: block; margin-bottom: 4px;">
+                                        Resolución Máxima:
+                                    </label>
+                                    <select id="webpMaxResolution" style="padding: 6px 10px; font-size: 13px;">
+                                        <option value="1920">1920px (Full HD Banner Recomendado)</option>
+                                        <option value="1280">1280px (Estándar 720p)</option>
+                                        <option value="800">800px (Tarjeta / Miniatura)</option>
+                                        <option value="0">Original (Sin escalar)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- PREVIEW RESULTADO -->
+                            <div id="webpResultBox" class="webp-result-box" style="display:none; margin-top: 16px;">
+                                <div class="webp-result-preview">
+                                    <img id="webpResultImg" src="" alt="WebP Preview">
+                                </div>
+                                <div class="webp-result-meta">
+                                    <div class="result-stats-row">
+                                        <div>
+                                            <small style="color: var(--brand-gray-text);">Nombre generado:</small>
+                                            <strong id="webpResultName" style="color: var(--brand-white); display: block;">banner.webp</strong>
+                                        </div>
+                                        <div>
+                                            <small style="color: var(--brand-gray-text);">Ahorro de Peso:</small>
+                                            <strong id="webpResultSavings" style="color: #00E676; display: block; font-size: 16px;">-80%</strong>
+                                        </div>
+                                    </div>
+                                    <div class="result-stats-details" style="font-size: 13px; margin-top: 4px;">
+                                        <span id="webpOriginalSize" style="color: var(--brand-gray-text);">Original: 2.4 MB</span> → <strong id="webpConvertedSize" style="color: var(--brand-gold);">WebP: 380 KB</strong>
+                                        <span id="webpDimensions" style="margin-left: 8px; color: var(--brand-gray-text);">(1920x1080)</span>
+                                    </div>
+                                    <div class="webp-result-actions" style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+                                        <button type="button" class="btn btn-primary" id="btnDownloadWebp">
+                                            💾 Descargar Archivo .WebP
+                                        </button>
+                                        <button type="button" class="btn btn-outline" id="btnUseInNewsShortcut">
+                                            📰 Usar en Nueva Noticia
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PESTAÑA 6: GESTIÓN DE STAFF & ROLES (SOLO CEO / ADMIN) -->
+                <section id="tab-staff" class="tab-pane">
+                    <div class="action-bar">
+                        <div>
+                            <h2 style="font-size: 18px; color: var(--brand-white); margin-bottom: 4px;">Equipo de Trabajo & Permisos</h2>
+                            <p style="font-size: 13px; color: var(--brand-gray-text);">Control de accesos para redactores, coaches de escuadra y administradores.</p>
+                        </div>
+                        <button class="btn btn-primary" id="openAddStaffModalBtn">
+                            + Añadir Miembro del Staff
+                        </button>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Usuario / Staff</th>
+                                    <th>Correo / Usuario</th>
+                                    <th>Rol Asignado</th>
+                                    <th>Alcance / Permisos</th>
+                                    <th>Estado</th>
+                                    <th class="text-right">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="staffTableBody">
+                                <!-- Generado por JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- PESTAÑA 7: AUDITORÍA & PAPELERA DE RECUPERACIÓN (SOLO CEO / ADMIN) -->
+                <section id="tab-audit" class="tab-pane">
+                    <div class="action-bar">
+                        <div>
+                            <h2 style="font-size: 18px; color: var(--brand-white); margin-bottom: 4px;">Auditoría, Historial de Cambios & Papelera</h2>
+                            <p style="font-size: 13px; color: var(--brand-gray-text);">Control total para el CEO: monitorea qué hacen los editores y coaches. Si alguien borra algo por error, restáuralo al instante.</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn btn-secondary" id="btnEmptyTrash">
+                                🗑️ Vaciar Papelera
+                            </button>
+                            <button class="btn btn-outline" id="btnExportAuditLog">
+                                📥 Exportar Registro (JSON)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SUB-TABS: PAPELERA vs REGISTRO DE AUDITORIA -->
+                    <div class="audit-subtabs-bar">
+                        <button class="audit-tab-btn active" data-audit-tab="trash" id="auditTabTrashBtn">
+                            🗑️ Papelera de Recuperación (<span id="trashCountNumber">0</span>)
+                        </button>
+                        <button class="audit-tab-btn" data-audit-tab="logs" id="auditTabLogsBtn">
+                            📜 Registro de Actividad (<span id="logsCountNumber">0</span>)
+                        </button>
+                    </div>
+
+                    <!-- SECCIÓN PAPELERA -->
+                    <div id="auditPaneTrash" class="audit-subpane active">
+                        <div class="table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Elemento / Título</th>
+                                        <th>Detalles del Elemento</th>
+                                        <th>Eliminado Por</th>
+                                        <th>Fecha y Hora</th>
+                                        <th class="text-right">Acción de Recuperación</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="trashTableBody">
+                                    <!-- Generado por JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN HISTORIAL DE ACTIVIDAD -->
+                    <div id="auditPaneLogs" class="audit-subpane" style="display:none;">
+                        <div class="action-bar-search" style="margin-bottom: 16px;">
+                            <input type="text" id="searchLogInput" placeholder="Filtrar actividad por usuario, acción o texto...">
+                            <select id="filterLogActionSelect">
+                                <option value="all">Todas las acciones</option>
+                                <option value="CREACIÓN">Creaciones</option>
+                                <option value="EDICIÓN">Ediciones</option>
+                                <option value="ELIMINACIÓN">Eliminaciones</option>
+                                <option value="RESTAURACIÓN">Restauraciones</option>
+                                <option value="STAFF">Permisos de Staff</option>
+                            </select>
+                        </div>
+
+                        <div class="table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha & Hora</th>
+                                        <th>Usuario & Rol</th>
+                                        <th>Acción Realizada</th>
+                                        <th>Detalle del Cambio</th>
+                                        <th class="text-right">Inspeccionar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="auditLogsTableBody">
+                                    <!-- Generado por JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: CREAR / EDITAR NOTICIA -->
+    <div id="newsModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="newsModalTitle">Crear Noticia</h3>
+                <button class="modal-close" id="closeNewsModalBtn">&times;</button>
+            </div>
+            <form id="newsForm">
+                <input type="hidden" id="newsId">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group flex-2">
+                            <label for="newsTitle">Título de la Noticia *</label>
+                            <input type="text" id="newsTitle" placeholder="Ej: ARAXYS Y KITSUNE UNEN FUERZAS" required>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="newsCategory">Categoría *</label>
+                            <select id="newsCategory" required>
+                                <option value="COLABORACION">COLABORACION</option>
+                                <option value="RECLUTAMIENTO">RECLUTAMIENTO</option>
+                                <option value="TORNEOS">TORNEOS</option>
+                                <option value="ROSTER">ROSTER UPDATE</option>
+                                <option value="COMUNIDAD">COMUNIDAD</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="newsAuthor">Autor / Redactor</label>
+                            <input type="text" id="newsAuthor" placeholder="Ej: Krys / Prensa Araxys" value="Prensa Araxys">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="newsDate">Fecha de Publicación</label>
+                            <input type="date" id="newsDate">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="newsStatus">Estado</label>
+                            <select id="newsStatus">
+                                <option value="publicado">Publicado</option>
+                                <option value="borrador">Borrador</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsImage">Imagen de Portada (Ruta, URL o Convertir WebP)</label>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="newsImage" placeholder="Ej: ../img/news/araxys-kitsune-20260810.webp o URL web" required style="flex: 1;">
+                            <label for="modalNewsImageUpload" class="btn btn-secondary" style="margin: 0; white-space: nowrap; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 6px;">
+                                ⚡ Convertir a WebP
+                            </label>
+                            <input type="file" id="modalNewsImageUpload" accept="image/png, image/jpeg, image/jpg, image/webp" style="display: none;">
+                        </div>
+                        <small class="form-hint">Si seleccionas una foto PNG o JPG, se convertirá a .WebP al instante y podrás descargarla para tu web o Drive.</small>
+                        <div id="modalWebpPreview" style="display: none; margin-top: 10px; padding: 10px 14px; background: var(--brand-dark-2); border-radius: 8px; border: 1px solid var(--brand-border); align-items: center; gap: 12px;">
+                            <img id="modalWebpThumb" src="" style="width: 55px; height: 36px; object-fit: cover; border-radius: 4px; border: 1px solid var(--brand-border);">
+                            <div style="flex: 1; font-size: 12px;">
+                                <strong id="modalWebpInfo" style="color: var(--brand-gold); display: block;">Convertido a WebP</strong>
+                                <span id="modalWebpSavings" style="color: #00E676;"></span>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline" id="modalDownloadWebpBtn">💾 Descargar .webp</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsExcerpt">Resumen Corto (Para tarjetas y portada)</label>
+                        <textarea id="newsExcerpt" rows="2" placeholder="Breve descripción que engancha al lector..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsContent">Contenido Completo del Artículo</label>
+                        <textarea id="newsContent" rows="7" placeholder="Escribe aquí toda la noticia, declaraciones, enlaces a torneos, etc..." required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelNewsBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar y Publicar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: AGREGAR / EDITAR JUGADOR -->
+    <div id="playerModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="playerModalTitle">Añadir Jugador al Roster</h3>
+                <button class="modal-close" id="closePlayerModalBtn">&times;</button>
+            </div>
+            <form id="playerForm">
+                <input type="hidden" id="playerId">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="playerTeam">Equipo *</label>
+                            <select id="playerTeam" required>
+                                <option value="titular">Araxys Titular</option>
+                                <option value="prime">Araxys Prime</option>
+                                <option value="vanguard">Araxys Vanguard</option>
+                                <option value="wolf">Araxys Wolf</option>
+                                <option value="nexus">Araxys Nexus</option>
+                            </select>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="playerNick">Gamertag / Nick *</label>
+                            <input type="text" id="playerNick" placeholder="Ej: Krys, Chiflesinho, Andrew" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="playerRole">Rol en Valorant *</label>
+                            <select id="playerRole" required>
+                                <option value="Duelista">Duelista</option>
+                                <option value="Iniciador">Iniciador</option>
+                                <option value="Controlador">Controlador</option>
+                                <option value="Centinela">Centinela</option>
+                                <option value="IGL / Capitán">IGL / Capitán</option>
+                                <option value="Coach">Coach / Analista</option>
+                                <option value="Suplente">Suplente</option>
+                            </select>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="playerAgent">Agente Principal</label>
+                            <input type="text" id="playerAgent" placeholder="Ej: Jett, Omen, Sova, Cypher">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="playerPhoto">Foto del Jugador</label>
+                        <input type="text" id="playerPhoto" placeholder="Ej: ../img/equipos/equipos.webp o URL" value="../img/equipos/equipos.webp">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="playerTwitter">X / Twitter (@usuario)</label>
+                            <input type="text" id="playerTwitter" placeholder="@AraxysEsports">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="playerTracker">Tracker.gg / Perfil Riot</label>
+                            <input type="text" id="playerTracker" placeholder="Nick#TAG">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelPlayerBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Jugador</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: AGREGAR / EDITAR STAFF -->
+    <div id="staffModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="staffModalTitle">Añadir Miembro del Staff</h3>
+                <button class="modal-close" id="closeStaffModalBtn">&times;</button>
+            </div>
+            <form id="staffForm">
+                <input type="hidden" id="staffId">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="staffNick">Nombre / Gamertag *</label>
+                            <input type="text" id="staffNick" placeholder="Ej: Chiflesinho, Diego, Prensa" required>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="staffUser">Usuario o Correo *</label>
+                            <input type="text" id="staffUser" placeholder="usuario@araxys.xyz" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="staffRole">Rol y Permisos Asignados *</label>
+                            <select id="staffRole" required>
+                                <option value="admin">👑 CEO / Administrador (Acceso Total)</option>
+                                <option value="editor">📰 Prensa & Redacción (Solo Noticias)</option>
+                                <option value="coach_prime">🎯 Coach / Capitán — Araxys Prime</option>
+                                <option value="coach_titular">🛡️ Coach / Capitán — Araxys Titular</option>
+                                <option value="coach_vanguard">⚡ Coach / Capitán — Araxys Vanguard</option>
+                                <option value="coach_wolf">🐺 Coach / Capitán — Araxys Wolf</option>
+                                <option value="coach_nexus">🔮 Coach / Capitán — Araxys Nexus</option>
+                            </select>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="staffPass">Contraseña Inicial</label>
+                            <input type="password" id="staffPass" placeholder="••••••••••••" value="araxys2026">
+                        </div>
+                    </div>
+                    <small class="form-hint">🔒 Seguridad: Los coaches y capitanes solo podrán ver y modificar los jugadores de su propio equipo asignado.</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelStaffBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Miembro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: INSPECCIONAR SNAPSHOT AUDITORÍA (CEO) -->
+    <div id="snapshotModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="snapshotModalTitle">Inspección de Registro / Snapshot</h3>
+                <button class="modal-close" id="closeSnapshotModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="snapshotModalSubtitle" style="color: var(--brand-gold); font-size: 13px; margin-bottom: 12px; font-weight: 700;"></p>
+                <div class="code-snapshot-box" style="background: var(--brand-dark-3); padding: 14px; border-radius: 8px; border: 1px solid var(--brand-border); max-height: 380px; overflow-y: auto;">
+                    <pre id="snapshotModalContent" style="color: var(--brand-white); font-family: monospace; font-size: 12px; white-space: pre-wrap; margin: 0;"></pre>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeSnapshotBtn">Cerrar Inspección</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICACIONES TOAST -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
