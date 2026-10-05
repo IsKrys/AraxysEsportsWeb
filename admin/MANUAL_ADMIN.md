@@ -4,13 +4,13 @@ Bienvenido al Centro de Mando de **Araxys Esports** (`https://araxys.xyz/admin/`
 
 ---
 
-## 1. 🔑 Acceso y Credenciales del Fundador / CEO
+## 1. 🔑 Acceso y Perfil del Fundador / CEO
 
 * **Ruta de Acceso:** `https://araxys.xyz/admin/` (o en local: `http://localhost:8000/admin/index.html`)
-* **Usuario Maestro:** `Krys` (o correo: `usuario_admin`)
-* **Autenticación:** Administrada en privado
+* **Usuario Maestro:** Cuenta autorizada para el CEO (`Krys`)
+* **Autenticación:** Gestionada de manera privada mediante el control de acceso del panel.
 
-> 💡 *Nota de Seguridad:* Solo el CEO tiene acceso a la pestaña de **Auditoría, Historial de Cambios y Papelera de Recuperación** y a la **Gestión de Staff**.
+> 🔒 *Aviso de Seguridad Crítico:* Nunca documentes, almacenes ni subas contraseñas reales, tokens de acceso ni claves de seguridad a repositorios de GitHub o documentación pública. Toda credencial debe mantenerse en canales privados y seguros.
 
 ---
 
@@ -27,6 +27,7 @@ El panel cuenta con restricciones automáticas de interfaz y operaciones según 
 | **Coach Vanguard** | ⚡ Vanguard | **Exclusivo:** Solo puede ver y modificar los jugadores de **Araxys Vanguard**. |
 | **Coach Wolf** | 🐺 Wolf | **Exclusivo:** Solo puede ver y modificar los jugadores de **Araxys Wolf**. |
 | **Coach Nexus** | 🔮 Nexus | **Exclusivo:** Solo puede ver y modificar los jugadores de **Araxys Nexus** (División Sorpresa). |
+| **Coach Origin** | ⚔️ Origin | **Exclusivo:** Solo puede ver y modificar los jugadores de **Araxys Origin**. |
 
 ---
 
@@ -37,11 +38,11 @@ El panel cuenta con restricciones automáticas de interfaz y operaciones según 
 3. Haz clic en el botón **`+ Añadir Miembro`**.
 4. Completa los datos:
    * **Nombre / Gamertag:** Ej: `Chiflesinho`, `Redacción Prensa`.
-   * **Usuario / Correo:** Ej: `usuario_staff`.
+   * **Usuario / Alias:** Identificador interno único asignado al miembro.
    * **Rol:** Selecciona el rol correspondiente (CEO, Editor o Coach de la división específica).
-   * **Contraseña inicial:** Asigna una clave segura (ej: `clave_segura`).
+   * **Contraseña inicial:** Asigna una clave robusta y única generada en privado (mínimo 12 caracteres recomendados).
 5. Haz clic en **Guardar Miembro**.
-6. Pásale el enlace del panel (`https://araxys.xyz/admin/`) con su usuario y contraseña. Al ingresar, el sistema adaptará automáticamente el panel a sus permisos específicos.
+6. Entrega el enlace del panel (`https://araxys.xyz/admin/`) junto con su usuario y contraseña únicamente por un canal privado y seguro (por ejemplo, mensaje directo verificado).
 
 ---
 
@@ -71,27 +72,15 @@ Para evitar que un miembro borre información por error:
   * ⚪ **Modo Local:** Respaldo offline guardado en el navegador.
 * **Colecciones en la Nube:**
   * `araxys_news` — Artículos publicados y borradores.
-  * `araxys_players` — Jugadores de las 5 divisiones.
-  * `araxys_staff` — Credenciales y roles del equipo.
+  * `araxys_players` — Jugadores de las divisiones.
+  * `araxys_staff` — Registros y roles del equipo.
   * `araxys_trash` — Papelera sincronizada.
   * `araxys_activity_log` — Registro de auditoría.
-* **Reglas de Seguridad Definitivas (Firebase Console):**
-  Asegúrate de que en la consola de Firebase (`console.firebase.google.com`) &rarr; **Firestore Database** &rarr; pestaña **Reglas (Rules)** esté publicado:
-  ```javascript
-  rules_version = '2';
-  service cloud.firestore {
-    match /databases/{database}/documents {
-      match /{document=**} {
-        allow read, write: if true;
-      }
-    }
-  }
-  ```
 
 ---
 
 ## 7. 🚀 Web Pública Dinámica
 
-Tanto la sección de noticias ([`news/news.html`](file:///C:/Users/Administrator/Documents/GitHub/AraxysEsportsWeb/news/news.html)) como las 5 divisiones de equipos ([`teams/teams.html`](file:///C:/Users/Administrator/Documents/GitHub/AraxysEsportsWeb/teams/teams.html)) leen los datos directamente de Firestore en tiempo real. 
+Tanto la sección de noticias ([`news/news.html`](file:///C:/Users/Administrator/Documents/GitHub/AraxysEsportsWeb/news/news.html)) como las divisiones de equipos ([`teams/teams.html`](file:///C:/Users/Administrator/Documents/GitHub/AraxysEsportsWeb/teams/teams.html)) leen los datos directamente de Firestore en tiempo real. 
 
 Cualquier cambio guardado en el panel se refleja de forma instantánea para los visitantes de la página web oficial.
