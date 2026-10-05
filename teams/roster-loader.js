@@ -86,7 +86,7 @@
         players.forEach(p => {
             const nick = p.nick || "Jugador";
             const role = p.role || "Jugador";
-            const agent = p.agent ? ` • ${p.agent}` : "";
+            const agentStr = (p.agent && p.agent !== "No especificado" && p.agent !== "Por Anunciar") ? ` • ${p.agent}` : "";
             const photo = cleanPhotoPath(p.photo);
 
             // Detectar capitán
@@ -101,7 +101,7 @@
                 <div class="member-overlay">
                     <div class="member-info-wrap">
                         <h3>${nick.toUpperCase()}</h3>
-                        <span class="member-role">${role}${agent}</span>
+                        <span class="member-role">${role}${agentStr}</span>
                     </div>
                 </div>
             </article>`;
@@ -153,6 +153,28 @@
         const currentTeam = getCurrentTeam();
         const isShowcase = window.location.pathname.toLowerCase().includes("teams.html");
 
+        // 1. CARGA INMEDIATA DESDE LOCALSTORAGE (Cero retraso, render instantáneo)
+        if (currentTeam) {
+            try {
+                const localPlayers = JSON.parse(localStorage.getItem(STORAGE_KEY_PLAYERS) || "[]");
+                const teamPlayers = localPlayers.filter(p => p.team === currentTeam);
+                if (teamPlayers.length > 0) renderRoster(teamPlayers, currentTeam);
+            } catch (_) {}
+
+            // Escuchar cambios locales en tiempo real entre pestañas
+            window.addEventListener("storage", (e) => {
+                if (e.key === STORAGE_KEY_PLAYERS) {
+                    try {
+                        const updated = JSON.parse(e.newValue || "[]");
+                        const teamPlayers = updated.filter(p => p.team === currentTeam);
+                        if (teamPlayers.length > 0) renderRoster(teamPlayers, currentTeam);
+                    } catch (_) {}
+                }
+            });
+        }
+        if (isShowcase) updateTeamsShowcase();
+
+        // 2. CONEXIÓN Y ESCUCHA EN TIEMPO REAL CON CLOUD FIRESTORE
         let config = DEFAULT_CONFIG;
         try {
             const rawConfig = localStorage.getItem(STORAGE_KEY_CONFIG);
@@ -163,19 +185,9 @@
         } catch (_) {}
 
         if (typeof firebase === "undefined" || !config || !config.projectId) {
-            // Fallback a localStorage local si está disponible
-            if (currentTeam) {
-                try {
-                    const localPlayers = JSON.parse(localStorage.getItem(STORAGE_KEY_PLAYERS) || "[]");
-                    const teamPlayers = localPlayers.filter(p => p.team === currentTeam);
-                    if (teamPlayers.length > 0) renderRoster(teamPlayers, currentTeam);
-                } catch (_) {}
-            }
-            if (isShowcase) updateTeamsShowcase();
             return;
         }
 
-        // Conectar a Firestore
         try {
             const app = firebase.apps.length > 0 ? firebase.app() : firebase.initializeApp(config);
             const db = firebase.firestore();
@@ -188,7 +200,7 @@
                         if (!snapshot.empty) {
                             const players = [];
                             snapshot.forEach(doc => players.push(doc.data()));
-                            renderRoster(players, currentTeam);
+                            if (players.length > 0) renderRoster(players, currentTeam);
                         }
                     }, (err) => console.warn("[RosterLoader] Error al escuchar Firestore:", err));
             } else if (isShowcase) {
