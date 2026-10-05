@@ -485,3 +485,28 @@
         font-size:1.8rem;
     }
 }
+
+/* ==============================================================
+   DETALLES DINÁMICOS DE ROSTER (FIRESTORE)
+   ============================================================== */
+.member-info-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.member-role {
+    color: #DC136C;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(0, 0, 0, 0.65);
+    padding: 3px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(220, 19, 108, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
