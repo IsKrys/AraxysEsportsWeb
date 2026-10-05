@@ -41,6 +41,11 @@
             name: "ARAXYS NEXUS",
             badge: "DIVISIÓN SORPRESA",
             desc: "El roster que tomara por sorpresa a la comunidad de Valorant y Araxys Esports."
+        },
+        origin: {
+            name: "ARAXYS ORIGIN",
+            badge: "DIVISIÓN COMPETITIVA",
+            desc: "El equipo de Araxys que promete darle las mejores batallas a Wolf y sus rivales."
         }
     };
 
@@ -54,6 +59,7 @@
         if (path.includes("vanguard")) return "vanguard";
         if (path.includes("wolf")) return "wolf";
         if (path.includes("nexus")) return "nexus";
+        if (path.includes("origin")) return "origin";
         return null;
     }
 
@@ -124,7 +130,7 @@
     }
 
     /**
-     * Si estamos en teams.html (resumen general), asegurar que Nexus esté visible
+     * Si estamos en teams.html (resumen general), asegurar que Nexus y Origin estén visibles
      */
     function updateTeamsShowcase(allPlayers) {
         const nexusCard = document.querySelector('a[href="nexus.html"]');
@@ -132,6 +138,13 @@
             nexusCard.removeAttribute("hidden");
             const p = nexusCard.querySelector("p");
             if (p) p.textContent = "División Sorpresa";
+        }
+
+        const originCard = document.querySelector('a[href="origin.html"]');
+        if (originCard) {
+            originCard.removeAttribute("hidden");
+            const p = originCard.querySelector("p");
+            if (p) p.textContent = "División Competitiva";
         }
     }
 
