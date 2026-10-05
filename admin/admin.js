@@ -109,7 +109,14 @@ const INITIAL_PLAYERS = [
     { id: "p20", team: "wolf", nick: "Lobo", role: "Iniciador", agent: "Gekko", photo: "../img/equipos/equipos.webp", twitter: "", tracker: "" },
 
     // Roster Nexus (División Sorpresa)
-    { id: "p21", team: "nexus", nick: "Próximamente", role: "Roster Secreto", agent: "Por Anunciar", photo: "../img/equipos/equipos.webp", twitter: "@AraxysEsports", tracker: "" }
+    { id: "p21", team: "nexus", nick: "Próximamente", role: "Roster Secreto", agent: "Por Anunciar", photo: "../img/equipos/equipos.webp", twitter: "@AraxysEsports", tracker: "" },
+
+    // Roster Origin (División Competitiva)
+    { id: "p22", team: "origin", nick: "Shatsu", role: "Capitán", agent: "Omen", photo: "../img/equipos/equipos.webp", twitter: "@AraxysEsports", tracker: "" },
+    { id: "p23", team: "origin", nick: "Karane", role: "Duelista", agent: "Jett", photo: "../img/equipos/equipos.webp", twitter: "", tracker: "" },
+    { id: "p24", team: "origin", nick: "Kiri", role: "Iniciador", agent: "Fade", photo: "../img/equipos/equipos.webp", twitter: "", tracker: "" },
+    { id: "p25", team: "origin", nick: "Pip", role: "Controlador", agent: "Viper", photo: "../img/equipos/equipos.webp", twitter: "", tracker: "" },
+    { id: "p26", team: "origin", nick: "Owen", role: "Centinela", agent: "Killjoy", photo: "../img/equipos/equipos.webp", twitter: "", tracker: "" }
 ];
 
 const TEAM_DETAILS = {
@@ -137,6 +144,11 @@ const TEAM_DETAILS = {
         name: "ARAXYS NEXUS",
         badge: "DIVISIÓN SORPRESA",
         desc: "El roster que tomara por sorpresa a la comunidad de Valorant y Araxys Esports."
+    },
+    origin: {
+        name: "ARAXYS ORIGIN",
+        badge: "DIVISIÓN COMPETITIVA",
+        desc: "El equipo de Araxys que promete darle las mejores batallas a Wolf y sus rivales."
     }
 };
 
@@ -147,7 +159,8 @@ const ROLE_DEFINITIONS = {
     coach_titular: { label: "Coach / Capitán Titular", scope: "Solo Roster Araxys Titular", badge: "🛡️ Titular", team: "titular", color: "var(--brand-magenta)" },
     coach_vanguard: { label: "Coach / Capitán Vanguard", scope: "Solo Roster Araxys Vanguard", badge: "⚡ Vanguard", team: "vanguard", color: "#00D1FF" },
     coach_wolf: { label: "Coach / Capitán Wolf", scope: "Solo Roster Araxys Wolf", badge: "🐺 Wolf", team: "wolf", color: "#A855F7" },
-    coach_nexus: { label: "Coach / Capitán Nexus", scope: "Solo Roster Araxys Nexus", badge: "🔮 Nexus", team: "nexus", color: "#FF4655" }
+    coach_nexus: { label: "Coach / Capitán Nexus", scope: "Solo Roster Araxys Nexus", badge: "🔮 Nexus", team: "nexus", color: "#FF4655" },
+    coach_origin: { label: "Coach / Capitán Origin", scope: "Solo Roster Araxys Origin", badge: "⚔️ Origin", team: "origin", color: "#FF9900" }
 };
 
 const INITIAL_STAFF = [
@@ -173,7 +186,15 @@ class AdminStore {
             this.players = INITIAL_PLAYERS;
             this.savePlayers();
         } else {
-            this.players = savedPlayers;
+            // Asegurar que si hay nuevos jugadores iniciales (ej. Araxys Origin p22-p26), se integren sin perder ediciones
+            const existingIds = new Set(savedPlayers.map(p => p.id));
+            const missingInitial = INITIAL_PLAYERS.filter(p => !existingIds.has(p.id));
+            if (missingInitial.length > 0) {
+                this.players = [...savedPlayers, ...missingInitial];
+                this.savePlayers();
+            } else {
+                this.players = savedPlayers;
+            }
         }
 
         const savedStaff = this.load("araxys_staff_clean_v1", null);
@@ -1759,7 +1780,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            if (confirm("¿Deseas subir todos los datos oficiales (6 noticias, 21 jugadores y staff) a Google Cloud Firestore?")) {
+            if (confirm("¿Deseas subir todos los datos oficiales (6 noticias, 26 jugadores y staff) a Google Cloud Firestore?")) {
                 try {
                     showToast("Subiendo base de datos a Google Cloud Firestore...");
                     const count = await window.araxysCloud.seedInitialDatabase();
