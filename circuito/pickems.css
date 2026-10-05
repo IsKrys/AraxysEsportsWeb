@@ -1,0 +1,1267 @@
+/* ==========================================================================
+   ESTILOS OFICIALES: PICK'EMS ARAXYS CIRCUIT 2026
+   ========================================================================== */
+
+:root {
+    --pick-magenta: #DC136C;
+    --pick-gold: #FEE440;
+    --pick-silver: #D1D5DB;
+    --pick-bronze: #E09F67;
+    --pick-cyan: #00F5D4;
+    --pick-blue: #05D9E8;
+    --pick-bg: #0A0C12;
+    --pick-card-bg: rgba(18, 22, 32, 0.88);
+    --pick-border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+    background-color: var(--pick-bg);
+    color: #F0EFF4;
+}
+
+/* ==========================================================================
+   MODAL DE INSTRUCCIONES ("CARTELITO BONITO")
+   ========================================================================== */
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(8, 10, 16, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-card {
+    position: relative;
+    background: linear-gradient(145deg, rgba(22, 27, 40, 0.98) 0%, rgba(14, 17, 26, 0.98) 100%);
+    border: 1px solid rgba(220, 19, 108, 0.45);
+    border-radius: 28px;
+    max-width: 820px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 45px 40px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 50px rgba(220, 19, 108, 0.25);
+    transform: scale(0.92) translateY(20px);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.modal-backdrop.active .modal-card {
+    transform: scale(1) translateY(0);
+}
+
+.modal-decor-glow {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(220, 19, 108, 0.35) 0%, transparent 70%);
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 24px;
+    right: 26px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #C0C8D6;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.modal-close-btn:hover {
+    background: var(--pick-magenta);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.modal-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(220, 19, 108, 0.18);
+    border: 1px solid rgba(220, 19, 108, 0.5);
+    color: #FF5A9E;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+}
+
+.modal-header h2 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+}
+
+.modal-lead {
+    font-size: 1.05rem;
+    color: #A8B2C4;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Pasos */
+.modal-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.step-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 18px 20px;
+    background: rgba(14, 18, 28, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+}
+
+.step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: var(--pick-magenta);
+    color: white;
+    font-weight: 900;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.step-content p {
+    font-size: 0.86rem;
+    color: #929EB2;
+    line-height: 1.45;
+}
+
+/* Caja de premios */
+.modal-prizes-box {
+    background: radial-gradient(circle at top left, rgba(254, 228, 64, 0.12) 0%, rgba(14, 18, 28, 0.9) 80%);
+    border: 1px solid rgba(254, 228, 64, 0.35);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 30px;
+}
+
+.prizes-box-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.prizes-trophy {
+    font-size: 2.4rem;
+}
+
+.prizes-box-header h3 {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--pick-gold);
+    margin-bottom: 2px;
+}
+
+.prizes-box-header p {
+    font-size: 0.85rem;
+    color: #BAC3D2;
+}
+
+.prizes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.prize-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    background: rgba(10, 13, 20, 0.6);
+    border-radius: 12px;
+}
+
+.prize-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.prize-desc strong {
+    display: block;
+    font-size: 0.92rem;
+    color: white;
+    margin-bottom: 2px;
+}
+
+.prize-desc span {
+    font-size: 0.8rem;
+    color: #8E98A8;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-remember-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.84rem;
+    color: #8C96A6;
+    cursor: pointer;
+}
+
+.modal-remember-label input {
+    accent-color: var(--pick-magenta);
+    width: 16px;
+    height: 16px;
+}
+
+.btn-start-picks {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #FEE440 0%, #FF9E00 100%);
+    color: #111;
+    font-weight: 900;
+    font-size: 0.98rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(254, 228, 64, 0.35);
+    transition: all 0.25s ease;
+}
+
+.btn-start-picks:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(254, 228, 64, 0.55);
+}
+
+/* ==========================================================================
+   SECCION HERO PICK'EMS
+   ========================================================================== */
+
+.pickems-hero {
+    min-height: 48vh;
+    background: radial-gradient(circle at center top, rgba(220, 19, 108, 0.25) 0%, rgba(10, 12, 18, 0.98) 75%), url("../img/hero/news-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 130px 25px 50px;
+}
+
+.pickems-hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.pickems-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.back-circuit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #D2D8E4;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.back-circuit-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.pickems-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(0, 245, 212, 0.12);
+    border: 1px solid rgba(0, 245, 212, 0.4);
+    color: var(--pick-cyan);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.pickems-hero h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #FFF 40%, #DC136C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtext {
+    font-size: 1.15rem;
+    color: #A0AAB8;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pickems-action-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-action-help,
+.btn-action-reset {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-action-help {
+    background: rgba(254, 228, 64, 0.15);
+    border: 1px solid rgba(254, 228, 64, 0.4);
+    color: var(--pick-gold);
+}
+
+.btn-action-help:hover {
+    background: var(--pick-gold);
+    color: #111;
+}
+
+.btn-action-reset {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #A8B2C2;
+}
+
+.btn-action-reset:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #F87171;
+}
+
+.picks-counter-badge {
+    padding: 10px 18px;
+    border-radius: 12px;
+    background: rgba(14, 18, 26, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.88rem;
+    color: #BAC2D0;
+}
+
+.picks-counter-badge strong {
+    color: var(--pick-cyan);
+    font-size: 1rem;
+}
+
+/* ==========================================================================
+   MAIN PICK'EMS LAYOUT
+   ========================================================================== */
+
+.pickems-main {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 40px 25px 100px;
+}
+
+.section-heading {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 35px;
+}
+
+.heading-tag {
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--pick-magenta);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.section-heading h2 {
+    font-size: 2.3rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.section-heading p {
+    font-size: 1rem;
+    color: #929DB0;
+}
+
+/* Toast Box */
+.toast-box {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99998;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    border-radius: 14px;
+    background: rgba(18, 22, 34, 0.95);
+    border: 1px solid var(--pick-magenta);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--pick-magenta-glow);
+    color: white;
+    font-weight: 700;
+    font-size: 0.92rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+}
+
+.toast-box.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Banner de Estado Guardado */
+.saved-state-banner {
+    background: radial-gradient(circle at top left, rgba(0, 245, 212, 0.15) 0%, rgba(14, 18, 28, 0.95) 70%);
+    border: 1px solid rgba(0, 245, 212, 0.45);
+    border-radius: 20px;
+    padding: 26px 30px;
+    margin-bottom: 45px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 245, 212, 0.12);
+}
+
+.saved-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(0, 245, 212, 0.2);
+    color: var(--pick-cyan);
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.saved-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.saved-info-row p {
+    font-size: 1.05rem;
+    color: #D2D9E4;
+}
+
+.saved-time {
+    display: block;
+    font-size: 0.82rem;
+    color: #8C96A6;
+    margin-top: 4px;
+}
+
+.saved-actions-btns {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-copy-discord {
+    padding: 10px 20px;
+    border-radius: 12px;
+    background: #5865F2;
+    border: none;
+    color: white;
+    font-weight: 800;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-copy-discord:hover {
+    background: #4752c4;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+}
+
+.btn-join-discord {
+    padding: 10px 18px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-join-discord:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.btn-unlock-picks {
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    color: #A0AAB8;
+    font-weight: 700;
+    font-size: 0.84rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-unlock-picks:hover {
+    border-color: var(--pick-magenta);
+    color: #FF5A9E;
+}
+
+/* ==========================================================================
+   SECCION PODIO (1º AL 4º LUGAR)
+   ========================================================================== */
+
+.podium-section {
+    margin-bottom: 70px;
+}
+
+.podium-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.podium-slot {
+    background: var(--pick-card-bg);
+    border: 2px dashed rgba(255, 255, 255, 0.12);
+    border-radius: 22px;
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    min-height: 280px;
+    transition: all 0.3s ease;
+}
+
+.podium-slot.slot-first {
+    border-color: rgba(254, 228, 64, 0.35);
+}
+
+.podium-slot.slot-first:hover {
+    box-shadow: 0 15px 40px rgba(254, 228, 64, 0.2);
+}
+
+.podium-slot.slot-second {
+    border-color: rgba(209, 213, 219, 0.3);
+}
+
+.podium-slot.slot-third {
+    border-color: rgba(224, 159, 103, 0.3);
+}
+
+.podium-slot.slot-fourth {
+    border-color: rgba(0, 245, 212, 0.25);
+}
+
+.slot-ribbon {
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.slot-first .slot-ribbon { background: rgba(254, 228, 64, 0.15); color: var(--pick-gold); border: 1px solid rgba(254, 228, 64, 0.35); }
+.slot-second .slot-ribbon { background: rgba(209, 213, 219, 0.12); color: var(--pick-silver); border: 1px solid rgba(209, 213, 219, 0.3); }
+.slot-third .slot-ribbon { background: rgba(224, 159, 103, 0.14); color: var(--pick-bronze); border: 1px solid rgba(224, 159, 103, 0.35); }
+.slot-fourth .slot-ribbon { background: rgba(0, 245, 212, 0.12); color: var(--pick-cyan); border: 1px solid rgba(0, 245, 212, 0.3); }
+
+.slot-points-tag {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #7E899A;
+    margin-bottom: 15px;
+}
+
+.slot-card-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #6C7789;
+    padding: 20px 10px;
+}
+
+.placeholder-icon {
+    font-size: 2.5rem;
+    opacity: 0.4;
+    margin-bottom: 8px;
+}
+
+.placeholder-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #8C96A6;
+    margin-bottom: 4px;
+}
+
+.placeholder-hint {
+    font-size: 0.75rem;
+    color: #606B7C;
+}
+
+/* Estado Asignado dentro de un slot */
+.slot-filled-card {
+    width: 100%;
+    background: rgba(14, 18, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    animation: slotFillIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes slotFillIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.filled-team-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 14px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.filled-team-name {
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.filled-team-motto {
+    font-size: 0.75rem;
+    color: #8E98A8;
+    margin-bottom: 12px;
+}
+
+.btn-remove-slot {
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #F87171;
+    font-size: 0.75rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-remove-slot:hover {
+    background: #EF4444;
+    color: white;
+}
+
+/* ==========================================================================
+   SECCION BANCO DE EQUIPOS (LOS 4 PARTICIPANTES)
+   ========================================================================== */
+
+.teams-pool-section {
+    margin-bottom: 70px;
+}
+
+.teams-pool-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.team-pool-card {
+    background: var(--pick-card-bg);
+    border: 1px solid var(--pick-border);
+    border-radius: 22px;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-pool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.team-pool-card.vanguard { border-top: 4px solid var(--pick-magenta); }
+.team-pool-card.vanguard:hover { border-color: var(--pick-magenta); box-shadow: 0 15px 40px rgba(220, 19, 108, 0.25); }
+
+.team-pool-card.wolf { border-top: 4px solid var(--pick-blue); }
+.team-pool-card.wolf:hover { border-color: var(--pick-blue); box-shadow: 0 15px 40px rgba(5, 217, 232, 0.25); }
+
+.team-pool-card.prime { border-top: 4px solid var(--pick-gold); }
+.team-pool-card.prime:hover { border-color: var(--pick-gold); box-shadow: 0 15px 40px rgba(254, 228, 64, 0.25); }
+
+.team-pool-card.origin { border-top: 4px solid var(--pick-cyan); }
+.team-pool-card.origin:hover { border-color: var(--pick-cyan); box-shadow: 0 15px 40px rgba(0, 245, 212, 0.25); }
+
+/* Cuando un equipo ya esta asignado en el podio */
+.team-pool-card.assigned {
+    opacity: 0.6;
+    border-style: dashed;
+    transform: none !important;
+}
+
+.team-card-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.team-pool-logo {
+    width: 65px;
+    height: 65px;
+    border-radius: 16px;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: #111;
+}
+
+.team-assignment-badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #BAC2D0;
+    text-transform: uppercase;
+}
+
+.team-pool-card.assigned .team-assignment-badge {
+    background: rgba(0, 245, 212, 0.18);
+    color: var(--pick-cyan);
+    border: 1px solid rgba(0, 245, 212, 0.4);
+}
+
+.team-pool-info h3 {
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.team-pool-motto {
+    font-size: 0.82rem;
+    color: #929EB2;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.team-pool-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.t-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #BAC2D0;
+}
+
+.btn-assign-team {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    font-weight: 800;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-assign-team:hover {
+    background: var(--pick-magenta);
+    border-color: var(--pick-magenta);
+    box-shadow: 0 6px 20px var(--pick-magenta-glow);
+}
+
+.team-pool-card.assigned .btn-assign-team {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #727D8E;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   SECCION PREDICCION MVP (RADIO BUTTONS DECORADOS)
+   ========================================================================== */
+
+.mvp-prediction-section {
+    margin-bottom: 70px;
+}
+
+.mvp-options-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.mvp-radio-card {
+    cursor: pointer;
+    display: block;
+}
+
+.mvp-radio-card input {
+    display: none;
+}
+
+.mvp-radio-box {
+    background: var(--pick-card-bg);
+    border: 1px solid var(--pick-border);
+    border-radius: 18px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    transition: all 0.25s ease;
+}
+
+.mvp-radio-card:hover .mvp-radio-box {
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.mvp-thumb {
+    width: 55px;
+    height: 55px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.mvp-radio-text strong {
+    display: block;
+    font-size: 1.05rem;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.mvp-radio-text span {
+    font-size: 0.78rem;
+    color: #8C96A6;
+    line-height: 1.4;
+    display: block;
+    margin-bottom: 14px;
+}
+
+.radio-check-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.mvp-radio-card input:checked + .mvp-radio-box {
+    border-color: var(--pick-magenta);
+    background: rgba(220, 19, 108, 0.12);
+    box-shadow: 0 10px 30px rgba(220, 19, 108, 0.25);
+}
+
+.mvp-radio-card input:checked + .mvp-radio-box .radio-check-dot {
+    border-color: var(--pick-magenta);
+    background: var(--pick-magenta);
+    box-shadow: 0 0 10px var(--pick-magenta);
+}
+
+.mvp-radio-card input:checked + .mvp-radio-box .radio-check-dot::after {
+    content: "✓";
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 900;
+}
+
+/* ==========================================================================
+   SECCION FORMULARIO DE BLOQUEO Y REGISTRO
+   ========================================================================== */
+
+.submission-section {
+    margin-bottom: 80px;
+}
+
+.submission-card {
+    background: radial-gradient(circle at top right, rgba(220, 19, 108, 0.18) 0%, rgba(16, 20, 30, 0.96) 65%);
+    border: 1px solid rgba(220, 19, 108, 0.35);
+    border-radius: 26px;
+    padding: 45px 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.sub-badge {
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: var(--pick-magenta);
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.submission-header h2 {
+    font-size: 2.3rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.submission-header p {
+    color: #A0AAB8;
+    font-size: 1.02rem;
+    margin-bottom: 30px;
+}
+
+.form-inputs-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #E2E8F0;
+    margin-bottom: 8px;
+}
+
+.input-group .req {
+    color: var(--pick-magenta);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 14px;
+    background: rgba(10, 13, 20, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--pick-magenta);
+    box-shadow: 0 0 15px var(--pick-magenta-glow);
+    background: rgba(12, 16, 24, 0.95);
+}
+
+.input-help {
+    font-size: 0.78rem;
+    color: #7A8696;
+    display: block;
+    margin-top: 6px;
+}
+
+/* Validation status box */
+.validation-status-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 22px;
+    border-radius: 14px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.validation-status-box.valid {
+    background: rgba(0, 245, 212, 0.1);
+    border-color: rgba(0, 245, 212, 0.35);
+}
+
+.status-icon-wrap {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.status-text-wrap strong {
+    display: block;
+    font-size: 0.98rem;
+    color: white;
+    margin-bottom: 2px;
+}
+
+.status-text-wrap p {
+    font-size: 0.85rem;
+    color: #9AA6B8;
+    margin: 0;
+}
+
+.form-actions-row {
+    margin-bottom: 20px;
+}
+
+.btn-lock-picks {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 18px 30px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #DC136C 0%, #FF5A9E 100%);
+    color: white;
+    font-weight: 900;
+    font-size: 1.12rem;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 35px var(--pick-magenta-glow);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-lock-picks:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 15px 45px rgba(220, 19, 108, 0.6);
+}
+
+.btn-lock-picks:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+}
+
+.privacy-note {
+    font-size: 0.82rem;
+    color: #8C96A6;
+    text-align: center;
+}
+
+/* ==========================================================================
+   SECCION RECOMPENSAS DESTACADAS
+   ========================================================================== */
+
+.prizes-showcase-section {
+    margin-bottom: 60px;
+}
+
+.prizes-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.prize-showcase-card {
+    background: var(--pick-card-bg);
+    border: 1px solid var(--pick-border);
+    border-radius: 22px;
+    padding: 35px 28px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.prize-showcase-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(254, 228, 64, 0.4);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(254, 228, 64, 0.15);
+}
+
+.prize-card-icon {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 15px rgba(254, 228, 64, 0.3));
+}
+
+.prize-showcase-card h3 {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.prize-showcase-card p {
+    font-size: 0.9rem;
+    color: #98A4B6;
+    line-height: 1.55;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .podium-grid,
+    .teams-pool-grid,
+    .mvp-options-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .prizes-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .pickems-hero {
+        padding: 110px 20px 40px;
+    }
+
+    .pickems-hero h1 {
+        font-size: 2.7rem;
+    }
+
+    .modal-card {
+        padding: 30px 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .modal-steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-inputs-row {
+        grid-template-columns: 1fr;
+    }
+
+    .podium-grid,
+    .teams-pool-grid,
+    .mvp-options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .submission-card {
+        padding: 30px 20px;
+    }
+
+    .saved-info-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn-copy-discord,
+    .btn-join-discord,
+    .btn-unlock-picks {
+        width: 100%;
+        text-align: center;
+    }
+}

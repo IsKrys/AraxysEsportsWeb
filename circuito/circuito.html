@@ -14,27 +14,27 @@
 
     <!-- INICIO SEO: metadatos para buscadores y redes sociales. -->
 
-    <meta name="description" content="Descubre Araxys Circuit, el espacio competitivo de torneos y progresion de Araxys Esports.">
+    <meta name="description" content="Araxys Circuit: Sigue el calendario, las posiciones oficiales de Challonge, líderes de tabla, MVP del torneo, transmisiones en YouTube/Twitch y participa en el Pick'Ems.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://araxys.xyz/circuito/circuito.html">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_MX">
     <meta property="og:site_name" content="Araxys Esports">
-    <meta property="og:title" content="Araxys Circuit">
-    <meta property="og:description" content="Descubre Araxys Circuit, el espacio competitivo de torneos y progresion de Araxys Esports.">
+    <meta property="og:title" content="Araxys Circuit | Calendario, Posiciones, MVP y Transmisiones">
+    <meta property="og:description" content="Sigue el calendario en vivo, tabla de posiciones de Challonge, líderes del circuito, estadísticas MVP y participa en el Pick'Ems oficial de Araxys Circuit.">
     <meta property="og:url" content="https://araxys.xyz/circuito/circuito.html">
     <meta property="og:image" content="https://araxys.xyz/img/seo/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Araxys Esports">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Araxys Circuit">
-    <meta name="twitter:description" content="Descubre Araxys Circuit, el espacio competitivo de torneos y progresion de Araxys Esports.">
+    <meta name="twitter:title" content="Araxys Circuit | Calendario, Posiciones y Transmisiones">
+    <meta name="twitter:description" content="Sigue el calendario en vivo, tabla de posiciones de Challonge, líderes del circuito, estadísticas MVP y transmisiones en vivo.">
     <meta name="twitter:image" content="https://araxys.xyz/img/seo/og-image.jpg">
 
     <!-- FIN SEO -->
 
-    <title>Araxys Circuit</title>
+    <title>Araxys Circuit | Calendario, Posiciones y Transmisiones</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon/araxys-favicon.ico">
 
     <link rel="stylesheet" href="../css/global.css">
@@ -51,8 +51,9 @@
 <!-- INICIO HEADER: barra superior con logo y navegacion. -->
 
 <header>
+
         <a href="../index.html" class="logo">
-            <img src="../img/logos/logo.png" alt="Araxys">
+            <img src="../img/logos/logo.png" alt="Araxys Esports">
         </a>
 
 <!-- INICIO NAVEGACION: enlaces principales del sitio. -->
@@ -61,7 +62,8 @@
             <a href="../news/news.html">Noticias</a>
             <a href="../torneos/torneos.html">Torneos</a>
             <a href="../teams/teams.html">Araxys Teams</a>
-            <a href="../about/about.html">Sobre Nosotros</a>
+            <a href="circuito.html" class="nav-active">Araxys Circuit</a>
+            <a href="pickems.html" class="nav-pickems-pill">🏆 Pick'Ems</a>
             <a href="../apply/apply.html">Inscribirse</a>
         </nav>
         <!-- FIN NAVEGACION -->
@@ -73,22 +75,508 @@
 <!-- INICIO SECCION: circuit-hero -->
 
 <section class="circuit-hero">
+
+        <div class="hero-particles" aria-hidden="true"></div>
+
         <div class="hero-overlay">
-            <span class="circuit-tag">CIRCUITO</span>
+
+            <div class="circuit-badge-wrapper">
+                <span class="circuit-tag">LIGA OFICIAL 2026</span>
+                <span class="circuit-status-live">
+                    <span class="live-pulse-dot"></span> EN COMPETICIÓN
+                </span>
+            </div>
+
             <h1>ARAXYS CIRCUIT</h1>
-            <p>Bienvenido al circuito de Araxys Esports. Compite - aprende y gana.</p>
+
+            <p class="hero-description">
+                El epicentro competitivo de Araxys Esports. 4 escuadras élite en contienda por la gloria: tabla de posiciones en tiempo real, seguimiento de líderes, MVP individual y transmisiones oficiales.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#calendario" class="btn-circuit-primary">
+                    <span class="btn-icon">📅</span> Ver Calendario y Posiciones
+                </a>
+                <a href="pickems.html" class="btn-circuit-pickems">
+                    <span class="btn-icon">🏆</span> Jugar Pick'Ems Oficial
+                    <span class="btn-sparkle">¡PREMIOS!</span>
+                </a>
+                <a href="#transmisiones" class="btn-circuit-secondary">
+                    <span class="btn-icon">📺</span> Transmisiones en Vivo
+                </a>
+            </div>
+
+            <!-- Resumen rapido del circuito -->
+            <div class="hero-stats-ribbon">
+                <div class="ribbon-item">
+                    <span class="ribbon-value">4</span>
+                    <span class="ribbon-label">Equipos Élite</span>
+                </div>
+                <div class="ribbon-separator"></div>
+                <div class="ribbon-item">
+                    <span class="ribbon-value">VALORANT</span>
+                    <span class="ribbon-label">Modalidad 5v5</span>
+                </div>
+                <div class="ribbon-separator"></div>
+                <div class="ribbon-item">
+                    <span class="ribbon-value">CHALLONGE</span>
+                    <span class="ribbon-label">Fixture Oficial</span>
+                </div>
+                <div class="ribbon-separator"></div>
+                <div class="ribbon-item">
+                    <span class="ribbon-value">EN DIRECTO</span>
+                    <span class="ribbon-label">YouTube & Twitch</span>
+                </div>
+            </div>
+
         </div>
+
+        <div class="scroll-indicator">&darr;</div>
+
     </section>
-    <!-- FIN SECCION -->
 
-<!-- INICIO CONTENIDO PRINCIPAL. -->
+    <!-- FIN SECCION HERO -->
 
-<main class="circuit-workspace">
+<!-- INICIO BARRA DE NAVEGACION INTERNA DEL CIRCUITO -->
 
-        <div class="circuit-placeholder">
-            <p>El circuito aun no se encuentra disponible, estamos trabajando en ello para darte una experiencia completa con buena organizacion y el mejor ambiente competitivo.</p>
-            <a href="../reglamento circuito/reglamento-circuito.html" class="circuit-rules-btn">Ver reglamento del circuito</a>
+<nav class="circuit-subnav" aria-label="Navegación del Circuito">
+        <div class="subnav-container">
+            <a href="#calendario" class="subnav-link active">
+                <span>📅</span> Calendario & Posiciones
+            </a>
+            <a href="#destacados" class="subnav-link">
+                <span>👑</span> Líder & MVP
+            </a>
+            <a href="#transmisiones" class="subnav-link">
+                <span>📡</span> Transmisiones Live
+            </a>
+            <a href="pickems.html" class="subnav-link highlight">
+                <span>🏆</span> Pick'Ems Predicciones
+            </a>
+            <a href="../reglamento circuito/reglamento-circuito.html" class="subnav-link">
+                <span>📜</span> Reglamento
+            </a>
         </div>
+    </nav>
+
+    <!-- FIN BARRA DE NAVEGACION INTERNA -->
+
+<!-- INICIO CONTENIDO PRINCIPAL -->
+
+<main class="circuit-main">
+
+        <!-- INICIO SECCION: CALENDARIO Y POSICIONES (CHALLONGE) -->
+        <section id="calendario" class="circuit-section">
+
+            <div class="section-title-wrap">
+                <span class="section-eyebrow">TABLA Y CRUCES OFICIALES</span>
+                <h2>Calendario y Posiciones</h2>
+                <p>
+                    Sigue en tiempo real las llaves, fechas de enfrentamientos y puntuaciones sincronizadas directamente con Challonge.
+                </p>
+            </div>
+
+            <!-- Contenedor premium para el modulo de Challonge -->
+            <div class="challonge-wrapper-card">
+
+                <div class="challonge-top-bar">
+                    <div class="challonge-status-indicator">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Módulo Challonge en Vivo</span>
+                    </div>
+
+                    <div class="challonge-format-tags">
+                        <span class="format-tag">Temporada Regular & Playoffs</span>
+                        <span class="format-tag">Bo3 Series</span>
+                    </div>
+
+                    <div class="challonge-actions">
+                        <a href="https://challonge.com/es/AraxysCircuit" target="_blank" rel="noopener noreferrer" class="challonge-link-btn" title="Abrir en challonge.com">
+                            Ver en Challonge.com ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Modulo Challonge proporcionado por el usuario -->
+                <div class="challonge-iframe-container">
+                    <iframe src="https://challonge.com/es/AraxysCircuit/module" width="100%" height="520" frameborder="0" scrolling="auto" allowtransparency="true" class="challonge-frame" title="Araxys Circuit Challonge"></iframe>
+                </div>
+
+                <div class="challonge-bottom-bar">
+                    <div class="challonge-note">
+                        <span class="note-icon">ℹ️</span>
+                        <span>Las posiciones, horarios y marcadores se actualizan automáticamente al término de cada partida oficial.</span>
+                    </div>
+                    <div class="challonge-quick-links">
+                        <a href="../reglamento circuito/reglamento-circuito.html" class="quick-rule-link">Consultar Reglas de Desempate →</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        <!-- FIN SECCION CALENDARIO -->
+
+        <!-- INICIO SECCION: PANELES DESTACADOS (LIDER Y MVP) -->
+        <section id="destacados" class="circuit-section">
+
+            <div class="section-title-wrap">
+                <span class="section-eyebrow">RENDIMIENTO EXCEPCIONAL</span>
+                <h2>Paneles Destacados del Circuito</h2>
+                <p>
+                    El equipo que domina la cima de la tabla y la figura individual más determinante en frags e impacto.
+                </p>
+            </div>
+
+            <div class="spotlight-grid">
+
+                <!-- PANEL 1: LIDER DE LA TABLA (EQUIPO CON MAS PUNTOS / PRIMERO) -->
+                <article class="spotlight-card leader-card">
+
+                    <div class="spotlight-glow" aria-hidden="true"></div>
+
+                    <div class="spotlight-header">
+                        <div class="spotlight-badge badge-leader">
+                            <span class="badge-icon">👑</span> 1º LUGAR EN LA TABLA
+                        </div>
+                        <span class="spotlight-subtitle">Equipo con Mayor Puntaje</span>
+                    </div>
+
+                    <div class="spotlight-body">
+
+                        <div class="team-showcase">
+                            <div class="team-emblem-wrap">
+                                <img src="../img/teams/vanguard.webp" alt="Araxys Vanguard" class="team-emblem-img">
+                                <div class="emblem-rank-tag">#1</div>
+                            </div>
+                            <div class="team-info-wrap">
+                                <span class="team-league-tag">ARAXYS CIRCUIT 2026</span>
+                                <h3>Araxys Vanguard</h3>
+                                <p class="team-motto">"El escudo competitivo de la comunidad"</p>
+                            </div>
+                        </div>
+
+                        <!-- Estadisticas clave del lider -->
+                        <div class="stats-matrix">
+                            <div class="stat-box primary">
+                                <span class="stat-number">12</span>
+                                <span class="stat-label">Puntos Totales</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-number">4 - 0</span>
+                                <span class="stat-label">Récord (V - D)</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Efectividad</span>
+                            </div>
+                            <div class="stat-box highlight">
+                                <span class="stat-number">+28</span>
+                                <span class="stat-label">Diferencial Rondas</span>
+                            </div>
+                        </div>
+
+                        <!-- Barra de estatus competitivo -->
+                        <div class="status-progress-card">
+                            <div class="progress-info">
+                                <span>Pase asegurado a la Gran Final</span>
+                                <span class="progress-streak">🔥 Racha: 4 Victorias</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Mini Roster Preview -->
+                        <div class="roster-snippet">
+                            <span class="snippet-label">Titulares Destacados:</span>
+                            <div class="roster-tags">
+                                <span class="roster-tag captain">👑 DIXZzELS (C)</span>
+                                <span class="roster-tag">NIGHT</span>
+                                <span class="roster-tag">KARETSAS</span>
+                                <span class="roster-tag">CROIX</span>
+                                <span class="roster-tag">KRYS</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="spotlight-footer">
+                        <a href="../teams/vanguard.html" class="spotlight-btn btn-view-team">
+                            Ver Perfil del Roster Vanguard →
+                        </a>
+                    </div>
+
+                </article>
+
+                <!-- PANEL 2: MVP DEL CIRCUITO (MAXIMO ARTILLERO / KILL LEADER INDEPENDIENTE) -->
+                <article class="spotlight-card mvp-card">
+
+                    <div class="spotlight-glow" aria-hidden="true"></div>
+
+                    <div class="spotlight-header">
+                        <div class="spotlight-badge badge-mvp">
+                            <span class="badge-icon">⭐</span> MVP DEL CIRCUITO
+                        </div>
+                        <span class="spotlight-subtitle">Máximo Anotador de Kills</span>
+                    </div>
+
+                    <div class="spotlight-body">
+
+                        <div class="player-showcase">
+                            <div class="player-avatar-wrap">
+                                <img src="../img/equipos/TitularTarjeta1.webp" alt="KRYS MVP" class="player-avatar-img">
+                                <div class="mvp-star-badge">MVP</div>
+                            </div>
+                            <div class="player-info-wrap">
+                                <span class="player-team-tag">ARAXYS VANGUARD • DUELISTA</span>
+                                <h3>KRYS</h3>
+                                <p class="player-specialty">"Precisión milimétrica y agresividad táctica"</p>
+                            </div>
+                        </div>
+
+                        <!-- Estadisticas del MVP -->
+                        <div class="stats-matrix">
+                            <div class="stat-box primary mvp-accent">
+                                <span class="stat-number">142</span>
+                                <span class="stat-label">Kills Totales</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-number">1.68</span>
+                                <span class="stat-label">K/D Ratio</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-number">294.5</span>
+                                <span class="stat-label">ACS Promedio</span>
+                            </div>
+                            <div class="stat-box highlight">
+                                <span class="stat-number">36.4%</span>
+                                <span class="stat-label">% Headshot</span>
+                            </div>
+                        </div>
+
+                        <!-- Mencion al logro individual -->
+                        <div class="mvp-highlight-box">
+                            <div class="highlight-quote">
+                                <strong>Récord de la Temporada:</strong> 35 eliminaciones en una sola serie Bo3 y 18 First Bloods registrados a lo largo del circuito.
+                            </div>
+                            <div class="mvp-independent-note">
+                                <span class="badge-independent">Independiente de la tabla general</span>
+                                <small>Premiando el rendimiento individual más letal de la liga.</small>
+                            </div>
+                        </div>
+
+                        <!-- Mini stats secundarias -->
+                        <div class="mvp-quick-stats">
+                            <div class="quick-stat-item">
+                                <span class="q-label">Agentes Frecuentes:</span>
+                                <span class="q-val">Jett / Reyna / Raze</span>
+                            </div>
+                            <div class="quick-stat-item">
+                                <span class="q-label">Clutches Ganados:</span>
+                                <span class="q-val">7 Rondas Clave</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="spotlight-footer">
+                        <a href="pickems.html" class="spotlight-btn btn-vote-mvp">
+                            ¿Será tu MVP? Vota en Pick'Ems ⚡
+                        </a>
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+        <!-- FIN SECCION PANELES DESTACADOS -->
+
+        <!-- INICIO SECCION: TRANSMISIONES OFICIALES (YOUTUBE & TWITCH) -->
+        <section id="transmisiones" class="circuit-section">
+
+            <div class="section-title-wrap">
+                <span class="section-eyebrow">DÓNDE VER LA LIGA</span>
+                <h2>Transmisiones en Vivo y Canales Oficiales</h2>
+                <p>
+                    No te pierdas ningún enfrentamiento de Araxys Circuit. Sintoniza las transmisiones oficiales con casteo en directo, análisis de jugadas y chat en tiempo real.
+                </p>
+            </div>
+
+            <!-- Grilla de Canales de Streaming -->
+            <div class="broadcast-grid">
+
+                <!-- TARJETA TWITCH -->
+                <div class="broadcast-card twitch-card">
+
+                    <div class="broadcast-banner-decor twitch-decor" aria-hidden="true"></div>
+
+                    <div class="broadcast-card-header">
+                        <div class="platform-brand">
+                            <!-- Twitch SVG Logo -->
+                            <svg class="platform-icon" viewBox="0 0 24 24" width="38" height="38" fill="currentColor">
+                                <path d="M2.149 0L.537 4.119v16.836h5.731V24h3.224l3.045-3.045h4.657l6.269-6.269V0H2.149zm19.164 13.612l-3.582 3.582H12l-3.045 3.045v-3.045H4.119V2.149h17.194v11.463zm-3.582-7.343v6.09h-2.149v-6.09h2.149zm-5.731 0v6.09H9.851v-6.09h2.151z"/>
+                            </svg>
+                            <div>
+                                <span class="platform-tag">DIRECTO PRINCIPAL</span>
+                                <h3>Twitch Oficial</h3>
+                            </div>
+                        </div>
+                        <span class="live-pill">🔴 EN DIRECTO</span>
+                    </div>
+
+                    <p class="broadcast-desc">
+                        Vive la experiencia esports con chat en vivo, emotes personalizados de la comunidad, predicciones de canal y comentarios del staff oficial.
+                    </p>
+
+                    <div class="broadcast-perks">
+                        <div class="perk-item">
+                            <span class="perk-check">✓</span>
+                            <span>Casteo y narración en tiempo real</span>
+                        </div>
+                        <div class="perk-item">
+                            <span class="perk-check">✓</span>
+                            <span>Chat interactivo y encuestas en vivo</span>
+                        </div>
+                        <div class="perk-item">
+                            <span class="perk-check">✓</span>
+                            <span>Predicciones con puntos de canal</span>
+                        </div>
+                    </div>
+
+                    <div class="broadcast-schedule-chip">
+                        <span class="schedule-icon">⏰</span>
+                        <span>Fines de semana • 6:00 PM CST (México)</span>
+                    </div>
+
+                    <a href="https://www.twitch.tv" target="_blank" rel="noopener noreferrer" class="broadcast-action-btn twitch-action">
+                        <span>Ir a la Transmisión en Twitch</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+
+                </div>
+
+                <!-- TARJETA YOUTUBE -->
+                <div class="broadcast-card youtube-card">
+
+                    <div class="broadcast-banner-decor youtube-decor" aria-hidden="true"></div>
+
+                    <div class="broadcast-card-header">
+                        <div class="platform-brand">
+                            <!-- YouTube SVG Logo -->
+                            <svg class="platform-icon" viewBox="0 0 24 24" width="38" height="38" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                            <div>
+                                <span class="platform-tag">VODS & DIRECTOS 4K</span>
+                                <h3>YouTube Oficial</h3>
+                            </div>
+                        </div>
+                        <span class="vod-pill">▶️ REPETICIONES & VODS</span>
+                    </div>
+
+                    <p class="broadcast-desc">
+                        Transmisión simultánea en alta fidelidad 1080p60 / 4K, con acceso instantáneo a repeticiones completas (VODs), mejores jugadas y clips destacados.
+                    </p>
+
+                    <div class="broadcast-perks">
+                        <div class="perk-item">
+                            <span class="perk-check">✓</span>
+                            <span>Transmisión en directo en 1080p60 y 4K</span>
+                        </div>
+                        <div class="perk-item">
+                            <span class="perk-check">✓</span>
+                            <span>VODs completos disponibles tras cada jornada</span>
+                        </div>
+                        <div class="perk-item">
+                            <span class="perk-check">✓</span>
+                            <span>Highlights, mejores frags y compilaciones</span>
+                        </div>
+                    </div>
+
+                    <div class="broadcast-schedule-chip">
+                        <span class="schedule-icon">🎬</span>
+                        <span>Directos simultáneos y resúmenes semanales</span>
+                    </div>
+
+                    <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="broadcast-action-btn youtube-action">
+                        <span>Ir al Canal de YouTube</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Tira informativa de alertas y discord -->
+            <div class="stream-alert-box">
+                <div class="alert-content">
+                    <span class="alert-emoji">🔔</span>
+                    <div>
+                        <strong>¿Quieres recibir aviso instantáneo cuando empiece una partida?</strong>
+                        <p>Únete a nuestro Discord y activa el rol de Notificaciones para enterarte al instante de los enfrentamientos de Araxys Circuit.</p>
+                    </div>
+                </div>
+                <a href="https://discord.gg/Fc2QdZGAyJ" target="_blank" rel="noopener noreferrer" class="discord-alert-btn">
+                    Unirse al Discord Oficial →
+                </a>
+            </div>
+
+        </section>
+        <!-- FIN SECCION TRANSMISIONES -->
+
+        <!-- INICIO SECCION: TEASER CALLOUT PICK'EMS -->
+        <section class="circuit-section pickems-cta-section">
+
+            <div class="pickems-cta-card">
+
+                <div class="cta-badge">SISTEMA EXCLUSIVO DE PREDICCIONES</div>
+
+                <div class="cta-content-grid">
+                    <div class="cta-text-area">
+                        <h2>¿Tienes lo necesario para predecir al Campeón?</h2>
+                        <p>
+                            ¡Demuestra tu conocimiento de la escena! Ordena el podio entre los 4 equipos contendientes (<strong>Araxys Vanguard</strong>, <strong>Araxys Wolf</strong>, <strong>Araxys Prime</strong> y <strong>Araxys Origin</strong>) y acierta al MVP del torneo.
+                        </p>
+
+                        <div class="cta-prizes-preview">
+                            <div class="prize-pill">
+                                <span>🥇 Mención de Honor en la Home</span>
+                            </div>
+                            <div class="prize-pill">
+                                <span>🎭 Rol Exclusivo en Discord</span>
+                            </div>
+                            <div class="prize-pill">
+                                <span>🎮 Random Game Key Steam/PC</span>
+                            </div>
+                        </div>
+
+                        <div class="cta-actions">
+                            <a href="pickems.html" class="btn-cta-pickems">
+                                ⚡ ¡Participar en el Pick'Ems Ahora!
+                            </a>
+                            <span class="cta-subnote">100% Gratuito y Abierto a la Comunidad</span>
+                        </div>
+                    </div>
+
+                    <div class="cta-visual-area">
+                        <div class="trophy-hologram">
+                            <span class="hologram-icon">🏆</span>
+                            <div class="hologram-teams-strip">
+                                <span class="h-team vanguard">VANGUARD</span>
+                                <span class="h-team wolf">WOLF</span>
+                                <span class="h-team prime">PRIME</span>
+                                <span class="h-team origin">ORIGIN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        <!-- FIN SECCION CALLOUT PICK'EMS -->
 
     </main>
 
@@ -99,20 +587,29 @@
 <!-- INICIO FOOTER: enlaces y datos de cierre. -->
 
 <footer>
-        <img src="../img/logos/logo.png" alt="Araxys">
+
+        <img src="../img/logos/logo.png" alt="Araxys Esports">
+
         <div class="footer-links">
             <a href="../news/news.html">Noticias</a>
-            <a href="../news/news.html#instalock">InstaLock</a>
+            <a href="../about/about.html">Sobre Nosotros</a>
             <a href="../teams/teams.html">Teams</a>
             <a href="../torneos/torneos.html">Torneos</a>
+            <a href="circuito.html">Araxys Circuit</a>
+            <a href="pickems.html">Pick'Ems</a>
         </div>
+
         <div class="footer-social">
-            <a href="#">YouTube</a>
+            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="https://www.twitch.tv" target="_blank" rel="noopener noreferrer">Twitch</a>
             <a href="#">X</a>
             <a href="https://discord.gg/Fc2QdZGAyJ" target="_blank" rel="noopener noreferrer">Discord</a>
         </div>
+
         <p>&copy; 2026 Araxys Esports. Todos los derechos reservados.</p>
+
     </footer>
+
     <!-- FIN FOOTER -->
 
 </body>

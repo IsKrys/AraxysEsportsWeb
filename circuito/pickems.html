@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- INICIO HEAD: metadatos, titulo, fuentes y estilos. -->
+
+<head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- INICIO SEO: metadatos para buscadores y redes sociales. -->
+
+    <meta name="description" content="Pick'Ems Oficial de Araxys Circuit: Pronostica las posiciones de los 4 equipos (Vanguard, Wolf, Prime y Origin), acierta al MVP y gana premios exclusivos.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://araxys.xyz/circuito/pickems.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="Araxys Esports">
+    <meta property="og:title" content="Pick'Ems Araxys Circuit 2026 | Predicciones Oficiales">
+    <meta property="og:description" content="Pronostica las posiciones del Araxys Circuit. Gana mención en la web de Araxys, rol exclusivo en Discord y Random Game Key.">
+    <meta property="og:url" content="https://araxys.xyz/circuito/pickems.html">
+    <meta property="og:image" content="https://araxys.xyz/img/seo/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pick'Ems Araxys Circuit">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pick'Ems Araxys Circuit 2026">
+    <meta name="twitter:description" content="Pronostica el podio de los 4 equipos y gana premios exclusivos en Araxys Esports.">
+    <meta name="twitter:image" content="https://araxys.xyz/img/seo/og-image.jpg">
+
+    <!-- FIN SEO -->
+
+    <title>Pick'Ems Araxys Circuit 2026 | Predicciones y Premios</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon/araxys-favicon.ico">
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="circuito.css">
+    <link rel="stylesheet" href="pickems.css">
+
+</head>
+
+<!-- FIN HEAD -->
+
+<body>
+
+    <div class="page-transition"></div>
+
+    <!-- ====================================================================
+         CARTELITO BONITO: MODAL POPUP DE INSTRUCCIONES Y PREMIOS
+         ==================================================================== -->
+    <div id="instructionsModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-card">
+
+            <div class="modal-decor-glow" aria-hidden="true"></div>
+
+            <button type="button" class="modal-close-btn" id="closeModalBtn" aria-label="Cerrar instrucciones">
+                ✕
+            </button>
+
+            <div class="modal-header">
+                <div class="modal-badge">
+                    <span class="badge-spark">✨</span> GUÍA OFICIAL PICK'EMS
+                </div>
+                <h2 id="modalTitle">¡Bienvenido al Pick'Ems de Araxys Circuit!</h2>
+                <p class="modal-lead">
+                    Demuestra tu instinto analítico en el circuito oficial. Ordena el podio final de los 4 equipos contendientes, pronostica al MVP y gana premios exclusivos para la comunidad.
+                </p>
+            </div>
+
+            <!-- Pasos de instrucciones -->
+            <div class="modal-steps-grid">
+
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h4>Ordena el Podio (1º al 4º)</h4>
+                        <p>Haz clic o arrastra a <strong>Vanguard</strong>, <strong>Wolf</strong>, <strong>Prime</strong> y <strong>Origin</strong> a sus casillas correspondientes.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h4>Elige al MVP del Torneo</h4>
+                        <p>Selecciona a la escuadra o estrella individual que crees que acumulará más kills durante la liga (+50 pts bonus).</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h4>Ingresa tus Datos</h4>
+                        <p>Escribe tu Nickname y tu usuario de Discord para asociar tus aciertos y poder entregarte los premios oficiales.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h4>Bloquea tus Picks</h4>
+                        <p>Guarda tus predicciones de forma segura. Podrás copiar tu comprobante directamente a nuestro canal de Discord.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Caja destacada de premios como pidió el usuario -->
+            <div class="modal-prizes-box">
+                <div class="prizes-box-header">
+                    <span class="prizes-trophy">🎁</span>
+                    <div>
+                        <h3>Premios para quienes acierten:</h3>
+                        <p>Los participantes con pronóstico perfecto o mayor puntaje recibirán:</p>
+                    </div>
+                </div>
+
+                <div class="prizes-list">
+                    <div class="prize-item">
+                        <span class="prize-icon">🥇</span>
+                        <div class="prize-desc">
+                            <strong>Mención de Honor en el Inicio de la Página</strong>
+                            <span>Tu nombre aparecerá en la web oficial de Araxys Esports como Maestro de los Picks.</span>
+                        </div>
+                    </div>
+
+                    <div class="prize-item">
+                        <span class="prize-icon">🎭</span>
+                        <div class="prize-desc">
+                            <strong>Rol Exclusivo en Discord</strong>
+                            <span>Rol conmemorativo permanente en nuestro servidor oficial de Discord.</span>
+                        </div>
+                    </div>
+
+                    <div class="prize-item">
+                        <span class="prize-icon">🔑</span>
+                        <div class="prize-desc">
+                            <strong>Random Game Key (Steam / PC)</strong>
+                            <span>Código sorpresa digital para canjear un juego completo en tu biblioteca.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer del modal -->
+            <div class="modal-footer">
+                <label class="modal-remember-label">
+                    <input type="checkbox" id="dontShowAgainCheck">
+                    <span>No volver a abrir automáticamente al entrar</span>
+                </label>
+
+                <button type="button" class="btn-start-picks" id="startPicksBtn">
+                    <span>¡Entendido, Comenzar mis Picks!</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <!-- FIN MODAL DE INSTRUCCIONES -->
+
+<!-- INICIO HEADER: barra superior con logo y navegacion. -->
+
+<header>
+
+        <a href="../index.html" class="logo">
+            <img src="../img/logos/logo.png" alt="Araxys Esports">
+        </a>
+
+<!-- INICIO NAVEGACION: enlaces principales del sitio. -->
+
+<nav>
+            <a href="../news/news.html">Noticias</a>
+            <a href="../torneos/torneos.html">Torneos</a>
+            <a href="../teams/teams.html">Araxys Teams</a>
+            <a href="circuito.html">Araxys Circuit</a>
+            <a href="pickems.html" class="nav-active nav-pickems-pill">🏆 Pick'Ems</a>
+            <a href="../apply/apply.html">Inscribirse</a>
+        </nav>
+        <!-- FIN NAVEGACION -->
+
+    </header>
+
+    <!-- FIN HEADER -->
+
+<!-- INICIO SECCION HERO PICK'EMS -->
+
+<section class="pickems-hero">
+
+        <div class="pickems-hero-content">
+
+            <div class="pickems-top-bar">
+                <a href="circuito.html" class="back-circuit-btn">
+                    ← Volver a Araxys Circuit
+                </a>
+                <div class="pickems-status-pill">
+                    <span class="live-pulse-dot"></span> PREDICCIONES ABIERTAS
+                </div>
+            </div>
+
+            <h1>PICK'EMS ARAXYS CIRCUIT</h1>
+
+            <p class="hero-subtext">
+                4 escuadras élite, un solo campeón. Ordena las posiciones del 1º al 4º lugar, acierta al MVP del torneo y compite por premios exclusivos de la comunidad.
+            </p>
+
+            <!-- Barra de control rápido -->
+            <div class="pickems-action-bar">
+                <button type="button" class="btn-action-help" id="openInstructionsBtn">
+                    <span>📖</span> Ver Instrucciones & Premios
+                </button>
+                <button type="button" class="btn-action-reset" id="resetPicksBtn">
+                    <span>🔄</span> Reiniciar Selección
+                </button>
+                <div class="picks-counter-badge" id="picksCounterBadge">
+                    Puestos asignados: <strong id="assignedCountText">0/4</strong>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FIN SECCION HERO -->
+
+<!-- INICIO CONTENIDO PRINCIPAL PICK'EMS -->
+
+<main class="pickems-main">
+
+        <!-- NOTIFICACION TOAST -->
+        <div id="toastNotification" class="toast-box" role="alert" aria-live="polite">
+            <span id="toastIcon">ℹ️</span>
+            <span id="toastMessage">Mensaje informativo</span>
+        </div>
+
+        <!-- TARJETA DE RESUMEN / ESTADO GUARDADO (APARECE CUANDO EL USUARIO YA GUARDO SUS PICKS) -->
+        <section id="savedStateCard" class="saved-state-banner" style="display: none;">
+            <div class="saved-badge">
+                <span>🔒</span> ¡TUS PICKS ESTÁN BLOQUEADOS Y REGISTRADOS!
+            </div>
+            <div class="saved-info-row">
+                <p>
+                    Tus predicciones han sido guardadas de forma exitosa para <strong>Araxys Circuit 2026</strong>.
+                    <span id="savedTimestampText" class="saved-time"></span>
+                </p>
+                <div class="saved-actions-btns">
+                    <button type="button" class="btn-copy-discord" id="copyDiscordBtn">
+                        📋 Copiar Formato para Discord
+                    </button>
+                    <a href="https://discord.gg/Fc2QdZGAyJ" target="_blank" rel="noopener noreferrer" class="btn-join-discord">
+                        💬 Pegar en el Discord Oficial →
+                    </a>
+                    <button type="button" class="btn-unlock-picks" id="unlockPicksBtn">
+                        🔓 Modificar Mis Picks
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCION 1: EL PODIO (CASILLAS DEL 1º AL 4º LUGAR) -->
+        <section class="podium-section">
+
+            <div class="section-heading">
+                <span class="heading-tag">PASO 1</span>
+                <h2>El Podio del Circuito</h2>
+                <p>Haz clic en los equipos de abajo para asignarlos en orden o haz clic en cualquier puesto vacío.</p>
+            </div>
+
+            <div class="podium-grid">
+
+                <!-- 1º LUGAR: CAMPEON -->
+                <div class="podium-slot slot-first" data-position="1" id="slot-1">
+                    <div class="slot-ribbon">
+                        <span class="slot-crown">👑</span> 1º LUGAR • CAMPEÓN
+                    </div>
+                    <div class="slot-points-tag">+100 PTS</div>
+
+                    <div class="slot-card-content empty" id="slot-content-1">
+                        <div class="empty-placeholder">
+                            <span class="placeholder-icon">🥇</span>
+                            <span class="placeholder-title">Primer Lugar</span>
+                            <span class="placeholder-hint">Haz clic en un equipo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2º LUGAR: SUBCAMPEON -->
+                <div class="podium-slot slot-second" data-position="2" id="slot-2">
+                    <div class="slot-ribbon">
+                        <span class="slot-medal">🥈</span> 2º LUGAR • SUBCAMPEÓN
+                    </div>
+                    <div class="slot-points-tag">+60 PTS</div>
+
+                    <div class="slot-card-content empty" id="slot-content-2">
+                        <div class="empty-placeholder">
+                            <span class="placeholder-icon">🥈</span>
+                            <span class="placeholder-title">Segundo Lugar</span>
+                            <span class="placeholder-hint">Haz clic en un equipo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3º LUGAR -->
+                <div class="podium-slot slot-third" data-position="3" id="slot-3">
+                    <div class="slot-ribbon">
+                        <span class="slot-medal">🥉</span> 3º LUGAR
+                    </div>
+                    <div class="slot-points-tag">+40 PTS</div>
+
+                    <div class="slot-card-content empty" id="slot-content-3">
+                        <div class="empty-placeholder">
+                            <span class="placeholder-icon">🥉</span>
+                            <span class="placeholder-title">Tercer Lugar</span>
+                            <span class="placeholder-hint">Haz clic en un equipo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4º LUGAR -->
+                <div class="podium-slot slot-fourth" data-position="4" id="slot-4">
+                    <div class="slot-ribbon">
+                        <span class="slot-shield">🎖️</span> 4º LUGAR
+                    </div>
+                    <div class="slot-points-tag">+20 PTS</div>
+
+                    <div class="slot-card-content empty" id="slot-content-4">
+                        <div class="empty-placeholder">
+                            <span class="placeholder-icon">🎖️</span>
+                            <span class="placeholder-title">Cuarto Lugar</span>
+                            <span class="placeholder-hint">Haz clic en un equipo</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SECCION 2: LOS 4 EQUIPOS PARTICIPANTES -->
+        <section class="teams-pool-section">
+
+            <div class="section-heading">
+                <span class="heading-tag">EQUIPOS DISPONIBLES</span>
+                <h2>Los 4 Equipos Contendientes</h2>
+                <p>Haz clic en cualquier equipo disponible para asignarlo al siguiente puesto libre en el podio.</p>
+            </div>
+
+            <div class="teams-pool-grid">
+
+                <!-- EQUIPO 1: ARAXYS VANGUARD -->
+                <div class="team-pool-card vanguard" data-team-id="vanguard" id="teamCard-vanguard">
+                    <div class="team-card-banner">
+                        <img src="../img/teams/vanguard.webp" alt="Araxys Vanguard" class="team-pool-logo">
+                        <span class="team-assignment-badge" id="badge-vanguard">Disponible</span>
+                    </div>
+                    <div class="team-pool-info">
+                        <h3>Araxys Vanguard</h3>
+                        <p class="team-pool-motto">"El escudo competitivo de la comunidad"</p>
+                        <div class="team-pool-details">
+                            <span class="t-tag">Capitán: DIXZzELS</span>
+                            <span class="t-tag">Premier: Invicto</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-assign-team" id="assignBtn-vanguard">
+                        Asignar al Podio +
+                    </button>
+                </div>
+
+                <!-- EQUIPO 2: ARAXYS WOLF -->
+                <div class="team-pool-card wolf" data-team-id="wolf" id="teamCard-wolf">
+                    <div class="team-card-banner">
+                        <img src="../img/teams/wolf.webp" alt="Araxys Wolf" class="team-pool-logo">
+                        <span class="team-assignment-badge" id="badge-wolf">Disponible</span>
+                    </div>
+                    <div class="team-pool-info">
+                        <h3>Araxys Wolf</h3>
+                        <p class="team-pool-motto">"La manada táctica implacable"</p>
+                        <div class="team-pool-details">
+                            <span class="t-tag">Especialidad: Táctico</span>
+                            <span class="t-tag">Roster: Agresivo</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-assign-team" id="assignBtn-wolf">
+                        Asignar al Podio +
+                    </button>
+                </div>
+
+                <!-- EQUIPO 3: ARAXYS PRIME -->
+                <div class="team-pool-card prime" data-team-id="prime" id="teamCard-prime">
+                    <div class="team-card-banner">
+                        <img src="../img/teams/prime.webp" alt="Araxys Prime" class="team-pool-logo">
+                        <span class="team-assignment-badge" id="badge-prime">Disponible</span>
+                    </div>
+                    <div class="team-pool-info">
+                        <h3>Araxys Prime</h3>
+                        <p class="team-pool-motto">"La élite dorada de alto calibre"</p>
+                        <div class="team-pool-details">
+                            <span class="t-tag">Especialidad: Precisión</span>
+                            <span class="t-tag">Enfoque: Estratégico</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-assign-team" id="assignBtn-prime">
+                        Asignar al Podio +
+                    </button>
+                </div>
+
+                <!-- EQUIPO 4: ARAXYS ORIGIN -->
+                <div class="team-pool-card origin" data-team-id="origin" id="teamCard-origin">
+                    <div class="team-card-banner">
+                        <img src="../img/teams/origin.webp" alt="Araxys Origin" class="team-pool-logo">
+                        <span class="team-assignment-badge" id="badge-origin">Disponible</span>
+                    </div>
+                    <div class="team-pool-info">
+                        <h3>Araxys Origin</h3>
+                        <p class="team-pool-motto">"El génesis y evolución constante"</p>
+                        <div class="team-pool-details">
+                            <span class="t-tag">Especialidad: Adaptabilidad</span>
+                            <span class="t-tag">Proyección: Ascenso</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-assign-team" id="assignBtn-origin">
+                        Asignar al Podio +
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SECCION 3: PREDICCION ESPECIAL MVP -->
+        <section class="mvp-prediction-section">
+
+            <div class="section-heading">
+                <span class="heading-tag">PASO 2 • BONUS EXTRA</span>
+                <h2>Predicción de MVP del Circuito</h2>
+                <p>Elige al equipo o figura que logrará la mayor cantidad de kills en el torneo (+50 PTS extra).</p>
+            </div>
+
+            <div class="mvp-options-grid">
+
+                <label class="mvp-radio-card" for="mvp-vanguard">
+                    <input type="radio" name="mvpPrediction" id="mvp-vanguard" value="Araxys Vanguard">
+                    <div class="mvp-radio-box">
+                        <img src="../img/teams/vanguard.webp" alt="Vanguard MVP" class="mvp-thumb">
+                        <div class="mvp-radio-text">
+                            <strong>Araxys Vanguard</strong>
+                            <span>Aspirante con figuras como KRYS y DIXZzELS</span>
+                        </div>
+                        <span class="radio-check-dot"></span>
+                    </div>
+                </label>
+
+                <label class="mvp-radio-card" for="mvp-wolf">
+                    <input type="radio" name="mvpPrediction" id="mvp-wolf" value="Araxys Wolf">
+                    <div class="mvp-radio-box">
+                        <img src="../img/teams/wolf.webp" alt="Wolf MVP" class="mvp-thumb">
+                        <div class="mvp-radio-text">
+                            <strong>Araxys Wolf</strong>
+                            <span>Duelistas letales y control de mapas</span>
+                        </div>
+                        <span class="radio-check-dot"></span>
+                    </div>
+                </label>
+
+                <label class="mvp-radio-card" for="mvp-prime">
+                    <input type="radio" name="mvpPrediction" id="mvp-prime" value="Araxys Prime">
+                    <div class="mvp-radio-box">
+                        <img src="../img/teams/prime.webp" alt="Prime MVP" class="mvp-thumb">
+                        <div class="mvp-radio-text">
+                            <strong>Araxys Prime</strong>
+                            <span>Puntería de élite y clutches clave</span>
+                        </div>
+                        <span class="radio-check-dot"></span>
+                    </div>
+                </label>
+
+                <label class="mvp-radio-card" for="mvp-origin">
+                    <input type="radio" name="mvpPrediction" id="mvp-origin" value="Araxys Origin">
+                    <div class="mvp-radio-box">
+                        <img src="../img/teams/origin.webp" alt="Origin MVP" class="mvp-thumb">
+                        <div class="mvp-radio-text">
+                            <strong>Araxys Origin</strong>
+                            <span>Jóvenes promesas con frags explosivos</span>
+                        </div>
+                        <span class="radio-check-dot"></span>
+                    </div>
+                </label>
+
+            </div>
+
+        </section>
+
+        <!-- SECCION 4: FORMULARIO DE REGISTRO Y BLOQUEO -->
+        <section class="submission-section">
+
+            <div class="submission-card">
+
+                <div class="submission-header">
+                    <span class="sub-badge">PASO 3 & CIERRE</span>
+                    <h2>Bloquea y Guarda tus Predicciones</h2>
+                    <p>Ingresa tus datos para registrar tu boleto oficial en la comunidad de Araxys Esports.</p>
+                </div>
+
+                <form id="pickemsForm" class="pickems-form" novalidate>
+
+                    <div class="form-inputs-row">
+
+                        <div class="input-group">
+                            <label for="userNameInput">
+                                Tu Nombre o Nickname Competitivo <span class="req">*</span>
+                            </label>
+                            <input type="text" id="userNameInput" placeholder="Ej: ShadowPlayer / Valkyrie" required maxlength="30">
+                            <small class="input-help">Nombre con el que aparecerás si ganas la mención en la Home.</small>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="userDiscordInput">
+                                Tu Usuario de Discord <span class="req">*</span>
+                            </label>
+                            <input type="text" id="userDiscordInput" placeholder="Ej: krys#1234 o @krys" required maxlength="40">
+                            <small class="input-help">Necesario para asignarte el Rol Exclusivo y entregarte tu Game Key.</small>
+                        </div>
+
+                    </div>
+
+                    <!-- Verificador de estado de los picks -->
+                    <div class="validation-status-box" id="validationStatusBox">
+                        <div class="status-icon-wrap" id="statusIconWrap">⚠️</div>
+                        <div class="status-text-wrap">
+                            <strong id="statusTitle">Picks Incompletos</strong>
+                            <p id="statusDesc">Debes ordenar a los 4 equipos en el podio antes de poder bloquear tus predicciones.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-actions-row">
+                        <button type="submit" class="btn-lock-picks" id="lockPicksBtn" disabled>
+                            <span class="lock-icon">🔒</span>
+                            <span>BLOQUEAR Y GUARDAR PICKS</span>
+                        </button>
+                    </div>
+
+                    <div class="privacy-note">
+                        <span>🛡️ Tus picks se almacenan de forma local en tu navegador y son verificables por el staff oficial al copiar tu código en Discord.</span>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- PREMIOS Y RECOMPENSAS DESTACADOS -->
+        <section class="prizes-showcase-section">
+            <div class="section-heading">
+                <span class="heading-tag">RECOMPENSAS OFICIALES</span>
+                <h2>¿Qué ganas si aciertas tus Picks?</h2>
+                <p>Los fanáticos más precisos de Araxys Circuit recibirán recompensas exclusivas:</p>
+            </div>
+
+            <div class="prizes-cards-grid">
+                <div class="prize-showcase-card">
+                    <div class="prize-card-icon">🥇</div>
+                    <h3>Mención en el Inicio de la Web</h3>
+                    <p>Tu nombre y predicción destacada en el portal principal de araxys.xyz ante toda la comunidad y visitantes.</p>
+                </div>
+
+                <div class="prize-showcase-card">
+                    <div class="prize-card-icon">🎭</div>
+                    <h3>Rol Exclusivo en Discord</h3>
+                    <p>Insignia permanente de "Pick'Em Master / Analista Élite" en nuestro servidor de Discord para destacar entre todos.</p>
+                </div>
+
+                <div class="prize-showcase-card">
+                    <div class="prize-card-icon">🎮</div>
+                    <h3>Random Game Key (Steam/PC)</h3>
+                    <p>Un código digital canjeable en PC para añadir un título sorpresa completo a tu biblioteca de videojuegos.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FIN CONTENIDO PRINCIPAL -->
+
+    <script src="../js/global.js?v=20260706-transition-fix"></script>
+    <script src="pickems.js"></script>
+
+<!-- INICIO FOOTER: enlaces y datos de cierre. -->
+
+<footer>
+
+        <img src="../img/logos/logo.png" alt="Araxys Esports">
+
+        <div class="footer-links">
+            <a href="../news/news.html">Noticias</a>
+            <a href="../about/about.html">Sobre Nosotros</a>
+            <a href="../teams/teams.html">Teams</a>
+            <a href="../torneos/torneos.html">Torneos</a>
+            <a href="circuito.html">Araxys Circuit</a>
+            <a href="pickems.html">Pick'Ems</a>
+        </div>
+
+        <div class="footer-social">
+            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="https://www.twitch.tv" target="_blank" rel="noopener noreferrer">Twitch</a>
+            <a href="#">X</a>
+            <a href="https://discord.gg/Fc2QdZGAyJ" target="_blank" rel="noopener noreferrer">Discord</a>
+        </div>
+
+        <p>&copy; 2026 Araxys Esports. Todos los derechos reservados.</p>
+
+    </footer>
+
+    <!-- FIN FOOTER -->
+
+</body>
+
+</html>
