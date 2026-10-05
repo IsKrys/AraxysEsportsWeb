@@ -334,7 +334,7 @@ class AraxysCloudSync {
             totalOps++;
         });
 
-        // 2. Jugadores (21 jugadores reales de 5 divisiones)
+        // 2. Jugadores (26 jugadores reales de 6 divisiones)
         (store.players || []).forEach(item => {
             const ref = this.db.collection(this.COLLECTIONS.PLAYERS).doc(item.id);
             batch.set(ref, item);
