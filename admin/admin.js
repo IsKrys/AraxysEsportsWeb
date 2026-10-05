@@ -123,32 +123,44 @@ const TEAM_DETAILS = {
     titular: {
         name: "ARAXYS TITULAR",
         badge: "ROSTER PRINCIPAL",
-        desc: "El equipo estelar que representa la bandera de Araxys Esports en Valorant."
+        desc: "El equipo estelar que representa la bandera de Araxys Esports en Valorant.",
+        color: "#DC136C",
+        accent: "rgba(220, 19, 108, 0.25)"
     },
     prime: {
         name: "ARAXYS PRIME",
         badge: "DIVISIÓN COMPETITIVA EN ASCENSO",
-        desc: "Capitaneado por Chiflesinho. El equipo con el mejor ambiente y competitividad de la comunidad de Araxys Esports."
+        desc: "Capitaneado por Chiflesinho. El equipo con el mejor ambiente y competitividad de la comunidad de Araxys Esports.",
+        color: "#FEE440",
+        accent: "rgba(254, 228, 64, 0.2)"
     },
     vanguard: {
         name: "ARAXYS VANGUARD",
         badge: "DIVISIÓN DE DESARROLLO",
-        desc: "Roster enfocado en el avance estratégico y dominio del juego en todos los aspectos competitivos."
+        desc: "Roster enfocado en el avance estratégico y dominio del juego en todos los aspectos competitivos.",
+        color: "#00D1FF",
+        accent: "rgba(0, 209, 255, 0.2)"
     },
     wolf: {
         name: "ARAXYS WOLF",
         badge: "DIVISIÓN COMPETITIVA",
-        desc: "La manada mas competitiva y audaz de la comunidad de Araxys Esports."
+        desc: "La manada mas competitiva y audaz de la comunidad de Araxys Esports.",
+        color: "#A855F7",
+        accent: "rgba(168, 85, 247, 0.2)"
     },
     nexus: {
         name: "ARAXYS NEXUS",
         badge: "DIVISIÓN SORPRESA",
-        desc: "El roster que tomara por sorpresa a la comunidad de Valorant y Araxys Esports."
+        desc: "El roster que tomara por sorpresa a la comunidad de Valorant y Araxys Esports.",
+        color: "#FF4655",
+        accent: "rgba(255, 70, 85, 0.2)"
     },
     origin: {
         name: "ARAXYS ORIGIN",
         badge: "DIVISIÓN COMPETITIVA",
-        desc: "El equipo de Araxys que promete darle las mejores batallas a Wolf y sus rivales."
+        desc: "El equipo de Araxys que promete darle las mejores batallas a Wolf y sus rivales.",
+        color: "#FF9900",
+        accent: "rgba(255, 153, 0, 0.22)"
     }
 };
 
@@ -164,7 +176,8 @@ const ROLE_DEFINITIONS = {
 };
 
 const INITIAL_STAFF = [
-    { id: "s1", nick: "Krys", user: "krys", role: "admin", status: "Activo" }
+    { id: "s1", nick: "Krys", user: "krys", role: "admin", status: "Activo" },
+    { id: "s2", nick: "Shatsu", user: "shatsu", role: "coach_origin", status: "Activo" }
 ];
 
 // ==============================================================
@@ -829,9 +842,33 @@ const teamFilterTabs = document.querySelectorAll(".team-tab-btn");
 
 function renderTeamBanner(teamKey) {
     const details = TEAM_DETAILS[teamKey] || TEAM_DETAILS.titular;
-    document.getElementById("currentTeamName").textContent = details.name;
-    document.getElementById("currentTeamBadge").textContent = details.badge;
-    document.getElementById("currentTeamDesc").textContent = details.desc;
+    const nameEl = document.getElementById("currentTeamName");
+    const badgeEl = document.getElementById("currentTeamBadge");
+    const descEl = document.getElementById("currentTeamDesc");
+    const banner = document.querySelector(".team-overview-banner");
+
+    if (nameEl) nameEl.textContent = details.name;
+    if (badgeEl) {
+        badgeEl.textContent = details.badge;
+        if (details.color) {
+            badgeEl.style.background = details.color;
+            badgeEl.style.color = (details.color === "#FEE440" || details.color === "#FF9900") ? "#111" : "#fff";
+        }
+    }
+    if (descEl) descEl.textContent = details.desc;
+    if (banner && details.accent) {
+        banner.style.background = `linear-gradient(135deg, ${details.accent} 0%, rgba(33,30,32,0.92) 100%)`;
+        banner.style.borderColor = details.color || "var(--brand-border)";
+    }
+}
+
+function selectTeamTab(teamKey) {
+    if (!teamKey || !TEAM_DETAILS[teamKey]) teamKey = "titular";
+    currentSelectedTeam = teamKey;
+    document.querySelectorAll(".team-tab-btn").forEach(b => {
+        b.classList.toggle("active", b.getAttribute("data-team") === teamKey);
+    });
+    renderPlayersGrid();
 }
 
 function renderPlayersGrid() {
@@ -884,13 +921,21 @@ function renderPlayersGrid() {
     });
 }
 
-teamFilterTabs.forEach(btn => {
-    btn.addEventListener("click", () => {
-        teamFilterTabs.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        currentSelectedTeam = btn.getAttribute("data-team");
-        renderPlayersGrid();
-    });
+// Delegación global para pestañas de equipos y accesos directos
+document.addEventListener("click", (e) => {
+    const tabBtn = e.target.closest(".team-tab-btn");
+    if (tabBtn) {
+        const teamKey = tabBtn.getAttribute("data-team");
+        if (teamKey) selectTeamTab(teamKey);
+    }
+    const rosterPill = e.target.closest("[data-select-team]");
+    if (rosterPill) {
+        const teamKey = rosterPill.getAttribute("data-select-team");
+        if (teamKey) {
+            switchTab("tab-teams");
+            selectTeamTab(teamKey);
+        }
+    }
 });
 
 // MODAL JUGADOR
