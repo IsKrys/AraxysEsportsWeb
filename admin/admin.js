@@ -1197,7 +1197,7 @@ if (staffForm) {
         const nick = document.getElementById("staffNick").value.trim();
         const user = document.getElementById("staffUser").value.trim();
         const role = document.getElementById("staffRole").value;
-        const password = document.getElementById("staffPass").value.trim() ;
+        const password = document.getElementById("staffPass").value.trim();
 
         if (id) {
             const index = store.staff.findIndex(x => x.id === id);
