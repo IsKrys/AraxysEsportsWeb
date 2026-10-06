@@ -480,6 +480,20 @@ function applyRolePermissions() {
     document.querySelectorAll(".nav-item").forEach(item => item.style.display = "flex");
     document.querySelectorAll(".team-tab-btn").forEach(btn => btn.style.display = "inline-block");
 
+    const isPrivileged = isOwnerOrAdmin(role);
+
+    // Control de acceso a Sincronización en la Nube (Solo Owner y Admin)
+    const openCloudModalBtn = document.getElementById("openCloudModalBtn");
+    const cloudStatusBadge = document.getElementById("cloudStatusBadge");
+    const cloudModal = document.getElementById("cloudModal");
+    if (openCloudModalBtn) openCloudModalBtn.style.display = isPrivileged ? "inline-flex" : "none";
+    if (cloudStatusBadge) cloudStatusBadge.style.display = isPrivileged ? "inline-flex" : "none";
+    if (!isPrivileged && cloudModal) cloudModal.classList.remove("open");
+
+    // Control de visibilidad para KPI "ACTIVO - SISTEMA ONLINE" (Solo Owner y Admin)
+    const kpiSystemOnlineCard = document.getElementById("kpiSystemOnlineCard");
+    if (kpiSystemOnlineCard) kpiSystemOnlineCard.style.display = isPrivileged ? "flex" : "none";
+
     const quickBtn = document.getElementById("quickNewNewsBtn");
     const overviewNewsCard = document.getElementById("overviewNewsCard");
     const overviewTeamsCard = document.getElementById("overviewTeamsCard");
@@ -592,6 +606,14 @@ function checkAuthStatus() {
         applyRolePermissions();
     } else {
         loginOverlay.classList.remove("hidden");
+        const openCloudModalBtn = document.getElementById("openCloudModalBtn");
+        const cloudStatusBadge = document.getElementById("cloudStatusBadge");
+        const kpiSystemOnlineCard = document.getElementById("kpiSystemOnlineCard");
+        const cloudModal = document.getElementById("cloudModal");
+        if (openCloudModalBtn) openCloudModalBtn.style.display = "none";
+        if (cloudStatusBadge) cloudStatusBadge.style.display = "none";
+        if (kpiSystemOnlineCard) kpiSystemOnlineCard.style.display = "none";
+        if (cloudModal) cloudModal.classList.remove("open");
     }
 }
 
@@ -2239,6 +2261,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnDisconnectCloud = document.getElementById("btnDisconnectCloud");
 
     function openCloudModal() {
+        const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+        if (!isOwnerOrAdmin(role)) {
+            showToast("Acceso denegado: solo Administradores y Owners pueden acceder a la sincronización en la nube.", "danger");
+            return;
+        }
         if (!cloudModal) return;
         // Cargar configuración existente en los campos
         const activeConfig = getActiveFirebaseConfig();
@@ -2281,6 +2308,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cloudConfigForm) {
         cloudConfigForm.addEventListener("submit", async (e) => {
             e.preventDefault();
+            const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+            if (!isOwnerOrAdmin(role)) {
+                showToast("Acceso denegado: solo Administradores y Owners pueden modificar la configuración en la nube.", "danger");
+                return;
+            }
             const snippet = cloudSnippetInput.value.trim();
             let configToSave = null;
 
@@ -2318,6 +2350,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnSeedCloudDb) {
         btnSeedCloudDb.addEventListener("click", async () => {
+            const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+            if (!isOwnerOrAdmin(role)) {
+                showToast("Acceso denegado: solo Administradores y Owners pueden inicializar la base de datos.", "danger");
+                return;
+            }
             if (!window.araxysCloud.isConnected) {
                 showToast("Primero debes conectar con Firebase antes de subir los datos.", "danger");
                 return;
@@ -2337,6 +2374,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnDisconnectCloud) {
         btnDisconnectCloud.addEventListener("click", () => {
+            const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+            if (!isOwnerOrAdmin(role)) {
+                showToast("Acceso denegado: solo Administradores y Owners pueden desconectar la nube.", "danger");
+                return;
+            }
             if (confirm("¿Desconectar de Firebase y regresar al Modo Local en este navegador?")) {
                 clearFirebaseConfig();
                 window.araxysCloud.disconnect();
