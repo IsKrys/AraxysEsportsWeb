@@ -119,6 +119,8 @@ class AraxysCloudSync {
             delete profile.password; // Asegurar ausencia de campos sensibles
 
             const cleanRole = typeof normalizeRole === "function" ? normalizeRole(profile.role, profile.team) : (profile.role || "editor");
+            const roleInfo = typeof getRoleInfo === "function" ? getRoleInfo(cleanRole, profile.team) : null;
+            const resolvedTeam = profile.team || (roleInfo && roleInfo.team) || null;
 
             if (typeof store !== "undefined") {
                 store.auth = {
@@ -127,7 +129,7 @@ class AraxysCloudSync {
                     email: firebaseUser.email,
                     user: profile.nick || firebaseUser.displayName || firebaseUser.email.split("@")[0],
                     role: cleanRole,
-                    team: profile.team || null
+                    team: resolvedTeam
                 };
             }
 
