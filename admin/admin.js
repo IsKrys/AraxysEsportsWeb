@@ -165,19 +165,53 @@ const TEAM_DETAILS = {
 };
 
 const ROLE_DEFINITIONS = {
-    admin: { label: "CEO / Administrador", scope: "Control Total de la Organización", badge: "👑 CEO", color: "var(--brand-magenta)" },
-    editor: { label: "Prensa & Redacción", scope: "Solo Noticias y Artículos", badge: "📰 Editor", color: "#00D1FF" },
-    coach_prime: { label: "Coach / Capitán Prime", scope: "Solo Roster Araxys Prime", badge: "🎯 Prime", team: "prime", color: "var(--brand-gold)" },
-    coach_titular: { label: "Coach / Capitán Titular", scope: "Solo Roster Araxys Titular", badge: "🛡️ Titular", team: "titular", color: "var(--brand-magenta)" },
-    coach_vanguard: { label: "Coach / Capitán Vanguard", scope: "Solo Roster Araxys Vanguard", badge: "⚡ Vanguard", team: "vanguard", color: "#00D1FF" },
-    coach_wolf: { label: "Coach / Capitán Wolf", scope: "Solo Roster Araxys Wolf", badge: "🐺 Wolf", team: "wolf", color: "#A855F7" },
-    coach_nexus: { label: "Coach / Capitán Nexus", scope: "Solo Roster Araxys Nexus", badge: "🔮 Nexus", team: "nexus", color: "#FF4655" },
-    coach_origin: { label: "Coach / Capitán Origin", scope: "Solo Roster Araxys Origin", badge: "⚔️ Origin", team: "origin", color: "#FF9900" }
+    owner: { label: "Owner / CEO", scope: "Control Total de la Organización", badge: "👑 Owner", color: "var(--brand-gold)" },
+    admin: { label: "Administrador", scope: "Gestión Administrativa y Equipos", badge: "🛡️ Admin", color: "var(--brand-magenta)" },
+    editor: { label: "Editor", scope: "Solo Noticias y Artículos", badge: "📰 Editor", color: "#00D1FF" },
+    coach: { label: "Coach", scope: "Gestión de Rosters de Valorant", badge: "🎯 Coach", team: "titular", color: "var(--brand-gold)" },
+    coach_prime: { label: "Coach Prime", scope: "Solo Roster Araxys Prime", badge: "🎯 Prime", team: "prime", color: "var(--brand-gold)" },
+    coach_titular: { label: "Coach Titular", scope: "Solo Roster Araxys Titular", badge: "🛡️ Titular", team: "titular", color: "var(--brand-magenta)" },
+    coach_vanguard: { label: "Coach Vanguard", scope: "Solo Roster Araxys Vanguard", badge: "⚡ Vanguard", team: "vanguard", color: "#00D1FF" },
+    coach_wolf: { label: "Coach Wolf", scope: "Solo Roster Araxys Wolf", badge: "🐺 Wolf", team: "wolf", color: "#A855F7" },
+    coach_nexus: { label: "Coach Nexus", scope: "Solo Roster Araxys Nexus", badge: "🔮 Nexus", team: "nexus", color: "#FF4655" },
+    coach_origin: { label: "Coach Origin", scope: "Solo Roster Araxys Origin", badge: "⚔️ Origin", team: "origin", color: "#FF9900" }
 };
 
+function normalizeRole(rawRole, rawTeam) {
+    if (!rawRole) return "editor";
+    const clean = String(rawRole).trim().toLowerCase();
+    if (clean === "owner" || clean === "fundador" || clean === "ceo/owner" || clean === "owner/ceo") return "owner";
+    if (clean === "admin" || clean === "administrador" || clean === "ceo") return "admin";
+    if (clean === "editor" || clean === "redactor" || clean === "prensa") return "editor";
+    if (clean === "coach" && rawTeam) {
+        const teamKey = "coach_" + String(rawTeam).trim().toLowerCase();
+        if (ROLE_DEFINITIONS[teamKey]) return teamKey;
+    }
+    if (ROLE_DEFINITIONS[clean]) return clean;
+    if (clean.startsWith("coach_")) return clean;
+    if (clean.startsWith("coach-")) return "coach_" + clean.replace("coach-", "");
+    if (clean === "coach") return "coach";
+    return "editor"; // Default seguro de menor privilegio (NUNCA admin)
+}
+
+function getRoleInfo(role, team) {
+    const norm = normalizeRole(role, team);
+    return ROLE_DEFINITIONS[norm] || ROLE_DEFINITIONS.editor;
+}
+
+function isCoachRole(role) {
+    if (!role) return false;
+    const clean = normalizeRole(role);
+    return clean === "coach" || clean.startsWith("coach_");
+}
+
+function isOwnerOrAdmin(role) {
+    const clean = normalizeRole(role);
+    return clean === "owner" || clean === "admin";
+}
+
 const INITIAL_STAFF = [
-    { id: "s1", nick: "Krys", user: "krys", role: "admin", status: "Activo" },
-    { id: "s2", nick: "Shatsu", user: "shatsu", role: "coach_origin", status: "Activo" }
+    { id: "owner-initial", nick: "Krys", user: "krys", role: "owner", status: "Activo" }
 ];
 
 // ==============================================================
@@ -213,9 +247,13 @@ class AdminStore {
         const savedStaff = this.load("araxys_staff_clean_v1", null);
         if (!savedStaff) {
             this.staff = INITIAL_STAFF;
-            this.saveStaff();
         } else {
-            this.staff = savedStaff;
+            // Garantizar que no persistan contraseñas en memoria ni en disco
+            this.staff = savedStaff.map(s => {
+                const clean = { ...s };
+                delete clean.password;
+                return clean;
+            });
         }
 
         this.trash = this.load("araxys_trash_v1", []);
@@ -224,14 +262,16 @@ class AdminStore {
                 id: "log-seed-1",
                 timestamp: new Date().toISOString(),
                 user: "Krys",
-                role: "admin",
+                role: "owner",
                 action: "INICIALIZACIÓN",
                 detail: "Sincronización oficial del CMS Araxys con 6 noticias, 5 divisiones y visor de auditoría.",
                 snapshot: null
             }
         ]);
 
-        this.auth = this.load("araxys_admin_auth", { loggedIn: false, user: "Krys", role: "admin" });
+        // Autenticación controlada exclusivamente por Firebase Auth (eliminando cualquier credencial o estado en localStorage)
+        try { localStorage.removeItem("araxys_admin_auth"); } catch (_) {}
+        this.auth = { loggedIn: false, uid: null, email: null, user: "", role: null };
     }
 
     load(key, fallback) {
@@ -249,17 +289,25 @@ class AdminStore {
 
     saveNews() { this.save("araxys_news_v2", this.news); }
     savePlayers() { this.save("araxys_players_v2", this.players); }
-    saveStaff() { this.save("araxys_staff_clean_v1", this.staff); }
+    saveStaff() {
+        const sanitized = this.staff.map(s => {
+            const clean = { ...s };
+            delete clean.password;
+            return clean;
+        });
+        this.save("araxys_staff_clean_v1", sanitized);
+    }
     saveTrash() { this.save("araxys_trash_v1", this.trash); }
     saveActivityLog() { this.save("araxys_activity_log_v1", this.activityLog); }
-    saveAuth() { this.save("araxys_admin_auth", this.auth); }
+    saveAuth() { /* No-op: La autenticación es administrada exclusivamente por Firebase Auth */ }
 
     logAction(action, detail, snapshot = null) {
         const entry = {
-            id: "log-" + Date.now() + "-" + Math.random().toString(36).substr(2, 4),
+            id: "log-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6),
+            uid: this.auth && this.auth.uid ? this.auth.uid : null,
             timestamp: new Date().toISOString(),
             user: this.auth.user || "Staff Araxys",
-            role: this.auth.role || "admin",
+            role: normalizeRole(this.auth ? this.auth.role : "editor"),
             action: action,
             detail: detail,
             snapshot: snapshot
@@ -281,10 +329,14 @@ class AdminStore {
             title: item.title || item.nick,
             subtitle: type === "news" ? (`Cat: ${item.category || "General"} • Autor: ${item.author || "Prensa"}`) : (`Equipo: ${item.team?.toUpperCase()} • Rol: ${item.role}`),
             deletedBy: this.auth.user || "Staff Araxys",
-            deletedByRole: this.auth.role || "admin",
+            deletedByRole: normalizeRole(this.auth ? this.auth.role : "editor"),
             deletedAt: new Date().toISOString(),
             data: { ...item }
         };
+        // Garantizar authorUid en el snapshot de noticias enviadas a papelera
+        if (type === "news" && !trashItem.data.authorUid && this.auth && this.auth.uid) {
+            trashItem.data.authorUid = this.auth.uid;
+        }
         this.trash.unshift(trashItem);
         this.saveTrash();
         if (window.araxysCloud && window.araxysCloud.isConnected) {
@@ -298,6 +350,11 @@ class AdminStore {
     }
 
     restoreFromTrash(trashId) {
+        if (!isOwnerOrAdmin(this.auth.role)) {
+            if (typeof showToast === "function") showToast("Acceso denegado: Solo el Owner o Administrador pueden restaurar elementos.", "danger");
+            return false;
+        }
+
         const idx = this.trash.findIndex(t => t.id === trashId);
         if (idx === -1) return false;
         const trashItem = this.trash[idx];
@@ -344,6 +401,11 @@ class AdminStore {
     }
 
     purgeTrashItem(trashId) {
+        if (!isOwnerOrAdmin(this.auth.role)) {
+            if (typeof showToast === "function") showToast("Acceso denegado: Solo el Owner o Administrador pueden purgar elementos.", "danger");
+            return false;
+        }
+
         const idx = this.trash.findIndex(t => t.id === trashId);
         if (idx === -1) return false;
         const trashItem = this.trash[idx];
@@ -359,6 +421,11 @@ class AdminStore {
     }
 
     clearTrash() {
+        if (!isOwnerOrAdmin(this.auth.role)) {
+            if (typeof showToast === "function") showToast("Acceso denegado: Solo el Owner o Administrador pueden vaciar la papelera.", "danger");
+            return;
+        }
+
         const count = this.trash.length;
         if (count === 0) return;
         this.trash = [];
@@ -395,8 +462,8 @@ const demoAccessBtn = document.getElementById("demoAccessBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 
 function applyRolePermissions() {
-    const role = store.auth.role || "admin";
-    const roleInfo = ROLE_DEFINITIONS[role] || ROLE_DEFINITIONS.admin;
+    const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+    const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
 
     const userNameEl = document.getElementById("sidebarUserName");
     const userRoleEl = document.getElementById("sidebarUserRole");
@@ -416,8 +483,8 @@ function applyRolePermissions() {
     if (overviewNewsCard) overviewNewsCard.style.display = "block";
     if (overviewTeamsCard) overviewTeamsCard.style.display = "block";
 
-    if (role.startsWith("coach_")) {
-        const myTeam = roleInfo.team;
+    if (isCoachRole(role)) {
+        const myTeam = roleInfo.team || (store.auth && store.auth.team) || "titular";
         // Ocultar secciones y tarjetas no autorizadas para coaches
         const navNews = document.getElementById("navItemNews");
         const navTournaments = document.getElementById("navItemTournaments");
@@ -437,6 +504,7 @@ function applyRolePermissions() {
                 btn.style.display = "none";
             } else {
                 btn.classList.add("active");
+                btn.style.display = "inline-block";
             }
         });
 
@@ -473,7 +541,7 @@ function applyRolePermissions() {
         }
         switchTab("tab-news");
     } else {
-        // CEO / Administrador: acceso total
+        // Owner / Administrador: acceso total
         const playerTeamSelect = document.getElementById("playerTeam");
         if (playerTeamSelect) {
             Array.from(playerTeamSelect.options).forEach(opt => opt.disabled = false);
@@ -491,7 +559,7 @@ function applyRolePermissions() {
 }
 
 function checkAuthStatus() {
-    if (store.auth.loggedIn) {
+    if (store.auth && store.auth.loggedIn && store.auth.uid) {
         loginOverlay.classList.add("hidden");
         applyRolePermissions();
     } else {
@@ -499,39 +567,126 @@ function checkAuthStatus() {
     }
 }
 
-loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const inputVal = document.getElementById("loginEmail").value.trim().toLowerCase();
-    const passVal = document.getElementById("loginPassword").value.trim();
-    
-    // Buscar si coincide con algún usuario registrado en el staff
-    const found = store.staff.find(s => s.user.toLowerCase() === inputVal || s.nick.toLowerCase() === inputVal);
-    
-    if (found) {
-        if (found.password && found.password !== passVal) {
-            showToast("Contraseña incorrecta para este usuario.", "danger");
+// Recuperación de contraseña con Firebase Authentication
+const forgotPassForm = document.getElementById("forgotPassForm");
+const btnForgotPass = document.getElementById("btnForgotPass");
+const btnBackToLogin = document.getElementById("btnBackToLogin");
+
+if (btnForgotPass && forgotPassForm && loginForm) {
+    btnForgotPass.addEventListener("click", () => {
+        loginForm.style.display = "none";
+        forgotPassForm.style.display = "block";
+    });
+}
+
+if (btnBackToLogin && forgotPassForm && loginForm) {
+    btnBackToLogin.addEventListener("click", () => {
+        forgotPassForm.style.display = "none";
+        loginForm.style.display = "block";
+    });
+}
+
+if (forgotPassForm) {
+    forgotPassForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = document.getElementById("resetEmail").value.trim().toLowerCase();
+        const submitBtn = document.getElementById("btnSendResetSubmit");
+
+        if (!email) {
+            showToast("Ingresa tu correo registrado en Firebase.", "danger");
             return;
         }
-        store.auth = { loggedIn: true, user: found.nick, role: found.role };
-    } else if (inputVal === "krys" || inputVal === "diego" || inputVal === "admin") {
-        // Acceso maestro directo para el CEO
-        store.auth = { loggedIn: true, user: "Krys", role: "admin" };
-    } else {
-        showToast("Usuario no reconocido. Solicita acceso al CEO de Araxys Esports.", "danger");
-        return;
-    }
-    
-    store.saveAuth();
-    checkAuthStatus();
-    showToast(`¡Bienvenido al Centro de Mando, ${store.auth.user}!`);
-});
 
-logoutBtn.addEventListener("click", () => {
-    store.auth = { loggedIn: false, user: "", role: "admin" };
-    store.saveAuth();
-    checkAuthStatus();
-    showToast("Sesión cerrada correctamente.", "danger");
-});
+        try {
+            if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Enviando enlace..."; }
+            if (!window.araxysCloud) {
+                showToast("El motor de Firebase no se inicializó correctamente. Recarga la página.", "danger");
+                return;
+            }
+            if (!window.araxysCloud.isConnected) {
+                await window.araxysCloud.init();
+            }
+            await window.araxysCloud.sendPasswordReset(email);
+            showToast("Correo de restablecimiento enviado. Revisa tu bandeja de entrada o spam.");
+            forgotPassForm.reset();
+            forgotPassForm.style.display = "none";
+            loginForm.style.display = "block";
+        } catch (err) {
+            console.error("[AuthReset] Error:", err);
+            let msg = "No se pudo enviar el correo de recuperación.";
+            if (err.code === "auth/user-not-found") msg = "No existe ninguna cuenta con este correo.";
+            else if (err.code === "auth/invalid-email") msg = "Formato de correo no válido.";
+            else if (err.message) msg = err.message;
+            showToast(msg, "danger");
+        } finally {
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "ENVIAR ENLACE DE RECUPERACIÓN"; }
+        }
+    });
+}
+
+if (loginForm) {
+    loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const emailVal = document.getElementById("loginEmail").value.trim().toLowerCase();
+        const passVal = document.getElementById("loginPassword").value.trim();
+        const submitBtn = document.getElementById("btnLoginSubmit");
+
+        if (!emailVal || !passVal) {
+            showToast("Ingresa tu correo institucional y contraseña.", "danger");
+            return;
+        }
+
+        try {
+            if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Verificando..."; }
+            
+            // Conectar a Firebase si aún no está inicializado
+            if (!window.araxysCloud) {
+                showToast("El motor de Firebase no se inicializó correctamente. Recarga la página.", "danger");
+                return;
+            }
+            if (!window.araxysCloud.isConnected) {
+                const connected = await window.araxysCloud.init();
+                if (!connected) {
+                    showToast("No se pudo conectar a Firebase. Revisa tu conexión de red.", "danger");
+                    return;
+                }
+            }
+
+            await window.araxysCloud.signIn(emailVal, passVal);
+            // El observador handleAuthStateChanged valida permisos con araxys_staff/{uid}
+        } catch (err) {
+            console.error("[AuthLogin] Error:", err.code, err.message, err);
+            let msg = "Credenciales incorrectas o usuario no registrado.";
+            if (err.code === "auth/invalid-email") msg = "El formato de correo no es válido.";
+            else if (err.code === "auth/user-not-found") msg = "El usuario no existe en Firebase Authentication. Créalo en la consola de Firebase.";
+            else if (err.code === "auth/wrong-password") msg = "Contraseña incorrecta.";
+            else if (err.code === "auth/invalid-credential") msg = "Credenciales incorrectas: correo o contraseña inválidos.";
+            else if (err.code === "auth/operation-not-allowed") msg = "El proveedor Correo/Contraseña no está habilitado en Firebase Console (Authentication > Sign-in method).";
+            else if (err.code === "auth/user-disabled") msg = "Esta cuenta ha sido inhabilitada en Firebase.";
+            else if (err.code === "auth/too-many-requests") msg = "Demasiados intentos fallidos. Intenta más tarde.";
+            else if (err.code === "auth/network-request-failed") msg = "Error de red al conectar con Firebase.";
+            else if (err.message) msg = `Error (${err.code || 'Auth'}): ${err.message}`;
+            showToast(msg, "danger");
+        } finally {
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "ENTRAR AL PANEL"; }
+        }
+    });
+}
+
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", async () => {
+        try {
+            if (window.araxysCloud && typeof window.araxysCloud.signOut === "function") {
+                await window.araxysCloud.signOut();
+            }
+        } catch (err) {
+            console.warn("[Logout] Error al cerrar sesión:", err);
+        }
+        store.auth = { loggedIn: false, uid: null, email: null, user: "", role: null };
+        checkAuthStatus();
+        showToast("Sesión cerrada correctamente.", "danger");
+    });
+}
 
 // ==============================================================
 // NAVEGACIÓN POR PESTAÑAS
@@ -551,23 +706,24 @@ const TAB_TITLES = {
 };
 
 function switchTab(tabId) {
-    const role = store.auth.role || "admin";
-    const roleInfo = ROLE_DEFINITIONS[role] || ROLE_DEFINITIONS.admin;
+    const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+    const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
 
     // Validación estricta de navegación según rol
-    if (tabId === "tab-audit" && role !== "admin") {
-        showToast("Acceso denegado: Solo el CEO puede acceder a Auditoría y Papelera.", "danger");
+    if ((tabId === "tab-audit" || tabId === "tab-staff") && !isOwnerOrAdmin(role)) {
+        showToast("Acceso denegado: Solo el Owner y Administrador pueden acceder a esta sección.", "danger");
         tabId = "tab-overview";
-    } else if (role.startsWith("coach_")) {
+    } else if (isCoachRole(role)) {
         const allowed = ["tab-teams", "tab-overview"];
         if (!allowed.includes(tabId)) {
-            showToast(`Acceso denegado: Los coaches solo gestionan su equipo (${roleInfo.team.toUpperCase()}).`, "danger");
+            const teamName = (roleInfo.team || (store.auth && store.auth.team) || "titular").toUpperCase();
+            showToast(`Acceso denegado: Los coaches solo gestionan su equipo (${teamName}).`, "danger");
             tabId = "tab-teams";
         }
     } else if (role === "editor") {
         const allowed = ["tab-news", "tab-tournaments", "tab-branding", "tab-overview"];
         if (!allowed.includes(tabId)) {
-            showToast(`Acceso denegado: Los redactores tienen acceso a Noticias, Torneos y Recursos.`, "danger");
+            showToast(`Acceso denegado: Los editores tienen acceso a Noticias, Torneos y Recursos.`, "danger");
             tabId = "tab-news";
         }
     }
@@ -668,8 +824,16 @@ function renderNewsTable() {
 
     filtered.forEach(n => {
         const tr = document.createElement("tr");
-        const statusClass = n.status === "publicado" ? "status-published" : "status-draft";
+        const statusClass = n.status === "publicado" ? "status-published" : (n.status === "en_revision" ? "status-review" : "status-draft");
+        const statusLabel = n.status === "publicado" ? "PUBLICADO" : (n.status === "en_revision" ? "EN REVISIÓN" : "BORRADOR");
         const catClass = getCategoryClass(n.category);
+        const userRole = normalizeRole(store.auth ? store.auth.role : "editor");
+        const isPrivileged = isOwnerOrAdmin(userRole);
+        const isEditorUser = userRole === "editor";
+        const isPublished = n.status === "publicado";
+        const isOwnDraft = !n.authorUid || (store.auth && n.authorUid === store.auth.uid);
+        const canEdit = isPrivileged || (isEditorUser && !isPublished && isOwnDraft);
+        const canDelete = isPrivileged || (isEditorUser && !isPublished && isOwnDraft);
 
         tr.innerHTML = `
             <td>
@@ -684,12 +848,18 @@ function renderNewsTable() {
             <td>${n.date}</td>
             <td>
                 <span class="status-badge ${statusClass}">
-                    ● ${n.status.toUpperCase()}
+                    ● ${statusLabel}
                 </span>
             </td>
             <td class="action-buttons">
-                <button class="btn btn-outline btn-xs edit-news-btn" data-id="${n.id}" title="Editar">✏️ Editar</button>
-                <button class="btn btn-danger btn-xs delete-news-btn" data-id="${n.id}" title="Eliminar">🗑️</button>
+                ${canEdit ? `
+                    <button class="btn btn-outline btn-xs edit-news-btn" data-id="${n.id}" title="Editar">✏️ Editar</button>
+                ` : `
+                    <button class="btn btn-outline btn-xs" disabled style="opacity: 0.4; cursor: not-allowed;" title="${isPublished ? 'Publicada (Solo Admin/Owner)' : 'Borrador de otro autor'}">🔒 ${isPublished ? 'Publicada' : 'Bloqueado'}</button>
+                `}
+                ${canDelete ? `
+                    <button class="btn btn-danger btn-xs delete-news-btn" data-id="${n.id}" title="Eliminar">🗑️</button>
+                ` : ``}
             </td>
         `;
         newsTableBody.appendChild(tr);
@@ -717,8 +887,8 @@ const closeNewsModalBtn = document.getElementById("closeNewsModalBtn");
 const cancelNewsBtn = document.getElementById("cancelNewsBtn");
 
 function openCreateNewsModal() {
-    const role = store.auth.role || "admin";
-    if (role !== "admin" && role !== "editor") {
+    const role = normalizeRole(store.auth ? store.auth.role : "editor");
+    if (!isOwnerOrAdmin(role) && role !== "editor") {
         showToast("Acceso denegado: tu rol no tiene permisos para crear noticias.", "danger");
         return;
     }
@@ -727,12 +897,23 @@ function openCreateNewsModal() {
     document.getElementById("newsForm").reset();
     document.getElementById("newsDate").value = new Date().toISOString().split("T")[0];
     document.getElementById("newsImage").value = "../img/news/araxys-kitsune-20260810.webp";
+
+    const optPublicado = document.getElementById("optStatusPublicado");
+    const newsStatus = document.getElementById("newsStatus");
+    if (role === "editor") {
+        if (optPublicado) { optPublicado.disabled = true; optPublicado.style.display = "none"; }
+        if (newsStatus) newsStatus.value = "borrador";
+    } else {
+        if (optPublicado) { optPublicado.disabled = false; optPublicado.style.display = ""; }
+        if (newsStatus) newsStatus.value = "publicado";
+    }
+
     newsModal.classList.add("open");
 }
 
 function openEditNewsModal(id) {
-    const role = store.auth.role || "admin";
-    if (role !== "admin" && role !== "editor") {
+    const role = normalizeRole(store.auth ? store.auth.role : "editor");
+    if (!isOwnerOrAdmin(role) && role !== "editor") {
         showToast("Acceso denegado: tu rol no tiene permisos para editar noticias.", "danger");
         return;
     }
@@ -740,13 +921,34 @@ function openEditNewsModal(id) {
     const item = store.news.find(n => n.id === id);
     if (!item) return;
 
+    if (role === "editor") {
+        if (item.status === "publicado") {
+            showToast("Acceso denegado: Los redactores no pueden editar noticias que ya han sido publicadas.", "warning");
+            return;
+        }
+        if (item.authorUid && store.auth.uid && item.authorUid !== store.auth.uid) {
+            showToast("Acceso denegado: Solo puedes editar tus propios borradores.", "warning");
+            return;
+        }
+    }
+
     document.getElementById("newsModalTitle").textContent = "Editar Noticia";
     document.getElementById("newsId").value = item.id;
     document.getElementById("newsTitle").value = item.title;
     document.getElementById("newsCategory").value = item.category;
     document.getElementById("newsAuthor").value = item.author;
     document.getElementById("newsDate").value = item.date;
-    document.getElementById("newsStatus").value = item.status || "publicado";
+
+    const optPublicado = document.getElementById("optStatusPublicado");
+    const newsStatus = document.getElementById("newsStatus");
+    if (role === "editor") {
+        if (optPublicado) { optPublicado.disabled = true; optPublicado.style.display = "none"; }
+        if (newsStatus) newsStatus.value = item.status === "en_revision" ? "en_revision" : "borrador";
+    } else {
+        if (optPublicado) { optPublicado.disabled = false; optPublicado.style.display = ""; }
+        if (newsStatus) newsStatus.value = item.status || "publicado";
+    }
+
     document.getElementById("newsImage").value = item.image;
     document.getElementById("newsExcerpt").value = item.excerpt;
     document.getElementById("newsContent").value = item.content;
@@ -764,8 +966,8 @@ cancelNewsBtn.addEventListener("click", closeNewsModal);
 
 newsForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const role = store.auth.role || "admin";
-    if (role !== "admin" && role !== "editor") {
+    const role = normalizeRole(store.auth ? store.auth.role : "editor");
+    if (!isOwnerOrAdmin(role) && role !== "editor") {
         showToast("Acceso denegado: no tienes permisos para publicar noticias.", "danger");
         closeNewsModal();
         return;
@@ -781,31 +983,63 @@ newsForm.addEventListener("submit", (e) => {
     const excerpt = document.getElementById("newsExcerpt").value.trim();
     const content = document.getElementById("newsContent").value.trim();
 
+    // Verificaciones estrictas para Editores en el frontend
+    if (role === "editor") {
+        if (status === "publicado") {
+            showToast("Acceso denegado: Los redactores no pueden publicar directamente. Selecciona 'Enviar a Revisión' o 'Borrador'.", "danger");
+            return;
+        }
+        if (id) {
+            const existing = store.news.find(n => n.id === id);
+            if (existing && existing.status === "publicado") {
+                showToast("Acceso denegado: No puedes modificar una noticia ya publicada.", "danger");
+                closeNewsModal();
+                return;
+            }
+            if (existing && existing.authorUid && store.auth.uid && existing.authorUid !== store.auth.uid) {
+                showToast("Acceso denegado: Solo puedes editar tus propios borradores.", "danger");
+                closeNewsModal();
+                return;
+            }
+        }
+    }
+
     if (id) {
         // Editar
         const index = store.news.findIndex(n => n.id === id);
         if (index !== -1) {
             const beforeData = { ...store.news[index] };
-            store.news[index] = { ...store.news[index], title, category, author, date, status, image, excerpt, content };
-            store.logAction("EDICIÓN", `Se actualizó la noticia "${title}"`, { before: beforeData, after: store.news[index] });
-            showToast("Noticia actualizada con éxito.");
+            const existingAuthorUid = store.news[index].authorUid || (store.auth && store.auth.uid ? store.auth.uid : "");
+            store.news[index] = {
+                ...store.news[index],
+                title, category, author, date, status, image, excerpt, content,
+                authorUid: existingAuthorUid
+            };
+            store.logAction("EDICIÓN", `Se actualizó la noticia "${title}" [${status}]`, { before: beforeData, after: store.news[index] });
+            showToast(status === "en_revision" ? "Noticia enviada a revisión para aprobación." : "Noticia actualizada con éxito.");
         }
     } else {
         // Crear nueva
         const newNews = {
             id: "noticia-" + Date.now(),
             slug: `noticia-${Date.now()}.html`,
-            title, category, author, date, status, image, excerpt, content
+            title, category, author, date, status, image, excerpt, content,
+            authorUid: store.auth && store.auth.uid ? store.auth.uid : ""
         };
         store.news.unshift(newNews);
-        store.logAction("CREACIÓN", `Se publicó nueva noticia: "${title}" (${category})`, newNews);
-        showToast("¡Nueva noticia publicada en el CMS!");
+        store.logAction("CREACIÓN", `Se registró noticia: "${title}" [${status}]`, newNews);
+        showToast(status === "en_revision" ? "Borrador enviado a revisión de los administradores." : (status === "borrador" ? "Borrador guardado." : "¡Nueva noticia publicada en el CMS!"));
     }
 
     store.saveNews();
     if (window.araxysCloud && window.araxysCloud.isConnected) {
         const targetItem = id ? store.news.find(n => n.id === id) : store.news[0];
-        if (targetItem) window.araxysCloud.saveNewsDoc(targetItem);
+        if (targetItem) {
+            window.araxysCloud.saveNewsDoc(targetItem).catch(err => {
+                console.error("[News] Error guardando en Firestore:", err);
+                showToast("Error de permisos en Firestore al guardar noticia: " + err.message, "danger");
+            });
+        }
     }
     closeNewsModal();
     renderNewsTable();
@@ -813,14 +1047,25 @@ newsForm.addEventListener("submit", (e) => {
 });
 
 function deleteNews(id) {
-    const role = store.auth.role || "admin";
-    if (role !== "admin" && role !== "editor") {
+    const role = normalizeRole(store.auth ? store.auth.role : "editor");
+    if (!isOwnerOrAdmin(role) && role !== "editor") {
         showToast("Acceso denegado: no tienes permisos para eliminar noticias.", "danger");
         return;
     }
 
     const item = store.news.find(n => n.id === id);
     if (!item) return;
+
+    if (role === "editor") {
+        if (item.status === "publicado") {
+            showToast("Acceso denegado: Los redactores no pueden eliminar noticias publicadas.", "danger");
+            return;
+        }
+        if (item.authorUid && store.auth.uid && item.authorUid !== store.auth.uid) {
+            showToast("Acceso denegado: Solo puedes eliminar tus propios borradores.", "danger");
+            return;
+        }
+    }
 
     if (!confirm(`¿Seguro que deseas eliminar la noticia "${item.title}"?`)) return;
 
@@ -946,8 +1191,8 @@ const closePlayerModalBtn = document.getElementById("closePlayerModalBtn");
 const cancelPlayerBtn = document.getElementById("cancelPlayerBtn");
 
 function openAddPlayerModal() {
-    const role = store.auth.role || "admin";
-    const roleInfo = ROLE_DEFINITIONS[role] || ROLE_DEFINITIONS.admin;
+    const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+    const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
 
     if (role === "editor") {
         showToast("Los redactores de prensa no tienen permisos para gestionar rosters.", "danger");
@@ -959,7 +1204,7 @@ function openAddPlayerModal() {
     document.getElementById("playerForm").reset();
 
     const teamSelect = document.getElementById("playerTeam");
-    if (role.startsWith("coach_")) {
+    if (isCoachRole(role)) {
         teamSelect.value = roleInfo.team;
         teamSelect.disabled = true;
     } else {
@@ -972,8 +1217,8 @@ function openAddPlayerModal() {
 }
 
 function openEditPlayerModal(id) {
-    const role = store.auth.role || "admin";
-    const roleInfo = ROLE_DEFINITIONS[role] || ROLE_DEFINITIONS.admin;
+    const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+    const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
 
     if (role === "editor") {
         showToast("Los redactores no tienen permisos para modificar jugadores.", "danger");
@@ -983,7 +1228,7 @@ function openEditPlayerModal(id) {
     const p = store.players.find(x => x.id === id);
     if (!p) return;
 
-    if (role.startsWith("coach_") && p.team !== roleInfo.team) {
+    if (isCoachRole(role) && p.team !== roleInfo.team) {
         showToast(`Acceso denegado: solo puedes editar jugadores de tu equipo (${roleInfo.team.toUpperCase()}).`, "danger");
         return;
     }
@@ -993,7 +1238,7 @@ function openEditPlayerModal(id) {
     
     const teamSelect = document.getElementById("playerTeam");
     teamSelect.value = p.team;
-    teamSelect.disabled = role.startsWith("coach_");
+    teamSelect.disabled = isCoachRole(role);
 
     document.getElementById("playerNick").value = p.nick;
     document.getElementById("playerRole").value = p.role;
@@ -1015,8 +1260,8 @@ cancelPlayerBtn.addEventListener("click", closePlayerModal);
 
 playerForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const role = store.auth.role || "admin";
-    const roleInfo = ROLE_DEFINITIONS[role] || ROLE_DEFINITIONS.admin;
+    const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+    const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
 
     if (role === "editor") {
         showToast("Acceso denegado: no puedes modificar rosters.", "danger");
@@ -1028,7 +1273,7 @@ playerForm.addEventListener("submit", (e) => {
     let team = document.getElementById("playerTeam").value;
 
     // Si es coach, forzar siempre a su equipo autorizado
-    if (role.startsWith("coach_")) {
+    if (isCoachRole(role)) {
         team = roleInfo.team;
     }
 
@@ -1043,7 +1288,7 @@ playerForm.addEventListener("submit", (e) => {
         const index = store.players.findIndex(x => x.id === id);
         if (index !== -1) {
             // Si es coach, asegurar que el jugador que edita pertenece a su equipo
-            if (role.startsWith("coach_") && store.players[index].team !== roleInfo.team) {
+            if (isCoachRole(role) && store.players[index].team !== roleInfo.team) {
                 showToast("Acceso denegado.", "danger");
                 closePlayerModal();
                 return;
@@ -1074,8 +1319,8 @@ playerForm.addEventListener("submit", (e) => {
 });
 
 function deletePlayer(id) {
-    const role = store.auth.role || "admin";
-    const roleInfo = ROLE_DEFINITIONS[role] || ROLE_DEFINITIONS.admin;
+    const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+    const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
 
     if (role === "editor") {
         showToast("Los redactores no pueden eliminar jugadores.", "danger");
@@ -1085,7 +1330,7 @@ function deletePlayer(id) {
     const p = store.players.find(x => x.id === id);
     if (!p) return;
 
-    if (role.startsWith("coach_") && p.team !== roleInfo.team) {
+    if (isCoachRole(role) && p.team !== roleInfo.team) {
         showToast(`Solo puedes gestionar a tu propio equipo (${roleInfo.team.toUpperCase()}).`, "danger");
         return;
     }
@@ -1116,25 +1361,39 @@ function renderStaffTable() {
     if (!staffTableBody) return;
     staffTableBody.innerHTML = "";
 
+    const currentUserRole = normalizeRole(store.auth ? store.auth.role : "editor");
+    const isOwnerUser = currentUserRole === "owner";
+
     store.staff.forEach(s => {
-        const info = ROLE_DEFINITIONS[s.role] || ROLE_DEFINITIONS.admin;
+        const info = getRoleInfo(s.role, s.team);
         const tr = document.createElement("tr");
+        const sRole = normalizeRole(s.role);
+        const isOwnerMember = sRole === "owner" || s.nick === "Krys";
+        const canManageMember = isOwnerUser || (currentUserRole === "admin" && !isOwnerMember);
+
         tr.innerHTML = `
             <td>
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <div class="user-avatar" style="width: 32px; height: 32px; font-size: 11px; background: ${info.color};">${s.nick.substring(0, 2).toUpperCase()}</div>
-                    <strong style="color: var(--brand-white);">${s.nick}</strong>
+                    <div class="user-avatar" style="width: 32px; height: 32px; font-size: 11px; background: ${info.color};">${s.nick ? s.nick.substring(0, 2).toUpperCase() : "AX"}</div>
+                    <div>
+                        <strong style="color: var(--brand-white); display: block;">${s.nick}</strong>
+                        <small style="color: var(--brand-gray-text); font-size: 11px;">${s.email || "Sin correo"}</small>
+                    </div>
                 </div>
             </td>
             <td>${s.user}</td>
             <td><span class="badge-tag" style="background: rgba(255,255,255,0.08); color: ${info.color}; border: 1px solid ${info.color};">${info.label}</span></td>
             <td><small style="color: var(--brand-gray-text);">${info.scope}</small></td>
-            <td><span class="status-badge status-published">● ${s.status}</span></td>
+            <td><span class="status-badge status-published">● ${s.status || "Activo"}</span></td>
             <td class="action-buttons">
-                ${s.nick !== "Krys" ? `
+                ${isOwnerMember ? `
+                    <span style="font-size: 12px; color: var(--brand-gold); font-weight: bold;">👑 Owner / CEO</span>
+                ` : (canManageMember ? `
                     <button class="btn btn-outline btn-xs edit-staff-btn" data-id="${s.id}">Editar</button>
                     <button class="btn btn-danger btn-xs delete-staff-btn" data-id="${s.id}">🗑️</button>
-                ` : `<span style="font-size: 12px; color: var(--brand-gold); font-weight: bold;">👑 Fundador</span>`}
+                ` : `
+                    <span style="font-size: 11px; color: var(--brand-gray-text);">Solo Lectura</span>
+                `)}
             </td>
         `;
         staffTableBody.appendChild(tr);
@@ -1150,29 +1409,56 @@ function renderStaffTable() {
 }
 
 function openAddStaffModal() {
-    if (store.auth.role !== "admin") {
-        showToast("Solo el Administrador / CEO puede gestionar personal.", "danger");
+    const myRole = normalizeRole(store.auth ? store.auth.role : "editor");
+    if (!isOwnerOrAdmin(myRole)) {
+        showToast("Solo el Owner o Administrador pueden registrar personal.", "danger");
         return;
     }
     document.getElementById("staffModalTitle").textContent = "Añadir Miembro del Staff";
     document.getElementById("staffId").value = "";
+    document.getElementById("staffEmail").disabled = false;
     staffForm.reset();
+
+    const ownerOption = document.querySelector("#staffRole option[value='owner']");
+    if (ownerOption) {
+        ownerOption.disabled = (myRole !== "owner");
+        ownerOption.style.display = (myRole !== "owner") ? "none" : "";
+    }
+
     staffModal.classList.add("open");
 }
 
 function openEditStaffModal(id) {
-    if (store.auth.role !== "admin") {
-        showToast("Solo el Administrador / CEO puede editar miembros.", "danger");
+    const myRole = normalizeRole(store.auth ? store.auth.role : "editor");
+    if (!isOwnerOrAdmin(myRole)) {
+        showToast("Solo el Owner o Administrador pueden editar miembros.", "danger");
         return;
     }
     const s = store.staff.find(x => x.id === id);
     if (!s) return;
+
+    if (normalizeRole(s.role) === "owner" && myRole !== "owner") {
+        showToast("Acceso denegado: Solo el Owner puede modificar la cuenta del Owner.", "danger");
+        return;
+    }
+
     document.getElementById("staffModalTitle").textContent = "Editar Miembro del Staff";
     document.getElementById("staffId").value = s.id;
     document.getElementById("staffNick").value = s.nick;
     document.getElementById("staffUser").value = s.user;
+
+    const ownerOption = document.querySelector("#staffRole option[value='owner']");
+    if (ownerOption) {
+        ownerOption.disabled = (myRole !== "owner");
+        ownerOption.style.display = (myRole !== "owner") ? "none" : "";
+    }
+
     document.getElementById("staffRole").value = s.role;
-    document.getElementById("staffPass").value = s.password || "";
+    const emailField = document.getElementById("staffEmail");
+    if (emailField) {
+        emailField.value = s.email || "";
+        emailField.disabled = true; // El email en Auth no se edita directamente
+    }
     staffModal.classList.add("open");
 }
 
@@ -1185,10 +1471,11 @@ if (closeStaffModalBtn) closeStaffModalBtn.addEventListener("click", closeStaffM
 if (cancelStaffBtn) cancelStaffBtn.addEventListener("click", closeStaffModal);
 
 if (staffForm) {
-    staffForm.addEventListener("submit", (e) => {
+    staffForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        if (store.auth.role !== "admin") {
-            showToast("Acceso denegado: solo el CEO puede registrar staff.", "danger");
+        const myRole = normalizeRole(store.auth ? store.auth.role : "editor");
+        if (!isOwnerOrAdmin(myRole)) {
+            showToast("Acceso denegado: solo el Owner o Administrador pueden registrar staff.", "danger");
             closeStaffModal();
             return;
         }
@@ -1196,50 +1483,105 @@ if (staffForm) {
         const id = document.getElementById("staffId").value;
         const nick = document.getElementById("staffNick").value.trim();
         const user = document.getElementById("staffUser").value.trim();
+        const email = document.getElementById("staffEmail").value.trim().toLowerCase();
         const role = document.getElementById("staffRole").value;
-        const password = document.getElementById("staffPass").value.trim();
+        const submitBtn = document.getElementById("btnSaveStaffMember");
+
+        if (!nick || !user || !role) {
+            showToast("Completa los campos obligatorios.", "danger");
+            return;
+        }
+
+        // Prevención estricta de escalada a Owner por Administradores
+        if (normalizeRole(role) === "owner" && myRole !== "owner") {
+            showToast("Acceso denegado: Solo el Owner supremo puede asignar el rol de Owner.", "danger");
+            return;
+        }
 
         if (id) {
-            const index = store.staff.findIndex(x => x.id === id);
-            if (index !== -1) {
-                store.staff[index] = { ...store.staff[index], nick, user, role, password };
-                store.logAction("STAFF", `Se actualizó rol de staff: ${nick} (${ROLE_DEFINITIONS[role].label})`);
+            // Edición de miembro existente
+            try {
+                if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Actualizando..."; }
+                const index = store.staff.findIndex(x => x.id === id);
+                if (index !== -1) {
+                    if (normalizeRole(store.staff[index].role) === "owner" && myRole !== "owner") {
+                        showToast("Acceso denegado: No puedes modificar la cuenta del Owner.", "danger");
+                        return;
+                    }
+                    store.staff[index] = { ...store.staff[index], nick, user, role };
+                }
+                if (window.araxysCloud && window.araxysCloud.isConnected) {
+                    await window.araxysCloud.saveStaffDoc({ id, nick, user, role, email });
+                }
+                const roleDef = getRoleInfo(role);
+                store.logAction("STAFF", `Se actualizó rol de staff: ${nick} (${roleDef.label})`);
                 showToast(`Datos de ${nick} actualizados.`);
+                closeStaffModal();
+                renderStaffTable();
+            } catch (err) {
+                console.error("[Staff] Error actualizando:", err);
+                showToast("Error al actualizar miembro: " + err.message, "danger");
+            } finally {
+                if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Guardar Miembro"; }
             }
         } else {
-            const newMember = {
-                id: "s-" + Date.now(),
-                nick, user, role, password, status: "Activo"
-            };
-            store.staff.push(newMember);
-            store.logAction("STAFF", `Nuevo staff registrado: ${nick} (${ROLE_DEFINITIONS[role].label})`);
-            showToast(`¡${nick} añadido con rol ${ROLE_DEFINITIONS[role].label}!`);
-        }
+            // Nuevo miembro mediante invitación por Firebase Auth
+            if (!email) {
+                showToast("Ingresa el correo electrónico para la invitación de Firebase Auth.", "danger");
+                return;
+            }
 
-        store.saveStaff();
-        if (window.araxysCloud && window.araxysCloud.isConnected) {
-            const savedMember = id ? store.staff.find(x => x.id === id) : store.staff[store.staff.length - 1];
-            if (savedMember) window.araxysCloud.saveStaffDoc(savedMember);
+            try {
+                if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Creando invitación..."; }
+                showToast("Creando cuenta y enviando correo de invitación...");
+                
+                const newMember = await window.araxysCloud.registerStaffMember({ email, nick, user, role });
+                store.staff.push(newMember);
+                const roleDef = getRoleInfo(role);
+                store.logAction("STAFF", `Nuevo staff registrado con invitación: ${nick} (${roleDef.label})`, newMember);
+                showToast(`¡Invitación enviada a ${email}! ${nick} ya forma parte del staff.`);
+                closeStaffModal();
+                renderStaffTable();
+            } catch (err) {
+                console.error("[Staff] Error registrando miembro:", err);
+                let msg = "No se pudo registrar al miembro.";
+                if (err.code === "auth/email-already-in-use") msg = "Este correo electrónico ya está registrado en Firebase Auth.";
+                else if (err.code === "auth/invalid-email") msg = "El formato de correo no es válido.";
+                else if (err.message) msg = err.message;
+                showToast(msg, "danger");
+            } finally {
+                if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Guardar Miembro"; }
+            }
         }
-        closeStaffModal();
-        renderStaffTable();
     });
 }
 
 function deleteStaffMember(id) {
-    if (store.auth.role !== "admin") {
-        showToast("Solo el CEO puede revocar accesos.", "danger");
+    const myRole = normalizeRole(store.auth ? store.auth.role : "editor");
+    if (!isOwnerOrAdmin(myRole)) {
+        showToast("Solo el Owner o Administrador pueden revocar accesos.", "danger");
         return;
     }
 
     const s = store.staff.find(x => x.id === id);
     if (!s) return;
+    const sRole = normalizeRole(s.role);
+    if (sRole === "owner") {
+        showToast("No se puede revocar el acceso del Owner / CEO.", "danger");
+        return;
+    }
+    if (myRole !== "owner" && sRole === "owner") {
+        showToast("Acceso denegado: Solo el Owner puede eliminar a un Owner.", "danger");
+        return;
+    }
     if (!confirm(`¿Revocar acceso y desvincular a ${s.nick} del staff?`)) return;
 
     store.staff = store.staff.filter(x => x.id !== id);
-    store.saveStaff();
     if (window.araxysCloud && window.araxysCloud.isConnected) {
-        window.araxysCloud.deleteStaffDoc(id);
+        window.araxysCloud.deleteStaffDoc(id).catch(err => {
+            console.error("[Staff] Error borrando:", err);
+            showToast("Error al revocar acceso en Firestore: " + err.message, "danger");
+        });
     }
     store.logAction("STAFF", `Acceso revocado para miembro de staff: ${s.nick}`);
     renderStaffTable();

@@ -1,0 +1,387 @@
+rules_version = '2';
+
+// ===============================================================
+// ARAXYS ESPORTS — CLOUD FIRESTORE SECURITY RULES
+// ===============================================================
+//
+// Proyecto: Araxys Esports Official Web Platform & CMS
+// Entorno: Google Cloud Firestore (Producción)
+// Versión CEL: rules_version = '2'
+//
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Collection: araxys_news
+// Document ID: {newsId} (Slug o ID alfanumérico generado)
+// Fields:
+//   - id: string (opcional en doc, tamaño <= 100)
+//   - title: string (requerido, tamaño 1-300 caracteres)
+//   - slug: string (opcional, tamaño <= 300)
+//   - category: string (requerido, tamaño 1-100)
+//   - author: string (requerido, tamaño 1-100)
+//   - authorUid: string (opcional para admin/owner, requerido para editores, tamaño <= 128)
+//   - date: string (requerido, tamaño 1-50, formato YYYY-MM-DD o ISO)
+//   - status: string (opcional en doc, enum: 'publicado', 'borrador', 'en_revision')
+//   - image: string (opcional, tamaño <= 1000, ruta relativa o URL)
+//   - excerpt: string (opcional, tamaño <= 2000)
+//   - content: string (opcional, tamaño <= 50000)
+//
+// Collection: araxys_players
+// Document ID: {playerId} (ID alfanumérico generado)
+// Fields:
+//   - id: string (opcional en doc, tamaño <= 100)
+//   - team: string (requerido, enum: titular, prime, vanguard, wolf, nexus, origin)
+//   - nick: string (requerido, tamaño 1-100)
+//   - role: string (requerido, tamaño 1-100)
+//   - agent: string (opcional, tamaño <= 100)
+//   - photo: string (opcional, tamaño <= 1000)
+//   - twitter: string (opcional, tamaño <= 100)
+//   - tracker: string (opcional, tamaño <= 200)
+//
+// Collection: araxys_staff
+// Document ID: {userId} (Exact Firebase Authentication UID: request.auth.uid)
+// Fields:
+//   - id: string (opcional en doc, tamaño <= 128)
+//   - uid: string (opcional en doc, tamaño <= 128)
+//   - role: string (requerido, enum: owner, admin, editor, coach_prime, coach_titular, coach_vanguard, coach_wolf, coach_nexus, coach_origin)
+//   - nick: string (requerido, tamaño 1-100)
+//   - email: string (opcional, tamaño <= 150)
+//   - user: string (opcional, tamaño <= 100)
+//   - status: string (opcional, tamaño <= 50)
+//   - createdAt: string/timestamp (opcional, tamaño <= 60)
+//   - updatedAt: string/timestamp (opcional, tamaño <= 60)
+//
+// Collection: araxys_activity_log
+// Document ID: {logId} (ID único generado, ej: log-timestamp-rand)
+// Fields:
+//   - id: string (opcional, tamaño <= 100)
+//   - timestamp: string (requerido, tamaño 1-60, ISO 8601)
+//   - user: string (requerido, tamaño 1-100)
+//   - role: string (opcional, tamaño <= 50)
+//   - action: string (requerido, tamaño 1-100)
+//   - detail: string (requerido, tamaño <= 2000)
+//   - snapshot: any/map (opcional)
+//
+// Collection: araxys_trash
+// Document ID: {trashId} (ID único generado, ej: trash-timestamp)
+// Fields:
+//   - id: string (opcional, tamaño <= 100)
+//   - type: string (requerido, enum: 'news' o 'player')
+//   - title: string (requerido, tamaño 1-300)
+//   - subtitle: string (opcional, tamaño <= 500)
+//   - deletedBy: string (requerido, tamaño 1-100)
+//   - deletedByRole: string (opcional, tamaño <= 50)
+//   - deletedAt: string (requerido, tamaño 1-60, ISO 8601)
+//   - data: map (requerido, snapshot del objeto eliminado)
+//
+// ===============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Helper Functions (Autenticación y Jerarquía RBAC sin Custom Claims)
+    // ===============================================================
+
+    // Verifica si la solicitud proviene de una sesión autenticada con Firebase Auth
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Obtiene los datos del documento del usuario en el directorio araxys_staff
+    function getStaffData() {
+      return isSignedIn() && exists(/databases/$(database)/documents/araxys_staff/$(request.auth.uid))
+        ? get(/databases/$(database)/documents/araxys_staff/$(request.auth.uid)).data
+        : {};
+    }
+
+    // Obtiene el rol del usuario autenticado directamente desde araxys_staff/{uid}
+    function getStaffRole() {
+      return isSignedIn() &&
+             exists(/databases/$(database)/documents/araxys_staff/$(request.auth.uid)) &&
+             'role' in get(/databases/$(database)/documents/araxys_staff/$(request.auth.uid)).data
+        ? get(/databases/$(database)/documents/araxys_staff/$(request.auth.uid)).data.role
+        : '';
+    }
+
+    // Rol 'owner': Máxima jerarquía (Fundador / Krys). Acceso total supremo.
+    // Depende exclusivamente del rol registrado en araxys_staff/{request.auth.uid}.
+    function isOwner() {
+      return isSignedIn() && getStaffRole() == 'owner';
+    }
+
+    // Rol 'admin': CEO y Administradores generales (hereda permisos de Owner)
+    function isAdmin() {
+      return isSignedIn() && (getStaffRole() == 'admin' || isOwner());
+    }
+
+    // Rol 'editor': Prensa y Redacción de noticias (hereda permisos de Admin y Owner)
+    function isEditor() {
+      return isSignedIn() && (getStaffRole() == 'editor' || isAdmin());
+    }
+
+    // Obtiene la división asignada al coach si está registrada en el documento de staff
+    function getStaffTeam() {
+      return isSignedIn() &&
+             exists(/databases/$(database)/documents/araxys_staff/$(request.auth.uid)) &&
+             'team' in get(/databases/$(database)/documents/araxys_staff/$(request.auth.uid)).data
+        ? get(/databases/$(database)/documents/araxys_staff/$(request.auth.uid)).data.team
+        : '';
+    }
+
+    // Rol 'coach_<team>' o 'coach': Entrenador asignado a una división (Admin y Owner tienen control universal)
+    function isCoach(team) {
+      return isSignedIn() && (
+        getStaffRole() == 'coach_' + team ||
+        (getStaffRole() == 'coach' && getStaffTeam() == team) ||
+        isAdmin()
+      );
+    }
+
+    // Verifica si el usuario autenticado pertenece formalmente a Araxys Staff
+    function isStaff() {
+      return isSignedIn() && (isOwner() || getStaffRole() != '');
+    }
+
+    // ===============================================================
+    // Domain Validators (Tipado estricto y prevención contra DoS)
+    // ===============================================================
+
+    // Validador de artículos de noticias (araxys_news)
+    function isValidNews(data) {
+      return data.keys().hasAll(['title', 'category', 'author', 'date']) &&
+             data.keys().hasOnly(['id', 'title', 'slug', 'category', 'author', 'authorUid', 'date', 'status', 'image', 'excerpt', 'content']) &&
+             data.title is string && data.title.size() > 0 && data.title.size() <= 300 &&
+             data.category is string && data.category.size() > 0 && data.category.size() <= 100 &&
+             data.author is string && data.author.size() > 0 && data.author.size() <= 100 &&
+             data.date is string && data.date.size() > 0 && data.date.size() <= 50 &&
+             (!('id' in data) || (data.id is string && data.id.size() <= 100)) &&
+             (!('slug' in data) || (data.slug is string && data.slug.size() <= 300)) &&
+             (!('authorUid' in data) || (data.authorUid is string && data.authorUid.size() > 0 && data.authorUid.size() <= 128)) &&
+             (!('status' in data) || (data.status is string && data.status in ['publicado', 'borrador', 'en_revision'])) &&
+             (!('image' in data) || (data.image is string && data.image.size() <= 1000)) &&
+             (!('excerpt' in data) || (data.excerpt is string && data.excerpt.size() <= 2000)) &&
+             (!('content' in data) || (data.content is string && data.content.size() <= 50000));
+    }
+
+    // Validador de jugadores y divisiones (araxys_players)
+    function isValidPlayer(data) {
+      return data.keys().hasAll(['team', 'nick', 'role']) &&
+             data.keys().hasOnly(['id', 'team', 'nick', 'role', 'agent', 'photo', 'twitter', 'tracker']) &&
+             data.team is string && data.team in ['titular', 'prime', 'vanguard', 'wolf', 'nexus', 'origin'] &&
+             data.nick is string && data.nick.size() > 0 && data.nick.size() <= 100 &&
+             data.role is string && data.role.size() > 0 && data.role.size() <= 100 &&
+             (!('id' in data) || (data.id is string && data.id.size() <= 100)) &&
+             (!('agent' in data) || (data.agent is string && data.agent.size() <= 100)) &&
+             (!('photo' in data) || (data.photo is string && data.photo.size() <= 1000)) &&
+             (!('twitter' in data) || (data.twitter is string && data.twitter.size() <= 100)) &&
+             (!('tracker' in data) || (data.tracker is string && data.tracker.size() <= 200));
+    }
+
+    // Validador del directorio de Staff y credenciales de acceso (araxys_staff)
+    function isValidStaff(data) {
+      return data.keys().hasAll(['role', 'nick']) &&
+             data.keys().hasOnly(['id', 'uid', 'role', 'nick', 'email', 'user', 'team', 'status', 'createdAt', 'updatedAt']) &&
+             data.role is string && data.role in [
+               'owner', 'admin', 'editor', 'coach',
+               'coach_prime', 'coach_titular', 'coach_vanguard',
+               'coach_wolf', 'coach_nexus', 'coach_origin'
+             ] &&
+             (!('team' in data) || (data.team is string && data.team in ['titular', 'prime', 'vanguard', 'wolf', 'nexus', 'origin'])) &&
+             data.nick is string && data.nick.size() > 0 && data.nick.size() <= 100 &&
+             (!('id' in data) || (data.id is string && data.id.size() <= 128)) &&
+             (!('uid' in data) || (data.uid is string && data.uid.size() <= 128)) &&
+             (!('email' in data) || (data.email is string && data.email.size() <= 150)) &&
+             (!('user' in data) || (data.user is string && data.user.size() <= 100)) &&
+             (!('status' in data) || (data.status is string && data.status.size() <= 50)) &&
+             (!('createdAt' in data) || (data.createdAt is string && data.createdAt.size() <= 60)) &&
+             (!('updatedAt' in data) || (data.updatedAt is string && data.updatedAt.size() <= 60));
+    }
+
+    // Validador de registros de auditoría inmutables (araxys_activity_log)
+    function isValidActivityLog(data) {
+      return data.keys().hasAll(['timestamp', 'user', 'action', 'detail']) &&
+             data.keys().hasOnly(['id', 'uid', 'timestamp', 'user', 'role', 'action', 'detail', 'snapshot']) &&
+             data.timestamp is string && data.timestamp.size() > 0 && data.timestamp.size() <= 60 &&
+             data.user is string && data.user.size() > 0 && data.user.size() <= 100 &&
+             data.action is string && data.action.size() > 0 && data.action.size() <= 100 &&
+             data.detail is string && data.detail.size() <= 2000 &&
+             (!('id' in data) || (data.id is string && data.id.size() <= 100)) &&
+             (!('uid' in data) || (data.uid is string && data.uid.size() <= 128)) &&
+             (!('role' in data) || (data.role is string && data.role.size() <= 50)) &&
+             (!('snapshot' in data) || data.snapshot is map);
+    }
+
+    // Validador de elementos en papelera de recuperación (araxys_trash)
+    function isValidTrash(data) {
+      return data.keys().hasAll(['type', 'title', 'deletedBy', 'deletedAt', 'data']) &&
+             data.keys().hasOnly(['id', 'type', 'title', 'subtitle', 'deletedBy', 'deletedByRole', 'deletedAt', 'data']) &&
+             data.type is string && (data.type == 'news' || data.type == 'player') &&
+             data.title is string && data.title.size() > 0 && data.title.size() <= 300 &&
+             data.deletedBy is string && data.deletedBy.size() > 0 && data.deletedBy.size() <= 100 &&
+             data.deletedAt is string && data.deletedAt.size() > 0 && data.deletedAt.size() <= 60 &&
+             data.data is map &&
+             (!('id' in data) || (data.id is string && data.id.size() <= 100)) &&
+             (!('subtitle' in data) || (data.subtitle is string && data.subtitle.size() <= 500)) &&
+             (!('deletedByRole' in data) || (data.deletedByRole is string && data.deletedByRole.size() <= 50));
+    }
+
+    // ===============================================================
+    // Colecciones y Reglas de Control de Acceso
+    // ===============================================================
+
+    // 1. Colección de Noticias (araxys_news)
+    // - Lectura:
+    //     * Visitantes públicos y coaches: únicamente noticias con status == 'publicado'.
+    //     * Editores: noticias publicadas + sus propios borradores o revisiones (authorUid == request.auth.uid).
+    //     * Admin y Owner: todas las noticias (publicadas, en revisión y borradores).
+    // - Creación:
+    //     * Admin y Owner pueden crear noticias con cualquier estado ('publicado', 'borrador', 'en_revision').
+    //     * Editor solo puede crear sus propios borradores y revisiones ('borrador' o 'en_revision')
+    //       y debe registrarse como autor (authorUid == request.auth.uid).
+    // - Edición:
+    //     * Admin y Owner pueden editar cualquier noticia y publicar directamente ('publicado').
+    //     * Editor NO puede modificar noticias ya publicadas (status != 'publicado').
+    //     * Editor solo puede editar sus propios borradores/revisiones (authorUid == request.auth.uid)
+    //       manteniendo el estado en 'borrador' o 'en_revision' sin alterar authorUid.
+    // - Eliminación:
+    //     * Admin y Owner pueden eliminar cualquier noticia.
+    //     * Editor NO puede borrar noticias publicadas. Solo puede borrar sus propios borradores o revisiones.
+    match /araxys_news/{newsId} {
+      allow read: if resource.data.status == 'publicado' ||
+                     isAdmin() ||
+                     (isEditor() && ('authorUid' in resource.data && resource.data.authorUid == request.auth.uid));
+
+      allow create: if isValidNews(request.resource.data) && (
+        isAdmin() || (
+          isEditor() &&
+          request.resource.data.status in ['borrador', 'en_revision'] &&
+          ('authorUid' in request.resource.data && request.resource.data.authorUid == request.auth.uid)
+        )
+      );
+
+      allow update: if isValidNews(request.resource.data) && (
+        isAdmin() || (
+          isEditor() &&
+          resource.data.status != 'publicado' &&
+          resource.data.status in ['borrador', 'en_revision'] &&
+          ('authorUid' in resource.data && resource.data.authorUid == request.auth.uid) &&
+          request.resource.data.status in ['borrador', 'en_revision'] &&
+          ('authorUid' in request.resource.data && request.resource.data.authorUid == resource.data.authorUid)
+        )
+      );
+
+      allow delete: if isAdmin() || (
+        isEditor() &&
+        resource.data.status != 'publicado' &&
+        resource.data.status in ['borrador', 'en_revision'] &&
+        ('authorUid' in resource.data && resource.data.authorUid == request.auth.uid)
+      );
+    }
+
+    // 2. Colección de Jugadores y Rosters (araxys_players)
+    // - Lectura: Pública para las páginas de rosters y showcase general.
+    // - Creación: Admin y Owner tienen control universal. Coaches solo crean en su división asignada.
+    // - Edición: Admin y Owner tienen control universal. Coaches solo modifican su equipo y no pueden
+    //   transferir jugadores a otra división (request.resource.data.team == resource.data.team).
+    // - Eliminación: Admin y Owner pueden eliminar cualquiera; Coaches solo de su equipo asignado.
+    match /araxys_players/{playerId} {
+      allow read: if true;
+
+      allow create: if isValidPlayer(request.resource.data) && (
+        isAdmin() || (
+          isCoach(request.resource.data.team) &&
+          request.resource.data.team in ['titular', 'prime', 'vanguard', 'wolf', 'nexus', 'origin']
+        )
+      );
+
+      allow update: if isValidPlayer(request.resource.data) && (
+        isAdmin() || (
+          isCoach(resource.data.team) &&
+          request.resource.data.team == resource.data.team
+        )
+      );
+
+      allow delete: if isAdmin() || isCoach(resource.data.team);
+    }
+
+    // 3. Directorio de Staff (araxys_staff)
+    // - Documento mapeado al UID de autenticación {userId}.
+    // - Lectura: Cada usuario autenticado puede leer su propio documento de staff,
+    //   y Administradores/Owner pueden leer todo el directorio.
+    // - Creación: Owner puede crear cualquier rol. Admin puede crear personal pero NO un 'owner'.
+    // - Edición: Owner control total. Admin solo modifica no-owners, no puede promover a 'owner',
+    //   y no puede modificar su propio rol (prevención estricta de escalamiento de privilegios).
+    // - Eliminación: Owner puede eliminar cualquiera. Admin solo puede eliminar no-owners.
+    match /araxys_staff/{userId} {
+      allow read: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+
+      allow create: if isValidStaff(request.resource.data) && (
+        isOwner() || (isAdmin() && request.resource.data.role != 'owner')
+      );
+
+      allow update: if isValidStaff(request.resource.data) && (
+        isOwner() || (
+          isAdmin() &&
+          resource.data.role != 'owner' &&
+          request.resource.data.role != 'owner' &&
+          (request.auth.uid != userId || request.resource.data.role == resource.data.role)
+        )
+      );
+
+      allow delete: if isOwner() || (isAdmin() && resource.data.role != 'owner');
+    }
+
+    // 4. Registro de Auditoría (araxys_activity_log)
+    // - Lectura: Restringida exclusivamente a Administradores y Owner.
+    // - Creación: Permitida para cualquier miembro de staff autenticado.
+    //   Refuerzo de integridad: Si el cliente envía 'role', debe coincidir con su rol en araxys_staff.
+    //   Si envía 'uid', debe coincidir con su UID autenticado (request.auth.uid) impidiendo falsificación.
+    // - Modificación / Eliminación: Bloqueadas permanentemente (allow update, delete: if false)
+    //   garantizando inmutabilidad y transparencia forense de la auditoría.
+    match /araxys_activity_log/{logId} {
+      allow read: if isAdmin();
+      allow create: if isStaff() &&
+                       isValidActivityLog(request.resource.data) &&
+                       (!('role' in request.resource.data) || request.resource.data.role == getStaffRole()) &&
+                       (!('uid' in request.resource.data) || request.resource.data.uid == request.auth.uid);
+      allow update, delete: if false;
+    }
+
+    // 5. Papelera de Recuperación (araxys_trash)
+    // - Lectura: Restringida a Administradores y Owner para revisión y restauración.
+    // - Creación: Respeta estrictamente los permisos del contenido original:
+    //     * Admin y Owner: cualquier noticia o jugador.
+    //     * Editor: únicamente sus propios borradores o revisiones de noticias (data.authorUid == request.auth.uid).
+    //     * Coach: únicamente jugadores de su propia división asignada (isCoach(data.team)).
+    // - Modificación / Eliminación: Exclusivo de Administradores y Owner (para restauración oficial o purga permanente).
+    match /araxys_trash/{trashId} {
+      allow read: if isAdmin();
+      allow create: if isStaff() && isValidTrash(request.resource.data) && (
+        isAdmin() || (
+          isEditor() &&
+          request.resource.data.type == 'news' &&
+          'authorUid' in request.resource.data.data &&
+          request.resource.data.data.authorUid == request.auth.uid &&
+          'status' in request.resource.data.data &&
+          request.resource.data.data.status in ['borrador', 'en_revision']
+        ) || (
+          request.resource.data.type == 'player' &&
+          'team' in request.resource.data.data &&
+          isCoach(request.resource.data.data.team)
+        )
+      );
+      allow update: if isAdmin() && isValidTrash(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // ===============================================================
+    // Denegación por Defecto (Default Deny)
+    // ===============================================================
+    // Cualquier otra colección o ruta no definida explícitamente queda bloqueada por defecto.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
