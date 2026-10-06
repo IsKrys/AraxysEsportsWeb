@@ -24,15 +24,33 @@
             
             <form id="loginForm" class="login-form">
                 <div class="form-group">
-                    <label for="loginEmail">Usuario o Correo</label>
-                    <input type="text" id="loginEmail" placeholder="usuario_admin" required autocomplete="username">
+                    <label for="loginEmail">Correo Electrónico</label>
+                    <input type="email" id="loginEmail" placeholder="admin@araxysesports.com" required autocomplete="username">
                 </div>
                 <div class="form-group">
                     <label for="loginPassword">Contraseña</label>
                     <input type="password" id="loginPassword" placeholder="••••••••••••" required autocomplete="current-password">
                 </div>
+                <div class="login-row-help" style="display: flex; justify-content: flex-end; margin-top: -6px; margin-bottom: 12px;">
+                    <button type="button" id="btnForgotPass" style="background: none; border: none; color: var(--brand-gold); font-size: 13px; cursor: pointer; text-decoration: underline; padding: 0;">¿Olvidaste tu contraseña?</button>
+                </div>
                 <div class="login-actions">
-                    <button type="submit" class="btn btn-primary btn-block">ENTRAR AL PANEL</button>
+                    <button type="submit" class="btn btn-primary btn-block" id="btnLoginSubmit">ENTRAR AL PANEL</button>
+                </div>
+            </form>
+
+            <!-- FORMULARIO DE RECUPERACIÓN DE CONTRASEÑA -->
+            <form id="forgotPassForm" class="login-form" style="display: none;">
+                <p style="font-size: 13px; color: var(--brand-gray-text); margin-bottom: 15px; line-height: 1.4;">
+                    Ingresa tu correo institucional registrado en Firebase Authentication para recibir el enlace de restablecimiento seguro.
+                </p>
+                <div class="form-group">
+                    <label for="resetEmail">Correo Electrónico</label>
+                    <input type="email" id="resetEmail" placeholder="admin@araxysesports.com" autocomplete="email">
+                </div>
+                <div class="login-actions" style="display: flex; flex-direction: column; gap: 8px;">
+                    <button type="submit" class="btn btn-primary btn-block" id="btnSendResetSubmit">ENVIAR ENLACE DE RECUPERACIÓN</button>
+                    <button type="button" id="btnBackToLogin" class="btn btn-secondary btn-block">VOLVER A INICIAR SESIÓN</button>
                 </div>
             </form>
             <div class="login-footer">
@@ -688,8 +706,9 @@
                         <div class="form-group flex-1">
                             <label for="newsStatus">Estado</label>
                             <select id="newsStatus">
-                                <option value="publicado">Publicado</option>
-                                <option value="borrador">Borrador</option>
+                                <option value="publicado" id="optStatusPublicado">🟢 Publicado (Solo Admin/Owner)</option>
+                                <option value="en_revision" id="optStatusRevision">🟡 Enviar a Revisión</option>
+                                <option value="borrador" id="optStatusBorrador">⚪ Borrador</option>
                             </select>
                         </div>
                     </div>
@@ -826,10 +845,15 @@
 
                     <div class="form-row">
                         <div class="form-group flex-1">
+                            <label for="staffEmail">Correo Electrónico (Firebase Auth) *</label>
+                            <input type="email" id="staffEmail" placeholder="staff@araxysesports.com" required autocomplete="email">
+                        </div>
+                        <div class="form-group flex-1">
                             <label for="staffRole">Rol y Permisos Asignados *</label>
                             <select id="staffRole" required>
-                                <option value="admin">👑 CEO / Administrador (Acceso Total)</option>
-                                <option value="editor">📰 Prensa & Redacción (Solo Noticias)</option>
+                                <option value="owner">👑 Owner / CEO (Acceso Supremo)</option>
+                                <option value="admin">🛡️ Administrador (Gestión General)</option>
+                                <option value="editor">📰 Editor (Solo Noticias)</option>
                                 <option value="coach_prime">🎯 Coach / Capitán — Araxys Prime</option>
                                 <option value="coach_titular">🛡️ Coach / Capitán — Araxys Titular</option>
                                 <option value="coach_vanguard">⚡ Coach / Capitán — Araxys Vanguard</option>
@@ -838,10 +862,11 @@
                                 <option value="coach_origin">⚔️ Coach / Capitán — Araxys Origin</option>
                             </select>
                         </div>
-                        <div class="form-group flex-1">
-                            <label for="staffPass">Contraseña Inicial</label>
-                            <input type="password" id="staffPass" placeholder="••••••••••••" autocomplete="new-password">
-                        </div>
+                    </div>
+                    <div id="staffInviteNotice" style="background: rgba(0, 209, 255, 0.08); border: 1px solid rgba(0, 209, 255, 0.25); border-radius: 8px; padding: 10px 14px; margin-top: 10px; margin-bottom: 8px;">
+                        <small style="color: #00D1FF; display: block; line-height: 1.45;">
+                            ✉️ <strong>Invitación Segura por Correo:</strong> Al registrar un nuevo miembro, se creará su cuenta en Firebase Authentication y se le enviará un enlace para que configure su propia contraseña. El administrador nunca necesita conocer contraseñas de terceros.
+                        </small>
                     </div>
                     <small class="form-hint">🔒 Seguridad: Los coaches y capitanes solo podrán ver y modificar los jugadores de su propio equipo asignado.</small>
                 </div>
@@ -1017,11 +1042,12 @@
 
     <!-- SDK DE GOOGLE FIREBASE (CDN COMPAT OFICIAL v10.12.0) -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
     <!-- MOTOR DE CONFIGURACIÓN Y SINCRONIZACIÓN CLOUD -->
-    <script src="firebase-config.js?v=20261004-origin-fix"></script>
-    <script src="firebase-sync.js?v=20261004-origin-fix"></script>
-    <script src="admin.js?v=20261004-origin-fix"></script>
+    <script src="firebase-config.js?v=20261005-catclass-fix"></script>
+    <script src="firebase-sync.js?v=20261005-catclass-fix"></script>
+    <script src="admin.js?v=20261005-catclass-fix"></script>
 </body>
 </html>

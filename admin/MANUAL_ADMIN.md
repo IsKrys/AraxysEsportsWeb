@@ -20,8 +20,9 @@ El panel cuenta con restricciones automáticas de interfaz y operaciones según 
 
 | Rol | Insignia | Alcance de Permisos |
 | :--- | :--- | :--- |
-| **CEO / Administrador** | 👑 CEO | **Control Total:** Noticias, Rosters, Torneos, Kit de Marca, Staff, Auditoría y Papelera. |
-| **Prensa & Redacción** | 📰 Editor | **Contenido:** Redactar, editar y publicar Noticias y Torneos. No tiene acceso a Rosters ni Staff. |
+| **Owner / CEO** | 👑 Owner | **Control Supremo:** Control total absoluto de la organización, gestión de administradores y jerarquía máxima. |
+| **Administrador** | 🛡️ Admin | **Gestión General:** Noticias, Rosters, Torneos, Kit de Marca, Staff, Auditoría y Papelera. No puede promover a otro Owner. |
+| **Editor** | 📰 Editor | **Prensa y Artículos:** Creación y edición de borradores propios y envío a revisión. Publicación y eliminación de publicados restringida a Admin/Owner. |
 | **Coach Titular** | 🛡️ Titular | **Exclusivo:** Solo puede ver y modificar los jugadores de **Araxys Titular**. |
 | **Coach Prime** | 🎯 Prime | **Exclusivo:** Solo puede ver y modificar los jugadores de **Araxys Prime** (Chiflesinho). |
 | **Coach Vanguard** | ⚡ Vanguard | **Exclusivo:** Solo puede ver y modificar los jugadores de **Araxys Vanguard**. |
