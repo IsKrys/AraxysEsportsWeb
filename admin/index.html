@@ -130,11 +130,11 @@
                     <h1 class="page-title" id="pageTitle">Resumen General</h1>
                 </div>
                 <div class="topbar-right">
-                    <button id="cloudStatusBadge" class="cloud-status-pill offline" title="Estado de sincronización en tiempo real con Google Firebase">
+                    <button id="cloudStatusBadge" class="cloud-status-pill offline" title="Estado de sincronización en tiempo real con Google Firebase" style="display: none;">
                         <span class="status-dot"></span>
                         <span class="status-text">Nube: Modo Local</span>
                     </button>
-                    <button id="openCloudModalBtn" class="btn btn-outline btn-sm" title="Configurar conexión con Google Firebase">
+                    <button id="openCloudModalBtn" class="btn btn-outline btn-sm" title="Configurar conexión con Google Firebase" style="display: none;">
                         <span>☁️ Sincronización Nube</span>
                     </button>
                     <a href="../index.html" target="_blank" class="btn btn-outline btn-sm">
@@ -172,7 +172,7 @@
                                 <span class="kpi-label">Equipos Competitivos</span>
                             </div>
                         </div>
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="kpiSystemOnlineCard" style="display: none;">
                             <div class="kpi-icon icon-purple">⚡</div>
                             <div class="kpi-data">
                                 <span class="kpi-num">Activo</span>

@@ -563,6 +563,11 @@ class AraxysCloudSync {
      * Sube todos los datos iniciales oficiales a Firestore (Seed inicial)
      */
     async seedInitialDatabase() {
+        const currentRole = typeof normalizeRole === "function" ? normalizeRole(store.auth ? store.auth.role : null) : (store.auth ? store.auth.role : null);
+        if (currentRole !== "owner" && currentRole !== "admin") {
+            throw new Error("Acceso denegado: solo Administradores y Owners pueden sincronizar la base de datos en la nube.");
+        }
+
         if (!this.isConnected || !this.db) {
             throw new Error("No hay conexión activa con Google Cloud Firestore.");
         }
@@ -630,6 +635,9 @@ class AraxysCloudSync {
         if (badge) {
             badge.className = `cloud-status-pill ${status}`;
             if (textEl) textEl.textContent = text;
+            const currentRole = typeof normalizeRole === "function" ? normalizeRole(store.auth ? store.auth.role : null) : (store.auth ? store.auth.role : null);
+            const isPrivileged = currentRole === "owner" || currentRole === "admin";
+            badge.style.display = isPrivileged ? "inline-flex" : "none";
         }
 
         if (banner) {
