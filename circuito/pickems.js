@@ -16,21 +16,21 @@ document.addEventListener("DOMContentLoaded", () => {
         wolf: {
             id: "wolf",
             name: "Araxys Wolf",
-            motto: "La manada táctica implacable",
+            motto: "Implacable",
             logo: "../img/teams/wolf.webp",
             colorClass: "wolf"
         },
         prime: {
             id: "prime",
             name: "Araxys Prime",
-            motto: "La élite dorada de alto calibre",
+            motto: "Precisión, estrategia y constancia",
             logo: "../img/teams/prime.webp",
             colorClass: "prime"
         },
         origin: {
             id: "origin",
             name: "Araxys Origin",
-            motto: "El génesis y evolución constante",
+            motto: "Hambre de victoria",
             logo: "../img/teams/origin.webp",
             colorClass: "origin"
         }
