@@ -182,15 +182,17 @@ function normalizeRole(rawRole, rawTeam) {
     const clean = String(rawRole).trim().toLowerCase();
     if (clean === "owner" || clean === "fundador" || clean === "ceo/owner" || clean === "owner/ceo") return "owner";
     if (clean === "admin" || clean === "administrador" || clean === "ceo") return "admin";
-    if (clean === "editor" || clean === "redactor" || clean === "prensa") return "editor";
-    if (clean === "coach" && rawTeam) {
+    if (clean === "editor" || clean === "redactor" || clean === "prensa" || clean.includes("prensa") || clean.includes("redacc") || clean.includes("editor")) return "editor";
+    if (clean.startsWith("coach_") || clean.startsWith("coach-")) {
+        const teamKey = clean.replace(/^coach[-_]/, "");
+        if (ROLE_DEFINITIONS["coach_" + teamKey]) return "coach_" + teamKey;
+    }
+    if ((clean === "coach" || clean.includes("coach")) && rawTeam) {
         const teamKey = "coach_" + String(rawTeam).trim().toLowerCase();
         if (ROLE_DEFINITIONS[teamKey]) return teamKey;
     }
     if (ROLE_DEFINITIONS[clean]) return clean;
-    if (clean.startsWith("coach_")) return clean;
-    if (clean.startsWith("coach-")) return "coach_" + clean.replace("coach-", "");
-    if (clean === "coach") return "coach";
+    if (clean === "coach" || clean.includes("coach")) return "coach";
     return "editor"; // Default seguro de menor privilegio (NUNCA admin)
 }
 
@@ -464,6 +466,7 @@ const logoutBtn = document.getElementById("logoutBtn");
 function applyRolePermissions() {
     const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
     const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
+    const myTeam = roleInfo.team || (store.auth && store.auth.team) || "titular";
 
     const userNameEl = document.getElementById("sidebarUserName");
     const userRoleEl = document.getElementById("sidebarUserRole");
@@ -480,11 +483,8 @@ function applyRolePermissions() {
     const quickBtn = document.getElementById("quickNewNewsBtn");
     const overviewNewsCard = document.getElementById("overviewNewsCard");
     const overviewTeamsCard = document.getElementById("overviewTeamsCard");
-    if (overviewNewsCard) overviewNewsCard.style.display = "block";
-    if (overviewTeamsCard) overviewTeamsCard.style.display = "block";
 
     if (isCoachRole(role)) {
-        const myTeam = roleInfo.team || (store.auth && store.auth.team) || "titular";
         // Ocultar secciones y tarjetas no autorizadas para coaches
         const navNews = document.getElementById("navItemNews");
         const navTournaments = document.getElementById("navItemTournaments");
@@ -497,6 +497,20 @@ function applyRolePermissions() {
         if (navStaff) navStaff.style.display = "none";
         if (navAudit) navAudit.style.display = "none";
         if (overviewNewsCard) overviewNewsCard.style.display = "none";
+
+        // En el panel de Resumen (Overview): SOLO mostrar la pastilla de su propio equipo
+        if (overviewTeamsCard) {
+            overviewTeamsCard.style.display = "block";
+            overviewTeamsCard.querySelectorAll("[data-select-team]").forEach(pill => {
+                const team = pill.getAttribute("data-select-team");
+                pill.style.display = (team === myTeam) ? "flex" : "none";
+            });
+            const manageBtn = overviewTeamsCard.querySelector(".switch-to-tab");
+            if (manageBtn) {
+                manageBtn.textContent = `Gestionar Roster (${myTeam.toUpperCase()})`;
+                manageBtn.setAttribute("data-target", "tab-teams");
+            }
+        }
 
         // En la sección de equipos, solo mostrar su propio equipo
         document.querySelectorAll(".team-tab-btn").forEach(btn => {
@@ -522,13 +536,14 @@ function applyRolePermissions() {
         switchTab("tab-teams");
         renderPlayersGrid();
     } else if (role === "editor") {
-        // Redactor: solo noticias, torneos y recursos
+        // Redactor / Editor: solo noticias, torneos y recursos. CERO ACCESO A ROSTERS.
         const navTeams = document.getElementById("navItemTeams");
         const navStaff = document.getElementById("navItemStaff");
         const navAudit = document.getElementById("navItemAudit");
         if (navTeams) navTeams.style.display = "none";
         if (navStaff) navStaff.style.display = "none";
         if (navAudit) navAudit.style.display = "none";
+        if (overviewNewsCard) overviewNewsCard.style.display = "block";
         if (overviewTeamsCard) overviewTeamsCard.style.display = "none";
 
         if (quickBtn) {
@@ -541,7 +556,20 @@ function applyRolePermissions() {
         }
         switchTab("tab-news");
     } else {
-        // Owner / Administrador: acceso total
+        // Owner / Administrador: acceso total a todas las divisiones
+        if (overviewNewsCard) overviewNewsCard.style.display = "block";
+        if (overviewTeamsCard) {
+            overviewTeamsCard.style.display = "block";
+            overviewTeamsCard.querySelectorAll("[data-select-team]").forEach(pill => {
+                pill.style.display = "flex";
+            });
+            const manageBtn = overviewTeamsCard.querySelector(".switch-to-tab");
+            if (manageBtn) {
+                manageBtn.textContent = "Gestionar";
+                manageBtn.setAttribute("data-target", "tab-teams");
+            }
+        }
+
         const playerTeamSelect = document.getElementById("playerTeam");
         if (playerTeamSelect) {
             Array.from(playerTeamSelect.options).forEach(opt => opt.disabled = false);
@@ -708,6 +736,7 @@ const TAB_TITLES = {
 function switchTab(tabId) {
     const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
     const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
+    const myTeam = roleInfo.team || (store.auth && store.auth.team) || "titular";
 
     // Validación estricta de navegación según rol
     if ((tabId === "tab-audit" || tabId === "tab-staff") && !isOwnerOrAdmin(role)) {
@@ -716,14 +745,19 @@ function switchTab(tabId) {
     } else if (isCoachRole(role)) {
         const allowed = ["tab-teams", "tab-overview"];
         if (!allowed.includes(tabId)) {
-            const teamName = (roleInfo.team || (store.auth && store.auth.team) || "titular").toUpperCase();
-            showToast(`Acceso denegado: Los coaches solo gestionan su equipo (${teamName}).`, "danger");
+            showToast(`Acceso denegado: Los coaches solo gestionan su equipo (${myTeam.toUpperCase()}).`, "danger");
             tabId = "tab-teams";
+        }
+        if (tabId === "tab-teams") {
+            currentSelectedTeam = myTeam;
         }
     } else if (role === "editor") {
         const allowed = ["tab-news", "tab-tournaments", "tab-branding", "tab-overview"];
-        if (!allowed.includes(tabId)) {
-            showToast(`Acceso denegado: Los editores tienen acceso a Noticias, Torneos y Recursos.`, "danger");
+        if (tabId === "tab-teams") {
+            showToast("Acceso denegado: Los redactores de prensa no tienen permisos sobre los rosters.", "danger");
+            tabId = "tab-news";
+        } else if (!allowed.includes(tabId)) {
+            showToast("Acceso denegado: Los editores tienen acceso a Noticias, Torneos y Recursos.", "danger");
             tabId = "tab-news";
         }
     }
@@ -731,6 +765,27 @@ function switchTab(tabId) {
     if (tabId === "tab-audit") {
         renderTrashList();
         renderAuditLog();
+    }
+
+    // Reforzar visibilidad de overviewTeamsCard según rol si se navega a tab-overview
+    if (tabId === "tab-overview") {
+        const overviewTeamsCard = document.getElementById("overviewTeamsCard");
+        if (overviewTeamsCard) {
+            if (role === "editor") {
+                overviewTeamsCard.style.display = "none";
+            } else if (isCoachRole(role)) {
+                overviewTeamsCard.style.display = "block";
+                overviewTeamsCard.querySelectorAll("[data-select-team]").forEach(pill => {
+                    const team = pill.getAttribute("data-select-team");
+                    pill.style.display = (team === myTeam) ? "flex" : "none";
+                });
+            } else {
+                overviewTeamsCard.style.display = "block";
+                overviewTeamsCard.querySelectorAll("[data-select-team]").forEach(pill => {
+                    pill.style.display = "flex";
+                });
+            }
+        }
     }
 
     navItems.forEach(item => {
@@ -752,8 +807,24 @@ navItems.forEach(btn => {
 });
 
 document.querySelectorAll(".switch-to-tab").forEach(btn => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
         const target = btn.getAttribute("data-target");
+        const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+        const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
+        const myTeam = roleInfo.team || (store.auth && store.auth.team) || "titular";
+
+        if (target === "tab-teams") {
+            if (role === "editor") {
+                showToast("Acceso denegado: Los redactores de prensa no tienen acceso a los rosters de equipos.", "danger");
+                return;
+            }
+            if (isCoachRole(role)) {
+                switchTab("tab-teams");
+                selectTeamTab(myTeam);
+                return;
+            }
+        }
         switchTab(target);
     });
 });
@@ -1108,7 +1179,24 @@ function renderTeamBanner(teamKey) {
 }
 
 function selectTeamTab(teamKey) {
-    if (!teamKey || !TEAM_DETAILS[teamKey]) teamKey = "titular";
+    const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+    const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
+    const myTeam = roleInfo.team || (store.auth && store.auth.team) || "titular";
+
+    if (role === "editor") {
+        showToast("Los redactores de prensa no tienen permisos sobre los rosters.", "danger");
+        switchTab("tab-news");
+        return;
+    }
+
+    if (isCoachRole(role)) {
+        if (teamKey && teamKey !== myTeam) {
+            showToast(`Acceso denegado: Solo puedes gestionar a tu propio equipo (${myTeam.toUpperCase()}).`, "danger");
+        }
+        teamKey = myTeam;
+    }
+
+    if (!teamKey || !TEAM_DETAILS[teamKey]) teamKey = isCoachRole(role) ? myTeam : "titular";
     currentSelectedTeam = teamKey;
     document.querySelectorAll(".team-tab-btn").forEach(b => {
         b.classList.toggle("active", b.getAttribute("data-team") === teamKey);
@@ -1121,15 +1209,29 @@ function renderPlayersGrid() {
     const filtered = store.players.filter(p => p.team === currentSelectedTeam);
     playersCardsGrid.innerHTML = "";
 
+    const userRole = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+    const roleInfo = getRoleInfo(userRole, store.auth ? store.auth.team : null);
+    const myTeam = roleInfo.team || (store.auth && store.auth.team) || null;
+    const isPrivileged = isOwnerOrAdmin(userRole);
+    const canManageTeam = isPrivileged || (isCoachRole(userRole) && currentSelectedTeam === myTeam);
+
+    // Controlar botón de registrar jugador en la cabecera
+    const addBtn = document.getElementById("openAddPlayerModalBtn");
+    if (addBtn) {
+        addBtn.style.display = canManageTeam ? "inline-flex" : "none";
+    }
+
     if (filtered.length === 0) {
         playersCardsGrid.innerHTML = `
             <div style="grid-column: 1/-1; background: var(--brand-dark-2); border: 1px dashed var(--brand-border); border-radius: var(--radius-lg); padding: 50px 20px; text-align: center;">
                 <p style="color: var(--brand-gray-text); font-size: 15px; margin-bottom: 16px;">Aún no hay jugadores registrados en esta división.</p>
-                <button class="btn btn-primary btn-sm" id="emptyStateAddPlayerBtn">+ Registrar Primer Jugador</button>
+                ${canManageTeam ? '<button class="btn btn-primary btn-sm" id="emptyStateAddPlayerBtn">+ Registrar Primer Jugador</button>' : '<small style="color: var(--brand-gray-text);">🔒 Solo lectura para esta división.</small>'}
             </div>
         `;
-        const emptyBtn = document.getElementById("emptyStateAddPlayerBtn");
-        if (emptyBtn) emptyBtn.addEventListener("click", openAddPlayerModal);
+        if (canManageTeam) {
+            const emptyBtn = document.getElementById("emptyStateAddPlayerBtn");
+            if (emptyBtn) emptyBtn.addEventListener("click", openAddPlayerModal);
+        }
         return;
     }
 
@@ -1148,22 +1250,30 @@ function renderPlayersGrid() {
                     <span>${p.twitter || "@Araxys"}</span>
                     <span style="margin-left:auto;">${p.tracker || "Tracker Riot"}</span>
                 </div>
+                ${canManageTeam ? `
                 <div class="player-card-actions">
                     <button class="btn btn-outline btn-xs flex-1 edit-player-btn" data-id="${p.id}">Editar</button>
                     <button class="btn btn-danger btn-xs delete-player-btn" data-id="${p.id}">🗑️</button>
                 </div>
+                ` : `
+                <div class="player-card-actions" style="opacity: 0.5; justify-content: center;">
+                    <small style="color: var(--brand-gray-text); font-size: 11px;">🔒 Solo Lectura</small>
+                </div>
+                `}
             </div>
         `;
         playersCardsGrid.appendChild(card);
     });
 
-    document.querySelectorAll(".edit-player-btn").forEach(btn => {
-        btn.addEventListener("click", () => openEditPlayerModal(btn.getAttribute("data-id")));
-    });
+    if (canManageTeam) {
+        document.querySelectorAll(".edit-player-btn").forEach(btn => {
+            btn.addEventListener("click", () => openEditPlayerModal(btn.getAttribute("data-id")));
+        });
 
-    document.querySelectorAll(".delete-player-btn").forEach(btn => {
-        btn.addEventListener("click", () => deletePlayer(btn.getAttribute("data-id")));
-    });
+        document.querySelectorAll(".delete-player-btn").forEach(btn => {
+            btn.addEventListener("click", () => deletePlayer(btn.getAttribute("data-id")));
+        });
+    }
 }
 
 // Delegación global para pestañas de equipos y accesos directos
@@ -1176,6 +1286,24 @@ document.addEventListener("click", (e) => {
     const rosterPill = e.target.closest("[data-select-team]");
     if (rosterPill) {
         const teamKey = rosterPill.getAttribute("data-select-team");
+        const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
+        const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
+        const myTeam = roleInfo.team || (store.auth && store.auth.team) || "titular";
+
+        if (role === "editor") {
+            showToast("Acceso denegado: Los redactores de prensa no tienen acceso a la gestión de rosters.", "danger");
+            return;
+        }
+
+        if (isCoachRole(role)) {
+            if (teamKey !== myTeam) {
+                showToast(`Acceso denegado: Solo puedes gestionar el roster de tu equipo (${myTeam.toUpperCase()}).`, "danger");
+            }
+            switchTab("tab-teams");
+            selectTeamTab(myTeam);
+            return;
+        }
+
         if (teamKey) {
             switchTab("tab-teams");
             selectTeamTab(teamKey);
@@ -1193,9 +1321,17 @@ const cancelPlayerBtn = document.getElementById("cancelPlayerBtn");
 function openAddPlayerModal() {
     const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
     const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
+    const myTeam = roleInfo.team || (store.auth && store.auth.team) || null;
+    const isPrivileged = isOwnerOrAdmin(role);
+    const canManageTeam = isPrivileged || (isCoachRole(role) && currentSelectedTeam === myTeam);
 
     if (role === "editor") {
         showToast("Los redactores de prensa no tienen permisos para gestionar rosters.", "danger");
+        return;
+    }
+
+    if (!canManageTeam) {
+        showToast(`Acceso denegado: Solo puedes registrar jugadores para tu equipo (${(myTeam || "").toUpperCase()}).`, "danger");
         return;
     }
 
@@ -1205,7 +1341,7 @@ function openAddPlayerModal() {
 
     const teamSelect = document.getElementById("playerTeam");
     if (isCoachRole(role)) {
-        teamSelect.value = roleInfo.team;
+        teamSelect.value = myTeam;
         teamSelect.disabled = true;
     } else {
         teamSelect.disabled = false;
@@ -1219,17 +1355,24 @@ function openAddPlayerModal() {
 function openEditPlayerModal(id) {
     const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
     const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
+    const myTeam = roleInfo.team || (store.auth && store.auth.team) || null;
+    const isPrivileged = isOwnerOrAdmin(role);
 
     if (role === "editor") {
-        showToast("Los redactores no tienen permisos para modificar jugadores.", "danger");
+        showToast("Los redactores de prensa no tienen permisos para modificar jugadores.", "danger");
         return;
     }
 
     const p = store.players.find(x => x.id === id);
     if (!p) return;
 
-    if (isCoachRole(role) && p.team !== roleInfo.team) {
-        showToast(`Acceso denegado: solo puedes editar jugadores de tu equipo (${roleInfo.team.toUpperCase()}).`, "danger");
+    if (isCoachRole(role) && p.team !== myTeam) {
+        showToast(`Acceso denegado: solo puedes editar jugadores de tu equipo (${myTeam.toUpperCase()}).`, "danger");
+        return;
+    }
+
+    if (!isPrivileged && !isCoachRole(role)) {
+        showToast("No tienes permisos para modificar jugadores.", "danger");
         return;
     }
 
@@ -1262,6 +1405,8 @@ playerForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
     const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
+    const myTeam = roleInfo.team || (store.auth && store.auth.team) || null;
+    const isPrivileged = isOwnerOrAdmin(role);
 
     if (role === "editor") {
         showToast("Acceso denegado: no puedes modificar rosters.", "danger");
@@ -1274,7 +1419,11 @@ playerForm.addEventListener("submit", (e) => {
 
     // Si es coach, forzar siempre a su equipo autorizado
     if (isCoachRole(role)) {
-        team = roleInfo.team;
+        team = myTeam;
+    } else if (!isPrivileged) {
+        showToast("Acceso denegado: no tienes permisos para modificar rosters.", "danger");
+        closePlayerModal();
+        return;
     }
 
     const nick = document.getElementById("playerNick").value.trim();
@@ -1288,8 +1437,8 @@ playerForm.addEventListener("submit", (e) => {
         const index = store.players.findIndex(x => x.id === id);
         if (index !== -1) {
             // Si es coach, asegurar que el jugador que edita pertenece a su equipo
-            if (isCoachRole(role) && store.players[index].team !== roleInfo.team) {
-                showToast("Acceso denegado.", "danger");
+            if (isCoachRole(role) && store.players[index].team !== myTeam) {
+                showToast("Acceso denegado: solo puedes editar jugadores de tu equipo.", "danger");
                 closePlayerModal();
                 return;
             }
@@ -1321,17 +1470,24 @@ playerForm.addEventListener("submit", (e) => {
 function deletePlayer(id) {
     const role = normalizeRole(store.auth ? store.auth.role : "editor", store.auth ? store.auth.team : null);
     const roleInfo = getRoleInfo(role, store.auth ? store.auth.team : null);
+    const myTeam = roleInfo.team || (store.auth && store.auth.team) || null;
+    const isPrivileged = isOwnerOrAdmin(role);
 
     if (role === "editor") {
-        showToast("Los redactores no pueden eliminar jugadores.", "danger");
+        showToast("Los redactores de prensa no pueden eliminar jugadores.", "danger");
         return;
     }
 
     const p = store.players.find(x => x.id === id);
     if (!p) return;
 
-    if (isCoachRole(role) && p.team !== roleInfo.team) {
-        showToast(`Solo puedes gestionar a tu propio equipo (${roleInfo.team.toUpperCase()}).`, "danger");
+    if (isCoachRole(role) && p.team !== myTeam) {
+        showToast(`Solo puedes gestionar a tu propio equipo (${myTeam.toUpperCase()}).`, "danger");
+        return;
+    }
+
+    if (!isPrivileged && !isCoachRole(role)) {
+        showToast("No tienes permisos para eliminar jugadores.", "danger");
         return;
     }
 
